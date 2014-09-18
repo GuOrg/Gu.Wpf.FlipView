@@ -3,6 +3,7 @@
     using System.Reflection;
     using System.Windows;
     using System.Windows.Controls;
+    using System.Windows.Media;
     using NUnit.Framework;
     using WPF.FlipView;
 
@@ -25,7 +26,12 @@
         [Test]
         public void TestNameTest()
         {
+            _flipView.SelectedIndex = 1;
+            _currentItem.RenderSize = new Size(100, 0);// set actual width
             _flipView.InternalHandleTouchMove(new Vector(-1, 0));
+            Assert.AreEqual(-1, ((TranslateTransform)_currentItem.RenderTransform).X);
+            Assert.AreEqual(99, ((TranslateTransform)_nextItem.RenderTransform).X);
+            Assert.AreEqual(2, _flipView.NextIndex);
         }
     }
 

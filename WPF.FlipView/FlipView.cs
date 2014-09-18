@@ -68,7 +68,11 @@ namespace WPF.FlipView
             typeof(FlipView),
             new UIPropertyMetadata(true));
 
-        public static readonly DependencyProperty ArrowPlacementProperty = DependencyProperty.Register("ArrowPlacement", typeof(ArrowPlacement), typeof(FlipView), new PropertyMetadata(default(ArrowPlacement)));
+        public static readonly DependencyProperty ArrowPlacementProperty = DependencyProperty.Register(
+            "ArrowPlacement",
+            typeof (ArrowPlacement),
+            typeof (FlipView),
+            new PropertyMetadata(default(ArrowPlacement)));
 
         static FlipView()
         {
@@ -184,7 +188,7 @@ namespace WPF.FlipView
             }
         }
 
-        private int NextIndex
+        internal int NextIndex
         {
             get
             {
@@ -192,6 +196,10 @@ namespace WPF.FlipView
             }
             set
             {
+                if (value == _nextIndex)
+                {
+                    return;
+                }
                 this._nextIndex = value;
                 if (_nextIndex >= 0 && _nextIndex < Items.Count)
                 {
@@ -253,6 +261,8 @@ namespace WPF.FlipView
         internal void InternalHandleTouchMove(Vector delta)
         {
             PART_CurrentItem.RenderTransform = new TranslateTransform(delta.X, 0);
+            PART_NextItem.RenderTransform = new TranslateTransform(PART_CurrentItem.ActualWidth + delta.X, 0);
+            NextIndex = delta.X < 0 ? SelectedIndex + 1 : SelectedIndex - 1;
             var treshold = PART_CurrentItem.ActualWidth/2;
             if (delta.X > treshold)
             {
