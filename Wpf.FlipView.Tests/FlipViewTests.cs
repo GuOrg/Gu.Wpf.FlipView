@@ -44,7 +44,7 @@
             _currentItem.RenderSize = new Size(100, 0);// set actual width
             _flipView.InternalHandleTouchMove(new Vector(-1, 0));
             Assert.AreEqual(-1, _flipView.CurrentTransform.X);
-            Assert.AreEqual(99, _flipView.NextTransform.X);
+            Assert.AreEqual(99, _flipView.NextTransform.Transform(new Point(0,0)).X);
             Assert.AreEqual(2, _flipView.NextIndex);
         }
 
@@ -55,7 +55,7 @@
             _currentItem.RenderSize = new Size(100, 0);// set actual width
             _flipView.InternalHandleTouchMove(new Vector(1, 0));
             Assert.AreEqual(1, _flipView.CurrentTransform.X);
-            Assert.AreEqual(-99, _flipView.NextTransform.X);
+            Assert.AreEqual(-99, _flipView.NextTransform.Transform(new Point(0,0)).X);
             Assert.AreEqual(0, _flipView.NextIndex);
         }
 
@@ -68,7 +68,7 @@
             _flipView.RunSlideAnimation(new Transition(0, 1));
             DispatcherUtil.DoEvents();
             Assert.AreEqual(-1, _flipView.CurrentTransform.X);
-            Assert.AreEqual(99, _flipView.NextTransform.X);
+            Assert.AreEqual(99, _flipView.NextTransform.Transform(new Point(0,0)).X);
         }
     }
 

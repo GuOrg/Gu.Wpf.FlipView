@@ -22,14 +22,30 @@
                            IndexWidth="50"
                            SelectedIndex="1"
                            ShowIndex="true">
-            <Rectangle Fill="Gold" />
-            <Rectangle Fill="Blue" />
-            <Rectangle Fill="Red" />
-            <Rectangle Fill="Green" />
+            <flipView:FlipView.Resources>
+                <Style TargetType="TextBlock">
+                    <Setter Property="FontSize" Value="70" />
+                    <Setter Property="HorizontalAlignment" Value="Center" />
+                    <Setter Property="VerticalAlignment" Value="Center" />
+                </Style>
+            </flipView:FlipView.Resources>
+            <Border Background="Gold">
+                <TextBlock Text="1" />
+            </Border>
+            <Border Background="Blue">
+                <TextBlock Text="2" />
+            </Border>
+            <Border Background="Red">
+                <TextBlock>3</TextBlock>
+            </Border>
+            <Border Background="Green">
+                <TextBlock>4</TextBlock>
+            </Border>
         </flipView:FlipView>
         <Grid Grid.Row="1"
               Grid.Column="0"
-              Grid.ColumnSpan="3">
+              Grid.ColumnSpan="3"
+              TextBlock.FontSize="12">
             <StackPanel>
                 <CheckBox Content="ShowArrows" IsChecked="{Binding ElementName=FlipView, Path=ShowArrows}" />
                 <ComboBox SelectedItem="{Binding ElementName=FlipView, Path=ArrowPlacement}">

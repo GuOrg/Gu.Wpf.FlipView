@@ -14,7 +14,8 @@ namespace WPF.FlipView
         public static RoutedUICommand NextCommand = new RoutedUICommand("Next", "Next", typeof(FlipView));
         public static RoutedUICommand PreviousCommand = new RoutedUICommand("Previous", "Previous", typeof(FlipView));
         private readonly TranslateTransform _currentTransform = new TranslateTransform();
-        private readonly TranslateTransform _nextTransform = new TranslateTransform();
+        private readonly TranslateTransform _nextOffsetTransform = new TranslateTransform();
+        private readonly TransformGroup _nextTransform;
         private bool _isAnimating = false;
         private ContentPresenter PART_CurrentItem;
         private ContentPresenter PART_NextItem;
@@ -90,6 +91,9 @@ namespace WPF.FlipView
             TouchDown += OnTouchDown;
             TouchMove += OnTouchMove;
             TouchUp += OnTouchUp;
+            _nextTransform = new TransformGroup();
+            _nextTransform.Children.Add(_nextOffsetTransform);
+            _nextTransform.Children.Add(_currentTransform);
         }
 
         public TimeSpan TransitionTime
@@ -196,7 +200,15 @@ namespace WPF.FlipView
             }
         }
 
-        public TranslateTransform NextTransform
+        public TranslateTransform NextOffsetTransform
+        {
+            get
+            {
+                return _nextOffsetTransform;
+            }
+        }
+
+        public TransformGroup NextTransform
         {
             get
             {
@@ -299,10 +311,11 @@ namespace WPF.FlipView
         /// <param name="delta"></param>
         internal void InternalHandleTouchMove(Vector delta)
         {
-            CurrentTransform.X = delta.X;
-            NextTransform.X = PART_CurrentItem.ActualWidth + delta.X;
+            CurrentTransform.X += delta.X;
+            var actualWidth = PART_CurrentItem.ActualWidth;
+            NextOffsetTransform.X = CurrentTransform.X < 0 ? actualWidth : -actualWidth;
             NextIndex = delta.X < 0 ? SelectedIndex + 1 : SelectedIndex - 1;
-            var treshold = PART_CurrentItem.ActualWidth / 2;
+            var treshold = actualWidth / 2;
             if (delta.X > treshold)
             {
                 if (SelectedIndex > 0)
@@ -325,9 +338,6 @@ namespace WPF.FlipView
             var animation = new DoubleAnimation(0, new Duration(TimeSpan.FromMilliseconds(50)));
             animation.Completed += this.OnAnimationCompleted;
             CurrentTransform.BeginAnimation(TranslateTransform.XProperty, animation);
-            double to = NextTransform.X < 0 ? -PART_CurrentItem.ActualWidth : PART_CurrentItem.ActualWidth;
-            var nextAnimation = new DoubleAnimation(to, new Duration(TimeSpan.FromMilliseconds(50)));
-            NextTransform.BeginAnimation(TranslateTransform.XProperty, nextAnimation);
         }
 
         private static void OnSelectedIndexChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
@@ -346,6 +356,10 @@ namespace WPF.FlipView
             {
                 return;
             }
+            var actualWidth = PART_CurrentItem.ActualWidth;
+
+            NextOffsetTransform.X = newIndex > oldIndex ? actualWidth : -actualWidth;
+
             NextIndex = newIndex;
             if (_isAnimating)
             {
@@ -377,7 +391,6 @@ namespace WPF.FlipView
             }
             _isAnimating = true;
             double toValue = transition.From < transition.To ? -this.ActualWidth : this.ActualWidth;
-            NextTransform.BeginAnimation(TranslateTransform.XProperty, AnimationFactory.CreateAnimation(-1 * toValue, fromValue, TransitionTime));
             var animation = AnimationFactory.CreateAnimation(fromValue, toValue, TransitionTime);
             animation.Completed += this.OnAnimationCompleted;
             CurrentTransform.BeginAnimation(TranslateTransform.XProperty, animation);
@@ -387,7 +400,6 @@ namespace WPF.FlipView
         {
             this.RefreshViewPort(this.SelectedIndex);
             CurrentTransform.BeginAnimation(TranslateTransform.XProperty, null);
-            NextTransform.BeginAnimation(TranslateTransform.XProperty, null);
             this._isAnimating = false;
         }
 
