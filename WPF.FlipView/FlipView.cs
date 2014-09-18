@@ -266,6 +266,12 @@ namespace WPF.FlipView
 
         private void OnTouchDown(object sender, TouchEventArgs e)
         {
+            if (_isAnimating)
+            {
+                CurrentTransform.BeginAnimation(TranslateTransform.XProperty, null);
+                NextTransform.BeginAnimation(TranslateTransform.XProperty, null);
+                _isAnimating = false;
+            }
             TouchStart = e.GetTouchPoint(this);
         }
 
@@ -381,6 +387,7 @@ namespace WPF.FlipView
         {
             this.RefreshViewPort(this.SelectedIndex);
             CurrentTransform.BeginAnimation(TranslateTransform.XProperty, null);
+            NextTransform.BeginAnimation(TranslateTransform.XProperty, null);
             this._isAnimating = false;
         }
 
