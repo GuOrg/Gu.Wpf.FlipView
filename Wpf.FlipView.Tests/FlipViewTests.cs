@@ -1,12 +1,13 @@
 ﻿namespace Wpf.FlipView.Tests
 {
-    using System.Reflection;
+    using System;
     using System.Threading;
     using System.Windows;
     using System.Windows.Controls;
+    using System.Windows.Input;
     using System.Windows.Media;
     using System.Windows.Threading;
-
+    using Moq;
     using NUnit.Framework;
     using WPF.FlipView;
 
@@ -17,81 +18,65 @@
         private ContentPresenter _currentItem;
         private ContentPresenter _nextItem;
 
-        private object _item1;
-        private object _item2;
-        private object _item3;
-
         [SetUp]
         public void SetUp()
         {
-            _flipView = new FlipView();
+            _flipView = new FlipView { TransitionTime = TimeSpan.Zero };
+
             _currentItem = new ContentPresenter();
             _flipView.SetCurrentItem(_currentItem);
             _nextItem = new ContentPresenter();
             _flipView.SetNextItem(_nextItem);
-            _item1 = new object();
-            _item2 = new object();
-            _item3 = new object();
-            _flipView.Items.Add(_item1);
-            _flipView.Items.Add(_item2);
-            _flipView.Items.Add(_item2);
+            _flipView.Items.Add(new DummyItem(0));
+            _flipView.Items.Add(new DummyItem(1));
+            _flipView.Items.Add(new DummyItem(2));
         }
 
-        [Test]
-        public void TouchMoveNegative()
+        [TestCase(1, 1, -99, 0)]
+        [TestCase(0, -1, 99, 1)]
+        public void TouchMoveRegretRetry(int startIndex, double deltaX, double expectedX, int nextIndex)
         {
-            _flipView.SelectedIndex = 1;
+            _flipView.SelectedIndex = startIndex;
+            _flipView.CurrentItem = _flipView.Items[startIndex];
             _currentItem.RenderSize = new Size(100, 0);// set actual width
-            _flipView.InternalHandleTouchMove(new Vector(-1, 0));
-            Assert.AreEqual(-1, _flipView.CurrentTransform.X);
-            Assert.AreEqual(99, _flipView.NextTransform.Transform(new Point(0,0)).X);
-            Assert.AreEqual(2, _flipView.NextIndex);
+            int x = 50;
+            _flipView.FakeTouchDown(new Point(x, 0));
+            _flipView.FakeTouchMove(new Point(x + deltaX, 0));
+            Assert.AreEqual(deltaX, _flipView.CurrentTransform.X);
+            Assert.AreEqual(expectedX, _flipView.NextTransform.Transform(new Point(0, 0)).X);
+            Assert.AreEqual(nextIndex, _flipView.NextIndex);
+            Assert.AreSame(_flipView.Items[startIndex], _flipView.CurrentItem);
+            Assert.AreSame(_flipView.Items[nextIndex], _flipView.NextItem);
+            _flipView.FakeTouchUp(new Point(x + deltaX, 0));
+            Assert.AreEqual(0, _flipView.CurrentTransform.X);
+            Assert.AreSame(_flipView.Items[startIndex], _flipView.CurrentItem);
+            Assert.IsNull( _flipView.NextItem);
+
+            _flipView.FakeTouchDown(new Point(x, 0));
+            _flipView.FakeTouchMove(new Point(x + deltaX, 0));
+            Assert.AreEqual(deltaX, _flipView.CurrentTransform.X);
+            Assert.AreEqual(expectedX, _flipView.NextTransform.Transform(new Point(0, 0)).X);
+            Assert.AreEqual(nextIndex, _flipView.NextIndex);
+            Assert.AreSame(_flipView.Items[startIndex], _flipView.CurrentItem);
+            Assert.AreSame(_flipView.Items[nextIndex], _flipView.NextItem);
         }
 
-        [Test]
-        public void TouchMovePositive()
+        [TestCase(1, 2, -100)]
+        [TestCase(2, 1, 100)]
+        [TestCase(1, 0, 100)]
+        public void RunSlideAnimation(int fromIndex, int toIndex, double expectedX)
         {
-            _flipView.SelectedIndex = 1;
-            _currentItem.RenderSize = new Size(100, 0);// set actual width
-            _flipView.InternalHandleTouchMove(new Vector(1, 0));
-            Assert.AreEqual(1, _flipView.CurrentTransform.X);
-            Assert.AreEqual(-99, _flipView.NextTransform.Transform(new Point(0,0)).X);
-            Assert.AreEqual(0, _flipView.NextIndex);
-        }
-
-        [Test]
-        public void RunSlideAnimation()
-        {
-            DispatcherUtil.DoEvents();
-            _flipView.SelectedIndex = 1;
-            _currentItem.RenderSize = new Size(100, 0);// set actual width
-            _flipView.RunSlideAnimation(new Transition(0, 1));
-            DispatcherUtil.DoEvents();
-            Assert.AreEqual(-1, _flipView.CurrentTransform.X);
-            Assert.AreEqual(99, _flipView.NextTransform.Transform(new Point(0,0)).X);
-        }
-    }
-
-    public static class FlipViewTestExt
-    {
-        public static FieldInfo PartCurrentItem;
-        public static FieldInfo PartNextItem;
-
-        static FlipViewTestExt()
-        {
-            const string PART_CurrentItem = "PART_CurrentItem";
-            const string PART_NextItem = "PART_NextItem";
-            PartCurrentItem = typeof(FlipView).GetField(PART_CurrentItem, BindingFlags.Instance | BindingFlags.NonPublic);
-            PartNextItem = typeof(FlipView).GetField(PART_NextItem, BindingFlags.Instance | BindingFlags.NonPublic);
-        }
-        public static void SetCurrentItem(this FlipView flipView, ContentPresenter contentPresenter)
-        {
-            PartCurrentItem.SetValue(flipView, contentPresenter);
-        }
-
-        public static void SetNextItem(this FlipView flipView, ContentPresenter contentPresenter)
-        {
-            PartNextItem.SetValue(flipView, contentPresenter);
+            _currentItem.RenderSize = new Size(Math.Abs(expectedX), 0);// set actual width
+            _flipView.SelectedIndex = fromIndex; // First time does nothing cos OldValue == -1
+            _flipView.SelectedIndex = toIndex;
+            //_flipView.TransitionTo(fromIndex, toIndex);
+            Assert.AreEqual(expectedX, _flipView.CurrentTransform.X);
+            Assert.AreEqual(0, _flipView.NextTransform.Transform(new Point(0, 0)).X);
+            //Assert.AreSame(_flipView.Items[toIndex], _flipView.NextItem);
+            //Assert.AreSame(_flipView.Items[fromIndex], _flipView.CurrentItem);
+            //_flipView.OnAnimationCompleted(null, null);
+            Assert.IsNull(_flipView.NextItem);
+            Assert.AreSame(_flipView.Items[toIndex], _flipView.CurrentItem);
         }
     }
 }
