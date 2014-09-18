@@ -1,0 +1,42 @@
+﻿<Window x:Class="Wpf.FlipView.Tests.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:flipView="clr-namespace:WPF.FlipView;assembly=WPF.FlipView"
+        Title="MainWindow"
+        Width="525"
+        Height="350">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="4*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <flipView:FlipView x:Name="FlipView"
+                           Grid.Column="1"
+                           IndexHeight="20"
+                           IndexWidth="50"
+                           ArrowPlacement="Inside"
+                           SelectedIndex="1"
+                           ShowIndex="true">
+            <Rectangle Fill="Gold" />
+            <Rectangle Fill="Blue" />
+            <Rectangle Fill="Red" />
+            <Rectangle Fill="Green" />
+        </flipView:FlipView>
+        <Grid Grid.Row="1"
+              Grid.Column="0"
+              Grid.ColumnSpan="3">
+            <StackPanel>
+                <CheckBox Content="ShowArrows" IsChecked="{Binding ElementName=FlipView, Path=ShowArrows}" />
+                <ComboBox SelectedItem="{Binding ElementName=FlipView, Path=ArrowPlacement}">
+                    <flipView:ArrowPlacement>Inside</flipView:ArrowPlacement>
+                    <flipView:ArrowPlacement>Outside</flipView:ArrowPlacement>
+                </ComboBox>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Window>
