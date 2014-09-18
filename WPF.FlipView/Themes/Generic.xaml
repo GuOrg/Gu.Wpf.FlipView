@@ -257,7 +257,9 @@
                                                                               RelativeSource={RelativeSource TemplatedParent}}"
                                                   ContentTemplate="{Binding ItemTemplate,
                                                                             RelativeSource={RelativeSource TemplatedParent}}"
-                                                  FocusVisualStyle="{x:Null}" />
+                                                  FocusVisualStyle="{x:Null}"
+                                                  RenderTransform="{Binding NextTransform,
+                                                                            RelativeSource={RelativeSource TemplatedParent}}" />
                                 <ContentPresenter x:Name="PART_CurrentItem"
                                                   HorizontalAlignment="{Binding HorizontalContentAlignment,
                                                                                 RelativeSource={RelativeSource TemplatedParent}}"
@@ -265,7 +267,9 @@
                                                                               RelativeSource={RelativeSource TemplatedParent}}"
                                                   ContentTemplate="{Binding ItemTemplate,
                                                                             RelativeSource={RelativeSource TemplatedParent}}"
-                                                  FocusVisualStyle="{x:Null}" />
+                                                  FocusVisualStyle="{x:Null}"
+                                                  RenderTransform="{Binding CurrentTransform,
+                                                                            RelativeSource={RelativeSource TemplatedParent}}" />
                             </Grid>
                         </Grid>
                     </Border>

@@ -11,6 +11,10 @@ namespace WPF.FlipView
 
     public class FlipView : Selector
     {
+        public static RoutedUICommand NextCommand = new RoutedUICommand("Next", "Next", typeof(FlipView));
+        public static RoutedUICommand PreviousCommand = new RoutedUICommand("Previous", "Previous", typeof(FlipView));
+        private readonly TranslateTransform _currentTransform = new TranslateTransform();
+        private readonly TranslateTransform _nextTransform = new TranslateTransform();
         private bool _isAnimating = false;
         private ContentPresenter PART_CurrentItem;
         private ContentPresenter PART_NextItem;
@@ -20,11 +24,7 @@ namespace WPF.FlipView
         private double fromValue = 0.0;
         private double elasticFactor = 1.0;
         private bool cancelManipulation = false;
-
         private int _nextIndex;
-
-        public static RoutedUICommand NextCommand = new RoutedUICommand("Next", "Next", typeof(FlipView));
-        public static RoutedUICommand PreviousCommand = new RoutedUICommand("Previous", "Previous", typeof(FlipView));
 
         public static readonly DependencyProperty TransitionTimeProperty = DependencyProperty.Register(
             "TransitionTime",
@@ -70,8 +70,8 @@ namespace WPF.FlipView
 
         public static readonly DependencyProperty ArrowPlacementProperty = DependencyProperty.Register(
             "ArrowPlacement",
-            typeof (ArrowPlacement),
-            typeof (FlipView),
+            typeof(ArrowPlacement),
+            typeof(FlipView),
             new PropertyMetadata(default(ArrowPlacement)));
 
         static FlipView()
@@ -86,7 +86,7 @@ namespace WPF.FlipView
             this.CommandBindings.Add(new CommandBinding(PreviousCommand, this.OnPreviousExecuted, this.OnPreviousCanExecute));
             this.Focusable = false;
             this.FocusVisualStyle = null;
-            Loaded += this.OnLoaded;
+            Loaded += (_, e) => CurrentItem = this.GetItemAt(SelectedIndex);
             TouchDown += OnTouchDown;
             TouchMove += OnTouchMove;
             TouchUp += OnTouchUp;
@@ -188,6 +188,46 @@ namespace WPF.FlipView
             }
         }
 
+        public TranslateTransform CurrentTransform
+        {
+            get
+            {
+                return _currentTransform;
+            }
+        }
+
+        public TranslateTransform NextTransform
+        {
+            get
+            {
+                return _nextTransform;
+            }
+        }
+
+        public object CurrentItem
+        {
+            get
+            {
+                return PART_CurrentItem.Content;
+            }
+            set
+            {
+                PART_CurrentItem.Content = value;
+            }
+        }
+
+        public object NextItem
+        {
+            get
+            {
+                return PART_NextItem.Content;
+            }
+            set
+            {
+                PART_NextItem.Content = value;
+            }
+        }
+
         internal int NextIndex
         {
             get
@@ -203,12 +243,11 @@ namespace WPF.FlipView
                 this._nextIndex = value;
                 if (_nextIndex >= 0 && _nextIndex < Items.Count)
                 {
-                    var nextItem = this.GetItemAt(_nextIndex);
-                    this.PART_NextItem.SetCurrentValue(ContentPresenter.ContentProperty, nextItem);
+                    NextItem = this.GetItemAt(_nextIndex);
                 }
                 else
                 {
-                    this.PART_NextItem.SetCurrentValue(ContentPresenter.ContentProperty, null);
+                    NextItem = null;
                 }
             }
         }
@@ -223,12 +262,6 @@ namespace WPF.FlipView
             this.PART_Root = this.GetTemplateChild("PART_Root") as Grid;
             this.PART_Container = this.GetTemplateChild("PART_Container") as FrameworkElement;
             this.PART_Index = this.GetTemplateChild("PART_Index") as ListBox;
-
-            //this.PART_Root.TouchDown += PART_Root_TouchDown;
-            //this.PART_Root.ManipulationStarted += this.OnRootManipulationStarted;
-            //this.PART_Root.ManipulationStarting += this.OnRootManipulationStarting;
-            //this.PART_Root.ManipulationDelta += this.OnRootManipulationDelta;
-            //this.PART_Root.ManipulationCompleted += this.OnRootManipulationCompleted;
         }
 
         private void OnTouchDown(object sender, TouchEventArgs e)
@@ -260,10 +293,10 @@ namespace WPF.FlipView
         /// <param name="delta"></param>
         internal void InternalHandleTouchMove(Vector delta)
         {
-            PART_CurrentItem.RenderTransform = new TranslateTransform(delta.X, 0);
-            PART_NextItem.RenderTransform = new TranslateTransform(PART_CurrentItem.ActualWidth + delta.X, 0);
+            CurrentTransform.X = delta.X;
+            NextTransform.X = PART_CurrentItem.ActualWidth + delta.X;
             NextIndex = delta.X < 0 ? SelectedIndex + 1 : SelectedIndex - 1;
-            var treshold = PART_CurrentItem.ActualWidth/2;
+            var treshold = PART_CurrentItem.ActualWidth / 2;
             if (delta.X > treshold)
             {
                 if (SelectedIndex > 0)
@@ -280,115 +313,25 @@ namespace WPF.FlipView
             }
         }
 
-        private void PART_Root_TouchDown(object sender, TouchEventArgs e)
-        {
-            TouchPoint pt = e.GetTouchPoint((UIElement)sender);
-            Point point = new Point(pt.Position.X, pt.Position.Y);
-
-            HitTestResult result = VisualTreeHelper.HitTest((UIElement)sender, point);
-
-            if (result != null && result.VisualHit != null)
-            {
-                DependencyObject button;
-                cancelManipulation = HasButtonParent(result.VisualHit, out button);
-            }
-        }
-
         private void OnTouchUp(object sender, TouchEventArgs e)
         {
-            PART_CurrentItem.RenderTransform.BeginAnimation(TranslateTransform.XProperty, new DoubleAnimation(0, new Duration(TimeSpan.FromMilliseconds(50))));
-            RefreshViewPort(SelectedIndex);
-        }
-
-        private void OnRootManipulationCompleted(object sender, ManipulationCompletedEventArgs e)
-        {
-            this.fromValue = e.TotalManipulation.Translation.X;
-            int oldIndex = this.SelectedIndex;
-            if (this.fromValue > 2)
-            {
-                if (this.SelectedIndex > 0)
-                {
-                    this.SelectedIndex -= 1;
-                }
-            }
-            else if (this.fromValue < -2)
-            {
-                if (this.SelectedIndex < this.Items.Count - 1)
-                {
-                    this.SelectedIndex += 1;
-                }
-            }
-
-            //if (this.elasticFactor < 1)
-            //{
-            //    var direction = new Transition(SelectedIndex, ((Transform)this.PART_Root.RenderTransform).Value.OffsetX);
-            //    this.RunSlideAnimation(direction);
-            //}
-
-            this.elasticFactor = 1.0;
-        }
-
-        private void OnRootManipulationDelta(object sender, ManipulationDeltaEventArgs e)
-        {
-            if (!(this.PART_Root.RenderTransform is MatrixTransform))
-            {
-                this.PART_Root.RenderTransform = new MatrixTransform();
-            }
-
-            Matrix matrix = ((MatrixTransform)this.PART_Root.RenderTransform).Matrix;
-            var delta = e.DeltaManipulation;
-
-            if ((this.SelectedIndex == 0 && delta.Translation.X > 0 && this.elasticFactor > 0)
-                || (this.SelectedIndex == this.Items.Count - 1 && delta.Translation.X < 0 && this.elasticFactor > 0))
-            {
-                this.elasticFactor -= 0.05;
-            }
-
-            matrix.Translate(delta.Translation.X * elasticFactor, 0);
-            this.PART_Root.RenderTransform = new MatrixTransform(matrix);
-
-            e.Handled = true;
-        }
-
-        private void OnRootManipulationStarted(object sender, ManipulationStartedEventArgs e)
-        {
-        }
-
-        private void OnRootManipulationStarting(object sender, ManipulationStartingEventArgs e)
-        {
-            e.ManipulationContainer = this.PART_Container;
-            e.Handled = true;
-            if (cancelManipulation)
-            {
-                e.Cancel();
-            }
-        }
-
-        private void OnLoaded(object sender, RoutedEventArgs e)
-        {
-            if (this.SelectedIndex > -1)
-            {
-                this.RefreshViewPort(this.SelectedIndex);
-            }
+            _isAnimating = true;
+            var animation = new DoubleAnimation(0, new Duration(TimeSpan.FromMilliseconds(50)));
+            animation.Completed += this.OnAnimationCompleted;
+            CurrentTransform.BeginAnimation(TranslateTransform.XProperty, animation);
+            double to = NextTransform.X < 0 ? -PART_CurrentItem.ActualWidth : PART_CurrentItem.ActualWidth;
+            var nextAnimation = new DoubleAnimation(to, new Duration(TimeSpan.FromMilliseconds(50)));
+            NextTransform.BeginAnimation(TranslateTransform.XProperty, nextAnimation);
         }
 
         private static void OnSelectedIndexChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             var flipView = (FlipView)d;
-            flipView.AnimateTo((int)e.OldValue, (int)e.NewValue);
-        }
-
-        private bool HasButtonParent(DependencyObject obj, out DependencyObject button)
-        {
-            var parent = VisualTreeHelper.GetParent(obj);
-
-            if ((parent != null) && (parent is ButtonBase) == false)
+            if (((int)e.OldValue) == -1)
             {
-                return HasButtonParent(parent, out button);
+                return;
             }
-
-            button = parent;
-            return parent != null;
+            flipView.AnimateTo((int)e.OldValue, (int)e.NewValue);
         }
 
         private void AnimateTo(int oldIndex, int newIndex)
@@ -400,30 +343,20 @@ namespace WPF.FlipView
             NextIndex = newIndex;
             if (_isAnimating)
             {
-                this.PART_CurrentItem.Content = this.GetItemAt(oldIndex);
+                CurrentItem = this.GetItemAt(oldIndex);
                 return;
             }
             var transition = new Transition(oldIndex, newIndex);
             if (newIndex >= 0 && newIndex < this.Items.Count)
             {
-                this.PART_NextItem.Content = this.GetItemAt(newIndex);
                 this.RunSlideAnimation(transition);
             }
         }
 
         private void RefreshViewPort(int selectedIndex)
         {
-            if (!this.EnsureTemplateParts())
-            {
-                return;
-            }
-
-            var currentItem = this.GetItemAt(selectedIndex);
-
-            this.PART_CurrentItem.RenderTransform = new TranslateTransform();
-            this.PART_CurrentItem.Content = currentItem;
-
-            this.PART_NextItem.SetCurrentValue(ContentPresenter.ContentProperty, null);
+            CurrentItem = this.GetItemAt(selectedIndex);
+            NextItem = null;
         }
 
         public void RunSlideAnimation(Transition transition)
@@ -438,27 +371,16 @@ namespace WPF.FlipView
             }
             _isAnimating = true;
             double toValue = transition.From < transition.To ? -this.ActualWidth : this.ActualWidth;
-            var currentItem = this.PART_CurrentItem;
-            if (!(currentItem.RenderTransform is TranslateTransform))
-            {
-                currentItem.RenderTransform = new TranslateTransform();
-            }
-            var toItem = this.PART_NextItem;
-            if (!(toItem.RenderTransform is TranslateTransform))
-            {
-                toItem.RenderTransform = new TranslateTransform();
-            }
-
-            toItem.RenderTransform.BeginAnimation(TranslateTransform.XProperty, AnimationFactory.CreateAnimation(-1 * toValue, fromValue, TransitionTime));
+            NextTransform.BeginAnimation(TranslateTransform.XProperty, AnimationFactory.CreateAnimation(-1 * toValue, fromValue, TransitionTime));
             var animation = AnimationFactory.CreateAnimation(fromValue, toValue, TransitionTime);
             animation.Completed += this.OnAnimationCompleted;
-            currentItem.RenderTransform.BeginAnimation(TranslateTransform.XProperty, animation);
+            CurrentTransform.BeginAnimation(TranslateTransform.XProperty, animation);
         }
 
         private void OnAnimationCompleted(object sender, EventArgs args)
         {
             this.RefreshViewPort(this.SelectedIndex);
-            this.PART_CurrentItem.RenderTransform.BeginAnimation(TranslateTransform.XProperty, null);
+            CurrentTransform.BeginAnimation(TranslateTransform.XProperty, null);
             this._isAnimating = false;
         }
 
@@ -474,7 +396,7 @@ namespace WPF.FlipView
 
         private bool EnsureTemplateParts()
         {
-            return this.PART_CurrentItem != null && this.PART_NextItem != null && this.PART_Root != null && this.PART_Index != null;
+            return this.PART_CurrentItem != null && this.PART_NextItem != null;
         }
 
         private void OnPreviousCanExecute(object sender, CanExecuteRoutedEventArgs e)

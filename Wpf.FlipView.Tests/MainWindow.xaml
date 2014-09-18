@@ -17,9 +17,9 @@
         </Grid.ColumnDefinitions>
         <flipView:FlipView x:Name="FlipView"
                            Grid.Column="1"
+                           ArrowPlacement="Inside"
                            IndexHeight="20"
                            IndexWidth="50"
-                           ArrowPlacement="Inside"
                            SelectedIndex="1"
                            ShowIndex="true">
             <Rectangle Fill="Gold" />
