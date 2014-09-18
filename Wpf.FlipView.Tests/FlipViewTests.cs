@@ -1,12 +1,54 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Wpf.FlipView.Tests
+﻿namespace Wpf.FlipView.Tests
 {
-    class FlipViewTests
+    using System.Reflection;
+    using System.Windows;
+    using System.Windows.Controls;
+    using NUnit.Framework;
+    using WPF.FlipView;
+
+    [RequiresSTA]
+    public class FlipViewTests
     {
+        private FlipView _flipView;
+        private ContentPresenter _currentItem;
+        private ContentPresenter _nextItem;
+        [SetUp]
+        public void SetUp()
+        {
+            _flipView = new FlipView();
+            _currentItem = new ContentPresenter();
+            _flipView.SetCurrentItem(_currentItem);
+            _nextItem = new ContentPresenter();
+            _flipView.SetNextItem(_nextItem);
+        }
+
+        [Test]
+        public void TestNameTest()
+        {
+            _flipView.InternalHandleTouchMove(new Vector(-1, 0));
+        }
+    }
+
+    public static class FlipViewTestExt
+    {
+        public static FieldInfo PartCurrentItem;
+        public static FieldInfo PartNextItem;
+
+        static FlipViewTestExt()
+        {
+            const string PART_CurrentItem = "PART_CurrentItem";
+            const string PART_NextItem = "PART_NextItem";
+            PartCurrentItem = typeof(FlipView).GetField(PART_CurrentItem, BindingFlags.Instance | BindingFlags.NonPublic);
+            PartNextItem = typeof(FlipView).GetField(PART_NextItem, BindingFlags.Instance | BindingFlags.NonPublic);
+        }
+        public static void SetCurrentItem(this FlipView flipView, ContentPresenter contentPresenter)
+        {
+            PartCurrentItem.SetValue(flipView, contentPresenter);
+        }
+
+        public static void SetNextItem(this FlipView flipView, ContentPresenter contentPresenter)
+        {
+            PartNextItem.SetValue(flipView, contentPresenter);
+        }
     }
 }

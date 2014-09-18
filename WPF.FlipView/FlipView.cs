@@ -12,8 +12,8 @@ namespace WPF.FlipView
     public class FlipView : Selector
     {
         private bool _isAnimating = false;
-        private ContentControl PART_CurrentItem;
-        private ContentControl PART_NextItem;
+        private ContentPresenter PART_CurrentItem;
+        private ContentPresenter PART_NextItem;
         private Grid PART_Root;
         private FrameworkElement PART_Container;
         private ListBox PART_Index;
@@ -70,6 +70,24 @@ namespace WPF.FlipView
 
         public static readonly DependencyProperty ArrowPlacementProperty = DependencyProperty.Register("ArrowPlacement", typeof(ArrowPlacement), typeof(FlipView), new PropertyMetadata(default(ArrowPlacement)));
 
+        static FlipView()
+        {
+            DefaultStyleKeyProperty.OverrideMetadata(typeof(FlipView), new FrameworkPropertyMetadata(typeof(FlipView)));
+            SelectedIndexProperty.OverrideMetadata(typeof(FlipView), new FrameworkPropertyMetadata(-1, OnSelectedIndexChanged));
+        }
+
+        public FlipView()
+        {
+            this.CommandBindings.Add(new CommandBinding(NextCommand, this.OnNextExecuted, this.OnNextCanExecute));
+            this.CommandBindings.Add(new CommandBinding(PreviousCommand, this.OnPreviousExecuted, this.OnPreviousCanExecute));
+            this.Focusable = false;
+            this.FocusVisualStyle = null;
+            Loaded += this.OnLoaded;
+            TouchDown += OnTouchDown;
+            TouchMove += OnTouchMove;
+            TouchUp += OnTouchUp;
+        }
+
         public TimeSpan TransitionTime
         {
             get
@@ -92,22 +110,6 @@ namespace WPF.FlipView
             {
                 SetValue(ArrowPlacementProperty, value);
             }
-        }
-
-        static FlipView()
-        {
-            DefaultStyleKeyProperty.OverrideMetadata(typeof(FlipView), new FrameworkPropertyMetadata(typeof(FlipView)));
-            SelectedIndexProperty.OverrideMetadata(typeof(FlipView), new FrameworkPropertyMetadata(-1, OnSelectedIndexChanged));
-        }
-
-        public FlipView()
-        {
-            this.CommandBindings.Add(new CommandBinding(NextCommand, this.OnNextExecuted, this.OnNextCanExecute));
-            this.CommandBindings.Add(new CommandBinding(PreviousCommand, this.OnPreviousExecuted, this.OnPreviousCanExecute));
-
-            this.Focusable = false;
-            this.FocusVisualStyle = null;
-            Loaded += this.OnLoaded;
         }
 
         public Brush SelectedIndexColor
@@ -203,20 +205,69 @@ namespace WPF.FlipView
             }
         }
 
+        private TouchPoint TouchStart { get; set; }
+
         public override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
-            this.PART_NextItem = this.GetTemplateChild("PART_NextItem") as ContentControl;
-            this.PART_CurrentItem = this.GetTemplateChild("PART_CurrentItem") as ContentControl;
+            this.PART_NextItem = this.GetTemplateChild("PART_NextItem") as ContentPresenter;
+            this.PART_CurrentItem = this.GetTemplateChild("PART_CurrentItem") as ContentPresenter;
             this.PART_Root = this.GetTemplateChild("PART_Root") as Grid;
             this.PART_Container = this.GetTemplateChild("PART_Container") as FrameworkElement;
             this.PART_Index = this.GetTemplateChild("PART_Index") as ListBox;
 
-            this.PART_Root.TouchDown += PART_Root_TouchDown;
-            this.PART_Root.ManipulationStarted += this.OnRootManipulationStarted;
-            this.PART_Root.ManipulationStarting += this.OnRootManipulationStarting;
-            this.PART_Root.ManipulationDelta += this.OnRootManipulationDelta;
-            this.PART_Root.ManipulationCompleted += this.OnRootManipulationCompleted;
+            //this.PART_Root.TouchDown += PART_Root_TouchDown;
+            //this.PART_Root.ManipulationStarted += this.OnRootManipulationStarted;
+            //this.PART_Root.ManipulationStarting += this.OnRootManipulationStarting;
+            //this.PART_Root.ManipulationDelta += this.OnRootManipulationDelta;
+            //this.PART_Root.ManipulationCompleted += this.OnRootManipulationCompleted;
+        }
+
+        private void OnTouchDown(object sender, TouchEventArgs e)
+        {
+            TouchStart = e.GetTouchPoint(this);
+        }
+
+        private void OnTouchMove(object sender, TouchEventArgs e)
+        {
+            if (TouchStart == null)
+            {
+                e.Handled = false;
+                return;
+            }
+            var tp = e.GetTouchPoint(this);
+            var delta = tp.Position - TouchStart.Position;
+            if (Math.Abs(delta.X) < Math.Abs(delta.Y))
+            {
+                e.Handled = false;
+                return;
+            }
+            InternalHandleTouchMove(delta);
+            e.Handled = true;
+        }
+
+        /// <summary>
+        /// Exposing this for tests
+        /// </summary>
+        /// <param name="delta"></param>
+        internal void InternalHandleTouchMove(Vector delta)
+        {
+            PART_CurrentItem.RenderTransform = new TranslateTransform(delta.X, 0);
+            var treshold = PART_CurrentItem.ActualWidth/2;
+            if (delta.X > treshold)
+            {
+                if (SelectedIndex > 0)
+                {
+                    SelectedIndex--;
+                }
+            }
+            if (delta.X < -treshold)
+            {
+                if (SelectedIndex < Items.Count)
+                {
+                    SelectedIndex++;
+                }
+            }
         }
 
         private void PART_Root_TouchDown(object sender, TouchEventArgs e)
@@ -231,6 +282,12 @@ namespace WPF.FlipView
                 DependencyObject button;
                 cancelManipulation = HasButtonParent(result.VisualHit, out button);
             }
+        }
+
+        private void OnTouchUp(object sender, TouchEventArgs e)
+        {
+            PART_CurrentItem.RenderTransform.BeginAnimation(TranslateTransform.XProperty, new DoubleAnimation(0, new Duration(TimeSpan.FromMilliseconds(50))));
+            RefreshViewPort(SelectedIndex);
         }
 
         private void OnRootManipulationCompleted(object sender, ManipulationCompletedEventArgs e)
