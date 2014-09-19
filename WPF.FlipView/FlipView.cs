@@ -29,9 +29,9 @@ namespace WPF.FlipView
 
         public static readonly DependencyProperty TransitionTimeProperty = DependencyProperty.Register(
             "TransitionTime",
-            typeof(TimeSpan),
+            typeof(int),
             typeof(FlipView),
-            new PropertyMetadata(TimeSpan.FromMilliseconds(300)));
+            new PropertyMetadata(300));
 
         public static readonly DependencyProperty ShowIndexProperty = DependencyProperty.RegisterAttached(
             "ShowIndex",
@@ -93,11 +93,11 @@ namespace WPF.FlipView
             _nextTransform.Children.Add(_currentTransform);
         }
 
-        public TimeSpan TransitionTime
+        public int TransitionTime
         {
             get
             {
-                return (TimeSpan)GetValue(TransitionTimeProperty);
+                return (int)GetValue(TransitionTimeProperty);
             }
             set
             {
@@ -350,9 +350,10 @@ namespace WPF.FlipView
             {
                 to = -actualWidth;
             }
-            if (TransitionTime > TimeSpan.Zero)
+            if (TransitionTime > 0)
             {
-                var animation = new DoubleAnimation(to, new Duration(TimeSpan.FromMilliseconds(50)));
+                double diff = Math.Abs(CurrentTransform.X - to) / actualWidth;
+                var animation = AnimationFactory.CreateAnimation(CurrentTransform.X, to, TimeSpan.FromMilliseconds(diff * TransitionTime));
                 animation.Completed += this.OnAnimationCompleted;
                 CurrentTransform.BeginAnimation(TranslateTransform.XProperty, animation);
             }
@@ -413,10 +414,10 @@ namespace WPF.FlipView
             }
             var actualWidth = PART_CurrentItem.ActualWidth;
             double toValue = transition.From < transition.To ? -actualWidth : actualWidth;
-            if (TransitionTime > TimeSpan.Zero)
+            if (TransitionTime > 0)
             {
                 _isAnimating = true;
-                var animation = AnimationFactory.CreateAnimation(CurrentTransform.X, toValue, TransitionTime);
+                var animation = AnimationFactory.CreateAnimation(CurrentTransform.X, toValue, TimeSpan.FromMilliseconds(TransitionTime));
                 animation.Completed += this.OnAnimationCompleted;
                 CurrentTransform.BeginAnimation(TranslateTransform.XProperty, animation);
                 //PART_CurrentItem.BeginAnimation(OpacityProperty, new DoubleAnimation(1, 0, new Duration(TransitionTime)));

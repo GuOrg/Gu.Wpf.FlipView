@@ -21,7 +21,7 @@
         [SetUp]
         public void SetUp()
         {
-            _flipView = new FlipView { TransitionTime = TimeSpan.Zero };
+            _flipView = new FlipView { TransitionTime = 0 };
 
             _currentItem = new ContentPresenter();
             _flipView.SetCurrentItem(_currentItem);
