@@ -154,13 +154,14 @@
         <!--  <Setter Property="IsManipulationEnabled" Value="True" />  -->
         <Setter Property="Focusable" Value="False" />
         <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type local:FlipView}">
                     <Border Background="{TemplateBinding Background}"
                             BorderBrush="{TemplateBinding BorderBrush}"
                             BorderThickness="{TemplateBinding BorderThickness}">
-                        <Grid x:Name="PART_Container">
+                        <Grid>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto" />
                                 <RowDefinition Height="*" />
@@ -171,8 +172,7 @@
                                 <ColumnDefinition Width="Auto" />
                             </Grid.ColumnDefinitions>
 
-                            <ListBox x:Name="PART_Index"
-                                     Grid.Row="0"
+                            <ListBox Grid.Row="0"
                                      Grid.Column="0"
                                      Grid.ColumnSpan="3"
                                      Margin="0,5,0,5"
@@ -187,7 +187,7 @@
                                                              UpdateSourceTrigger=PropertyChanged}"
                                      Visibility="{TemplateBinding ShowIndex,
                                                                   Converter={StaticResource BoolToCollapsedConverter},
-                                                                  ConverterParameter=true}">
+                                                                  ConverterParameter=true}"> 
                                 <ListBox.ItemsPanel>
                                     <ItemsPanelTemplate>
                                         <StackPanel IsItemsHost="True" Orientation="Horizontal" />
@@ -206,7 +206,7 @@
                                                          Converter={StaticResource BoolToHiddenConverter}}">
                                 <RepeatButton x:Name="LeftArrowButton"
                                               HorizontalAlignment="Left"
-                                              Command="local:FlipView.PreviousCommand"
+                                              Command="BrowseBack"
                                               Style="{StaticResource ArrowButtonStyle}">
                                     <RepeatButton.Content>
                                         <Path Data="{StaticResource LeftArrowPath}" Style="{StaticResource ArrowPath}" />
@@ -237,7 +237,7 @@
                                                          Converter={StaticResource BoolToHiddenConverter}}">
                                 <RepeatButton x:Name="RightArrowButton"
                                               HorizontalAlignment="Right"
-                                              Command="local:FlipView.NextCommand"
+                                              Command="BrowseForward"
                                               Style="{StaticResource ArrowButtonStyle}">
                                     <RepeatButton.Content>
                                         <Path Data="{StaticResource RightArrowPath}" Style="{StaticResource ArrowPath}" />
@@ -257,20 +257,20 @@
                                 </Border.Style>
                             </Border>
 
-                            <Grid x:Name="PART_Root"
+                            <Grid x:Name="PART_SwipePanel"
                                   Grid.Row="1"
                                   Grid.Column="1"
                                   Background="Transparent"
                                   ClipToBounds="True"
                                   IsManipulationEnabled="True">
 
-                                <ContentPresenter x:Name="PART_NextItem"
+                                <ContentPresenter x:Name="NextItem"
                                                   Content="{Binding NextItem,
                                                                     RelativeSource={RelativeSource TemplatedParent}}"
                                                   RenderTransform="{Binding NextTransform,
                                                                             RelativeSource={RelativeSource TemplatedParent}}"
                                                   Style="{StaticResource ContentStyle}" />
-                                <ContentPresenter x:Name="PART_CurrentItem"
+                                <ContentPresenter x:Name="CurrentItem"
                                                   Content="{Binding SelectedItem,
                                                                     RelativeSource={RelativeSource TemplatedParent}}"
                                                   RenderTransform="{Binding CurrentTransform,

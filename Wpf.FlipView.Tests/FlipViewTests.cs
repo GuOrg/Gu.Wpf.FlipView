@@ -34,7 +34,7 @@
 //        {
 //            _currentItem.RenderSize = new Size(100, 0);// set actual width
 //            _flipView.SelectedIndex = startIndex;
-//            _flipView.OnPan(new Vector(deltaX, 0));
+//            _flipView.OnSwipe(new Vector(deltaX, 0));
 //            Assert.AreEqual(deltaX, _flipView.CurrentTransform.X);
 //            Assert.AreEqual(nextX, _flipView.NextTransform.Transform(new Point(0, 0)).X);
 //            Assert.AreEqual(_flipView.NextIndex, nextIndex);
