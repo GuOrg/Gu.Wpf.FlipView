@@ -11,14 +11,13 @@ namespace Wpf.FlipView.Tests
     /// </summary>
     public class FlipViewUiTests
     {
-        [Test, RequiresSTA]
+        [Test, RequiresSTA, Explicit("Playing with ui automation")]
         public void TestNameTest()
         {
             var window = new MainWindow();
             var windowPeer = new WindowAutomationPeer(window);
             window.Show();
             List<AutomationPeer> automationPeers = windowPeer.GetChildren();
-            var flipViewPeer = automationPeers.OfType<WPF.FlipView.FlipView>().Single();
         }
     }
 }

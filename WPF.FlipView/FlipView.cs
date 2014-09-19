@@ -217,10 +217,14 @@ namespace WPF.FlipView
         {
             get
             {
-                return PART_CurrentItem.Content;
+                return this.PART_CurrentItem == null ? null : this.PART_CurrentItem.Content;
             }
             set
             {
+                if (this.PART_CurrentItem == null)
+                {
+                    return;
+                }
                 PART_CurrentItem.Content = value;
             }
         }
@@ -229,10 +233,14 @@ namespace WPF.FlipView
         {
             get
             {
-                return PART_NextItem.Content;
+                return this.PART_NextItem == null ? null : this.PART_NextItem.Content;
             }
             set
             {
+                if (this.PART_NextItem == null)
+                {
+                    return;
+                }
                 PART_NextItem.Content = value;
             }
         }
@@ -298,7 +306,7 @@ namespace WPF.FlipView
                 e.Handled = false;
                 return;
             }
-            InternalHandleTouchMove(delta);
+            this.OnTouchMoveInternal(delta);
             e.Handled = true;
         }
 
@@ -306,12 +314,12 @@ namespace WPF.FlipView
         /// Exposing this for tests
         /// </summary>
         /// <param name="delta"></param>
-        internal void InternalHandleTouchMove(Vector delta)
+        internal void OnTouchMoveInternal(Vector delta)
         {
-            var actualWidth = PART_CurrentItem.ActualWidth;
-            NextOffsetTransform.X = delta.X > 0 ? -actualWidth : actualWidth;
-            CurrentTransform.X = delta.X;
-            NextIndex = delta.X < 0 ? SelectedIndex + 1 : SelectedIndex - 1;
+            var actualWidth = this.PART_CurrentItem.ActualWidth;
+            this.NextOffsetTransform.X = delta.X > 0 ? -actualWidth : actualWidth;
+            this.CurrentTransform.X = delta.X;
+            this.NextIndex = delta.X < 0 ? this.SelectedIndex + 1 : this.SelectedIndex - 1;
         }
 
         private void OnTouchUp(object sender, TouchEventArgs e)
@@ -323,6 +331,7 @@ namespace WPF.FlipView
             var actualWidth = PART_CurrentItem.ActualWidth;
             var tp = e.GetTouchPoint(this);
             var delta = tp.Position - TouchStart.Position;
+            TouchStart = null;
             var treshold = actualWidth / 3;
             if (delta.X > treshold)
             {
@@ -338,8 +347,6 @@ namespace WPF.FlipView
                     SelectedIndex++;
                 }
             }
-            TouchStart = null;
-            _isAnimating = true;
 
             double to = 0;
             if (delta.X > treshold)
@@ -354,8 +361,7 @@ namespace WPF.FlipView
             {
                 double diff = Math.Abs(CurrentTransform.X - to) / actualWidth;
                 var animation = AnimationFactory.CreateAnimation(CurrentTransform.X, to, TimeSpan.FromMilliseconds(diff * TransitionTime));
-                animation.Completed += this.OnAnimationCompleted;
-                CurrentTransform.BeginAnimation(TranslateTransform.XProperty, animation);
+                this.AnimateCurrentTransform(animation);
             }
             else
             {
@@ -369,79 +375,100 @@ namespace WPF.FlipView
             var flipView = (FlipView)d;
             if (((int)e.OldValue) == -1 || flipView.TouchStart != null)
             {
+                if (flipView.PART_CurrentItem != null)
+                {
+                    flipView.CurrentItem = flipView.GetItemAt((int)e.NewValue);
+                }
                 return;
             }
-            flipView.TransitionTo((int)e.OldValue, (int)e.NewValue);
+            var transition = flipView.TransitionTo((int)e.OldValue, (int)e.NewValue);
+            var animation = flipView.CreateCurrentTransformSlideAnimation(transition);
+            flipView.AnimateCurrentTransform(animation);
         }
 
-        internal void TransitionTo(int oldIndex, int newIndex)
+        /// <summary>
+        /// Exposed for tests
+        /// </summary>
+        /// <param name="oldIndex"></param>
+        /// <param name="newIndex"></param>
+        /// <returns></returns>
+        internal Transition? TransitionTo(int oldIndex, int newIndex)
         {
-            if (!this.EnsureTemplateParts())
-            {
-                return;
-            }
-            var actualWidth = PART_CurrentItem.ActualWidth;
-
-            NextOffsetTransform.X = newIndex > oldIndex ? actualWidth : -actualWidth;
-
             NextIndex = newIndex;
             CurrentItem = this.GetItemAt(oldIndex);
             if (_isAnimating)
             {
-                return;
+                return null;
             }
+            var actualWidth = PART_CurrentItem.ActualWidth;
+            NextOffsetTransform.X = newIndex > oldIndex ? actualWidth : -actualWidth;
             if (newIndex >= 0 && newIndex < this.Items.Count)
             {
-                var transition = new Transition(oldIndex, newIndex);
-                this.RunSlideAnimation(transition);
+                return new Transition(oldIndex, newIndex);
             }
+            return null;
         }
 
         /// <summary>
-        /// 
+        /// Creates the animation for animating to the next slide
         /// </summary>
         /// <param name="transition"></param>
-        /// <param name="animate">This is for tests, no animation</param>
-        public void RunSlideAnimation(Transition transition)
+        /// <returns>null if TransitionTime == 0</returns>
+        internal AnimationTimeline CreateCurrentTransformSlideAnimation(Transition? transition)
         {
+            if (transition == null)
+            {
+                return null;
+            }
             if (!this.EnsureTemplateParts())
             {
-                return;
+                return null;
             }
             if (_isAnimating)
             {
-                return;
+                return null;
             }
             var actualWidth = PART_CurrentItem.ActualWidth;
-            double toValue = transition.From < transition.To ? -actualWidth : actualWidth;
+            double toValue = transition.Value.From < transition.Value.To ? -actualWidth : actualWidth;
             if (TransitionTime > 0)
             {
-                _isAnimating = true;
                 var animation = AnimationFactory.CreateAnimation(CurrentTransform.X, toValue, TimeSpan.FromMilliseconds(TransitionTime));
-                animation.Completed += this.OnAnimationCompleted;
-                CurrentTransform.BeginAnimation(TranslateTransform.XProperty, animation);
-                //PART_CurrentItem.BeginAnimation(OpacityProperty, new DoubleAnimation(1, 0, new Duration(TransitionTime)));
+                return animation;
             }
             else
             {
                 CurrentTransform.X = toValue;
-                OnAnimationCompleted(null, null);
             }
+            return null;
         }
 
-        private void RefreshViewPort(int selectedIndex)
+        /// <summary>
+        /// Applies the animation on CurrentTransform.X
+        /// </summary>
+        /// <param name="transition"></param>
+        private void AnimateCurrentTransform(AnimationTimeline transition)
         {
-            CurrentItem = this.GetItemAt(selectedIndex);
-            NextItem = null;
+            if (transition != null)
+            {
+                _isAnimating = true;
+                transition.Completed += this.OnAnimationCompleted;
+                CurrentTransform.BeginAnimation(TranslateTransform.XProperty, transition);
+            }
+            else
+            {
+                if (!_isAnimating)
+                {
+                    OnAnimationCompleted(null, null);
+                }
+            }
         }
 
         internal void OnAnimationCompleted(object sender, EventArgs args)
         {
-            this.RefreshViewPort(this.SelectedIndex);
+            CurrentItem = this.GetItemAt(this.SelectedIndex);
+            NextItem = null;
             CurrentTransform.BeginAnimation(TranslateTransform.XProperty, null);
             CurrentTransform.X = 0;
-            //PART_CurrentItem.BeginAnimation(OpacityProperty, null);
-            //PART_CurrentItem.Opacity = 1;
             this._isAnimating = false;
         }
 

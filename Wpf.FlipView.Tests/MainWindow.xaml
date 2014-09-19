@@ -21,7 +21,8 @@
                            IndexHeight="20"
                            IndexWidth="50"
                            SelectedIndex="1"
-                           ShowIndex="true">
+                           ShowIndex="true"
+                           TransitionTime="1000">
             <flipView:FlipView.Resources>
                 <Style TargetType="TextBlock">
                     <Setter Property="FontSize" Value="70" />

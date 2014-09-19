@@ -10,13 +10,13 @@ namespace Wpf.FlipView.Tests
     {
         public static FieldInfo PartCurrentItem;
         public static FieldInfo PartNextItem;
+        public static FieldInfo IsAnimating;
 
         static FlipViewTestExt()
         {
-            const string PART_CurrentItem = "PART_CurrentItem";
-            const string PART_NextItem = "PART_NextItem";
-            PartCurrentItem = typeof(FlipView).GetField(PART_CurrentItem, BindingFlags.Instance | BindingFlags.NonPublic);
-            PartNextItem = typeof(FlipView).GetField(PART_NextItem, BindingFlags.Instance | BindingFlags.NonPublic);
+            PartCurrentItem = typeof(FlipView).GetField("PART_CurrentItem", BindingFlags.Instance | BindingFlags.NonPublic);
+            PartNextItem = typeof(FlipView).GetField("PART_NextItem", BindingFlags.Instance | BindingFlags.NonPublic);
+            IsAnimating = typeof(FlipView).GetField("_isAnimating", BindingFlags.Instance | BindingFlags.NonPublic);
         }
         public static void SetCurrentItem(this FlipView flipView, ContentPresenter contentPresenter)
         {
@@ -28,10 +28,15 @@ namespace Wpf.FlipView.Tests
             PartNextItem.SetValue(flipView, contentPresenter);
         }
 
+        public static void SetIsAnimating(this FlipView flipView, bool isAnimating)
+        {
+            IsAnimating.SetValue(flipView, isAnimating);
+        }
+
         public static void FakeTouchDown(this FlipView flipView, Point point)
         {
             var device = new FakeTouchDevice(new TouchPoint(FakeTouchDevice.Default, point, new Rect(), TouchAction.Down));
-            var args = new TouchEventArgs(device,0) { RoutedEvent = UIElement.TouchDownEvent };
+            var args = new TouchEventArgs(device, 0) { RoutedEvent = UIElement.TouchDownEvent };
             flipView.RaiseEvent(args);
         }
 
@@ -48,5 +53,7 @@ namespace Wpf.FlipView.Tests
             var args = new TouchEventArgs(device, 0) { RoutedEvent = UIElement.TouchUpEvent };
             flipView.RaiseEvent(args);
         }
+
+
     }
 }
