@@ -41,6 +41,14 @@
         </Setter>
     </Style>
 
+    <Style x:Key="ContentStyle" TargetType="{x:Type ContentPresenter}">
+        <Setter Property="HorizontalAlignment" Value="{Binding HorizontalContentAlignment, RelativeSource={RelativeSource TemplatedParent}}" />
+        <Setter Property="VerticalAlignment" Value="{Binding VerticalContentAlignment, RelativeSource={RelativeSource TemplatedParent}}" />
+        <Setter Property="ContentTemplate" Value="{Binding ItemTemplate, RelativeSource={RelativeSource TemplatedParent}}" />
+        <Setter Property="ContentTemplateSelector" Value="{Binding ItemTemplateSelector, RelativeSource={RelativeSource TemplatedParent}}" />
+        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+    </Style>
+
     <Style x:Key="FocusVisual">
         <Setter Property="Control.Template">
             <Setter.Value>
@@ -143,7 +151,9 @@
     <Style TargetType="{x:Type local:FlipView}">
         <Setter Property="HorizontalContentAlignment" Value="Stretch" />
         <Setter Property="VerticalContentAlignment" Value="Stretch" />
-        <Setter Property="IsManipulationEnabled" Value="True" />
+        <!--  <Setter Property="IsManipulationEnabled" Value="True" />  -->
+        <Setter Property="Focusable" Value="False" />
+        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type local:FlipView}">
@@ -253,26 +263,19 @@
                                   Background="Transparent"
                                   ClipToBounds="True"
                                   IsManipulationEnabled="True">
+
                                 <ContentPresenter x:Name="PART_NextItem"
-                                                  HorizontalAlignment="{Binding HorizontalContentAlignment,
-                                                                                RelativeSource={RelativeSource TemplatedParent}}"
-                                                  VerticalAlignment="{Binding VerticalContentAlignment,
-                                                                              RelativeSource={RelativeSource TemplatedParent}}"
-                                                  ContentTemplate="{Binding ItemTemplate,
-                                                                            RelativeSource={RelativeSource TemplatedParent}}"
-                                                  FocusVisualStyle="{x:Null}"
+                                                  Content="{Binding NextItem,
+                                                                    RelativeSource={RelativeSource TemplatedParent}}"
                                                   RenderTransform="{Binding NextTransform,
-                                                                            RelativeSource={RelativeSource TemplatedParent}}" />
-                                <ContentPresenter x:Name="PART_CurrentItem"
-                                                  HorizontalAlignment="{Binding HorizontalContentAlignment,
-                                                                                RelativeSource={RelativeSource TemplatedParent}}"
-                                                  VerticalAlignment="{Binding VerticalContentAlignment,
-                                                                              RelativeSource={RelativeSource TemplatedParent}}"
-                                                  ContentTemplate="{Binding ItemTemplate,
                                                                             RelativeSource={RelativeSource TemplatedParent}}"
-                                                  FocusVisualStyle="{x:Null}"
+                                                  Style="{StaticResource ContentStyle}" />
+                                <ContentPresenter x:Name="PART_CurrentItem"
+                                                  Content="{Binding SelectedItem,
+                                                                    RelativeSource={RelativeSource TemplatedParent}}"
                                                   RenderTransform="{Binding CurrentTransform,
-                                                                            RelativeSource={RelativeSource TemplatedParent}}" />
+                                                                            RelativeSource={RelativeSource TemplatedParent}}"
+                                                  Style="{StaticResource ContentStyle}" />
                             </Grid>
                         </Grid>
                     </Border>

@@ -6,59 +6,101 @@
         Width="525"
         Height="350">
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition />
-            <RowDefinition Height="Auto" />
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="4*" />
-            <ColumnDefinition Width="*" />
-        </Grid.ColumnDefinitions>
-        <flipView:FlipView x:Name="FlipView"
-                           Grid.Column="1"
-                           ArrowPlacement="Inside"
-                           IndexHeight="20"
-                           IndexWidth="50"
-                           SelectedIndex="1"
-                           ShowIndex="true"
-                           TransitionTime="{Binding ElementName=AnimationSpeed,
-                                                    Path=Text}">
-            <flipView:FlipView.Resources>
-                <Style TargetType="TextBlock">
-                    <Setter Property="FontSize" Value="70" />
-                    <Setter Property="HorizontalAlignment" Value="Center" />
-                    <Setter Property="VerticalAlignment" Value="Center" />
-                </Style>
-            </flipView:FlipView.Resources>
-            <Border Background="Gold">
-                <TextBlock Text="1" />
-            </Border>
-            <Border Background="Blue">
-                <TextBlock Text="2" />
-            </Border>
-            <Border Background="Red">
-                <TextBlock>3</TextBlock>
-            </Border>
-            <Border Background="Green">
-                <TextBlock>4</TextBlock>
-            </Border>
-        </flipView:FlipView>
-        <Grid Grid.Row="1"
-              Grid.Column="0"
-              Grid.ColumnSpan="3"
-              TextBlock.FontSize="12">
-            <StackPanel>
-                <CheckBox Content="ShowArrows" IsChecked="{Binding ElementName=FlipView, Path=ShowArrows}" />
-                <ComboBox SelectedItem="{Binding ElementName=FlipView, Path=ArrowPlacement}">
-                    <flipView:ArrowPlacement>Inside</flipView:ArrowPlacement>
-                    <flipView:ArrowPlacement>Outside</flipView:ArrowPlacement>
-                </ComboBox>
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="Speed" />
-                    <TextBox x:Name="AnimationSpeed" Text="300" />
-                </StackPanel>
-            </StackPanel>
-        </Grid>
+        <TabControl>
+            <TabItem Header="FlipView">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="4*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <flipView:FlipView x:Name="FlipView"
+                                       Grid.Column="1"
+                                       ArrowPlacement="Inside"
+                                       IndexHeight="20"
+                                       IndexWidth="50"
+                                       SelectedIndex="1"
+                                       ShowIndex="true"
+                                       TransitionTime="{Binding ElementName=AnimationSpeed,
+                                                                Path=Text}">
+                        <flipView:FlipView.Resources>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="FontSize" Value="70" />
+                                <Setter Property="HorizontalAlignment" Value="Center" />
+                                <Setter Property="VerticalAlignment" Value="Center" />
+                            </Style>
+                        </flipView:FlipView.Resources>
+                        <Border Background="#feedde">
+                            <TextBlock Text="1" />
+                        </Border>
+                        <Border Background="#fdbe85">
+                            <TextBlock Text="2" />
+                        </Border>
+                        <Border Background="#fd8d3c">
+                            <TextBlock>3</TextBlock>
+                        </Border>
+                        <Border Background="#d94701">
+                            <TextBlock>4</TextBlock>
+                        </Border>
+                    </flipView:FlipView>
+                    <Grid Grid.Row="1"
+                          Grid.Column="0"
+                          Grid.ColumnSpan="3"
+                          TextBlock.FontSize="12">
+                        <StackPanel>
+                            <CheckBox Content="ShowArrows" IsChecked="{Binding ElementName=FlipView, Path=ShowArrows}" />
+                            <ComboBox SelectedItem="{Binding ElementName=FlipView, Path=ArrowPlacement}">
+                                <flipView:ArrowPlacement>Inside</flipView:ArrowPlacement>
+                                <flipView:ArrowPlacement>Outside</flipView:ArrowPlacement>
+                            </ComboBox>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="Speed" />
+                                <TextBox x:Name="AnimationSpeed" Text="300" />
+                            </StackPanel>
+                        </StackPanel>
+                    </Grid>
+                </Grid>
+            </TabItem>
+            <TabItem Header="TouchBox">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <InkCanvas Background="Gainsboro"
+                               EditingMode="InkAndGesture"
+                               Gesture="InkCanvas_OnGesture"
+                               MoveEnabled="True">
+                        <InkCanvas.DefaultDrawingAttributes>
+                            <DrawingAttributes Color="Transparent" />
+
+                        </InkCanvas.DefaultDrawingAttributes>
+                    </InkCanvas>
+                    <Button Grid.Column="0"
+                            Width="100"
+                            Height="50"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top"
+                            Click="ButtonBase_OnClick"
+                            IsManipulationEnabled="False">
+                        Clicker
+                    </Button>
+
+                    <Grid Grid.Column="1">
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <ListBox x:Name="ArgsBox" />
+                        <Button Grid.Row="1" Click="OnClear">Clear</Button>
+                    </Grid>
+                </Grid>
+
+            </TabItem>
+        </TabControl>
     </Grid>
 </Window>
