@@ -22,7 +22,8 @@
                            IndexWidth="50"
                            SelectedIndex="1"
                            ShowIndex="true"
-                           TransitionTime="1000">
+                           TransitionTime="{Binding ElementName=AnimationSpeed,
+                                                    Path=Text}">
             <flipView:FlipView.Resources>
                 <Style TargetType="TextBlock">
                     <Setter Property="FontSize" Value="70" />
@@ -53,6 +54,10 @@
                     <flipView:ArrowPlacement>Inside</flipView:ArrowPlacement>
                     <flipView:ArrowPlacement>Outside</flipView:ArrowPlacement>
                 </ComboBox>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Speed" />
+                    <TextBox x:Name="AnimationSpeed" Text="300" />
+                </StackPanel>
             </StackPanel>
         </Grid>
     </Grid>

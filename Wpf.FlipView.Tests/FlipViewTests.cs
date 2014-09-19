@@ -1,14 +1,9 @@
 ﻿namespace Wpf.FlipView.Tests
 {
     using System;
-    using System.Threading;
     using System.Windows;
     using System.Windows.Controls;
-    using System.Windows.Input;
-    using System.Windows.Media;
     using System.Windows.Media.Animation;
-    using System.Windows.Threading;
-    using Moq;
     using NUnit.Framework;
     using WPF.FlipView;
 
@@ -39,7 +34,7 @@
         {
             _currentItem.RenderSize = new Size(100, 0);// set actual width
             _flipView.SelectedIndex = startIndex;
-            _flipView.OnTouchMoveInternal(new Vector(deltaX, 0));
+            _flipView.OnPan(new Vector(deltaX, 0));
             Assert.AreEqual(deltaX, _flipView.CurrentTransform.X);
             Assert.AreEqual(nextX, _flipView.NextTransform.Transform(new Point(0, 0)).X);
             Assert.AreEqual(_flipView.NextIndex, nextIndex);
@@ -75,6 +70,16 @@
             Assert.AreEqual(nextIndex, _flipView.NextIndex);
             Assert.AreSame(_flipView.Items[startIndex], _flipView.CurrentItem);
             Assert.AreSame(_flipView.Items[nextIndex], _flipView.NextItem);
+        }
+
+        [Test]
+        public void OnPanEndedBeforeFirst()
+        {
+            _flipView.SelectedIndex = 0;
+            _currentItem.RenderSize = new Size(100, 0);// set actual width
+            _flipView.CurrentTransform.X = 50;
+            _flipView.OnPanEnded(new Vector(50,0),new Vector(5,0));
+            Assert.AreEqual(0,_flipView.CurrentTransform.X);
         }
 
         [TestCase(1, 2, -100)]

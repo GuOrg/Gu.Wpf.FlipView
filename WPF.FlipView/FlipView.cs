@@ -17,7 +17,7 @@ namespace WPF.FlipView
         private readonly TranslateTransform _currentTransform = new TranslateTransform();
         private readonly TranslateTransform _nextOffsetTransform = new TranslateTransform();
         private readonly TransformGroup _nextTransform;
-        private bool _isAnimating = false;
+        private AnimationTimeline _animation;
         private ContentPresenter PART_CurrentItem;
         private ContentPresenter PART_NextItem;
         private Grid PART_Root;
@@ -32,6 +32,15 @@ namespace WPF.FlipView
             typeof(int),
             typeof(FlipView),
             new PropertyMetadata(300));
+
+        public static readonly DependencyProperty MinSwipeVelocityProperty = DependencyProperty.Register(
+            "MinSwipeVelocity", typeof (double), typeof (FlipView), new PropertyMetadata(default(double)));
+
+        public double MinSwipeVelocity
+        {
+            get { return (double) GetValue(MinSwipeVelocityProperty); }
+            set { SetValue(MinSwipeVelocityProperty, value); }
+        }   
 
         public static readonly DependencyProperty ShowIndexProperty = DependencyProperty.RegisterAttached(
             "ShowIndex",
@@ -75,6 +84,8 @@ namespace WPF.FlipView
             typeof(FlipView),
             new PropertyMetadata(default(ArrowPlacement)));
 
+        private bool _isPanning;
+
         static FlipView()
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(FlipView), new FrameworkPropertyMetadata(typeof(FlipView)));
@@ -88,6 +99,49 @@ namespace WPF.FlipView
             this.Focusable = false;
             this.FocusVisualStyle = null;
             Loaded += (_, e) => CurrentItem = this.GetItemAt(SelectedIndex);
+
+            ManipulationDelta += (sender, args) =>
+            {
+                if (args.ManipulationContainer == PART_Root)
+                {
+                    var delta = args.CumulativeManipulation.Translation;
+                    if (Math.Abs( delta.X) < 3)
+                    {
+                        args.Handled = false;
+                        return;
+                    }
+                    if (Math.Abs( args.Velocities.LinearVelocity.X) < MinSwipeVelocity)
+                    {
+                        args.Handled = false;
+                        CurrentTransform.X = 0;
+                        return;
+                    }
+                    if (Math.Abs(delta.X) < Math.Abs(delta.Y))
+                    {
+                        args.Handled = false;
+                        return;
+                    }
+                    else
+                    {
+                        OnPan(delta);
+                        args.Handled = true;
+                    }
+                }
+                args.Handled = false;
+            };
+
+            ManipulationCompleted += (sender, args) =>
+            {
+                if (args.ManipulationContainer == PART_Root && _isPanning)
+                {
+                    OnPanEnded(args.TotalManipulation.Translation, args.FinalVelocities.LinearVelocity);
+                    args.Handled = true;
+                }
+                else
+                {
+                    args.Handled = false;
+                }
+            };
             _nextTransform = new TransformGroup();
             _nextTransform.Children.Add(_nextOffsetTransform);
             _nextTransform.Children.Add(_currentTransform);
@@ -265,8 +319,6 @@ namespace WPF.FlipView
             }
         }
 
-        private TouchPoint TouchStart { get; set; }
-
         public override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
@@ -275,105 +327,59 @@ namespace WPF.FlipView
             this.PART_Root = this.GetTemplateChild("PART_Root") as Grid;
             this.PART_Container = this.GetTemplateChild("PART_Container") as FrameworkElement;
             this.PART_Index = this.GetTemplateChild("PART_Index") as ListBox;
-            this.PART_Root.TouchDown += OnTouchDown;
-            this.PART_Root.TouchMove += OnTouchMove;
-            this.PART_Root.TouchUp += OnTouchUp;
-        }
-
-        private void OnTouchDown(object sender, TouchEventArgs e)
-        {
-            if (_isAnimating)
-            {
-                CurrentTransform.BeginAnimation(TranslateTransform.XProperty, null);
-                _isAnimating = false;
-            }
-            _isAnimating = true;
-            TouchStart = e.GetTouchPoint(this);
-            e.Handled = false;
-        }
-
-        private void OnTouchMove(object sender, TouchEventArgs e)
-        {
-            if (TouchStart == null)
-            {
-                e.Handled = false;
-                return;
-            }
-            var tp = e.GetTouchPoint(this);
-            var delta = tp.Position - TouchStart.Position;
-            if (Math.Abs(delta.X) < Math.Abs(delta.Y))
-            {
-                e.Handled = false;
-                return;
-            }
-            this.OnTouchMoveInternal(delta);
-            e.Handled = true;
+            CurrentItem = GetItemAt(SelectedIndex);
         }
 
         /// <summary>
         /// Exposing this for tests
         /// </summary>
         /// <param name="delta"></param>
-        internal void OnTouchMoveInternal(Vector delta)
+        internal void OnPan(Vector delta)
         {
+            if (_animation != null)
+            {
+                CurrentTransform.BeginAnimation(TranslateTransform.XProperty, null);
+                _animation.Completed -= OnAnimationCompleted;
+                _animation = null;
+            }
+            _isPanning = true;
             var actualWidth = this.PART_CurrentItem.ActualWidth;
             this.NextOffsetTransform.X = delta.X > 0 ? -actualWidth : actualWidth;
             this.CurrentTransform.X = delta.X;
             this.NextIndex = delta.X < 0 ? this.SelectedIndex + 1 : this.SelectedIndex - 1;
         }
 
-        private void OnTouchUp(object sender, TouchEventArgs e)
+        internal void OnPanEnded(Vector delta, Vector velocity)
         {
-            if (TouchStart == null)
-            {
-                return;
-            }
             var actualWidth = PART_CurrentItem.ActualWidth;
-            var tp = e.GetTouchPoint(this);
-            var delta = tp.Position - TouchStart.Position;
-            TouchStart = null;
-            var treshold = actualWidth / 3;
-            if (delta.X > treshold)
+            var treshold = actualWidth / 2;
+            int oldIndex = SelectedIndex;
+            if (Math.Abs(delta.X) > treshold || Math.Abs(velocity.X) > MinSwipeVelocity)
             {
-                if (SelectedIndex > 0)
+                if (SelectedIndex > 0 && delta.X > 0)
                 {
                     SelectedIndex--;
                 }
-            }
-            if (delta.X < -treshold)
-            {
-                if (SelectedIndex < Items.Count)
+                if (SelectedIndex < Items.Count && delta.X < 0)
                 {
                     SelectedIndex++;
                 }
             }
 
-            double to = 0;
-            if (delta.X > treshold)
-            {
-                to = actualWidth;
-            }
-            if (delta.X < -treshold)
-            {
-                to = -actualWidth;
-            }
-            if (TransitionTime > 0)
-            {
-                double diff = Math.Abs(CurrentTransform.X - to) / actualWidth;
-                var animation = AnimationFactory.CreateAnimation(CurrentTransform.X, to, TimeSpan.FromMilliseconds(diff * TransitionTime));
-                this.AnimateCurrentTransform(animation);
-            }
-            else
-            {
-                CurrentTransform.X = to;
-                OnAnimationCompleted(null, null);
-            }
+            Transition? transitionTo = TransitionTo(oldIndex, SelectedIndex);
+            var animation = CreateCurrentTransformSlideAnimation(transitionTo);
+            _isPanning = false;
+            AnimateCurrentTransform(animation);
         }
 
         private static void OnSelectedIndexChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             var flipView = (FlipView)d;
-            if (((int)e.OldValue) == -1 || flipView.TouchStart != null)
+            if (flipView._isPanning)
+            {
+                return;
+            }
+            if (((int)e.OldValue) == -1)
             {
                 if (flipView.PART_CurrentItem != null)
                 {
@@ -394,14 +400,17 @@ namespace WPF.FlipView
         /// <returns></returns>
         internal Transition? TransitionTo(int oldIndex, int newIndex)
         {
-            NextIndex = newIndex;
+            if (oldIndex != newIndex)
+            {
+                NextIndex = newIndex;
+                var actualWidth = PART_CurrentItem.ActualWidth;
+                NextOffsetTransform.X = newIndex > oldIndex ? actualWidth : -actualWidth;
+            }
             CurrentItem = this.GetItemAt(oldIndex);
-            if (_isAnimating)
+            if (_animation != null)
             {
                 return null;
             }
-            var actualWidth = PART_CurrentItem.ActualWidth;
-            NextOffsetTransform.X = newIndex > oldIndex ? actualWidth : -actualWidth;
             if (newIndex >= 0 && newIndex < this.Items.Count)
             {
                 return new Transition(oldIndex, newIndex);
@@ -424,15 +433,21 @@ namespace WPF.FlipView
             {
                 return null;
             }
-            if (_isAnimating)
+            if (_animation != null)
             {
                 return null;
             }
             var actualWidth = PART_CurrentItem.ActualWidth;
-            double toValue = transition.Value.From < transition.Value.To ? -actualWidth : actualWidth;
+            double toValue = 0;
+            if (transition.Value.From != transition.Value.To)
+            {
+                toValue = transition.Value.From < transition.Value.To ? -actualWidth : actualWidth;
+            }
             if (TransitionTime > 0)
             {
-                var animation = AnimationFactory.CreateAnimation(CurrentTransform.X, toValue, TimeSpan.FromMilliseconds(TransitionTime));
+                double delta = Math.Abs(CurrentTransform.X - toValue);
+                var duration = TimeSpan.FromMilliseconds((delta / actualWidth) * TransitionTime);
+                var animation = AnimationFactory.CreateAnimation(CurrentTransform.X, toValue, duration);
                 return animation;
             }
             else
@@ -445,18 +460,24 @@ namespace WPF.FlipView
         /// <summary>
         /// Applies the animation on CurrentTransform.X
         /// </summary>
-        /// <param name="transition"></param>
-        private void AnimateCurrentTransform(AnimationTimeline transition)
+        /// <param name="animation"></param>
+        private void AnimateCurrentTransform(AnimationTimeline animation)
         {
-            if (transition != null)
+            if (_animation != null && animation != null)
             {
-                _isAnimating = true;
-                transition.Completed += this.OnAnimationCompleted;
-                CurrentTransform.BeginAnimation(TranslateTransform.XProperty, transition);
+                _animation.Completed -= OnAnimationCompleted;
+                _animation = null;
+                CurrentTransform.BeginAnimation(TranslateTransform.XProperty, null);
+            }
+            if (animation != null)
+            {
+                _animation = animation;
+                animation.Completed += this.OnAnimationCompleted;
+                CurrentTransform.BeginAnimation(TranslateTransform.XProperty, animation);
             }
             else
             {
-                if (!_isAnimating)
+                if (_animation == null)
                 {
                     OnAnimationCompleted(null, null);
                 }
@@ -469,7 +490,7 @@ namespace WPF.FlipView
             NextItem = null;
             CurrentTransform.BeginAnimation(TranslateTransform.XProperty, null);
             CurrentTransform.X = 0;
-            this._isAnimating = false;
+            _animation = null;
         }
 
         private object GetItemAt(int index)
