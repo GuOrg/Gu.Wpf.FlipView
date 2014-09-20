@@ -33,5 +33,9 @@ namespace Wpf.FlipView.Tests
         {
             ArgsBox.Items.Clear();
         }
+        private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
+        {
+            ArgsBox.Items.Insert(0,"Click");
+        }
     }
 }

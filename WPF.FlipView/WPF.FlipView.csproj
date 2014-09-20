@@ -87,7 +87,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Compile Include="ArrowPlacement.cs" />
-    <Compile Include="GestureFinder.cs" />
+    <Compile Include="ManipulationGestureFinder.cs" />
+    <Compile Include="IGestureFinder.cs" />
+    <Compile Include="Swipe.cs" />
     <Compile Include="Transition.cs" />
     <Compile Include="AnimationFactory.cs" />
     <Compile Include="BoolToHiddenConverter.cs" />

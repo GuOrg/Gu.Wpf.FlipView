@@ -14,9 +14,9 @@ namespace WPF.FlipView
     {
         public static readonly DependencyProperty GestureFinderProperty = DependencyProperty.Register(
             "GestureFinder",
-            typeof(GestureFinder),
+            typeof(IGestureFinder),
             typeof(FlipView),
-            new PropertyMetadata(new GestureFinder(), OnGestureFinderChanged));
+            new PropertyMetadata(new ManipulationGestureFinder(), OnGestureFinderChanged));
 
         public static readonly DependencyProperty TransitionTimeProperty = DependencyProperty.Register(
             "TransitionTime",
@@ -93,7 +93,7 @@ namespace WPF.FlipView
 
             this.ManipulationDelta += (sender, args) =>
             {
-                if (GestureFinder != null && GestureFinder.IsSwipe(args))
+                if (GestureFinder != null && GestureFinder.Find(args) != Swipe.None)
                 {
                     OnSwipe(args.DeltaManipulation.Translation);
                     args.Handled = true;
@@ -104,7 +104,7 @@ namespace WPF.FlipView
             this.ManipulationCompleted += (sender, args) =>
             {
                 _isSwiping = false;
-                if (_isSwiping && GestureFinder != null && GestureFinder.IsSwipe(args))
+                if (_isSwiping && GestureFinder != null && GestureFinder.Find(args) != Swipe.None)
                 {
                     OnSwipeEnded(args.FinalVelocities.LinearVelocity);
                     args.Handled = true;
@@ -116,9 +116,9 @@ namespace WPF.FlipView
             _nextTransform.Children.Add(_currentTransform);
         }
 
-        public GestureFinder GestureFinder
+        public IGestureFinder GestureFinder
         {
-            get { return (GestureFinder)GetValue(GestureFinderProperty); }
+            get { return (IGestureFinder)GetValue(GestureFinderProperty); }
             set { SetValue(GestureFinderProperty, value); }
         }
 
@@ -410,7 +410,7 @@ namespace WPF.FlipView
 
         private static void OnGestureFinderChanged(DependencyObject o, DependencyPropertyChangedEventArgs e)
         {
-            var gestureFinder = (GestureFinder)e.NewValue;
+            var gestureFinder = (ManipulationGestureFinder)e.NewValue;
             if (gestureFinder != null)
             {
                 gestureFinder.InputElement = ((FlipView)o).PART_SwipePanel;

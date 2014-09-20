@@ -4,7 +4,7 @@
     using System.Windows;
     using System.Windows.Input;
 
-    public class GestureFinder : Freezable
+    public class ManipulationGestureFinder : Freezable, IGestureFinder
     {
         public static readonly DependencyProperty MinSwipeVelocityProperty = DependencyProperty.Register(
             "MinSwipeVelocity",
@@ -20,16 +20,16 @@
             set { SetValue(MinSwipeVelocityProperty, value); }
         }
 
-        public bool IsSwipe(ManipulationDeltaEventArgs args)
+        public Swipe Find(ManipulationDeltaEventArgs args)
         {
             if (args.ManipulationContainer != InputElement)
             {
-                return false;
+                return Swipe.None;
             }
             var delta = args.CumulativeManipulation.Translation;
             if (Math.Abs(delta.X) < 3)
             {
-                return false;
+                return Swipe.None;
             }
             //if (Math.Abs(args.Velocities.LinearVelocity.X) < MinSwipeVelocity)
             //{
@@ -39,23 +39,24 @@
             //}
             if (Math.Abs(delta.X) < Math.Abs(delta.Y))
             {
-                return false;
+                return Swipe.None;
             }
-            return true;
+            return delta.X<0 ? Swipe.Left : Swipe.Right;
         }
 
-        public bool IsSwipe(ManipulationCompletedEventArgs args)
+        public Swipe Find(ManipulationCompletedEventArgs args)
         {
             if (args.ManipulationContainer != InputElement)
             {
-                return false;
+                return Swipe.None;
             }
-            return true;
+            return args.TotalManipulation.Translation.X < 0 ? Swipe.Left : Swipe.Right;
+
         }
 
         protected override Freezable CreateInstanceCore()
         {
-            return new GestureFinder();
+            return new ManipulationGestureFinder();
         }
     }
 }

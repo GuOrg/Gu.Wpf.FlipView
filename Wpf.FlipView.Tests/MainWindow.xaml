@@ -104,11 +104,15 @@
 
             </TabItem>
             <TabItem Header="Manipulations">
-                <tests:TouchControl>
+                <tests:ManipulationBox />
+            </TabItem>
 
+            <TabItem Header="Mouse">
+                <tests:ManipulationBox />
+            </TabItem>
 
-                </tests:TouchControl>
-
+            <TabItem Header="CanExecute">
+                <tests:CanExecuteControl />
             </TabItem>
         </TabControl>
     </Grid>
