@@ -24,6 +24,7 @@ namespace Wpf.FlipView.Tests
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(EventBox), new FrameworkPropertyMetadata(typeof(EventBox)));
         }
+       
         public EventBox()
         {
             CommandBindings.Add(new CommandBinding(ClearCommand, ClearExecuted));

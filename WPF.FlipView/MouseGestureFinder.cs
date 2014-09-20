@@ -1,10 +1,10 @@
-﻿namespace WPF.FlipView
+namespace WPF.FlipView
 {
     using System;
     using System.Windows;
     using System.Windows.Input;
 
-    public class ManipulationGestureFinder : Freezable, IGestureFinder
+    public class MouseGestureFinder : Freezable, IGestureFinder
     {
         public static readonly DependencyProperty MinSwipeVelocityProperty = DependencyProperty.Register(
             "MinSwipeVelocity",
@@ -13,9 +13,26 @@
             new PropertyMetadata(0.0));
 
         public static readonly DependencyProperty MinSwipeLengthProperty = DependencyProperty.Register(
-            "MinSwipeLength", typeof (double), typeof (ManipulationGestureFinder), new PropertyMetadata(default(double)));
+            "MinSwipeLength",
+            typeof(double),
+            typeof(ManipulationGestureFinder),
+            new PropertyMetadata(default(double)));
 
-        public IInputElement InputElement { get; set; }
+        private WeakReference<IInputElement> _inputElement;
+
+        public IInputElement InputElement
+        {
+            get
+            {
+                IInputElement target;
+                _inputElement.TryGetTarget(out  target);
+                return target;
+            }
+            set
+            {
+                _inputElement.SetTarget(value);
+            }
+        }
 
         public double MinSwipeVelocity
         {
@@ -50,7 +67,7 @@
             {
                 return Swipe.None;
             }
-            return delta.X<0 ? Swipe.Left : Swipe.Right;
+            return delta.X < 0 ? Swipe.Left : Swipe.Right;
         }
 
         public Swipe Find(ManipulationCompletedEventArgs args)
