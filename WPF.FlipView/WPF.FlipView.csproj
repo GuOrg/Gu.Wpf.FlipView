@@ -98,7 +98,6 @@
     <Compile Include="Gestures\IGestureTracker.cs" />
     <Compile Include="Gestures\MouseGestureTracker.cs" />
     <Compile Include="Gestures\GesturePoint.cs" />
-    <Compile Include="Gestures\Swipe.cs" />
     <Compile Include="Gestures\TouchGestureTracker.cs" />
     <Compile Include="Transition.cs" />
     <Compile Include="AnimationFactory.cs" />

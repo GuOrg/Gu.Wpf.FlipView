@@ -158,9 +158,18 @@
         <Setter Property="GestureTracker">
             <Setter.Value>
                 <local:CompositeGestureTracker>
+
                     <local:CompositeGestureTracker.GestureTrackers>
-                        <local:MouseGestureTracker />
-                        <local:MouseGestureTracker />
+                        <local:MouseGestureTracker>
+                            <local:MouseGestureTracker.Interpreter>
+                                <local:GestureInterpreter MinSwipeLength="40" MinSwipeVelocity="1" />
+                            </local:MouseGestureTracker.Interpreter>
+                        </local:MouseGestureTracker>
+                        <local:TouchGestureTracker>
+                            <local:TouchGestureTracker.Interpreter>
+                                <local:GestureInterpreter MinSwipeLength="50" MinSwipeVelocity="1" />
+                            </local:TouchGestureTracker.Interpreter>
+                        </local:TouchGestureTracker>
                     </local:CompositeGestureTracker.GestureTrackers>
                 </local:CompositeGestureTracker>
             </Setter.Value>
@@ -277,7 +286,7 @@
                                 <ContentPresenter x:Name="NextItem"
                                                   Content="{Binding PreviousItem,
                                                                     RelativeSource={RelativeSource TemplatedParent}}"
-                                                  RenderTransform="{Binding NextTransform,
+                                                  RenderTransform="{Binding PreviousTransform,
                                                                             RelativeSource={RelativeSource TemplatedParent}}"
                                                   Style="{StaticResource ContentStyle}" />
                                 <ContentPresenter x:Name="CurrentItem"
