@@ -46,13 +46,13 @@ namespace WPF.FlipView
             "SelectedIndexColor",
             typeof(Brush),
             typeof(FlipView),
-            new FrameworkPropertyMetadata(new SolidColorBrush(Colors.DeepSkyBlue), FrameworkPropertyMetadataOptions.None));
+            new FrameworkPropertyMetadata(SystemColors.ActiveBorderBrush, FrameworkPropertyMetadataOptions.None));
 
         public static readonly DependencyProperty IndexColorProperty = DependencyProperty.RegisterAttached(
             "IndexColor",
             typeof(Brush),
             typeof(FlipView),
-            new FrameworkPropertyMetadata(new SolidColorBrush(Colors.Gray), FrameworkPropertyMetadataOptions.None));
+            new FrameworkPropertyMetadata(SystemColors.ControlBrush, FrameworkPropertyMetadataOptions.None));
 
         public static readonly DependencyProperty ShowArrowsProperty = DependencyProperty.RegisterAttached(
             "ShowArrows",
@@ -66,8 +66,8 @@ namespace WPF.FlipView
             typeof(FlipView),
             new FrameworkPropertyMetadata(default(ArrowPlacement), FrameworkPropertyMetadataOptions.AffectsArrange));
 
-        public static readonly DependencyProperty NextItemProperty = DependencyProperty.Register(
-            "NextItem",
+        public static readonly DependencyProperty PreviousItemProperty = DependencyProperty.Register(
+            "PreviousItem",
             typeof(object),
             typeof(FlipView),
             new PropertyMetadata(null));
@@ -218,10 +218,10 @@ namespace WPF.FlipView
             }
         }
 
-        public object NextItem
+        public object PreviousItem
         {
-            get { return (object)GetValue(NextItemProperty); }
-            set { SetValue(NextItemProperty, value); }
+            get { return (object)GetValue(PreviousItemProperty); }
+            set { SetValue(PreviousItemProperty, value); }
         }
 
         public TranslateTransform CurrentTransform
@@ -263,13 +263,13 @@ namespace WPF.FlipView
                 this._nextIndex = value;
                 if (_nextIndex != null && _nextIndex >= 0 && _nextIndex < Items.Count)
                 {
-                    SetCurrentValue(NextItemProperty, this.Items[_nextIndex.Value]);
+                    SetCurrentValue(PreviousItemProperty, this.Items[_nextIndex.Value]);
                     var sign = NextIndex > SelectedIndex ? 1 : -1;
                     _nextOffsetTransform.X = sign * PART_SwipePanel.ActualWidth;
                 }
                 else
                 {
-                    SetCurrentValue(NextItemProperty, null);
+                    SetCurrentValue(PreviousItemProperty, null);
                 }
             }
         }

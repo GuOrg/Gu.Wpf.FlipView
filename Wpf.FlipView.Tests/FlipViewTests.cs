@@ -38,7 +38,7 @@
 //            Assert.AreEqual(deltaX, _flipView.CurrentTransform.X);
 //            Assert.AreEqual(nextX, _flipView.NextTransform.Transform(new Point(0, 0)).X);
 //            Assert.AreEqual(_flipView.NextIndex, nextIndex);
-//            Assert.AreSame(_flipView.Items[nextIndex], _flipView.NextItem);
+//            Assert.AreSame(_flipView.Items[nextIndex], _flipView.PreviousItem);
 //            Assert.AreSame(_flipView.Items[startIndex], _flipView.CurrentItem);
 //        }
 
@@ -57,11 +57,11 @@
 //            Assert.AreEqual(expectedX, _flipView.NextTransform.Transform(new Point(0, 0)).X);
 //            Assert.AreEqual(nextIndex, _flipView.NextIndex);
 //            Assert.AreSame(_flipView.Items[startIndex], _flipView.CurrentItem);
-//            Assert.AreSame(_flipView.Items[nextIndex], _flipView.NextItem);
+//            Assert.AreSame(_flipView.Items[nextIndex], _flipView.PreviousItem);
 //            _flipView.FakeTouchUp(new Point(x + deltaX, 0));
 //            Assert.AreEqual(0, _flipView.CurrentTransform.X);
 //            Assert.AreSame(_flipView.Items[startIndex], _flipView.CurrentItem);
-//            Assert.IsNull(_flipView.NextItem);
+//            Assert.IsNull(_flipView.PreviousItem);
 
 //            _flipView.FakeTouchDown(new Point(x, 0));
 //            _flipView.FakeTouchMove(new Point(x + deltaX, 0));
@@ -69,7 +69,7 @@
 //            Assert.AreEqual(expectedX, _flipView.NextTransform.Transform(new Point(0, 0)).X);
 //            Assert.AreEqual(nextIndex, _flipView.NextIndex);
 //            Assert.AreSame(_flipView.Items[startIndex], _flipView.CurrentItem);
-//            Assert.AreSame(_flipView.Items[nextIndex], _flipView.NextItem);
+//            Assert.AreSame(_flipView.Items[nextIndex], _flipView.PreviousItem);
 //        }
 
 //        [Test]
@@ -90,7 +90,7 @@
 //            _currentItem.RenderSize = new Size(Math.Abs(expectedX), 0);// set actual width
 //            _flipView.SelectedIndex = fromIndex; // First time does nothing cos OldValue == -1
 //            _flipView.SelectedIndex = toIndex;
-//            Assert.IsNull(_flipView.NextItem);
+//            Assert.IsNull(_flipView.PreviousItem);
 //            Assert.AreSame(_flipView.Items[toIndex], _flipView.CurrentItem);
 //        }
 
@@ -104,7 +104,7 @@
 //            Assert.AreEqual(from, transitionTo.Value.From);
 //            Assert.AreEqual(to, transitionTo.Value.To);
 //            Assert.AreSame(_flipView.Items[from], _flipView.CurrentItem);
-//            Assert.AreSame(_flipView.Items[to], _flipView.NextItem);
+//            Assert.AreSame(_flipView.Items[to], _flipView.PreviousItem);
 //            Assert.AreEqual(nextX, _flipView.NextOffsetTransform.Transform(new Point(0, 0)).X);
 //        }
 
@@ -128,7 +128,7 @@
 //            Transition? transitionTo = _flipView.TransitionTo(@from, to);
 //            Assert.IsNull(transitionTo);
 //            Assert.AreSame(_flipView.Items[from], _flipView.CurrentItem);
-//            Assert.AreSame(_flipView.Items[to], _flipView.NextItem);
+//            Assert.AreSame(_flipView.Items[to], _flipView.PreviousItem);
 //        }
 
 //        [TestCase(0, false, true)]
