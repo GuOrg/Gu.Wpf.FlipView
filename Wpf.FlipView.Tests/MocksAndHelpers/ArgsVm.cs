@@ -10,10 +10,24 @@
 
     public class ArgsVm
     {
-        private static Type[] _types = { typeof(Vector), typeof(Point), typeof(ManipulationDelta), typeof(ManipulationVelocities) };
-        private readonly ArgsVm[] _children;
+        private readonly object _args;
+        private readonly PropertyInfo _info;
+
+        private static readonly Type[] _types =
+        {
+            typeof (Vector),
+            typeof (Point),
+            typeof (ManipulationDelta),
+            typeof (ManipulationVelocities),
+            typeof (InputDevice),
+            typeof (InertiaExpansionBehavior),
+            typeof (InertiaTranslationBehavior), 
+            typeof(InertiaRotationBehavior)
+        };
+        private ArgsVm[] _children;
         public ArgsVm(object args)
         {
+            _args = args;
             Name = StringIt(args);
             _children = args.GetType()
                             .GetProperties()
@@ -21,27 +35,44 @@
                             .Select(x => new ArgsVm(x.GetValue(args), x))
                             .ToArray();
         }
-        public ArgsVm(object args, PropertyInfo info)
+
+        private ArgsVm(object args, PropertyInfo info)
         {
-            _children = args.GetType()
-                            .GetProperties()
-                            .Where(x => _types.Contains(x.PropertyType))
-                            .Select(x => new ArgsVm(x.GetValue(args), x))
-                            .ToArray();
-
-            Name = _children.Any() ? info.Name : info.Name + StringIt(args);
-
+            _args = args;
+            _info = info;
+            Name = string.Format("{0}: {1}", info.Name, StringIt(args));
         }
 
         public IEnumerable<ArgsVm> Children
         {
-            get { return _children; }
+            get
+            {
+                if (_children == null && _info != null && !_info.PropertyType.IsPrimitive)
+                {
+                    PropertyInfo[] propertyInfos = _args.GetType()
+                                                        .GetProperties();
+                    _children = propertyInfos
+                                .Where(x => x != null && x.CanRead)
+                                .Select(x => new ArgsVm(x.GetValue(_args), x))
+                                .ToArray();
+                }
+                return _children;
+            }
         }
 
         public string Name { get; private set; }
 
         private string StringIt(object o)
         {
+            if (o == null)
+            {
+                return "null";
+            }
+            var d = o as double?;
+            if (d != null)
+            {
+                return d.Value.ToString("F1");
+            }
             var v = o as Vector?;
             if (v != null)
             {
