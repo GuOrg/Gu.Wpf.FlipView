@@ -8,29 +8,32 @@ namespace Wpf.FlipView.Tests
 
     public static class FlipViewTestExt
     {
-        public static FieldInfo PartCurrentItem;
-        public static FieldInfo PartNextItem;
         public static FieldInfo IsAnimating;
+
+        public static FieldInfo PartSwipePanel;
 
         static FlipViewTestExt()
         {
-            PartCurrentItem = typeof(FlipView).GetField("PART_CurrentItem", BindingFlags.Instance | BindingFlags.NonPublic);
-            PartNextItem = typeof(FlipView).GetField("PART_NextItem", BindingFlags.Instance | BindingFlags.NonPublic);
+            PartSwipePanel = typeof(FlipView).GetField("PART_SwipePanel", BindingFlags.Instance | BindingFlags.NonPublic);
             IsAnimating = typeof(FlipView).GetField("_isAnimating", BindingFlags.Instance | BindingFlags.NonPublic);
-        }
-        public static void SetCurrentItem(this FlipView flipView, ContentPresenter contentPresenter)
-        {
-            PartCurrentItem.SetValue(flipView, contentPresenter);
-        }
-
-        public static void SetNextItem(this FlipView flipView, ContentPresenter contentPresenter)
-        {
-            PartNextItem.SetValue(flipView, contentPresenter);
         }
 
         public static void SetIsAnimating(this FlipView flipView, bool isAnimating)
         {
             IsAnimating.SetValue(flipView, isAnimating);
+        }
+        public static void SetActualWidth(this FlipView flipView, double width)
+        {
+            var panel =(Panel) PartSwipePanel.GetValue(flipView);
+            if (panel == null)
+            {
+                panel = new Grid { RenderSize = new Size(width, 0) };
+                PartSwipePanel.SetValue(flipView, panel);
+            }
+            else
+            {
+                panel.RenderSize = new Size(width, 0);
+            }
         }
 
         public static void FakeTouchDown(this FlipView flipView, Point point)

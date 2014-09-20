@@ -264,33 +264,6 @@ namespace WPF.FlipView
             }
         }
 
-        /// <summary>
-        /// Exposing this for tests
-        /// </summary>
-        /// <param name="delta"></param>
-        internal void OnSwipe(Vector delta)
-        {
-            if (_animation != null)
-            {
-                CurrentTransform.BeginAnimation(TranslateTransform.XProperty, null);
-                _animation.Completed -= OnAnimationCompleted;
-                _animation = null;
-            }
-            _isSwiping = true;
-            var actualWidth = this.PART_SwipePanel.ActualWidth;
-            this.CurrentTransform.X += delta.X;
-            var sign = this.CurrentTransform.X > 0 ? -1 : 1;
-            this.PreviousOffsetTransform.X = sign * actualWidth;
-            this.PreviousIndex = SelectedIndex + sign;
-        }
-
-        internal void OnSwipeEnded(Vector velocity)
-        {
-            var animation = TransitionTo(SelectedIndex, this.PreviousIndex.Value, velocity);
-            _isSwiping = false;
-            AnimateCurrentTransform(animation);
-        }
-
         private bool TransitionTo(int newIndex)
         {
             var animation = TransitionTo(SelectedIndex, newIndex);
