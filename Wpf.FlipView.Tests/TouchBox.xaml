@@ -1,4 +1,4 @@
-﻿<tests:EventBox x:Class="Wpf.FlipView.Tests.ManipulationBox"
+﻿<tests:EventBox x:Class="Wpf.FlipView.Tests.TouchBox"
                 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -10,13 +10,9 @@
     <tests:EventBox.SwipeArea>
         <Border x:Name="InputElement"
                 Background="Gainsboro"
-                IsManipulationEnabled="True"
-                ManipulationBoundaryFeedback="OnInput"
-                ManipulationCompleted="OnEnded"
-                ManipulationDelta="OnInput"
-                ManipulationInertiaStarting="OnInput"
-                ManipulationStarted="OnInput"
-                ManipulationStarting="OnStarted">
+                TouchDown="OnStarted"
+                TouchMove="OnInput"
+                TouchUp="OnEnded">
             <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center">Swipe Here</TextBlock>
         </Border>
     </tests:EventBox.SwipeArea>

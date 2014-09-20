@@ -64,6 +64,7 @@
     <Compile Include="CanExecuteControl.xaml.cs">
       <DependentUpon>CanExecuteControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="EventBox.cs" />
     <Compile Include="MocksAndHelpers\DispatcherUtil.cs" />
     <Compile Include="MocksAndHelpers\DummyItem.cs" />
     <Compile Include="MocksAndHelpers\ArgsVm.cs" />
@@ -73,6 +74,9 @@
     <Compile Include="FlipViewUiTests.cs" />
     <Compile Include="ManipulationBox.xaml.cs">
       <DependentUpon>ManipulationBox.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="TouchBox.xaml.cs">
+      <DependentUpon>TouchBox.xaml</DependentUpon>
     </Compile>
     <Page Include="CanExecuteControl.xaml">
       <SubType>Designer</SubType>
@@ -95,6 +99,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="MouseBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\Generic.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="TouchBox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -9,34 +9,19 @@ namespace Wpf.FlipView.Tests
     /// <summary>
     /// Interaction logic for ManipulationBox.xaml
     /// </summary>
-    public partial class ManipulationBox : UserControl
+    public partial class ManipulationBox : EventBox
     {
-        private ManipulationGestureFinder _manipulationGestureFinder;
+        private readonly ManipulationGestureFinder _manipulationGestureFinder;
         public ManipulationBox()
         {
             InitializeComponent();
             _manipulationGestureFinder = new ManipulationGestureFinder { InputElement = InputElement };
         }
-        private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
-        {
-            ArgsBox.Items.Clear();
-        }
 
-        private void OnStarted(object sender, InputEventArgs e)
+        protected override void OnEnded(object sender, InputEventArgs e)
         {
-            ArgsBox.Items.Clear();
-            ArgsBox.Items.Add(new ArgsVm(e));
-        }
-
-        private void OnInput(object sender, InputEventArgs e)
-        {
-            ArgsBox.Items.Add(new ArgsVm(e));
-        }
-      
-        private void OnEnded(object sender, InputEventArgs e)
-        {
-            ArgsBox.Items.Add(new ArgsVm(e));
-            ArgsBox.Items.Add(string.Format("Find: {0}", _manipulationGestureFinder.Find((ManipulationCompletedEventArgs) e)));
+            Args.Add(new ArgsVm(e));
+            Args.Add(string.Format("Find: {0}", _manipulationGestureFinder.Find((ManipulationCompletedEventArgs)e)));
         }
     }
 }
