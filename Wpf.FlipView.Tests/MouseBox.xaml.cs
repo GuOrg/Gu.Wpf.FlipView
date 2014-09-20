@@ -6,15 +6,22 @@ namespace Wpf.FlipView.Tests
 {
     using System.Windows.Input;
 
+    using WPF.FlipView;
+
     /// <summary>
     /// Interaction logic for MouseBox.xaml
     /// </summary>
     public partial class MouseBox : EventBox
     {
         private bool _gestureStarted;
+
+        private MouseGestureFinder _finder;
+
         public MouseBox()
         {
             InitializeComponent();
+            this._finder = new MouseGestureFinder { InputElement = InputElement };
+            _finder.Gestured += (_, g) => Args.Add(new ArgsVm(g));
         }
 
         protected override void OnStarted(object sender, InputEventArgs e)

@@ -6,28 +6,7 @@
 
     public class ManipulationGestureFinder : Freezable, IGestureFinder
     {
-        public static readonly DependencyProperty MinSwipeVelocityProperty = DependencyProperty.Register(
-            "MinSwipeVelocity",
-            typeof(double),
-            typeof(FlipView),
-            new PropertyMetadata(0.0));
-
-        public static readonly DependencyProperty MinSwipeLengthProperty = DependencyProperty.Register(
-            "MinSwipeLength", typeof (double), typeof (ManipulationGestureFinder), new PropertyMetadata(default(double)));
-
-        public IInputElement InputElement { get; set; }
-
-        public double MinSwipeVelocity
-        {
-            get { return (double)GetValue(MinSwipeVelocityProperty); }
-            set { SetValue(MinSwipeVelocityProperty, value); }
-        }
-
-        public double MinSwipeLength
-        {
-            get { return (double)GetValue(MinSwipeLengthProperty); }
-            set { SetValue(MinSwipeLengthProperty, value); }
-        }
+        public UIElement InputElement { get; set; }
 
         public Swipe Find(ManipulationDeltaEventArgs args)
         {

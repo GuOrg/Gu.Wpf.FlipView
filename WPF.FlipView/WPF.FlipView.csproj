@@ -87,10 +87,15 @@
       <SubType>Designer</SubType>
     </Page>
     <Compile Include="ArrowPlacement.cs" />
-    <Compile Include="ManipulationGestureFinder.cs" />
-    <Compile Include="IGestureFinder.cs" />
-    <Compile Include="MouseGestureFinder.cs" />
-    <Compile Include="Swipe.cs" />
+    <Compile Include="Gestures\EventPattern.cs" />
+    <Compile Include="Gestures\Gesture.cs" />
+    <Compile Include="Gestures\GestureFinderBase.cs" />
+    <Compile Include="Gestures\ManipulationGestureFinder.cs" />
+    <Compile Include="Gestures\IGestureFinder.cs" />
+    <Compile Include="Gestures\MouseGestureFinder.cs" />
+    <Compile Include="Gestures\GesturePoint.cs" />
+    <Compile Include="Gestures\Swipe.cs" />
+    <Compile Include="Gestures\TouchGestureFinder.cs" />
     <Compile Include="Transition.cs" />
     <Compile Include="AnimationFactory.cs" />
     <Compile Include="BoolToHiddenConverter.cs" />

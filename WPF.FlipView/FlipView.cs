@@ -91,26 +91,6 @@ namespace WPF.FlipView
             this.CommandBindings.Add(new CommandBinding(NavigationCommands.BrowseBack, this.OnPreviousExecuted, this.OnPreviousCanExecute));
             this.CommandBindings.Add(new CommandBinding(NavigationCommands.BrowseForward, this.OnNextExecuted, this.OnNextCanExecute));
 
-            this.ManipulationDelta += (sender, args) =>
-            {
-                if (GestureFinder != null && GestureFinder.Find(args) != Swipe.None)
-                {
-                    OnSwipe(args.DeltaManipulation.Translation);
-                    args.Handled = true;
-                }
-                args.Handled = false;
-            };
-
-            this.ManipulationCompleted += (sender, args) =>
-            {
-                _isSwiping = false;
-                if (_isSwiping && GestureFinder != null && GestureFinder.Find(args) != Swipe.None)
-                {
-                    OnSwipeEnded(args.FinalVelocities.LinearVelocity);
-                    args.Handled = true;
-                }
-                args.Handled = false;
-            };
             _nextTransform = new TransformGroup();
             _nextTransform.Children.Add(_nextOffsetTransform);
             _nextTransform.Children.Add(_currentTransform);
