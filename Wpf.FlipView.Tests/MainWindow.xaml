@@ -110,7 +110,7 @@
             </TabItem>
 
             <TabItem Header="Mouse">
-                <tests:ManipulationBox />
+                <tests:MouseBox />
             </TabItem>
 
             <TabItem Header="Touch">

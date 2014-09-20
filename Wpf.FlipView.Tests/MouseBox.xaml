@@ -12,7 +12,7 @@
                 Background="Gainsboro"
                 MouseDown="OnStarted"
                 MouseMove="OnInput"
-                MouseUp="OnEnded">
+                MouseUp="OnEnded" >
             <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center">Swipe Here</TextBlock>
         </Border>
     </tests:EventBox.SwipeArea>
