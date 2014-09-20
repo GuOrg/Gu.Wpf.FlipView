@@ -51,7 +51,7 @@
         {
             if (IsLongEnough(gesture, MinSwipeLength) && IsFastEnough(gesture, MinSwipeVelocity) && IsHorizontalEnough(gesture))
             {
-                return gesture.Delta.X < 0;
+                return gesture.Delta.X > 0;
             }
             return false;
         }
@@ -75,7 +75,7 @@
         {
             if (IsLongEnough(gesture, MinSwipeLength) && IsFastEnough(gesture, MinSwipeVelocity) && IsHorizontalEnough(gesture))
             {
-                return gesture.Delta.X > 0;
+                return gesture.Delta.X < 0;
             }
             return false;
         }

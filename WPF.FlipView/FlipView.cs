@@ -16,7 +16,7 @@ namespace WPF.FlipView
             "GestureTracker",
             typeof(IGestureTracker),
             typeof(FlipView),
-            new PropertyMetadata(new TouchGestureTracker(), OnGestureFinderChanged));
+            new PropertyMetadata(new TouchGestureTracker(), OnGestureTrackerChanged));
 
         public static readonly DependencyProperty TransitionTimeProperty = DependencyProperty.Register(
             "TransitionTime",
@@ -388,7 +388,7 @@ namespace WPF.FlipView
             _animation = null;
         }
 
-        private static void OnGestureFinderChanged(DependencyObject o, DependencyPropertyChangedEventArgs e)
+        private static void OnGestureTrackerChanged(DependencyObject o, DependencyPropertyChangedEventArgs e)
         {
             var gestureFinder = (IGestureTracker)e.NewValue;
             var flipView = ((FlipView)o);

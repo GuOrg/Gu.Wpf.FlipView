@@ -157,11 +157,11 @@
         <Setter Property="FocusVisualStyle" Value="{x:Null}" />
         <Setter Property="GestureTracker">
             <Setter.Value>
-                <local:CompositeGestureTracker >
-                    <local:CompositeGestureTracker.GestureFinders>
+                <local:CompositeGestureTracker>
+                    <local:CompositeGestureTracker.GestureTrackers>
                         <local:MouseGestureTracker />
                         <local:MouseGestureTracker />
-                    </local:CompositeGestureTracker.GestureFinders>
+                    </local:CompositeGestureTracker.GestureTrackers>
                 </local:CompositeGestureTracker>
             </Setter.Value>
         </Setter>

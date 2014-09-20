@@ -8,12 +8,14 @@ namespace WPF.FlipView
 
     public class CompositeGestureTracker : IGestureTracker
     {
-        private readonly ObservableCollection<IGestureTracker> _gestureFinders = new ObservableCollection<IGestureTracker>();
+        private readonly ObservableCollection<IGestureTracker> _gestureTrackers = new ObservableCollection<IGestureTracker>();
         private bool _disposed = false;
+
+        private UIElement _inputElement;
 
         public CompositeGestureTracker()
         {
-            GestureFinders.CollectionChanged += GestureFindersOnCollectionChanged;
+            this.GestureTrackers.CollectionChanged += GestureFindersOnCollectionChanged;
             Interpreter = new GestureInterpreter();
         }
 
@@ -21,15 +23,29 @@ namespace WPF.FlipView
 
         public event EventHandler<GestureEventArgs> Gestured;
 
-        public ObservableCollection<IGestureTracker> GestureFinders
+        public ObservableCollection<IGestureTracker> GestureTrackers
         {
             get
             {
-                return this._gestureFinders;
+                return this._gestureTrackers;
             }
         }
 
-        public UIElement InputElement { get; set; }
+        public UIElement InputElement
+        {
+            get
+            {
+                return this._inputElement;
+            }
+            set
+            {
+                this._inputElement = value;
+                foreach (var tracker in this.GestureTrackers.Where(x=>x!=null))
+                {
+                    tracker.InputElement = value;
+                }
+            }
+        }
 
         /// <summary>
         /// Dispose(true); //I am calling you from Dispose, it's safe
@@ -54,7 +70,7 @@ namespace WPF.FlipView
 
             if (disposing)
             {
-                foreach (var gestureFinder in GestureFinders)
+                foreach (var gestureFinder in this.GestureTrackers)
                 {
                     gestureFinder.Dispose();
                 }
