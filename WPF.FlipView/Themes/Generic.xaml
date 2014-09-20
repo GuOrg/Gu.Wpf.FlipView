@@ -284,15 +284,15 @@
                                   IsManipulationEnabled="True">
 
                                 <ContentPresenter x:Name="NextItem"
-                                                  Content="{Binding PreviousItem,
+                                                  Content="{Binding OtherItem,
                                                                     RelativeSource={RelativeSource TemplatedParent}}"
-                                                  RenderTransform="{Binding PreviousTransform,
+                                                  RenderTransform="{Binding OtherItemTransform,
                                                                             RelativeSource={RelativeSource TemplatedParent}}"
                                                   Style="{StaticResource ContentStyle}" />
                                 <ContentPresenter x:Name="CurrentItem"
                                                   Content="{Binding SelectedItem,
                                                                     RelativeSource={RelativeSource TemplatedParent}}"
-                                                  RenderTransform="{Binding CurrentTransform,
+                                                  RenderTransform="{Binding SelectedItemTransform,
                                                                             RelativeSource={RelativeSource TemplatedParent}}"
                                                   Style="{StaticResource ContentStyle}" />
                             </Grid>

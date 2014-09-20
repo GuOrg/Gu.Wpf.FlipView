@@ -68,13 +68,14 @@
       <DependentUpon>CommandBox.xaml</DependentUpon>
     </Compile>
     <Compile Include="EventBox.cs" />
+    <Compile Include="FlipViewTests.cs" />
     <Compile Include="MocksAndHelpers\DispatcherUtil.cs" />
     <Compile Include="MocksAndHelpers\DummyItem.cs" />
     <Compile Include="MocksAndHelpers\ArgsVm.cs" />
     <Compile Include="MocksAndHelpers\DumpCommands.cs" />
     <Compile Include="MocksAndHelpers\FakeTouchDevice.cs" />
     <Compile Include="MocksAndHelpers\FlipViewTestExt.cs" />
-    <Compile Include="FlipViewTests.cs" />
+    <Compile Include="FlipViewInternalsTests.cs" />
     <Compile Include="FlipViewUiTests.cs" />
     <Compile Include="ManipulationBox.xaml.cs">
       <DependentUpon>ManipulationBox.xaml</DependentUpon>

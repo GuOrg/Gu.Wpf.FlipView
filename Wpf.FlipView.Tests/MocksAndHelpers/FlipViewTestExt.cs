@@ -4,6 +4,8 @@ namespace Wpf.FlipView.Tests
     using System.Windows;
     using System.Windows.Controls;
     using System.Windows.Input;
+    using System.Windows.Media.Animation;
+
     using WPF.FlipView;
 
     public static class FlipViewTestExt
@@ -15,16 +17,16 @@ namespace Wpf.FlipView.Tests
         static FlipViewTestExt()
         {
             PartSwipePanel = typeof(FlipView).GetField("PART_SwipePanel", BindingFlags.Instance | BindingFlags.NonPublic);
-            IsAnimating = typeof(FlipView).GetField("_isAnimating", BindingFlags.Instance | BindingFlags.NonPublic);
+            IsAnimating = typeof(FlipView).GetField("_animation", BindingFlags.Instance | BindingFlags.NonPublic);
         }
 
         public static void SetIsAnimating(this FlipView flipView, bool isAnimating)
         {
-            IsAnimating.SetValue(flipView, isAnimating);
+            IsAnimating.SetValue(flipView, isAnimating ? new DoubleAnimation() : null);
         }
         public static void SetActualWidth(this FlipView flipView, double width)
         {
-            var panel =(Panel) PartSwipePanel.GetValue(flipView);
+            var panel = (Panel)PartSwipePanel.GetValue(flipView);
             if (panel == null)
             {
                 panel = new Grid { RenderSize = new Size(width, 0) };

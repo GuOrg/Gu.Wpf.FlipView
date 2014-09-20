@@ -2,6 +2,7 @@ namespace WPF.FlipView
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
 
     public class GestureEventArgs : EventArgs
     {
@@ -18,7 +19,11 @@ namespace WPF.FlipView
             this._gestureTrackers.Add(tracker);
             this.Gesture = args.Gesture;
         }
-       
+
+        /// <summary>
+        /// When event is routed the most recent tracker is last
+        /// Typically you want to use the first tracker with an interpreter != null
+        /// </summary>
         public IEnumerable<IGestureTracker> GestureTrackers
         {
             get
@@ -28,5 +33,18 @@ namespace WPF.FlipView
         }
 
         public Gesture Gesture { get; private set; }
+
+        public IGestureInterpreter Interpreter
+        {
+            get
+            {
+                var tracker = _gestureTrackers.FirstOrDefault(x => x.Interpreter != null);
+                if (tracker == null)
+                {
+                    return null;
+                }
+                return tracker.Interpreter;
+            }
+        }
     }
 }

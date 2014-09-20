@@ -66,17 +66,17 @@ namespace WPF.FlipView
             typeof(FlipView),
             new FrameworkPropertyMetadata(default(ArrowPlacement), FrameworkPropertyMetadataOptions.AffectsArrange));
 
-        public static readonly DependencyProperty PreviousItemProperty = DependencyProperty.Register(
-            "PreviousItem",
+        public static readonly DependencyProperty OtherItemProperty = DependencyProperty.Register(
+            "OtherItem",
             typeof(object),
             typeof(FlipView),
             new PropertyMetadata(null));
 
-        private readonly TranslateTransform _currentTransform = new TranslateTransform();
-        private readonly TranslateTransform _previousOffsetTransform = new TranslateTransform();
-        private readonly TransformGroup _previousTransform;
+        private readonly TranslateTransform selectedItemTransform = new TranslateTransform();
+        private readonly TranslateTransform otherItemOffsetTransform = new TranslateTransform();
+        private readonly TransformGroup otherItemTransform;
         private AnimationTimeline _animation;
-        private int? _previousIndex = -1;
+        private int? otherIndex = -1;
         private bool _isSwiping;
         private const string PART_SwipePanelName = "PART_SwipePanel";
         private Panel PART_SwipePanel;
@@ -91,9 +91,9 @@ namespace WPF.FlipView
             this.CommandBindings.Add(new CommandBinding(NavigationCommands.BrowseBack, this.OnPreviousExecuted, this.OnPreviousCanExecute));
             this.CommandBindings.Add(new CommandBinding(NavigationCommands.BrowseForward, this.OnNextExecuted, this.OnNextCanExecute));
 
-            this._previousTransform = new TransformGroup();
-            this._previousTransform.Children.Add(this._previousOffsetTransform);
-            this._previousTransform.Children.Add(_currentTransform);
+            this.otherItemTransform = new TransformGroup();
+            this.otherItemTransform.Children.Add(this.otherItemOffsetTransform);
+            this.otherItemTransform.Children.Add(this.selectedItemTransform);
         }
 
         public IGestureTracker GestureTracker
@@ -198,58 +198,61 @@ namespace WPF.FlipView
             }
         }
 
-        public object PreviousItem
+        /// <summary>
+        /// This is the other item that shows during transitions
+        /// </summary>
+        public object OtherItem
         {
-            get { return (object)GetValue(PreviousItemProperty); }
-            set { SetValue(PreviousItemProperty, value); }
+            get { return (object)GetValue(OtherItemProperty); }
+            set { SetValue(OtherItemProperty, value); }
         }
 
-        public TranslateTransform CurrentTransform
+        public TranslateTransform SelectedItemTransform
         {
             get
             {
-                return _currentTransform;
+                return this.selectedItemTransform;
             }
         }
 
-        internal TranslateTransform PreviousOffsetTransform
+        internal TranslateTransform OtherItemOffsetTransform
         {
             get
             {
-                return this._previousOffsetTransform;
+                return this.otherItemOffsetTransform;
             }
         }
 
-        public TransformGroup PreviousTransform
+        public TransformGroup OtherItemTransform
         {
             get
             {
-                return this._previousTransform;
+                return this.otherItemTransform;
             }
         }
 
-        internal int? PreviousIndex
+        internal int? OtherIndex
         {
             get
             {
-                return this._previousIndex;
+                return this.otherIndex;
             }
             set
             {
-                if (value == this._previousIndex)
+                if (value == this.otherIndex)
                 {
                     return;
                 }
-                this._previousIndex = value;
-                if (this._previousIndex != null && this.IsWithinBounds(this._previousIndex.Value))
+                this.otherIndex = value;
+                if (this.otherIndex != null && this.IsWithinBounds(this.otherIndex.Value))
                 {
-                    SetCurrentValue(PreviousItemProperty, this.Items[this._previousIndex.Value]);
-                    var sign = this.PreviousIndex > SelectedIndex ? 1 : -1;
-                    this._previousOffsetTransform.X = sign * PART_SwipePanel.ActualWidth;
+                    SetCurrentValue(OtherItemProperty, this.Items[this.otherIndex.Value]);
+                    var sign = this.OtherIndex > SelectedIndex ? 1 : -1;
+                    this.otherItemOffsetTransform.X = sign * PART_SwipePanel.ActualWidth;
                 }
                 else
                 {
-                    SetCurrentValue(PreviousItemProperty, null);
+                    SetCurrentValue(OtherItemProperty, null);
                 }
             }
         }
@@ -267,7 +270,7 @@ namespace WPF.FlipView
         private bool TransitionTo(int newIndex)
         {
             var animation = TransitionTo(SelectedIndex, newIndex);
-            AnimateCurrentTransform(animation);
+            this.AnimateTransition(animation);
             return this.IsWithinBounds(newIndex);
         }
 
@@ -282,25 +285,30 @@ namespace WPF.FlipView
         {
             if (oldIndex != newIndex)
             {
-                this.PreviousIndex = newIndex;
+                if (this.IsWithinBounds(newIndex))
+                {
+                    this.SelectedIndex = newIndex;
+                    this.OtherIndex = oldIndex;
+                }
+                else
+                {
+                    this.OtherIndex = null;
+                }
             }
-            if (_animation != null)
+            if (_animation != null) // Just replace the items and let the current animation continue
             {
                 return null;
             }
-            if (newIndex >= 0 && newIndex < this.Items.Count)
-            {
-                return CreateCurrentTransformSlideAnimation(new Transition(oldIndex, newIndex));
-            }
-            return null;
+            return this.CreateTransitionAnimation(new Transition(OtherIndex, SelectedIndex));
         }
 
         /// <summary>
         /// Creates the animation for animating to the next slide
+        /// Returns null if animation is already running
         /// </summary>
         /// <param name="transition"></param>
         /// <returns>null if TransitionTime == 0</returns>
-        internal AnimationTimeline CreateCurrentTransformSlideAnimation(Transition? transition)
+        internal AnimationTimeline CreateTransitionAnimation(Transition? transition)
         {
             if (transition == null)
             {
@@ -315,39 +323,44 @@ namespace WPF.FlipView
             double toValue = 0;
             if (transition.Value.From != transition.Value.To)
             {
-                toValue = transition.Value.From < transition.Value.To ? -actualWidth : actualWidth;
+                if (_animation == null)
+                {
+                    var sign = transition.Value.From < transition.Value.To? 1 : -1;
+                    SelectedItemTransform.X = sign * actualWidth;
+                    OtherItemOffsetTransform.X = -1 * sign * actualWidth;
+                }
             }
             if (TransitionTime > 0)
             {
-                double delta = Math.Abs(CurrentTransform.X - toValue);
+                double delta = Math.Abs(this.SelectedItemTransform.X - toValue);
                 var duration = TimeSpan.FromMilliseconds((delta / actualWidth) * TransitionTime);
-                var animation = AnimationFactory.CreateAnimation(CurrentTransform.X, toValue, duration);
+                var animation = AnimationFactory.CreateAnimation(this.SelectedItemTransform.X, 0, duration);
                 return animation;
             }
             else
             {
-                CurrentTransform.X = toValue;
+                this.SelectedItemTransform.X = toValue;
             }
             return null;
         }
 
         /// <summary>
-        /// Applies the animation on CurrentTransform.X
+        /// Applies the animation on SelectedItemTransform.X
         /// </summary>
         /// <param name="animation"></param>
-        private void AnimateCurrentTransform(AnimationTimeline animation)
+        internal void AnimateTransition(AnimationTimeline animation)
         {
             if (_animation != null && animation != null)
             {
                 _animation.Completed -= OnAnimationCompleted;
                 _animation = null;
-                CurrentTransform.BeginAnimation(TranslateTransform.XProperty, null);
+                this.SelectedItemTransform.BeginAnimation(TranslateTransform.XProperty, null);
             }
             if (animation != null)
             {
                 _animation = animation;
                 animation.Completed += this.OnAnimationCompleted;
-                CurrentTransform.BeginAnimation(TranslateTransform.XProperty, animation);
+                this.SelectedItemTransform.BeginAnimation(TranslateTransform.XProperty, animation);
             }
             else
             {
@@ -360,11 +373,10 @@ namespace WPF.FlipView
 
         internal void OnAnimationCompleted(object sender, EventArgs args)
         {
-            SelectedIndex = this.PreviousIndex.Value;
-            CommandManager.InvalidateRequerySuggested();
-            this.PreviousIndex = null;
-            CurrentTransform.BeginAnimation(TranslateTransform.XProperty, null);
-            CurrentTransform.X = 0;
+            //CommandManager.InvalidateRequerySuggested();
+            this.OtherIndex = null;
+            this.SelectedItemTransform.BeginAnimation(TranslateTransform.XProperty, null);
+            this.SelectedItemTransform.X = 0;
             _animation = null;
         }
 
@@ -394,7 +406,7 @@ namespace WPF.FlipView
             return true;
         }
 
-        private void OnGesture(object sender, GestureEventArgs gesture)
+        private void OnGesture(object sender, GestureEventArgs e)
         {
             var tracker = GestureTracker;
             if (tracker == null)
@@ -407,12 +419,12 @@ namespace WPF.FlipView
                 return;
             }
 
-            if (interpreter.IsBack(gesture))
+            if (interpreter.IsBack(e.Gesture))
             {
                 TransitionTo(SelectedIndex - 1);
             }
 
-            if (interpreter.IsForward(gesture))
+            if (interpreter.IsForward(e.Gesture))
             {
                 TransitionTo(SelectedIndex + 1);
             }

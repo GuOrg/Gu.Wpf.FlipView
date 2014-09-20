@@ -34,8 +34,8 @@
 
         public bool IsBack(GestureEventArgs args)
         {
-            IGestureInterpreter interpreter;
-            if (!TryGetInterpreter(args, out interpreter))
+            var interpreter = args.Interpreter;
+            if (interpreter == null)
             {
                 return false;
             }
@@ -58,8 +58,8 @@
 
         public bool IsForward(GestureEventArgs args)
         {
-            IGestureInterpreter interpreter;
-            if (!TryGetInterpreter(args, out interpreter))
+            var interpreter = args.Interpreter;
+            if (interpreter == null)
             {
                 return false;
             }
@@ -83,24 +83,6 @@
         private static bool IsCommand(Gesture gesture, RoutedCommand command)
         {
             return gesture.CommandArgs != null && gesture.CommandArgs.Command == command;
-        }
-
-        private static bool TryGetInterpreter(GestureEventArgs args, out  IGestureInterpreter interpreter)
-        {
-            interpreter = null;
-            var gesture = args.Gesture;
-            if (gesture == null)
-            {
-                return false;
-            }
-            var tracker = args.GestureTrackers.LastOrDefault(x => x.Interpreter != null);
-            if (tracker == null || tracker.Interpreter == null)
-            {
-
-                return false;
-            }
-            interpreter = tracker.Interpreter;
-            return true;
         }
 
         internal static bool IsLongEnough(Gesture gesture, double minSwipeLength)

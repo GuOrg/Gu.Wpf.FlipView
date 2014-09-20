@@ -79,7 +79,7 @@ namespace WPF.FlipView
 
         protected abstract bool TryAddPoint(TArgs args);
 
-        protected virtual void OnGestured(Gesture e)
+        internal virtual void OnGestured(Gesture e)
         {
             var handler = this.Gestured;
             if (handler != null)

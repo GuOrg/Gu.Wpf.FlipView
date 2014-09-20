@@ -16,5 +16,10 @@ namespace WPF.FlipView
             this.To = to;
             this.TimeStamp = DateTime.Now;
         }
+
+        public Transition(int? otherIndex, int selectedIndex)
+            : this(otherIndex != null ? otherIndex.Value : selectedIndex, selectedIndex)
+        {
+        }
     }
 }
