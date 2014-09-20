@@ -7,9 +7,9 @@ namespace WPF.FlipView
     using System.Windows.Documents;
     using System.Windows.Input;
 
-    public class MouseGestureFinder : GestureFinderBase<MouseEventArgs>
+    public class MouseGestureTracker : GestureTrackerBase<MouseEventArgs>
     {
-        public MouseGestureFinder()
+        public MouseGestureTracker()
         {
             this.Patterns = new[]
                             {
@@ -30,7 +30,7 @@ namespace WPF.FlipView
 
         protected override Freezable CreateInstanceCore()
         {
-            return new ManipulationGestureFinder();
+            return new MouseGestureTracker();
         }
 
         protected override bool TryAddPoint(MouseEventArgs args)

@@ -5,44 +5,24 @@ namespace WPF.FlipView
     using System.Windows;
     using System.Windows.Input;
 
-    public abstract class GestureFinderBase<TArgs> : Freezable, IGestureFinder
+    public abstract class GestureTrackerBase<TArgs> : Freezable, IGestureTracker
     {
-        public static readonly DependencyProperty MinSwipeVelocityProperty = DependencyProperty.Register(
-            "MinSwipeVelocity", 
-            typeof(double),
-            typeof(GestureFinderBase<TArgs>), 
-            new PropertyMetadata(0.0));
-
-        public static readonly DependencyProperty MinSwipeLengthProperty = DependencyProperty.Register(
-            "MinSwipeLength",
-            typeof(double),
-            typeof(GestureFinderBase<TArgs>),
-            new PropertyMetadata(default(double)));
-
         protected readonly List<GesturePoint> Points = new List<GesturePoint>();
         protected bool IsGesturing;
         protected EventPattern[] Patterns;
+        private bool _disposed = false;
 
         private readonly WeakReference<UIElement> _inputElement = new WeakReference<UIElement>(null);
 
-        protected GestureFinderBase(params EventPattern[] patterns)
+        protected GestureTrackerBase(params EventPattern[] patterns)
         {
             this.Patterns = patterns;
+            Interpreter = new GestureInterpreter();
         }
 
-        public event EventHandler<Gesture> Gestured;
+        public IGestureInterpreter Interpreter { get; set; }
 
-        public double MinSwipeVelocity
-        {
-            get { return (double)GetValue(MinSwipeVelocityProperty); }
-            set { SetValue(MinSwipeVelocityProperty, value); }
-        }
-
-        public double MinSwipeLength
-        {
-            get { return (double)GetValue(MinSwipeLengthProperty); }
-            set { SetValue(MinSwipeLengthProperty, value); }
-        }
+        public event EventHandler<GestureEventArgs> Gestured;
 
         public UIElement InputElement
         {
@@ -67,7 +47,7 @@ namespace WPF.FlipView
                     foreach (var pattern in this.Patterns)
                     {
                         pattern.Add(value);
-                    } 
+                    }
                 }
                 this._inputElement.SetTarget(value);
             }
@@ -104,8 +84,43 @@ namespace WPF.FlipView
             var handler = this.Gestured;
             if (handler != null)
             {
-                handler(this, e);
+                handler(this, new GestureEventArgs(this, e));
             }
+        }
+
+        /// <summary>
+        /// Dispose(true); //I am calling you from Dispose, it's safe
+        /// GC.SuppressFinalize(this); //Hey, GC: don't bother calling finalize later
+        /// </summary>
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        /// <summary>
+        /// Protected implementation of Dispose pattern. 
+        /// </summary>
+        /// <param name="disposing">true: safe to free managed resources</param>
+        protected virtual void Dispose(bool disposing)
+        {
+            if (_disposed)
+            {
+                return;
+            }
+
+            if (disposing)
+            {
+                var element = InputElement;
+                if (element != null)
+                {
+                    foreach (var pattern in Patterns)
+                    {
+                        pattern.Remove(element);
+                    }
+                }
+            }
+            _disposed = true;
         }
     }
 }

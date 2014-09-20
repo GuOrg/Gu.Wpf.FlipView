@@ -15,13 +15,13 @@ namespace Wpf.FlipView.Tests
     {
         private bool _gestureStarted;
 
-        private MouseGestureFinder _finder;
+        private MouseGestureTracker _tracker;
 
         public MouseBox()
         {
             InitializeComponent();
-            this._finder = new MouseGestureFinder { InputElement = InputElement };
-            _finder.Gestured += (_, g) => Args.Add(new ArgsVm(g));
+            this._tracker = new MouseGestureTracker { InputElement = InputElement };
+            this._tracker.Gestured += (_, g) => Args.Add(new ArgsVm(g));
         }
 
         protected override void OnStarted(object sender, InputEventArgs e)

@@ -12,11 +12,11 @@ namespace WPF.FlipView
     [TemplatePart(Name = PART_SwipePanelName, Type = typeof(Panel))]
     public class FlipView : Selector
     {
-        public static readonly DependencyProperty GestureFinderProperty = DependencyProperty.Register(
-            "GestureFinder",
-            typeof(IGestureFinder),
+        public static readonly DependencyProperty GestureTrackerProperty = DependencyProperty.Register(
+            "GestureTracker",
+            typeof(IGestureTracker),
             typeof(FlipView),
-            new PropertyMetadata(new ManipulationGestureFinder(), OnGestureFinderChanged));
+            new PropertyMetadata(new TouchGestureTracker(), OnGestureFinderChanged));
 
         public static readonly DependencyProperty TransitionTimeProperty = DependencyProperty.Register(
             "TransitionTime",
@@ -96,10 +96,10 @@ namespace WPF.FlipView
             _nextTransform.Children.Add(_currentTransform);
         }
 
-        public IGestureFinder GestureFinder
+        public IGestureTracker GestureTracker
         {
-            get { return (IGestureFinder)GetValue(GestureFinderProperty); }
-            set { SetValue(GestureFinderProperty, value); }
+            get { return (IGestureTracker)GetValue(GestureTrackerProperty); }
+            set { SetValue(GestureTrackerProperty, value); }
         }
 
         public int TransitionTime
@@ -258,9 +258,9 @@ namespace WPF.FlipView
         {
             base.OnApplyTemplate();
             this.PART_SwipePanel = this.GetTemplateChild(PART_SwipePanelName) as Panel;
-            if (this.GestureFinder != null)
+            if (this.GestureTracker != null)
             {
-                this.GestureFinder.InputElement = PART_SwipePanel;
+                this.GestureTracker.InputElement = PART_SwipePanel;
             }
         }
 
@@ -390,10 +390,44 @@ namespace WPF.FlipView
 
         private static void OnGestureFinderChanged(DependencyObject o, DependencyPropertyChangedEventArgs e)
         {
-            var gestureFinder = (ManipulationGestureFinder)e.NewValue;
+            var gestureFinder = (IGestureTracker)e.NewValue;
+            var flipView = ((FlipView)o);
             if (gestureFinder != null)
             {
-                gestureFinder.InputElement = ((FlipView)o).PART_SwipePanel;
+                gestureFinder.InputElement = flipView.PART_SwipePanel;
+                gestureFinder.Gestured +=flipView.OnGesture;
+            }
+            var old = (IGestureTracker)e.OldValue;
+            if (old != null)
+            {
+                old.InputElement = null;
+                old.Gestured += flipView.OnGesture;
+            }
+        }
+
+        private void OnGesture(object sender, GestureEventArgs gesture)
+        {
+            var tracker = GestureTracker;
+            if (tracker == null)
+            {
+                return;
+            }
+            var interpreter = tracker.Interpreter;
+            if (interpreter == null)
+            {
+                return;
+            }
+
+            if (interpreter.IsBack(gesture))
+            {
+                var animation = TransitionTo(SelectedIndex, SelectedIndex - 1);
+                AnimateCurrentTransform(animation);
+            }
+
+            if (interpreter.IsForward(gesture))
+            {
+                var animation = TransitionTo(SelectedIndex, SelectedIndex + 1);
+                AnimateCurrentTransform(animation);
             }
         }
 

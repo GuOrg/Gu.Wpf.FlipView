@@ -4,9 +4,9 @@ namespace WPF.FlipView
     using System.Windows;
     using System.Windows.Input;
 
-    public class TouchGestureFinder : GestureFinderBase<TouchEventArgs>
+    public class TouchGestureTracker : GestureTrackerBase<TouchEventArgs>
     {
-        public TouchGestureFinder()
+        public TouchGestureTracker()
         {
             this.Patterns = new[]
                                 {
@@ -31,17 +31,19 @@ namespace WPF.FlipView
 
         private void OnBrowseForward(object sender, ExecutedRoutedEventArgs e)
         {
+            IsGesturing = false;
             this.OnGestured(new Gesture(e));
         }
 
         private void OnBrowseBack(object sender, ExecutedRoutedEventArgs e)
         {
+            IsGesturing = false;
             this.OnGestured(new Gesture(e));
         }
 
         protected override Freezable CreateInstanceCore()
         {
-            return new ManipulationGestureFinder();
+            return new TouchGestureTracker();
         }
 
         protected override bool TryAddPoint(TouchEventArgs args)

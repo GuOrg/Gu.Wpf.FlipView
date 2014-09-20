@@ -1,11 +1,11 @@
 ﻿namespace WPF.FlipView
 {
     using System.Collections.Generic;
-    using System.Globalization;
     using System.Windows;
     using System.Windows.Input;
 
-    public class Gesture
+
+    public class Gesture 
     {
         private readonly GesturePoint[] _points;
 
@@ -19,12 +19,12 @@
             Velocity = new Vector(Delta.X / duration, Delta.Y / duration);
         }
 
-        public Gesture(ExecutedRoutedEventArgs args)
+        public Gesture(ExecutedRoutedEventArgs commandArgs)
         {
-            this.Args = args;
+            this.CommandArgs = commandArgs;
         }
    
-        public ExecutedRoutedEventArgs Args { get; private set; }
+        public ExecutedRoutedEventArgs CommandArgs { get; private set; }
 
         public IEnumerable<GesturePoint> Points
         {
@@ -40,9 +40,9 @@
 
         public override string ToString()
         {
-            if (this.Args != null)
+            if (this.CommandArgs != null)
             {
-                return string.Format("Command: ", this.Args.Command);
+                return string.Format("Command: ", this.CommandArgs.Command);
             }
             return string.Format("Delta: ({0:F0}, {1:F0}),Velocity: ({2:F1}, {3:F1})", this.Delta.X, Delta.Y, this.Velocity.X, Velocity.Y);
         }
