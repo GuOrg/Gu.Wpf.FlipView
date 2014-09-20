@@ -27,6 +27,8 @@ namespace Wpf.FlipView.Tests
         public EventBox()
         {
             CommandBindings.Add(new CommandBinding(ClearCommand, ClearExecuted));
+            CommandBindings.Add(new CommandBinding(NavigationCommands.BrowseForward, (sender, args) => Args.Add("Forward")));
+            CommandBindings.Add(new CommandBinding(NavigationCommands.BrowseBack, (sender, args) => Args.Add("Back")));
         }
 
         public FrameworkElement SwipeArea

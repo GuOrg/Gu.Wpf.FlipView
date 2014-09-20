@@ -4,12 +4,14 @@
 
 
     <Style TargetType="{x:Type local:EventBox}">
+
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type local:EventBox}">
                     <Border Background="{TemplateBinding Background}"
                             BorderBrush="{TemplateBinding BorderBrush}"
                             BorderThickness="{TemplateBinding BorderThickness}">
+
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition />

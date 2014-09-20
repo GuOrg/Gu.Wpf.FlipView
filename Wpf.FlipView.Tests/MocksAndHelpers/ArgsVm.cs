@@ -47,7 +47,7 @@
         {
             get
             {
-                if (_children == null && _info != null && !_info.PropertyType.IsPrimitive)
+                if (_children == null && _args != null && _info != null && !_info.PropertyType.IsPrimitive)
                 {
                     PropertyInfo[] propertyInfos = _args.GetType()
                                                         .GetProperties();

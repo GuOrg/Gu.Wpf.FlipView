@@ -67,6 +67,7 @@
                     </Grid>
                 </Grid>
             </TabItem>
+
             <TabItem Header="InkCanvas">
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -103,12 +104,21 @@
                 </Grid>
 
             </TabItem>
+
             <TabItem Header="Manipulations">
                 <tests:ManipulationBox />
             </TabItem>
 
             <TabItem Header="Mouse">
                 <tests:ManipulationBox />
+            </TabItem>
+
+            <TabItem Header="Touch">
+                <tests:TouchBox />
+            </TabItem>
+
+            <TabItem Header="Commands">
+                <tests:CommandBox />
             </TabItem>
 
             <TabItem Header="CanExecute">

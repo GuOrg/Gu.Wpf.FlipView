@@ -64,6 +64,9 @@
     <Compile Include="CanExecuteControl.xaml.cs">
       <DependentUpon>CanExecuteControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="CommandBox.xaml.cs">
+      <DependentUpon>CommandBox.xaml</DependentUpon>
+    </Compile>
     <Compile Include="EventBox.cs" />
     <Compile Include="MocksAndHelpers\DispatcherUtil.cs" />
     <Compile Include="MocksAndHelpers\DummyItem.cs" />
@@ -79,6 +82,10 @@
       <DependentUpon>TouchBox.xaml</DependentUpon>
     </Compile>
     <Page Include="CanExecuteControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CommandBox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
