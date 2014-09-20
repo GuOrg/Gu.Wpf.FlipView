@@ -71,6 +71,7 @@
     <Compile Include="MocksAndHelpers\DispatcherUtil.cs" />
     <Compile Include="MocksAndHelpers\DummyItem.cs" />
     <Compile Include="MocksAndHelpers\ArgsVm.cs" />
+    <Compile Include="MocksAndHelpers\DumpCommands.cs" />
     <Compile Include="MocksAndHelpers\FakeTouchDevice.cs" />
     <Compile Include="MocksAndHelpers\FlipViewTestExt.cs" />
     <Compile Include="FlipViewTests.cs" />
