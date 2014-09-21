@@ -21,12 +21,7 @@
                     </Grid.ColumnDefinitions>
                     <flipView:FlipView x:Name="FlipView"
                                        Grid.Column="1"
-                                       ArrowPlacement="Outside"
-                                       IndexHeight="10"
-                                       IndexWidth="50"
                                        SelectedIndex="2"
-                                       ShowArrows="True"
-                                       ShowIndex="true"
                                        TransitionTime="{Binding ElementName=AnimationSpeed,
                                                                 Path=Text}">
                         <flipView:FlipView.Resources>
@@ -55,6 +50,7 @@
                           TextBlock.FontSize="12">
                         <StackPanel>
                             <CheckBox Content="ShowArrows" IsChecked="{Binding ElementName=FlipView, Path=ShowArrows}" />
+                            <CheckBox Content="ShowIndex" IsChecked="{Binding ElementName=FlipView, Path=ShowIndex}" />
                             <ComboBox SelectedItem="{Binding ElementName=FlipView, Path=ArrowPlacement}">
                                 <flipView:ArrowPlacement>Inside</flipView:ArrowPlacement>
                                 <flipView:ArrowPlacement>Outside</flipView:ArrowPlacement>

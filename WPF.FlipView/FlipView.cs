@@ -9,7 +9,7 @@ namespace WPF.FlipView
 {
     using System.Runtime.InteropServices;
     using System.Windows.Media.Animation;
-    [TemplatePart(Name = PART_SwipePanelName, Type = typeof(Panel))]
+    [TemplatePart(Name = PartSwipePanelName, Type = typeof(Panel))]
     public class FlipView : Selector
     {
         public static readonly DependencyProperty GestureTrackerProperty = DependencyProperty.Register(
@@ -40,7 +40,7 @@ namespace WPF.FlipView
             "IndexHeight",
             typeof(double),
             typeof(FlipView),
-            new FrameworkPropertyMetadata(5.0, FrameworkPropertyMetadataOptions.AffectsMeasure | FrameworkPropertyMetadataOptions.AffectsArrange));
+            new FrameworkPropertyMetadata(20.0, FrameworkPropertyMetadataOptions.AffectsMeasure | FrameworkPropertyMetadataOptions.AffectsArrange));
 
         public static readonly DependencyProperty SelectedIndexColorProperty = DependencyProperty.RegisterAttached(
             "SelectedIndexColor",
@@ -72,14 +72,13 @@ namespace WPF.FlipView
             typeof(FlipView),
             new PropertyMetadata(null));
 
-        private readonly TranslateTransform selectedItemTransform = new TranslateTransform();
-        private readonly TranslateTransform otherItemOffsetTransform = new TranslateTransform();
-        private readonly TransformGroup otherItemTransform;
+        private readonly TranslateTransform _selectedItemTransform = new TranslateTransform();
+        private readonly TranslateTransform _otherItemOffsetTransform = new TranslateTransform();
+        private readonly TransformGroup _otherItemTransform;
         private AnimationTimeline _animation;
-        private int? otherIndex = -1;
-        private bool _isSwiping;
-        private const string PART_SwipePanelName = "PART_SwipePanel";
-        private Panel PART_SwipePanel;
+        private int? _otherIndex = -1;
+        private const string PartSwipePanelName = "PART_SwipePanel";
+        private Panel _partSwipePanel;
 
         static FlipView()
         {
@@ -91,9 +90,9 @@ namespace WPF.FlipView
             this.CommandBindings.Add(new CommandBinding(NavigationCommands.BrowseBack, this.OnPreviousExecuted, this.OnPreviousCanExecute));
             this.CommandBindings.Add(new CommandBinding(NavigationCommands.BrowseForward, this.OnNextExecuted, this.OnNextCanExecute));
 
-            this.otherItemTransform = new TransformGroup();
-            this.otherItemTransform.Children.Add(this.otherItemOffsetTransform);
-            this.otherItemTransform.Children.Add(this.selectedItemTransform);
+            this._otherItemTransform = new TransformGroup();
+            this._otherItemTransform.Children.Add(this._otherItemOffsetTransform);
+            this._otherItemTransform.Children.Add(this._selectedItemTransform);
         }
 
         public IGestureTracker GestureTracker
@@ -211,7 +210,7 @@ namespace WPF.FlipView
         {
             get
             {
-                return this.selectedItemTransform;
+                return this._selectedItemTransform;
             }
         }
 
@@ -219,7 +218,7 @@ namespace WPF.FlipView
         {
             get
             {
-                return this.otherItemOffsetTransform;
+                return this._otherItemOffsetTransform;
             }
         }
 
@@ -227,7 +226,7 @@ namespace WPF.FlipView
         {
             get
             {
-                return this.otherItemTransform;
+                return this._otherItemTransform;
             }
         }
 
@@ -235,20 +234,20 @@ namespace WPF.FlipView
         {
             get
             {
-                return this.otherIndex;
+                return this._otherIndex;
             }
             set
             {
-                if (value == this.otherIndex)
+                if (value == this._otherIndex)
                 {
                     return;
                 }
-                this.otherIndex = value;
-                if (this.otherIndex != null && this.IsWithinBounds(this.otherIndex.Value))
+                this._otherIndex = value;
+                if (this._otherIndex != null && this.IsWithinBounds(this._otherIndex.Value))
                 {
-                    SetCurrentValue(OtherItemProperty, this.Items[this.otherIndex.Value]);
+                    SetCurrentValue(OtherItemProperty, this.Items[this._otherIndex.Value]);
                     var sign = this.OtherIndex > SelectedIndex ? 1 : -1;
-                    this.otherItemOffsetTransform.X = sign * PART_SwipePanel.ActualWidth;
+                    this._otherItemOffsetTransform.X = sign * _partSwipePanel.ActualWidth;
                 }
                 else
                 {
@@ -260,10 +259,10 @@ namespace WPF.FlipView
         public override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
-            this.PART_SwipePanel = this.GetTemplateChild(PART_SwipePanelName) as Panel;
+            this._partSwipePanel = this.GetTemplateChild(PartSwipePanelName) as Panel;
             if (this.GestureTracker != null)
             {
-                this.GestureTracker.InputElement = PART_SwipePanel;
+                this.GestureTracker.InputElement = _partSwipePanel;
             }
         }
 
@@ -319,7 +318,7 @@ namespace WPF.FlipView
             {
                 return null;
             }
-            var actualWidth = PART_SwipePanel.ActualWidth;
+            var actualWidth = _partSwipePanel.ActualWidth;
             double toValue = 0;
             if (transition.Value.From != transition.Value.To)
             {
@@ -386,7 +385,7 @@ namespace WPF.FlipView
             var flipView = ((FlipView)o);
             if (gestureFinder != null)
             {
-                gestureFinder.InputElement = flipView.PART_SwipePanel;
+                gestureFinder.InputElement = flipView._partSwipePanel;
                 gestureFinder.Gestured += flipView.OnGesture;
             }
             var old = (IGestureTracker)e.OldValue;

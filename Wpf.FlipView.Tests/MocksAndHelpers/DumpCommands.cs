@@ -27,11 +27,11 @@ namespace Wpf.FlipView.Tests.MocksAndHelpers
                 };
             foreach (var type in types)
             {
-                PropertyInfo[] propertyInfos = type.GetProperties().Where(x => x.PropertyType.IsSubclassOf(typeof (RoutedCommand))).ToArray();
+                PropertyInfo[] propertyInfos = type.GetProperties().Where(x => x.PropertyType.IsSubclassOf(typeof(RoutedCommand))).ToArray();
                 foreach (var propertyInfo in propertyInfos)
                 {
-                    Console.WriteLine(@"CommandBindings.Add(new CommandBinding({0}.{1}, (sender, args) => Args.Add(""{1}"")));",propertyInfo.DeclaringType.Name, propertyInfo.Name);
-                    
+                    Console.WriteLine(@"CommandBindings.Add(new CommandBinding({0}.{1}, (sender, args) => Args.Add(""{1}"")));", propertyInfo.DeclaringType.Name, propertyInfo.Name);
+
                 }
             }
         }
