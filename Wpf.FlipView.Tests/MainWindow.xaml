@@ -51,12 +51,22 @@
                         <StackPanel>
                             <CheckBox Content="ShowArrows" IsChecked="{Binding ElementName=FlipView, Path=ShowArrows}" />
                             <CheckBox Content="ShowIndex" IsChecked="{Binding ElementName=FlipView, Path=ShowIndex}" />
-                            <ComboBox SelectedItem="{Binding ElementName=FlipView, Path=ArrowPlacement}">
+                            <ComboBox Width="100"
+                                      HorizontalAlignment="Left"
+                                      SelectedItem="{Binding ElementName=FlipView,
+                                                             Path=ArrowPlacement}">
                                 <flipView:ArrowPlacement>Inside</flipView:ArrowPlacement>
                                 <flipView:ArrowPlacement>Outside</flipView:ArrowPlacement>
                             </ComboBox>
+                            <ComboBox Width="100"
+                                      HorizontalAlignment="Left"
+                                      SelectedItem="{Binding ElementName=FlipView,
+                                                             Path=IndexPlacement}">
+                                <flipView:IndexPlacement>Above</flipView:IndexPlacement>
+                                <flipView:IndexPlacement>Below</flipView:IndexPlacement>
+                            </ComboBox>
                             <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="Speed" />
+                                <TextBlock Text="Transitiontime:" VerticalAlignment="Center"/>
                                 <TextBox x:Name="AnimationSpeed" Text="300" />
                             </StackPanel>
                         </StackPanel>

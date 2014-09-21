@@ -30,29 +30,17 @@ namespace WPF.FlipView
             typeof(FlipView),
             new FrameworkPropertyMetadata(true, FrameworkPropertyMetadataOptions.AffectsMeasure | FrameworkPropertyMetadataOptions.AffectsArrange));
 
-        public static readonly DependencyProperty IndexWidthProperty = DependencyProperty.RegisterAttached(
-            "IndexWidth",
-            typeof(double),
-            typeof(FlipView),
-            new FrameworkPropertyMetadata(50.0, FrameworkPropertyMetadataOptions.AffectsMeasure | FrameworkPropertyMetadataOptions.AffectsArrange));
+        public static readonly DependencyProperty IndexPlacementProperty = DependencyProperty.Register(
+            "IndexPlacement", 
+            typeof (IndexPlacement), 
+            typeof (FlipView), 
+            new PropertyMetadata(IndexPlacement.Above));
 
-        public static readonly DependencyProperty IndexHeightProperty = DependencyProperty.RegisterAttached(
-            "IndexHeight",
-            typeof(double),
-            typeof(FlipView),
-            new FrameworkPropertyMetadata(20.0, FrameworkPropertyMetadataOptions.AffectsMeasure | FrameworkPropertyMetadataOptions.AffectsArrange));
-
-        public static readonly DependencyProperty SelectedIndexColorProperty = DependencyProperty.RegisterAttached(
-            "SelectedIndexColor",
-            typeof(Brush),
-            typeof(FlipView),
-            new FrameworkPropertyMetadata(SystemColors.ActiveBorderBrush, FrameworkPropertyMetadataOptions.None));
-
-        public static readonly DependencyProperty IndexColorProperty = DependencyProperty.RegisterAttached(
-            "IndexColor",
-            typeof(Brush),
-            typeof(FlipView),
-            new FrameworkPropertyMetadata(SystemColors.ControlBrush, FrameworkPropertyMetadataOptions.None));
+        public static readonly DependencyProperty IndexItemStyleProperty = DependencyProperty.Register(
+            "IndexItemStyle",
+            typeof (Style), 
+            typeof (FlipView),
+            new PropertyMetadata(default(Style)));
 
         public static readonly DependencyProperty ShowArrowsProperty = DependencyProperty.RegisterAttached(
             "ShowArrows",
@@ -65,6 +53,12 @@ namespace WPF.FlipView
             typeof(ArrowPlacement),
             typeof(FlipView),
             new FrameworkPropertyMetadata(default(ArrowPlacement), FrameworkPropertyMetadataOptions.AffectsArrange));
+
+        public static readonly DependencyProperty ArrowButtonStyleProperty = DependencyProperty.Register(
+            "ArrowButtonStyle",
+            typeof (Style),
+            typeof (FlipView), 
+            new PropertyMetadata(default(Style)));
 
         public static readonly DependencyProperty OtherItemProperty = DependencyProperty.Register(
             "OtherItem",
@@ -113,42 +107,6 @@ namespace WPF.FlipView
             }
         }
 
-        public ArrowPlacement ArrowPlacement
-        {
-            get
-            {
-                return (ArrowPlacement)GetValue(ArrowPlacementProperty);
-            }
-            set
-            {
-                SetValue(ArrowPlacementProperty, value);
-            }
-        }
-
-        public Brush SelectedIndexColor
-        {
-            get
-            {
-                return (Brush)GetValue(SelectedIndexColorProperty);
-            }
-            set
-            {
-                SetValue(SelectedIndexColorProperty, value);
-            }
-        }
-
-        public Brush IndexColor
-        {
-            get
-            {
-                return (Brush)GetValue(IndexColorProperty);
-            }
-            set
-            {
-                SetValue(IndexColorProperty, value);
-            }
-        }
-
         public bool ShowIndex
         {
             get
@@ -160,29 +118,17 @@ namespace WPF.FlipView
                 SetValue(ShowIndexProperty, value);
             }
         }
-
-        public double IndexWidth
+       
+        public IndexPlacement IndexPlacement
         {
-            get
-            {
-                return (int)GetValue(IndexWidthProperty);
-            }
-            set
-            {
-                SetValue(IndexWidthProperty, value);
-            }
+            get { return (IndexPlacement)GetValue(IndexPlacementProperty); }
+            set { SetValue(IndexPlacementProperty, value); }
         }
 
-        public double IndexHeight
+        public Style IndexItemStyle
         {
-            get
-            {
-                return (int)GetValue(IndexHeightProperty);
-            }
-            set
-            {
-                SetValue(IndexHeightProperty, value);
-            }
+            get { return (Style)GetValue(IndexItemStyleProperty); }
+            set { SetValue(IndexItemStyleProperty, value); }
         }
 
         public bool ShowArrows
@@ -195,6 +141,24 @@ namespace WPF.FlipView
             {
                 SetValue(ShowArrowsProperty, value);
             }
+        }
+
+        public ArrowPlacement ArrowPlacement
+        {
+            get
+            {
+                return (ArrowPlacement)GetValue(ArrowPlacementProperty);
+            }
+            set
+            {
+                SetValue(ArrowPlacementProperty, value);
+            }
+        }
+
+        public Style ArrowButtonStyle
+        {
+            get { return (Style)GetValue(ArrowButtonStyleProperty); }
+            set { SetValue(ArrowButtonStyleProperty, value); }
         }
 
         /// <summary>

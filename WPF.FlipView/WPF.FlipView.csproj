@@ -99,6 +99,7 @@
     <Compile Include="Gestures\MouseGestureTracker.cs" />
     <Compile Include="Gestures\GesturePoint.cs" />
     <Compile Include="Gestures\TouchGestureTracker.cs" />
+    <Compile Include="IndexPlacement.cs" />
     <Compile Include="Transition.cs" />
     <Compile Include="AnimationFactory.cs" />
     <Compile Include="BoolToHiddenConverter.cs" />
