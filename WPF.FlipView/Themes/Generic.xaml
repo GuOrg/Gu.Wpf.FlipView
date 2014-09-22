@@ -19,16 +19,21 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="ListBoxItem">
-                    <Grid Width="50"
+                    <Border x:Name="OuterBorder" Width="50"
                           Height="20"
+                            BorderThickness="1"
+                            BorderBrush="{x:Null}"
                           Background="Transparent">
                         <Border x:Name="Bd"
                                 Margin="5,5,5,5"
                                 Background="{DynamicResource {x:Static SystemColors.ControlDarkBrushKey}}" />
-                    </Grid>
+                    </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsSelected" Value="true">
                             <Setter TargetName="Bd" Property="Background" Value="{DynamicResource {x:Static SystemColors.ActiveCaptionBrushKey}}" />
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="true">
+                            <Setter TargetName="OuterBorder" Property="BorderBrush" Value="{DynamicResource {x:Static SystemColors.ControlDarkBrushKey}}" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
