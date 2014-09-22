@@ -16,17 +16,21 @@
 
     <Style x:Key="IndexItemStyle" TargetType="ListBoxItem">
         <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="ListBoxItem">
                     <Border x:Name="OuterBorder"
-                            Width="50"
-                            Height="20"
+                            Width="70"
+                            Height="50"
                             Background="Transparent"
                             BorderBrush="{x:Null}"
                             BorderThickness="1">
                         <Border x:Name="Bd"
-                                Margin="5,5,5,5"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Height="10"
+                                Width="60"
                                 Background="{DynamicResource {x:Static SystemColors.ControlDarkBrushKey}}" />
                     </Border>
                     <ControlTemplate.Triggers>

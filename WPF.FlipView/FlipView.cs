@@ -31,15 +31,15 @@ namespace WPF.FlipView
             new FrameworkPropertyMetadata(true, FrameworkPropertyMetadataOptions.AffectsMeasure | FrameworkPropertyMetadataOptions.AffectsArrange));
 
         public static readonly DependencyProperty IndexPlacementProperty = DependencyProperty.Register(
-            "IndexPlacement", 
-            typeof (IndexPlacement), 
-            typeof (FlipView), 
+            "IndexPlacement",
+            typeof(IndexPlacement),
+            typeof(FlipView),
             new PropertyMetadata(IndexPlacement.Above));
 
         public static readonly DependencyProperty IndexItemStyleProperty = DependencyProperty.Register(
             "IndexItemStyle",
-            typeof (Style), 
-            typeof (FlipView),
+            typeof(Style),
+            typeof(FlipView),
             new FrameworkPropertyMetadata(default(Style), FrameworkPropertyMetadataOptions.AffectsMeasure | FrameworkPropertyMetadataOptions.AffectsArrange));
 
         public static readonly DependencyProperty ShowArrowsProperty = DependencyProperty.RegisterAttached(
@@ -56,8 +56,8 @@ namespace WPF.FlipView
 
         public static readonly DependencyProperty ArrowButtonStyleProperty = DependencyProperty.Register(
             "ArrowButtonStyle",
-            typeof (Style),
-            typeof (FlipView), 
+            typeof(Style),
+            typeof(FlipView),
             new FrameworkPropertyMetadata(default(Style), FrameworkPropertyMetadataOptions.AffectsMeasure | FrameworkPropertyMetadataOptions.AffectsArrange));
 
         public static readonly DependencyProperty OtherItemProperty = DependencyProperty.Register(
@@ -118,7 +118,7 @@ namespace WPF.FlipView
                 SetValue(ShowIndexProperty, value);
             }
         }
-       
+
         public IndexPlacement IndexPlacement
         {
             get { return (IndexPlacement)GetValue(IndexPlacementProperty); }
@@ -210,7 +210,7 @@ namespace WPF.FlipView
                     return;
                 }
                 this._otherIndex = value;
-                if (this._otherIndex != null && this.IsWithinBounds(this._otherIndex.Value))
+                if (this._otherIndex != null && this.IsWithinBounds(this._otherIndex.Value) && _partSwipePanel != null)
                 {
                     SetCurrentValue(OtherItemProperty, this.Items[this._otherIndex.Value]);
                     var sign = this.OtherIndex > SelectedIndex ? 1 : -1;
@@ -276,7 +276,7 @@ namespace WPF.FlipView
         /// <returns>null if TransitionTime == 0</returns>
         internal AnimationTimeline CreateTransitionAnimation(Transition? transition)
         {
-            if (transition == null)
+            if (transition == null || _partSwipePanel == null)
             {
                 return null;
             }
@@ -291,7 +291,7 @@ namespace WPF.FlipView
             {
                 if (_animation == null)
                 {
-                    var sign = transition.Value.From < transition.Value.To? 1 : -1;
+                    var sign = transition.Value.From < transition.Value.To ? 1 : -1;
                     SelectedItemTransform.X = sign * actualWidth;
                     OtherItemOffsetTransform.X = -1 * sign * actualWidth;
                 }
