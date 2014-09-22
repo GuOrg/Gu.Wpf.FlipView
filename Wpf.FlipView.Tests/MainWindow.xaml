@@ -21,7 +21,7 @@
                     </Grid.ColumnDefinitions>
                     <flipView:FlipView x:Name="FlipView"
                                        Grid.Column="1"
-                                       SelectedIndex="2"
+                                       SelectedIndex="1"
                                        TransitionTime="{Binding ElementName=AnimationSpeed,
                                                                 Path=Text}">
                         <flipView:FlipView.Resources>
@@ -74,6 +74,83 @@
                 </Grid>
             </TabItem>
 
+            <TabItem Header="FlipView Styles">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="4*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <flipView:FlipView x:Name="StyledFlipView"
+                                       Grid.Column="1"
+                                       SelectedIndex="1"
+                                       TransitionTime="{Binding ElementName=AnimationSpeed,
+                                                                Path=Text}">
+                        <flipView:FlipView.ArrowButtonStyle>
+                            <Style TargetType="{x:Type RepeatButton}">
+                                <Setter Property="Width" Value="50" />
+                            </Style>
+                        </flipView:FlipView.ArrowButtonStyle>
+                        <flipView:FlipView.IndexItemStyle>
+                            <Style TargetType="{x:Type ListBoxItem}">
+                                <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+                                <Setter Property="Height" Value="30" />
+                                <Setter Property="Width" Value="60" />
+                            </Style>
+                        </flipView:FlipView.IndexItemStyle>
+                        <flipView:FlipView.Resources>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="FontSize" Value="70" />
+                                <Setter Property="HorizontalAlignment" Value="Center" />
+                                <Setter Property="VerticalAlignment" Value="Center" />
+                            </Style>
+                        </flipView:FlipView.Resources>
+                        <Border Background="#f1eef6">
+                            <TextBlock Text="1" />
+                        </Border>
+                        <Border Background="#bdc9e1">
+                            <TextBlock Text="2" />
+                        </Border>
+                        <Border Background="#74a9cf">
+                            <TextBlock>3</TextBlock>
+                        </Border>
+                        <Border Background="#0570b0">
+                            <TextBlock>4</TextBlock>
+                        </Border>
+                    </flipView:FlipView>
+                    <Grid Grid.Row="1"
+                          Grid.Column="0"
+                          Grid.ColumnSpan="3"
+                          TextBlock.FontSize="12">
+                        <StackPanel>
+                            <CheckBox Content="ShowArrows" IsChecked="{Binding ElementName=FlipView, Path=ShowArrows}" />
+                            <CheckBox Content="ShowIndex" IsChecked="{Binding ElementName=FlipView, Path=ShowIndex}" />
+                            <ComboBox Width="100"
+                                      HorizontalAlignment="Left"
+                                      SelectedItem="{Binding ElementName=FlipView,
+                                                             Path=ArrowPlacement}">
+                                <flipView:ArrowPlacement>Inside</flipView:ArrowPlacement>
+                                <flipView:ArrowPlacement>Outside</flipView:ArrowPlacement>
+                            </ComboBox>
+                            <ComboBox Width="100"
+                                      HorizontalAlignment="Left"
+                                      SelectedItem="{Binding ElementName=FlipView,
+                                                             Path=IndexPlacement}">
+                                <flipView:IndexPlacement>Above</flipView:IndexPlacement>
+                                <flipView:IndexPlacement>Below</flipView:IndexPlacement>
+                            </ComboBox>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock VerticalAlignment="Center" Text="Transitiontime:" />
+                                <TextBox Text="300" />
+                            </StackPanel>
+                        </StackPanel>
+                    </Grid>
+                </Grid>
+            </TabItem>
             <TabItem Header="InkCanvas">
                 <Grid>
                     <Grid.ColumnDefinitions>
