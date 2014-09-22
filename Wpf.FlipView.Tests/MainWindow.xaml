@@ -72,6 +72,7 @@
                 </Grid>
             </TabItem>
 
+            <!--Providing a sample of how to style it-->
             <TabItem Header="FlipView Styles">
                 <Grid>
                     <Grid.RowDefinitions>

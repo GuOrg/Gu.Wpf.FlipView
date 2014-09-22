@@ -40,7 +40,7 @@ namespace WPF.FlipView
             "IndexItemStyle",
             typeof (Style), 
             typeof (FlipView),
-            new FrameworkPropertyMetadata(default(Style), FrameworkPropertyMetadataOptions.AffectsMeasure));
+            new FrameworkPropertyMetadata(default(Style), FrameworkPropertyMetadataOptions.AffectsMeasure | FrameworkPropertyMetadataOptions.AffectsArrange));
 
         public static readonly DependencyProperty ShowArrowsProperty = DependencyProperty.RegisterAttached(
             "ShowArrows",
@@ -58,7 +58,7 @@ namespace WPF.FlipView
             "ArrowButtonStyle",
             typeof (Style),
             typeof (FlipView), 
-            new FrameworkPropertyMetadata(default(Style), FrameworkPropertyMetadataOptions.AffectsMeasure));
+            new FrameworkPropertyMetadata(default(Style), FrameworkPropertyMetadataOptions.AffectsMeasure | FrameworkPropertyMetadataOptions.AffectsArrange));
 
         public static readonly DependencyProperty OtherItemProperty = DependencyProperty.Register(
             "OtherItem",
