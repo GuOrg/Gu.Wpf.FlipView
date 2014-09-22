@@ -227,9 +227,10 @@ namespace WPF.FlipView
         {
             base.OnApplyTemplate();
             this._partSwipePanel = this.GetTemplateChild(PartSwipePanelName) as Panel;
-            if (this.GestureTracker != null)
+            if (this.GestureTracker != null && _partSwipePanel != null)
             {
                 this.GestureTracker.InputElement = _partSwipePanel;
+                this.GestureTracker.Gestured += this.OnGesture;
             }
         }
 
@@ -348,18 +349,18 @@ namespace WPF.FlipView
 
         private static void OnGestureTrackerChanged(DependencyObject o, DependencyPropertyChangedEventArgs e)
         {
-            var gestureFinder = (IGestureTracker)e.NewValue;
+            var tracker = (IGestureTracker)e.NewValue;
             var flipView = ((FlipView)o);
-            if (gestureFinder != null)
+            if (tracker != null && flipView._partSwipePanel != null)
             {
-                gestureFinder.InputElement = flipView._partSwipePanel;
-                gestureFinder.Gestured += flipView.OnGesture;
+                tracker.InputElement = flipView._partSwipePanel;
+                tracker.Gestured += flipView.OnGesture;
             }
             var old = (IGestureTracker)e.OldValue;
             if (old != null)
             {
                 old.InputElement = null;
-                old.Gestured += flipView.OnGesture;
+                old.Gestured -= flipView.OnGesture;
             }
         }
 
@@ -375,7 +376,7 @@ namespace WPF.FlipView
         private void OnGesture(object sender, GestureEventArgs e)
         {
             var tracker = GestureTracker;
-            if (tracker == null)
+            if (tracker == null || !ReferenceEquals(tracker.InputElement, this._partSwipePanel))
             {
                 return;
             }

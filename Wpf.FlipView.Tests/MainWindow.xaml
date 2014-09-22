@@ -114,10 +114,9 @@
                                                                   Margin="{TemplateBinding Padding}"
                                                                   HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                                                   VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                                                                  Content="{TemplateBinding Content}"
                                                                   Focusable="False"
                                                                   RecognizesAccessKey="True"
-                                                                  SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                                                                  SnapsToDevicePixels="True" />
                                             </Grid>
                                             <ControlTemplate.Triggers>
                                                 <Trigger Property="IsMouseOver" Value="True">

@@ -11,14 +11,14 @@ namespace WPF.FlipView
             this.Patterns = new[]
                                 {
                                     new EventPattern(
-                                        x => x.TouchDown += this.OnStart,
-                                        x => x.TouchDown -= this.OnStart),
+                                        x => x.PreviewTouchDown += this.OnStart,
+                                        x => x.PreviewTouchDown -= this.OnStart),
                                     new EventPattern(
-                                        x => x.TouchMove += this.OnMove,
-                                        x => x.TouchMove -= this.OnMove),
+                                        x => x.PreviewTouchMove += this.OnMove,
+                                        x => x.PreviewTouchMove -= this.OnMove),
                                     new EventPattern(
-                                        x => x.TouchUp += this.OnEnd,
-                                        x => x.TouchUp -= this.OnEnd),
+                                        x => x.PreviewTouchUp += this.OnEnd,
+                                        x => x.PreviewTouchUp -= this.OnEnd),
                                     new EventPattern(
                                         x => x.TouchLeave += this.OnEnd,
                                         x => x.TouchLeave -= this.OnEnd),

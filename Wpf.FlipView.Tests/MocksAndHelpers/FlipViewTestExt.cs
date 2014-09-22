@@ -16,7 +16,7 @@ namespace Wpf.FlipView.Tests
 
         static FlipViewTestExt()
         {
-            PartSwipePanel = typeof(FlipView).GetField("PART_SwipePanel", BindingFlags.Instance | BindingFlags.NonPublic);
+            PartSwipePanel = typeof(FlipView).GetField("_partSwipePanel", BindingFlags.Instance | BindingFlags.NonPublic);
             IsAnimating = typeof(FlipView).GetField("_animation", BindingFlags.Instance | BindingFlags.NonPublic);
         }
 
