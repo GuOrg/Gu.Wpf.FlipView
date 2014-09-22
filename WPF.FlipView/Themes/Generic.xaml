@@ -19,11 +19,12 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="ListBoxItem">
-                    <Border x:Name="OuterBorder" Width="50"
-                          Height="20"
-                            BorderThickness="1"
+                    <Border x:Name="OuterBorder"
+                            Width="50"
+                            Height="20"
+                            Background="Transparent"
                             BorderBrush="{x:Null}"
-                          Background="Transparent">
+                            BorderThickness="1">
                         <Border x:Name="Bd"
                                 Margin="5,5,5,5"
                                 Background="{DynamicResource {x:Static SystemColors.ControlDarkBrushKey}}" />
