@@ -110,14 +110,8 @@
 
         public bool ShowIndex
         {
-            get
-            {
-                return (bool)this.GetValue(ShowIndexProperty);
-            }
-            set
-            {
-                this.SetValue(ShowIndexProperty, value);
-            }
+            get { return (bool)this.GetValue(ShowIndexProperty); }
+            set { this.SetValue(ShowIndexProperty, value); }
         }
 
         public IndexPlacement IndexPlacement

@@ -31,7 +31,7 @@
         [TestCase(1, 0, 100)]
         public void SelectNewItem(int fromIndex, int toIndex, double expectedX)
         {
-            this._flipView.SetActualWidth(Math.Abs(expectedX));// set actual width
+            this._flipView.SetActualWidth(Math.Abs(expectedX)); // set actual width
             this._flipView.SelectedIndex = fromIndex; // First time does nothing cos OldValue == -1
             this._flipView.SelectedIndex = toIndex;
             Assert.IsNull(this._flipView.OtherItem);

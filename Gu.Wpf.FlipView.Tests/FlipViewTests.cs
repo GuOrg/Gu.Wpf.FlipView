@@ -54,7 +54,6 @@
             Assert.AreSame(this._flipView.Items[expectedTo], this._flipView.SelectedItem);
         }
 
-
         [TestCase(1000, 1, 0)]
         [TestCase(1000, 0, 0)]
         [TestCase(-1000, 1, 2)]

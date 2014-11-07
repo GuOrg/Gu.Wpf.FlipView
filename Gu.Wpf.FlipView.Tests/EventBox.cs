@@ -11,7 +11,6 @@
     {
         public static RoutedUICommand ClearCommand = new RoutedUICommand("Clear", "Clear", typeof(EventBox));
 
-
         public static readonly DependencyProperty SwipeAreaProperty = DependencyProperty.Register(
             "SwipeArea",
             typeof(FrameworkElement),

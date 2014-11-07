@@ -56,7 +56,5 @@ namespace Gu.Wpf.FlipView.Tests.MocksAndHelpers
             var args = new TouchEventArgs(device, 0) { RoutedEvent = UIElement.TouchUpEvent };
             flipView.RaiseEvent(args);
         }
-
-
     }
 }

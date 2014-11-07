@@ -19,16 +19,13 @@ namespace Gu.Wpf.FlipView.Gestures
             this.Interpreter = new GestureInterpreter();
         }
 
-        public IGestureInterpreter Interpreter { get; set; }
-
         public event EventHandler<GestureEventArgs> Gestured;
+
+        public IGestureInterpreter Interpreter { get; set; }
 
         public ObservableCollection<IGestureTracker> GestureTrackers
         {
-            get
-            {
-                return this._gestureTrackers;
-            }
+            get { return this._gestureTrackers; }
         }
 
         public UIElement InputElement
@@ -40,7 +37,7 @@ namespace Gu.Wpf.FlipView.Gestures
             set
             {
                 this._inputElement = value;
-                foreach (var tracker in this.GestureTrackers.Where(x=>x!=null))
+                foreach (var tracker in this.GestureTrackers.Where(x => x != null))
                 {
                     tracker.InputElement = value;
                 }

@@ -13,7 +13,6 @@
             InitializeComponent();
         }
 
-
         private void InkCanvas_OnGesture(object sender, InkCanvasGestureEventArgs e)
         {
             var recognitionResults = e.GetGestureRecognitionResults();
@@ -31,7 +30,7 @@
         }
         private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
         {
-            this.ArgsBox.Items.Insert(0,"Click");
+            this.ArgsBox.Items.Insert(0, "Click");
         }
     }
 }

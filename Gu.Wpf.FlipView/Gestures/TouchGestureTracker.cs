@@ -18,13 +18,21 @@ namespace Gu.Wpf.FlipView.Gestures
                                     new EventPattern(
                                         x => x.PreviewTouchUp += this.OnEnd,
                                         x => x.PreviewTouchUp -= this.OnEnd),
+                                    new EventPattern(x => x.TouchLeave += this.OnEnd, x => x.TouchLeave -= this.OnEnd),
                                     new EventPattern(
-                                        x => x.TouchLeave += this.OnEnd,
-                                        x => x.TouchLeave -= this.OnEnd),
-                                    new EventPattern(x=> x.CommandBindings.Add(new CommandBinding(NavigationCommands.BrowseForward, this.OnBrowseForward)),
-                                                     x=> x.CommandBindings.Remove(new CommandBinding(NavigationCommands.BrowseForward, this.OnBrowseForward))),
-                                    new EventPattern(x=> x.CommandBindings.Add(new CommandBinding(NavigationCommands.BrowseBack, this.OnBrowseBack)),
-                                                     x=> x.CommandBindings.Remove(new CommandBinding(NavigationCommands.BrowseBack, this.OnBrowseBack))) 
+                                        x =>
+                                        x.CommandBindings.Add(
+                                            new CommandBinding(NavigationCommands.BrowseForward, this.OnBrowseForward)),
+                                        x =>
+                                        x.CommandBindings.Remove(
+                                            new CommandBinding(NavigationCommands.BrowseForward, this.OnBrowseForward))),
+                                    new EventPattern(
+                                        x =>
+                                        x.CommandBindings.Add(
+                                            new CommandBinding(NavigationCommands.BrowseBack, this.OnBrowseBack)),
+                                        x =>
+                                        x.CommandBindings.Remove(
+                                            new CommandBinding(NavigationCommands.BrowseBack, this.OnBrowseBack)))
                                 };
         }
 

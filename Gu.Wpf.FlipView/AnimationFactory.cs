@@ -4,7 +4,10 @@
     using System.Windows;
     using System.Windows.Media.Animation;
 
-    public class AnimationFactory
+    /// <summary>
+    /// Helper for creating transition animations
+    /// </summary>
+    internal class AnimationFactory
     {
         public static AnimationFactory Instance
         {
@@ -50,7 +53,7 @@
             fromFrame.KeyTime = KeyTime.FromTimeSpan(TimeSpan.FromMilliseconds(0));
 
             var toFrame = new EasingDoubleKeyFrame(to);
-            //toFrame.EasingFunction = new ExponentialEase { EasingMode = EasingMode.EaseOut };
+            // toFrame.EasingFunction = new ExponentialEase { EasingMode = EasingMode.EaseOut };
             toFrame.KeyTime = KeyTime.FromTimeSpan(duration);
 
             doubleAnimation.KeyFrames.Add(fromFrame);

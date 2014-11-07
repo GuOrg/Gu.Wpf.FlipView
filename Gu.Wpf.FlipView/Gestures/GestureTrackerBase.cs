@@ -7,11 +7,10 @@ namespace Gu.Wpf.FlipView.Gestures
     public abstract class GestureTrackerBase<TArgs> : Freezable, IGestureTracker
     {
         protected readonly List<GesturePoint> Points = new List<GesturePoint>();
+        private readonly WeakReference<UIElement> _inputElement = new WeakReference<UIElement>(null);
         protected bool IsGesturing;
         protected EventPattern[] Patterns;
         private bool _disposed = false;
-
-        private readonly WeakReference<UIElement> _inputElement = new WeakReference<UIElement>(null);
 
         protected GestureTrackerBase(params EventPattern[] patterns)
         {
@@ -19,16 +18,16 @@ namespace Gu.Wpf.FlipView.Gestures
             this.Interpreter = new GestureInterpreter();
         }
 
-        public IGestureInterpreter Interpreter { get; set; }
-
         public event EventHandler<GestureEventArgs> Gestured;
+
+        public IGestureInterpreter Interpreter { get; set; }
 
         public UIElement InputElement
         {
             get
             {
                 UIElement target;
-                this._inputElement.TryGetTarget(out  target);
+                this._inputElement.TryGetTarget(out target);
                 return target;
             }
             set

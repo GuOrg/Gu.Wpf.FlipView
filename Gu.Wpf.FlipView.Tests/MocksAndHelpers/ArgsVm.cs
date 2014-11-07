@@ -13,16 +13,16 @@
         private readonly PropertyInfo _info;
 
         private static readonly Type[] _types =
-        {
-            typeof (Vector),
-            typeof (Point),
-            typeof (ManipulationDelta),
-            typeof (ManipulationVelocities),
-            typeof (InputDevice),
-            typeof (InertiaExpansionBehavior),
-            typeof (InertiaTranslationBehavior), 
-            typeof(InertiaRotationBehavior)
-        };
+            {
+                typeof(Vector),
+                typeof(Point),
+                typeof(ManipulationDelta),
+                typeof(ManipulationVelocities),
+                typeof(InputDevice),
+                typeof(InertiaExpansionBehavior),
+                typeof(InertiaTranslationBehavior),
+                typeof(InertiaRotationBehavior)
+            };
         private ArgsVm[] _children;
         public ArgsVm(object args)
         {

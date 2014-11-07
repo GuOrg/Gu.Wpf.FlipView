@@ -5,10 +5,10 @@ namespace Gu.Wpf.FlipView.Gestures
 
     public interface IGestureTracker : IDisposable
     {
+        event EventHandler<GestureEventArgs> Gestured;
+
         UIElement InputElement { get; set; }
 
         IGestureInterpreter Interpreter { get; set; }
-
-        event EventHandler<GestureEventArgs> Gestured;
     }
 }
