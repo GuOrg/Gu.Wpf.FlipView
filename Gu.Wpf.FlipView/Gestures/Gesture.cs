@@ -10,17 +10,17 @@
 
         public Gesture(GesturePoint[] points)
         {
-            this._points = points;
-            var first = this._points[0];
-            var last = this._points[this._points.Length - 1];
+            _points = points;
+            var first = _points[0];
+            var last = _points[_points.Length - 1];
             var duration = last.Time - first.Time;
-            this.Delta = last.Point - first.Point;
-            this.Velocity = new Vector(this.Delta.X / duration, this.Delta.Y / duration);
+            Delta = last.Point - first.Point;
+            Velocity = new Vector(Delta.X / duration, Delta.Y / duration);
         }
 
         public Gesture(ExecutedRoutedEventArgs commandArgs)
         {
-            this.CommandArgs = commandArgs;
+            CommandArgs = commandArgs;
         }
    
         public ExecutedRoutedEventArgs CommandArgs { get; private set; }
@@ -29,7 +29,7 @@
         {
             get
             {
-                return this._points;
+                return _points;
             }
         }
 
@@ -39,11 +39,11 @@
 
         public override string ToString()
         {
-            if (this.CommandArgs != null)
+            if (CommandArgs != null)
             {
-                return string.Format("Command: {0}", this.CommandArgs.Command);
+                return string.Format("Command: {0}", CommandArgs.Command);
             }
-            return string.Format("Delta: ({0:F0}, {1:F0}),Velocity: ({2:F1}, {3:F1})", this.Delta.X, this.Delta.Y, this.Velocity.X, this.Velocity.Y);
+            return string.Format("Delta: ({0:F0}, {1:F0}),Velocity: ({2:F1}, {3:F1})", Delta.X, Delta.Y, Velocity.X, Velocity.Y);
         }
     }
 }

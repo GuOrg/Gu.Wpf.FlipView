@@ -10,8 +10,8 @@ namespace Gu.Wpf.FlipView.Gestures
 
         public GesturePoint(Point point, int time)
         {
-            this.Point = point;
-            this.Time = time;
+            Point = point;
+            Time = time;
         }
     }
 }

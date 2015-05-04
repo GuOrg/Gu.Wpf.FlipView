@@ -8,7 +8,7 @@
     using System.Windows.Media;
     using System.Windows.Media.Animation;
 
-    using Gu.Wpf.FlipView.Gestures;
+    using Gestures;
 
     [TemplatePart(Name = PartSwipePanelName, Type = typeof(Panel))]
     public class FlipView : Selector
@@ -82,42 +82,42 @@
 
         public FlipView()
         {
-            this.CommandBindings.Add(new CommandBinding(NavigationCommands.BrowseBack, this.OnPreviousExecuted, this.OnPreviousCanExecute));
-            this.CommandBindings.Add(new CommandBinding(NavigationCommands.BrowseForward, this.OnNextExecuted, this.OnNextCanExecute));
+            CommandBindings.Add(new CommandBinding(NavigationCommands.BrowseBack, OnPreviousExecuted, OnPreviousCanExecute));
+            CommandBindings.Add(new CommandBinding(NavigationCommands.BrowseForward, OnNextExecuted, OnNextCanExecute));
 
-            this._otherItemTransform = new TransformGroup();
-            this._otherItemTransform.Children.Add(this._otherItemOffsetTransform);
-            this._otherItemTransform.Children.Add(this._selectedItemTransform);
+            _otherItemTransform = new TransformGroup();
+            _otherItemTransform.Children.Add(_otherItemOffsetTransform);
+            _otherItemTransform.Children.Add(_selectedItemTransform);
         }
 
         public IGestureTracker GestureTracker
         {
-            get { return (IGestureTracker)this.GetValue(GestureTrackerProperty); }
-            set { this.SetValue(GestureTrackerProperty, value); }
+            get { return (IGestureTracker)GetValue(GestureTrackerProperty); }
+            set { SetValue(GestureTrackerProperty, value); }
         }
 
         public int TransitionTime
         {
             get
             {
-                return (int)this.GetValue(FlipView.TransitionTimeProperty);
+                return (int)GetValue(TransitionTimeProperty);
             }
             set
             {
-                this.SetValue(FlipView.TransitionTimeProperty, value);
+                SetValue(TransitionTimeProperty, value);
             }
         }
 
         public bool ShowIndex
         {
-            get { return (bool)this.GetValue(ShowIndexProperty); }
-            set { this.SetValue(ShowIndexProperty, value); }
+            get { return (bool)GetValue(ShowIndexProperty); }
+            set { SetValue(ShowIndexProperty, value); }
         }
 
         public IndexPlacement IndexPlacement
         {
-            get { return (IndexPlacement)this.GetValue(IndexPlacementProperty); }
-            set { this.SetValue(IndexPlacementProperty, value); }
+            get { return (IndexPlacement)GetValue(IndexPlacementProperty); }
+            set { SetValue(IndexPlacementProperty, value); }
         }
 
         /// <summary>
@@ -125,19 +125,19 @@
         /// </summary>
         public Style IndexItemStyle
         {
-            get { return (Style)this.GetValue(IndexItemStyleProperty); }
-            set { this.SetValue(IndexItemStyleProperty, value); }
+            get { return (Style)GetValue(IndexItemStyleProperty); }
+            set { SetValue(IndexItemStyleProperty, value); }
         }
 
         public bool ShowArrows
         {
             get
             {
-                return (bool)this.GetValue(ShowArrowsProperty);
+                return (bool)GetValue(ShowArrowsProperty);
             }
             set
             {
-                this.SetValue(ShowArrowsProperty, value);
+                SetValue(ShowArrowsProperty, value);
             }
         }
 
@@ -145,18 +145,18 @@
         {
             get
             {
-                return (ArrowPlacement)this.GetValue(ArrowPlacementProperty);
+                return (ArrowPlacement)GetValue(ArrowPlacementProperty);
             }
             set
             {
-                this.SetValue(ArrowPlacementProperty, value);
+                SetValue(ArrowPlacementProperty, value);
             }
         }
 
         public Style ArrowButtonStyle
         {
-            get { return (Style)this.GetValue(ArrowButtonStyleProperty); }
-            set { this.SetValue(ArrowButtonStyleProperty, value); }
+            get { return (Style)GetValue(ArrowButtonStyleProperty); }
+            set { SetValue(ArrowButtonStyleProperty, value); }
         }
 
         /// <summary>
@@ -164,15 +164,15 @@
         /// </summary>
         public object OtherItem
         {
-            get { return (object)this.GetValue(OtherItemProperty); }
-            set { this.SetValue(OtherItemProperty, value); }
+            get { return (object)GetValue(OtherItemProperty); }
+            set { SetValue(OtherItemProperty, value); }
         }
 
         public TranslateTransform SelectedItemTransform
         {
             get
             {
-                return this._selectedItemTransform;
+                return _selectedItemTransform;
             }
         }
 
@@ -180,7 +180,7 @@
         {
             get
             {
-                return this._otherItemOffsetTransform;
+                return _otherItemOffsetTransform;
             }
         }
 
@@ -188,7 +188,7 @@
         {
             get
             {
-                return this._otherItemTransform;
+                return _otherItemTransform;
             }
         }
 
@@ -196,24 +196,24 @@
         {
             get
             {
-                return this._otherIndex;
+                return _otherIndex;
             }
             set
             {
-                if (value == this._otherIndex)
+                if (value == _otherIndex)
                 {
                     return;
                 }
-                this._otherIndex = value;
-                if (this._otherIndex != null && this.IsWithinBounds(this._otherIndex.Value) && this._partSwipePanel != null)
+                _otherIndex = value;
+                if (_otherIndex != null && IsWithinBounds(_otherIndex.Value) && _partSwipePanel != null)
                 {
-                    this.SetCurrentValue(OtherItemProperty, this.Items[this._otherIndex.Value]);
-                    var sign = this.OtherIndex > this.SelectedIndex ? 1 : -1;
-                    this._otherItemOffsetTransform.X = sign * this._partSwipePanel.ActualWidth;
+                    SetCurrentValue(OtherItemProperty, Items[_otherIndex.Value]);
+                    var sign = OtherIndex > SelectedIndex ? 1 : -1;
+                    _otherItemOffsetTransform.X = sign * _partSwipePanel.ActualWidth;
                 }
                 else
                 {
-                    this.SetCurrentValue(OtherItemProperty, null);
+                    SetCurrentValue(OtherItemProperty, null);
                 }
             }
         }
@@ -221,19 +221,19 @@
         public override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
-            this._partSwipePanel = this.GetTemplateChild(PartSwipePanelName) as Panel;
-            if (this.GestureTracker != null && this._partSwipePanel != null)
+            _partSwipePanel = GetTemplateChild(PartSwipePanelName) as Panel;
+            if (GestureTracker != null && _partSwipePanel != null)
             {
-                this.GestureTracker.InputElement = this._partSwipePanel;
-                this.GestureTracker.Gestured += this.OnGesture;
+                GestureTracker.InputElement = _partSwipePanel;
+                GestureTracker.Gestured += OnGesture;
             }
         }
 
         private bool TransitionTo(int newIndex)
         {
-            var animation = this.TransitionTo(this.SelectedIndex, newIndex);
-            this.AnimateTransition(animation);
-            return this.IsWithinBounds(newIndex);
+            var animation = TransitionTo(SelectedIndex, newIndex);
+            AnimateTransition(animation);
+            return IsWithinBounds(newIndex);
         }
 
         /// <summary>
@@ -247,21 +247,21 @@
         {
             if (oldIndex != newIndex)
             {
-                if (this.IsWithinBounds(newIndex))
+                if (IsWithinBounds(newIndex))
                 {
-                    this.SelectedIndex = newIndex;
-                    this.OtherIndex = oldIndex;
+                    SelectedIndex = newIndex;
+                    OtherIndex = oldIndex;
                 }
                 else
                 {
-                    this.OtherIndex = null;
+                    OtherIndex = null;
                 }
             }
-            if (this._animation != null) // Just replace the items and let the current animation continue
+            if (_animation != null) // Just replace the items and let the current animation continue
             {
                 return null;
             }
-            return this.CreateTransitionAnimation(new Transition(this.OtherIndex, this.SelectedIndex));
+            return CreateTransitionAnimation(new Transition(OtherIndex, SelectedIndex));
         }
 
         /// <summary>
@@ -272,36 +272,36 @@
         /// <returns>null if TransitionTime == 0</returns>
         internal AnimationTimeline CreateTransitionAnimation(Transition? transition)
         {
-            if (transition == null || this._partSwipePanel == null)
+            if (transition == null || _partSwipePanel == null)
             {
                 return null;
             }
 
-            if (this._animation != null)
+            if (_animation != null)
             {
                 return null;
             }
-            var actualWidth = this._partSwipePanel.ActualWidth;
+            var actualWidth = _partSwipePanel.ActualWidth;
             double toValue = 0;
             if (transition.Value.From != transition.Value.To)
             {
-                if (this._animation == null)
+                if (_animation == null)
                 {
                     var sign = transition.Value.From < transition.Value.To ? 1 : -1;
-                    this.SelectedItemTransform.X = sign * actualWidth;
-                    this.OtherItemOffsetTransform.X = -1 * sign * actualWidth;
+                    SelectedItemTransform.X = sign * actualWidth;
+                    OtherItemOffsetTransform.X = -1 * sign * actualWidth;
                 }
             }
-            if (this.TransitionTime > 0)
+            if (TransitionTime > 0)
             {
-                double delta = Math.Abs(this.SelectedItemTransform.X - toValue);
-                var duration = TimeSpan.FromMilliseconds((delta / actualWidth) * this.TransitionTime);
-                var animation = AnimationFactory.CreateAnimation(this.SelectedItemTransform.X, 0, duration);
+                double delta = Math.Abs(SelectedItemTransform.X - toValue);
+                var duration = TimeSpan.FromMilliseconds((delta / actualWidth) * TransitionTime);
+                var animation = AnimationFactory.CreateAnimation(SelectedItemTransform.X, 0, duration);
                 return animation;
             }
             else
             {
-                this.SelectedItemTransform.X = toValue;
+                SelectedItemTransform.X = toValue;
             }
             return null;
         }
@@ -312,23 +312,23 @@
         /// <param name="animation"></param>
         internal void AnimateTransition(AnimationTimeline animation)
         {
-            if (this._animation != null && animation != null)
+            if (_animation != null && animation != null)
             {
-                this._animation.Completed -= this.OnAnimationCompleted;
-                this._animation = null;
-                this.SelectedItemTransform.BeginAnimation(TranslateTransform.XProperty, null);
+                _animation.Completed -= OnAnimationCompleted;
+                _animation = null;
+                SelectedItemTransform.BeginAnimation(TranslateTransform.XProperty, null);
             }
             if (animation != null)
             {
-                this._animation = animation;
-                animation.Completed += this.OnAnimationCompleted;
-                this.SelectedItemTransform.BeginAnimation(TranslateTransform.XProperty, animation);
+                _animation = animation;
+                animation.Completed += OnAnimationCompleted;
+                SelectedItemTransform.BeginAnimation(TranslateTransform.XProperty, animation);
             }
             else
             {
-                if (this._animation == null)
+                if (_animation == null)
                 {
-                    this.OnAnimationCompleted(null, null);
+                    OnAnimationCompleted(null, null);
                 }
             }
         }
@@ -336,10 +336,10 @@
         internal void OnAnimationCompleted(object sender, EventArgs args)
         {
             //CommandManager.InvalidateRequerySuggested();
-            this.OtherIndex = null;
-            this.SelectedItemTransform.BeginAnimation(TranslateTransform.XProperty, null);
-            this.SelectedItemTransform.X = 0;
-            this._animation = null;
+            OtherIndex = null;
+            SelectedItemTransform.BeginAnimation(TranslateTransform.XProperty, null);
+            SelectedItemTransform.X = 0;
+            _animation = null;
         }
 
         private static void OnGestureTrackerChanged(DependencyObject o, DependencyPropertyChangedEventArgs e)
@@ -361,7 +361,7 @@
 
         private bool IsWithinBounds(int newIndex)
         {
-            if (newIndex < 0 || newIndex > (this.Items.Count - 1))
+            if (newIndex < 0 || newIndex > (Items.Count - 1))
             {
                 return false;
             }
@@ -370,8 +370,8 @@
 
         private void OnGesture(object sender, GestureEventArgs e)
         {
-            var tracker = this.GestureTracker;
-            if (tracker == null || !ReferenceEquals(tracker.InputElement, this._partSwipePanel))
+            var tracker = GestureTracker;
+            if (tracker == null || !ReferenceEquals(tracker.InputElement, _partSwipePanel))
             {
                 return;
             }
@@ -383,35 +383,35 @@
 
             if (interpreter.IsBack(e.Gesture))
             {
-                this.TransitionTo(this.SelectedIndex - 1);
+                TransitionTo(SelectedIndex - 1);
             }
 
             if (interpreter.IsForward(e.Gesture))
             {
-                this.TransitionTo(this.SelectedIndex + 1);
+                TransitionTo(SelectedIndex + 1);
             }
         }
 
         private void OnPreviousCanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
-            e.CanExecute = this.IsWithinBounds(this.SelectedIndex - 1);
+            e.CanExecute = IsWithinBounds(SelectedIndex - 1);
             e.Handled = true;
         }
 
         private void OnPreviousExecuted(object sender, ExecutedRoutedEventArgs e)
         {
-            e.Handled = this.TransitionTo(this.SelectedIndex - 1);
+            e.Handled = TransitionTo(SelectedIndex - 1);
         }
 
         private void OnNextCanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
-            e.CanExecute = this.IsWithinBounds(this.SelectedIndex + 1);
+            e.CanExecute = IsWithinBounds(SelectedIndex + 1);
             e.Handled = true;
         }
 
         private void OnNextExecuted(object sender, ExecutedRoutedEventArgs e)
         {
-            e.Handled = this.TransitionTo(this.SelectedIndex + 1);
+            e.Handled = TransitionTo(SelectedIndex + 1);
         }
     }
 }

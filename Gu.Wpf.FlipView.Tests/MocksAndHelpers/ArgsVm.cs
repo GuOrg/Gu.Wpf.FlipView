@@ -12,7 +12,7 @@
         private readonly object _args;
         private readonly PropertyInfo _info;
 
-        private static readonly Type[] _types =
+        private static readonly Type[] Types =
             {
                 typeof(Vector),
                 typeof(Point),
@@ -26,36 +26,36 @@
         private ArgsVm[] _children;
         public ArgsVm(object args)
         {
-            this._args = args;
-            this.Name = this.StringIt(args);
-            this._children = args.GetType()
+            _args = args;
+            Name = StringIt(args);
+            _children = args.GetType()
                             .GetProperties()
-                            .Where(x => _types.Contains(x.PropertyType))
+                            .Where(x => Types.Contains(x.PropertyType))
                             .Select(x => new ArgsVm(x.GetValue(args), x))
                             .ToArray();
         }
 
         private ArgsVm(object args, PropertyInfo info)
         {
-            this._args = args;
-            this._info = info;
-            this.Name = string.Format("{0}: {1}", info.Name, this.StringIt(args));
+            _args = args;
+            _info = info;
+            Name = string.Format("{0}: {1}", info.Name, StringIt(args));
         }
 
         public IEnumerable<ArgsVm> Children
         {
             get
             {
-                if (this._children == null && this._args != null && this._info != null && !this._info.PropertyType.IsPrimitive)
+                if (_children == null && _args != null && _info != null && !_info.PropertyType.IsPrimitive)
                 {
-                    PropertyInfo[] propertyInfos = this._args.GetType()
+                    PropertyInfo[] propertyInfos = _args.GetType()
                                                         .GetProperties();
-                    this._children = propertyInfos
+                    _children = propertyInfos
                                 .Where(x => x != null && x.CanRead)
-                                .Select(x => new ArgsVm(x.GetValue(this._args), x))
+                                .Select(x => new ArgsVm(x.GetValue(_args), x))
                                 .ToArray();
                 }
-                return this._children;
+                return _children;
             }
         }
 

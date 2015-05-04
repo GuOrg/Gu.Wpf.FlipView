@@ -14,8 +14,8 @@ namespace Gu.Wpf.FlipView.Gestures
 
         protected GestureTrackerBase(params EventPattern[] patterns)
         {
-            this.Patterns = patterns;
-            this.Interpreter = new GestureInterpreter();
+            Patterns = patterns;
+            Interpreter = new GestureInterpreter();
         }
 
         public event EventHandler<GestureEventArgs> Gestured;
@@ -27,51 +27,51 @@ namespace Gu.Wpf.FlipView.Gestures
             get
             {
                 UIElement target;
-                this._inputElement.TryGetTarget(out target);
+                _inputElement.TryGetTarget(out target);
                 return target;
             }
             set
             {
-                var old = this.InputElement;
+                var old = InputElement;
                 if (old != null)
                 {
-                    foreach (var pattern in this.Patterns)
+                    foreach (var pattern in Patterns)
                     {
                         pattern.Remove(old);
                     }
                 }
                 if (value != null)
                 {
-                    foreach (var pattern in this.Patterns)
+                    foreach (var pattern in Patterns)
                     {
                         pattern.Add(value);
                     }
                 }
-                this._inputElement.SetTarget(value);
+                _inputElement.SetTarget(value);
             }
         }
 
         protected virtual void OnStart(object sender, TArgs e)
         {
-            this.Points.Clear();
-            if (this.TryAddPoint(e))
+            Points.Clear();
+            if (TryAddPoint(e))
             {
-                this.IsGesturing = true;
+                IsGesturing = true;
             }
         }
 
         protected virtual void OnMove(object sender, TArgs e)
         {
-            this.TryAddPoint(e);
+            TryAddPoint(e);
         }
 
         protected virtual void OnEnd(object sender, TArgs e)
         {
-            if (this.IsGesturing)
+            if (IsGesturing)
             {
-                this.TryAddPoint(e);
-                this.IsGesturing = false;
-                this.OnGestured(new Gesture(this.Points.ToArray()));
+                TryAddPoint(e);
+                IsGesturing = false;
+                OnGestured(new Gesture(Points.ToArray()));
             }
         }
 
@@ -79,7 +79,7 @@ namespace Gu.Wpf.FlipView.Gestures
 
         internal virtual void OnGestured(Gesture e)
         {
-            var handler = this.Gestured;
+            var handler = Gestured;
             if (handler != null)
             {
                 handler(this, new GestureEventArgs(this, e));
@@ -92,7 +92,7 @@ namespace Gu.Wpf.FlipView.Gestures
         /// </summary>
         public void Dispose()
         {
-            this.Dispose(true);
+            Dispose(true);
             GC.SuppressFinalize(this);
         }
 
@@ -102,23 +102,23 @@ namespace Gu.Wpf.FlipView.Gestures
         /// <param name="disposing">true: safe to free managed resources</param>
         protected virtual void Dispose(bool disposing)
         {
-            if (this._disposed)
+            if (_disposed)
             {
                 return;
             }
 
             if (disposing)
             {
-                var element = this.InputElement;
+                var element = InputElement;
                 if (element != null)
                 {
-                    foreach (var pattern in this.Patterns)
+                    foreach (var pattern in Patterns)
                     {
                         pattern.Remove(element);
                     }
                 }
             }
-            this._disposed = true;
+            _disposed = true;
         }
     }
 }

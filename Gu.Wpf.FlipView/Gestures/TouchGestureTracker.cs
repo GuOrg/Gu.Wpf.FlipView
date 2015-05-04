@@ -7,45 +7,45 @@ namespace Gu.Wpf.FlipView.Gestures
     {
         public TouchGestureTracker()
         {
-            this.Patterns = new[]
+            Patterns = new[]
                                 {
                                     new EventPattern(
-                                        x => x.PreviewTouchDown += this.OnStart,
-                                        x => x.PreviewTouchDown -= this.OnStart),
+                                        x => x.PreviewTouchDown += OnStart,
+                                        x => x.PreviewTouchDown -= OnStart),
                                     new EventPattern(
-                                        x => x.PreviewTouchMove += this.OnMove,
-                                        x => x.PreviewTouchMove -= this.OnMove),
+                                        x => x.PreviewTouchMove += OnMove,
+                                        x => x.PreviewTouchMove -= OnMove),
                                     new EventPattern(
-                                        x => x.PreviewTouchUp += this.OnEnd,
-                                        x => x.PreviewTouchUp -= this.OnEnd),
-                                    new EventPattern(x => x.TouchLeave += this.OnEnd, x => x.TouchLeave -= this.OnEnd),
-                                    new EventPattern(
-                                        x =>
-                                        x.CommandBindings.Add(
-                                            new CommandBinding(NavigationCommands.BrowseForward, this.OnBrowseForward)),
-                                        x =>
-                                        x.CommandBindings.Remove(
-                                            new CommandBinding(NavigationCommands.BrowseForward, this.OnBrowseForward))),
+                                        x => x.PreviewTouchUp += OnEnd,
+                                        x => x.PreviewTouchUp -= OnEnd),
+                                    new EventPattern(x => x.TouchLeave += OnEnd, x => x.TouchLeave -= OnEnd),
                                     new EventPattern(
                                         x =>
                                         x.CommandBindings.Add(
-                                            new CommandBinding(NavigationCommands.BrowseBack, this.OnBrowseBack)),
+                                            new CommandBinding(NavigationCommands.BrowseForward, OnBrowseForward)),
                                         x =>
                                         x.CommandBindings.Remove(
-                                            new CommandBinding(NavigationCommands.BrowseBack, this.OnBrowseBack)))
+                                            new CommandBinding(NavigationCommands.BrowseForward, OnBrowseForward))),
+                                    new EventPattern(
+                                        x =>
+                                        x.CommandBindings.Add(
+                                            new CommandBinding(NavigationCommands.BrowseBack, OnBrowseBack)),
+                                        x =>
+                                        x.CommandBindings.Remove(
+                                            new CommandBinding(NavigationCommands.BrowseBack, OnBrowseBack)))
                                 };
         }
 
         private void OnBrowseForward(object sender, ExecutedRoutedEventArgs e)
         {
-            this.IsGesturing = false;
-            this.OnGestured(new Gesture(e));
+            IsGesturing = false;
+            OnGestured(new Gesture(e));
         }
 
         private void OnBrowseBack(object sender, ExecutedRoutedEventArgs e)
         {
-            this.IsGesturing = false;
-            this.OnGestured(new Gesture(e));
+            IsGesturing = false;
+            OnGestured(new Gesture(e));
         }
 
         protected override Freezable CreateInstanceCore()
@@ -55,13 +55,13 @@ namespace Gu.Wpf.FlipView.Gestures
 
         protected override bool TryAddPoint(TouchEventArgs args)
         {
-            var inputElement = this.InputElement;
+            var inputElement = InputElement;
 
             if (inputElement == null)
             {
                 return false;
             }
-            this.Points.Add(new GesturePoint(args.GetTouchPoint(inputElement).Position, args.Timestamp));
+            Points.Add(new GesturePoint(args.GetTouchPoint(inputElement).Position, args.Timestamp));
             return true;
         }
     }

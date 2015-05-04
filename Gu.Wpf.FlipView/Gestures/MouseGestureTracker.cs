@@ -7,20 +7,20 @@ namespace Gu.Wpf.FlipView.Gestures
     {
         public MouseGestureTracker()
         {
-            this.Patterns = new[]
+            Patterns = new[]
                             {
                                 new EventPattern(
-                                    x => x.PreviewMouseLeftButtonDown += this.OnStart,
-                                    x => x.PreviewMouseLeftButtonDown -= this.OnStart),
+                                    x => x.PreviewMouseLeftButtonDown += OnStart,
+                                    x => x.PreviewMouseLeftButtonDown -= OnStart),
                                 new EventPattern(
-                                    x => x.PreviewMouseMove += this.OnMove,
-                                    x => x.PreviewMouseMove -= this.OnMove),
+                                    x => x.PreviewMouseMove += OnMove,
+                                    x => x.PreviewMouseMove -= OnMove),
                                 new EventPattern(
-                                    x => x.PreviewMouseLeftButtonUp += this.OnEnd,
-                                    x => x.PreviewMouseLeftButtonDown -= this.OnEnd),
+                                    x => x.PreviewMouseLeftButtonUp += OnEnd,
+                                    x => x.PreviewMouseLeftButtonDown -= OnEnd),
                                 new EventPattern(
-                                    x => x.MouseLeave += this.OnEnd,
-                                    x => x.MouseLeave -= this.OnEnd)
+                                    x => x.MouseLeave += OnEnd,
+                                    x => x.MouseLeave -= OnEnd)
                             };
         }
 
@@ -31,13 +31,13 @@ namespace Gu.Wpf.FlipView.Gestures
 
         protected override bool TryAddPoint(MouseEventArgs args)
         {
-            var inputElement = this.InputElement;
+            var inputElement = InputElement;
 
             if (inputElement == null)
             {
                 return false;
             }
-            this.Points.Add(new GesturePoint(args.GetPosition(inputElement), args.Timestamp));
+            Points.Add(new GesturePoint(args.GetPosition(inputElement), args.Timestamp));
             return true;
         }
     }

@@ -12,9 +12,9 @@ namespace Gu.Wpf.FlipView
 
         public Transition(int @from, int to)
         {
-            this.From = @from;
-            this.To = to;
-            this.TimeStamp = DateTime.Now;
+            From = @from;
+            To = to;
+            TimeStamp = DateTime.Now;
         }
 
         public Transition(int? otherIndex, int selectedIndex)

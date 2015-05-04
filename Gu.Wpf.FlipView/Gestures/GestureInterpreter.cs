@@ -21,14 +21,14 @@
 
         public double MinSwipeVelocity
         {
-            get { return (double)this.GetValue(MinSwipeVelocityProperty); }
-            set { this.SetValue(MinSwipeVelocityProperty, value); }
+            get { return (double)GetValue(MinSwipeVelocityProperty); }
+            set { SetValue(MinSwipeVelocityProperty, value); }
         }
 
         public double MinSwipeLength
         {
-            get { return (double)this.GetValue(MinSwipeLengthProperty); }
-            set { this.SetValue(MinSwipeLengthProperty, value); }
+            get { return (double)GetValue(MinSwipeLengthProperty); }
+            set { SetValue(MinSwipeLengthProperty, value); }
         }
 
         public bool IsBack(GestureEventArgs args)
@@ -48,7 +48,7 @@
 
         public bool IsBack(Gesture gesture)
         {
-            if (IsLongEnough(gesture, this.MinSwipeLength) && IsFastEnough(gesture, this.MinSwipeVelocity) && this.IsHorizontalEnough(gesture))
+            if (IsLongEnough(gesture, MinSwipeLength) && IsFastEnough(gesture, MinSwipeVelocity) && IsHorizontalEnough(gesture))
             {
                 return gesture.Delta.X > 0;
             }
@@ -72,7 +72,7 @@
 
         public bool IsForward(Gesture gesture)
         {
-            if (IsLongEnough(gesture, this.MinSwipeLength) && IsFastEnough(gesture, this.MinSwipeVelocity) && this.IsHorizontalEnough(gesture))
+            if (IsLongEnough(gesture, MinSwipeLength) && IsFastEnough(gesture, MinSwipeVelocity) && IsHorizontalEnough(gesture))
             {
                 return gesture.Delta.X < 0;
             }

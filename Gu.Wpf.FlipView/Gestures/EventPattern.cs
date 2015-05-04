@@ -7,8 +7,8 @@ namespace Gu.Wpf.FlipView.Gestures
     {
         public EventPattern(Action<UIElement> add, Action<UIElement> remove)
         {
-            this.Add = add;
-            this.Remove = remove;
+            Add = add;
+            Remove = remove;
         }
         public Action<UIElement> Add { get; private set; }
         public Action<UIElement> Remove { get; private set; }
