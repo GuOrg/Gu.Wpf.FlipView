@@ -11,6 +11,11 @@
             <TabItem Header="TransitionControl">
                 <tests:TransitionControlView />
             </TabItem>
+
+            <TabItem Header="AnimatedTransforms">
+                <tests:AnimatedTransforms />
+            </TabItem>
+            
             <TabItem Header="FlipView">
                 <Grid>
                     <Grid.RowDefinitions>

@@ -1,29 +1,25 @@
-﻿using System.Windows;
-using System.Windows.Controls;
-
-namespace Gu.Wpf.FlipView.Tests
+﻿namespace Gu.Wpf.FlipView.Tests
 {
+    using System.Collections.Generic;
+    using System.Windows.Controls;
+    using System.Windows.Media;
+
     /// <summary>
     /// Interaction logic for TransitionControlView.xaml
     /// </summary>
     public partial class TransitionControlView : UserControl
     {
-        private Button _button;
-
         public TransitionControlView()
         {
             InitializeComponent();
+            Items = new[]
+                        {
+                            new TransitionItem(Brushes.Blue, "1"),
+                            new TransitionItem(Brushes.Red, "2"),
+                            new TransitionItem(Brushes.Yellow, "3"),
+                        };
         }
 
-        private void OnButtonClick(object sender, RoutedEventArgs e)
-        {
-            if (_button != null)
-            {
-                _button.Content = TransitionControl.Content;
-            }
-            var button = (Button)e.Source;
-            TransitionControl.Content = button.Content;
-            _button = button;
-        }
+        public IReadOnlyCollection<TransitionItem> Items { get; private set; }
     }
 }

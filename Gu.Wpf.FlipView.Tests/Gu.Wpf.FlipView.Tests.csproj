@@ -69,6 +69,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AnimatedTransforms.xaml.cs">
+      <DependentUpon>AnimatedTransforms.xaml</DependentUpon>
+    </Compile>
     <Compile Include="CanExecuteControl.xaml.cs">
       <DependentUpon>CanExecuteControl.xaml</DependentUpon>
     </Compile>
@@ -94,6 +97,11 @@
     <Compile Include="TransitionControlView.xaml.cs">
       <DependentUpon>TransitionControlView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="TransitionItem.cs" />
+    <Page Include="AnimatedTransforms.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="CanExecuteControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

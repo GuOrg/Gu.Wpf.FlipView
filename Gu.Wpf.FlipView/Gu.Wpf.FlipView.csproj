@@ -66,6 +66,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="TransitionControl.cs" />
+    <Compile Include="AttachedProperties\Transform.cs" />
     <Page Include="Themes\FlipView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

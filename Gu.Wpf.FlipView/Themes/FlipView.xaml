@@ -172,6 +172,7 @@
                                 <ColumnDefinition Width="Auto" />
                             </Grid.ColumnDefinitions>
 
+                            <!--  ReSharper disable once Xaml.MissingGridIndex Set in style  -->
                             <ListBox x:Name="Index"
                                      Grid.Column="0"
                                      Grid.ColumnSpan="3"
@@ -257,7 +258,9 @@
                                 </Border.Style>
                             </Border>
 
-                            <!--  ReSharper disable once Xaml.MissingGridIndex Set in style  -->
+                            <!--<flipView:TransitionControl Grid.Row="1"
+                                                        Grid.Column="1"
+                                                        Content="{TemplateBinding SelectedItem}" />-->
                             <Grid x:Name="PART_SwipePanel"
                                   Grid.Row="1"
                                   Grid.Column="1"
