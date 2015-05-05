@@ -91,6 +91,9 @@
     <Compile Include="TouchBox.xaml.cs">
       <DependentUpon>TouchBox.xaml</DependentUpon>
     </Compile>
+    <Compile Include="TransitionControlView.xaml.cs">
+      <DependentUpon>TransitionControlView.xaml</DependentUpon>
+    </Compile>
     <Page Include="CanExecuteControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -124,6 +127,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="TouchBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="TransitionControlView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

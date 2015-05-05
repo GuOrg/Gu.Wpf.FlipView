@@ -8,6 +8,9 @@
         Height="350">
     <Grid>
         <TabControl>
+            <TabItem Header="TransitionControl">
+                <tests:TransitionControlView />
+            </TabItem>
             <TabItem Header="FlipView">
                 <Grid>
                     <Grid.RowDefinitions>
