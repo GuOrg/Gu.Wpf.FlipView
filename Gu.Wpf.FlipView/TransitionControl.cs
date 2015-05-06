@@ -1,13 +1,11 @@
-﻿namespace Gu.Wpf.FlipView
+﻿using System;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Media.Animation;
+using Gu.Wpf.FlipView.Internals;
+
+namespace Gu.Wpf.FlipView
 {
-    using System;
-    using System.Windows;
-    using System.Windows.Controls;
-    using System.Windows.Controls.Primitives;
-    using System.Windows.Media.Animation;
-
-    using Gu.Wpf.FlipView.Internals;
-
     [TemplatePart(Name = PART_NewContent, Type = typeof(ContentPresenter))]
     [TemplatePart(Name = PART_OldContent, Type = typeof(ContentPresenter))]
     [StyleTypedProperty(Property = "NewContentStyle", StyleTargetType = typeof(ContentPresenter))]

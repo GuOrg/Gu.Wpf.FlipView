@@ -1,4 +1,6 @@
-﻿namespace Gu.Wpf.FlipView
+﻿using System.Windows.Data;
+
+namespace Gu.Wpf.FlipView
 {
     using System.Windows;
     using System.Windows.Controls;
@@ -86,6 +88,25 @@
             typeof(FlipView),
             new FrameworkPropertyMetadata(default(Style), FrameworkPropertyMetadataOptions.AffectsMeasure | FrameworkPropertyMetadataOptions.AffectsArrange));
 
+        private static readonly DependencyPropertyKey DeferredSelectedItemPropertyKey = DependencyProperty.RegisterReadOnly(
+            "DeferredSelectedItem",
+            typeof (object),
+            typeof (FlipView),
+            new PropertyMetadata(default(object)));
+
+        public static readonly DependencyProperty DeferredSelectedItemProperty = DeferredSelectedItemPropertyKey.DependencyProperty;
+
+        private static readonly DependencyProperty SelectedIndexProxyProperty = DependencyProperty.Register(
+            "SelectedIndexProxy",
+            typeof(int),
+            typeof(FlipView),
+            new PropertyMetadata(
+                -1,
+                null,
+                CoerceSelectedIndexProxy));
+
+        private int _previousIndex = -1;
+
         static FlipView()
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(FlipView), new FrameworkPropertyMetadata(typeof(FlipView)));
@@ -96,6 +117,14 @@
             CommandBindings.Add(new CommandBinding(NavigationCommands.BrowseBack, OnPreviousExecuted, OnPreviousCanExecute));
             CommandBindings.Add(new CommandBinding(NavigationCommands.BrowseForward, OnNextExecuted, OnNextCanExecute));
             AddHandler(GesturePanel.GesturedEvent, new GesturedEventhandler(OnGesture));
+            var binding = new Binding
+                {
+                    Source = this,
+                    Path = new PropertyPath(SelectedIndexProperty),
+                    Mode = BindingMode.OneWay,
+                    UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged,
+                };
+            BindingOperations.SetBinding(this, SelectedIndexProxyProperty, binding);
         }
 
         /// <summary>
@@ -152,6 +181,16 @@
             protected set { SetValue(CurrentOutAnimationPropertyKey, value); }
         }
 
+        /// <summary>
+        /// This is updated to SelectedItem after the animations are adjusted for the transtition.
+        /// This is the property the TransitionControl should be bound to
+        /// </summary>
+        public object DeferredSelectedItem
+        {
+            get { return (object)GetValue(DeferredSelectedItemProperty); }
+            protected set { SetValue(DeferredSelectedItemPropertyKey, value); }
+        }
+
         public bool ShowIndex
         {
             get { return (bool)GetValue(ShowIndexProperty); }
@@ -175,26 +214,14 @@
 
         public bool ShowArrows
         {
-            get
-            {
-                return (bool)GetValue(ShowArrowsProperty);
-            }
-            set
-            {
-                SetValue(ShowArrowsProperty, value);
-            }
+            get { return (bool)GetValue(ShowArrowsProperty); }
+            set { SetValue(ShowArrowsProperty, value); }
         }
 
         public ArrowPlacement ArrowPlacement
         {
-            get
-            {
-                return (ArrowPlacement)GetValue(ArrowPlacementProperty);
-            }
-            set
-            {
-                SetValue(ArrowPlacementProperty, value);
-            }
+            get { return (ArrowPlacement)GetValue(ArrowPlacementProperty); }
+            set { SetValue(ArrowPlacementProperty, value); }
         }
 
         public Style ArrowButtonStyle
@@ -203,6 +230,34 @@
             set { SetValue(ArrowButtonStyleProperty, value); }
         }
 
+        private static object CoerceSelectedIndexProxy(DependencyObject d, object basevalue)
+        {
+            var flipView = (FlipView)d;
+            var index = (int)basevalue;
+            flipView.PreviewSelectedIndexChanged(flipView._previousIndex, index);
+            flipView._previousIndex = index;
+            return basevalue;
+        }
+
+        protected virtual void PreviewSelectedIndexChanged(int previousIndex, int newIndex)
+        {
+            if (previousIndex == -1 || (previousIndex == newIndex))
+            {
+                CurrentInAnimation = null;
+                CurrentOutAnimation = null;
+            }
+            else if (newIndex > previousIndex)
+            {
+                CurrentInAnimation = IncreaseInAnimation;
+                CurrentOutAnimation = IncreaseOutAnimation;
+            }
+            else
+            {
+                CurrentInAnimation = DecreaseInAnimation;
+                CurrentOutAnimation = DecreaseOutAnimation;
+            }
+            DeferredSelectedItem = SelectedItem;
+        }
 
         private bool TransitionTo(int newIndex)
         {
@@ -213,17 +268,6 @@
             var isWithinBounds = IsWithinBounds(newIndex);
             if (isWithinBounds)
             {
-                bool isIncrease = newIndex > SelectedIndex;
-                if (isIncrease)
-                {
-                    CurrentInAnimation = IncreaseInAnimation;
-                    CurrentOutAnimation = IncreaseOutAnimation;
-                }
-                else
-                {
-                    CurrentInAnimation = DecreaseInAnimation;
-                    CurrentOutAnimation = DecreaseOutAnimation;
-                }
                 SelectedIndex = newIndex;
             }
             return isWithinBounds;
