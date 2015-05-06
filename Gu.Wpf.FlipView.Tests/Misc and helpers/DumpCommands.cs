@@ -26,7 +26,6 @@
                 foreach (var propertyInfo in propertyInfos)
                 {
                     Console.WriteLine(@"CommandBindings.Add(new CommandBinding({0}.{1}, (sender, args) => Args.Add(""{1}"")));", propertyInfo.DeclaringType.Name, propertyInfo.Name);
-
                 }
             }
         }
