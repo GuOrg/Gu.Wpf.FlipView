@@ -65,6 +65,7 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Gestures\GesturedEventhandler.cs" />
     <Compile Include="Internals\AnimationTracker.cs" />
     <Compile Include="Gestures\GesturedEventArgs.cs" />
     <Compile Include="GesturePanel.cs" />
@@ -93,10 +94,6 @@
     <Compile Include="Gestures\GesturePoint.cs" />
     <Compile Include="Gestures\TouchGestureTracker.cs" />
     <Compile Include="IndexPlacement.cs" />
-    <Compile Include="Internals\Transition.cs" />
-    <Compile Include="Internals\AnimationFactory.cs" />
-    <Compile Include="Internals\BooleanToHiddenConverter.cs" />
-    <Compile Include="Internals\BooleanToCollapsedConverter.cs" />
     <Compile Include="FlipView.cs">
       <SubType>Code</SubType>
     </Compile>

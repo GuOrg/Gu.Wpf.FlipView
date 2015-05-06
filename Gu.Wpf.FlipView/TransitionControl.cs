@@ -6,6 +6,8 @@
     using System.Windows.Media.Animation;
     using System.Windows.Threading;
 
+    using Gu.Wpf.FlipView.Internals;
+
     [TemplatePart(Name = PART_NewContent, Type = typeof(ContentPresenter))]
     [TemplatePart(Name = PART_OldContent, Type = typeof(ContentPresenter))]
     [StyleTypedProperty(Property = "NewContentStyle", StyleTargetType = typeof(ContentPresenter))]

@@ -1,4 +1,4 @@
-﻿namespace Gu.Wpf.FlipView
+﻿namespace Gu.Wpf.FlipView.Internals
 {
     using System;
     using System.Linq;
