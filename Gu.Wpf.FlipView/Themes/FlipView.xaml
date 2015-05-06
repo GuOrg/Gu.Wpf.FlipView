@@ -293,8 +293,7 @@
                                 </ListBox.Style>
 
                             </ListBox>
-                            
-                            <!--  ReSharper disable once Xaml.MissingGridIndex Set in style  -->
+
                             <Border x:Name="LeftArrow"
                                     Grid.Row="1"
                                     >
@@ -367,6 +366,7 @@
                                 </Border.Style>
                             </Border>
 
+                            <!--  ReSharper disable once Xaml.MissingGridIndex Set in style  -->
                             <!--  ReSharper disable once Xaml.MissingGridIndex Set in style  -->
                             <flipView:GesturePanel Grid.Row="1"
                                                    Grid.Column="1"

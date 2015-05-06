@@ -262,11 +262,11 @@
         {
             if (e.Gesture == GestureType.SwipeLeft)
             {
-                TransitionTo(SelectedIndex - 1);
+                TransitionTo(SelectedIndex + 1);
             }
             if (e.Gesture == GestureType.SwipeRight)
             {
-                TransitionTo(SelectedIndex + 1);
+                TransitionTo(SelectedIndex - 1);
             }
         }
     }
