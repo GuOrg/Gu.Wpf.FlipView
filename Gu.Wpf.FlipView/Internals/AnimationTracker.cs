@@ -69,6 +69,10 @@
             var storyboard = timeline as Storyboard;
             if (storyboard != null)
             {
+                if (storyboard.Children.Count == 0)
+                {
+                    return TimeSpan.Zero;
+                }
                 return storyboard.Children.Max(x => GetTimeToFinished(x));
             }
             throw new NotImplementedException(string.Format("GetTimeToFinished not implemented for: {0}", timeline.GetType().FullName));

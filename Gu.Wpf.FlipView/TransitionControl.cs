@@ -3,8 +3,8 @@
     using System;
     using System.Windows;
     using System.Windows.Controls;
+    using System.Windows.Controls.Primitives;
     using System.Windows.Media.Animation;
-    using System.Windows.Threading;
 
     using Gu.Wpf.FlipView.Internals;
 
@@ -57,15 +57,23 @@
             "InAnimation",
             typeof(Storyboard),
             typeof(TransitionControl),
-            new PropertyMetadata(default(Storyboard), OnOldTransitionChanged));
+            new PropertyMetadata(
+                CreateEmptyStoryboard(), 
+                OnOldTransitionChanged,
+                OnAnimationCoerce));
 
         public static readonly DependencyProperty OutAnimationProperty = DependencyProperty.Register(
             "OutAnimation",
             typeof(Storyboard),
             typeof(TransitionControl),
-            new PropertyMetadata(default(Storyboard)));
+            new PropertyMetadata(
+                CreateEmptyStoryboard(),
+                null,
+                OnAnimationCoerce));
 
         public static readonly DependencyProperty OldContentProperty = oldContentPropertyKey.DependencyProperty;
+
+        private static readonly Storyboard EmptyStoryboard = CreateEmptyStoryboard();
         private readonly AnimationTracker _oldContentAnimationTracker;
         private ContentPresenter _oldContentPresenter;
         private ContentPresenter _newContentPresenter;
@@ -173,13 +181,29 @@
             transitionControl.OldContent = null;
         }
 
+        private static object OnAnimationCoerce(DependencyObject d, object basevalue)
+        {
+            var storyboard = basevalue as Storyboard;
+            if (storyboard == null)
+            {
+                return EmptyStoryboard;
+            }
+            return storyboard;
+        }
+
+        private static Storyboard CreateEmptyStoryboard()
+        {
+            var storyboard = new Storyboard { FillBehavior = FillBehavior.Stop };
+            if (storyboard.CanFreeze)
+            {
+                storyboard.Freeze();
+            }
+            return storyboard;
+        }
+
         private void OnOldContentTransitionCompleted(object sender, EventArgs e)
         {
             OldContent = null;
-            if (_oldContentPresenter != null)
-            {
-                _oldContentPresenter.RaiseEvent(new RoutedEventArgs(ContentChangedEvent, _oldContentPresenter));
-            }
         }
     }
 }

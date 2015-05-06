@@ -1,6 +1,7 @@
 ﻿namespace Gu.Wpf.FlipView
 {
     using System.Windows;
+    using System.Windows.Controls;
     using System.Windows.Controls.Primitives;
     using System.Windows.Input;
     using System.Windows.Media.Animation;
@@ -42,10 +43,10 @@
         public static readonly DependencyProperty CurrentInAnimationProperty = CurrentInAnimationPropertyKey.DependencyProperty;
 
         private static readonly DependencyPropertyKey CurrentOutAnimationPropertyKey = DependencyProperty.RegisterReadOnly(
-    "CurrentOutAnimation",
-    typeof(Storyboard),
-    typeof(FlipView),
-    new PropertyMetadata(default(Storyboard)));
+            "CurrentOutAnimation",
+            typeof(Storyboard),
+            typeof(FlipView),
+            new PropertyMetadata(default(Storyboard)));
 
         public static readonly DependencyProperty CurrentOutAnimationProperty = CurrentOutAnimationPropertyKey.DependencyProperty;
 
@@ -201,6 +202,7 @@
             get { return (Style)GetValue(ArrowButtonStyleProperty); }
             set { SetValue(ArrowButtonStyleProperty, value); }
         }
+
 
         private bool TransitionTo(int newIndex)
         {

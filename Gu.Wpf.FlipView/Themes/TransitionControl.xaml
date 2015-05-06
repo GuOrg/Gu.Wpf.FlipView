@@ -39,6 +39,7 @@
                 <Storyboard>
                     <DoubleAnimation BeginTime="0:0:0"
                                      Duration="0:0:1"
+                                     FillBehavior="Stop"
                                      From="0"
                                      Storyboard.TargetProperty="Opacity"
                                      To="1"
@@ -52,6 +53,7 @@
                 <Storyboard>
                     <DoubleAnimation BeginTime="0:0:0"
                                      Duration="0:0:1"
+                                     FillBehavior="Stop"
                                      From="1"
                                      Storyboard.TargetProperty="Opacity"
                                      To="0"
