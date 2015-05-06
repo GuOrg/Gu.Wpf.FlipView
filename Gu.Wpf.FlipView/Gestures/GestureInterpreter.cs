@@ -31,7 +31,7 @@
             set { SetValue(MinSwipeLengthProperty, value); }
         }
 
-        public bool IsBack(GestureEventArgs args)
+        public bool IsSwipeRight(GestureEventArgs args)
         {
             var interpreter = args.Interpreter;
             if (interpreter == null)
@@ -43,10 +43,10 @@
             {
                 return true;
             }
-            return interpreter.IsBack(gesture);
+            return interpreter.IsSwipeRight(gesture);
         }
 
-        public bool IsBack(Gesture gesture)
+        public bool IsSwipeRight(Gesture gesture)
         {
             if (IsLongEnough(gesture, MinSwipeLength) && IsFastEnough(gesture, MinSwipeVelocity) && IsHorizontalEnough(gesture))
             {
@@ -55,7 +55,7 @@
             return false;
         }
 
-        public bool IsForward(GestureEventArgs args)
+        public bool IsSwipeLeft(GestureEventArgs args)
         {
             var interpreter = args.Interpreter;
             if (interpreter == null)
@@ -67,10 +67,10 @@
             {
                 return true;
             }
-            return interpreter.IsForward(gesture);
+            return interpreter.IsSwipeLeft(gesture);
         }
 
-        public bool IsForward(Gesture gesture)
+        public bool IsSwipeLeft(Gesture gesture)
         {
             if (IsLongEnough(gesture, MinSwipeLength) && IsFastEnough(gesture, MinSwipeVelocity) && IsHorizontalEnough(gesture))
             {

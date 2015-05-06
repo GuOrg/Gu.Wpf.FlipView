@@ -65,6 +65,10 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Internals\AnimationTracker.cs" />
+    <Compile Include="Gestures\GesturedEventArgs.cs" />
+    <Compile Include="GesturePanel.cs" />
+    <Compile Include="Gestures\GestureType.cs" />
     <Compile Include="TransitionControl.cs" />
     <Compile Include="AttachedProperties\Transform.cs" />
     <Page Include="Themes\FlipView.xaml">
@@ -89,13 +93,17 @@
     <Compile Include="Gestures\GesturePoint.cs" />
     <Compile Include="Gestures\TouchGestureTracker.cs" />
     <Compile Include="IndexPlacement.cs" />
-    <Compile Include="Transition.cs" />
-    <Compile Include="AnimationFactory.cs" />
-    <Compile Include="BooleanToHiddenConverter.cs" />
-    <Compile Include="BooleanToCollapsedConverter.cs" />
+    <Compile Include="Internals\Transition.cs" />
+    <Compile Include="Internals\AnimationFactory.cs" />
+    <Compile Include="Internals\BooleanToHiddenConverter.cs" />
+    <Compile Include="Internals\BooleanToCollapsedConverter.cs" />
     <Compile Include="FlipView.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Themes\GesturePanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Themes\TransitionControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

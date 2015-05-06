@@ -1,0 +1,30 @@
+﻿<UserControl x:Class="Gu.Wpf.FlipView.Demo.ControlDemos.ControlsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:flipView="http://gu.se/FlipView"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:controlDemos="clr-namespace:Gu.Wpf.FlipView.Demo.ControlDemos"
+             d:DesignHeight="300"
+             d:DesignWidth="300"
+             mc:Ignorable="d"
+             >
+    <TabControl>
+        <TabItem Header="TransitionControl">
+            <controlDemos:TransitionControlView />
+        </TabItem>
+
+        <TabItem Header="GesturePanelView">
+            <controlDemos:GesturePanelView />
+        </TabItem>
+
+        <TabItem Header="FlipView">
+            <controlDemos:FlipViewDemo />
+        </TabItem>
+
+        <!--  Providing a sample of how to style it  -->
+        <TabItem Header="FlipView Styles">
+            <controlDemos:StyledFlipViewDemo />
+        </TabItem>
+    </TabControl>
+</UserControl>

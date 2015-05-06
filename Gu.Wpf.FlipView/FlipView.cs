@@ -1,29 +1,53 @@
 ﻿namespace Gu.Wpf.FlipView
 {
-    using System;
     using System.Windows;
-    using System.Windows.Controls;
     using System.Windows.Controls.Primitives;
     using System.Windows.Input;
-    using System.Windows.Media;
     using System.Windows.Media.Animation;
 
-    using Gestures;
+    using Gu.Wpf.FlipView.Gestures;
 
-    [TemplatePart(Name = PartSwipePanelName, Type = typeof(Panel))]
     public class FlipView : Selector
     {
-        public static readonly DependencyProperty GestureTrackerProperty = DependencyProperty.Register(
-            "GestureTracker",
-            typeof(IGestureTracker),
+        public static readonly DependencyProperty IncreaseInAnimationProperty = DependencyProperty.Register(
+            "IncreaseInAnimation",
+            typeof(Storyboard),
             typeof(FlipView),
-            new PropertyMetadata(new TouchGestureTracker(), OnGestureTrackerChanged));
+            new PropertyMetadata(default(Storyboard)));
 
-        public static readonly DependencyProperty TransitionTimeProperty = DependencyProperty.Register(
-            "TransitionTime",
-            typeof(int),
+        public static readonly DependencyProperty IncreaseOutAnimationProperty = DependencyProperty.Register(
+            "IncreaseOutAnimation",
+            typeof(Storyboard),
             typeof(FlipView),
-            new UIPropertyMetadata(300));
+            new PropertyMetadata(default(Storyboard)));
+
+        public static readonly DependencyProperty DecreaseInAnimationProperty = DependencyProperty.Register(
+            "DecreaseInAnimation",
+            typeof(Storyboard),
+            typeof(FlipView),
+            new PropertyMetadata(default(Storyboard)));
+
+        public static readonly DependencyProperty DecreaseOutAnimationProperty = DependencyProperty.Register(
+            "DecreaseOutAnimation",
+            typeof(Storyboard),
+            typeof(FlipView),
+            new PropertyMetadata(default(Storyboard)));
+
+        private static readonly DependencyPropertyKey CurrentInAnimationPropertyKey = DependencyProperty.RegisterReadOnly(
+            "CurrentInAnimation",
+            typeof(Storyboard),
+            typeof(FlipView),
+            new PropertyMetadata(default(Storyboard)));
+
+        public static readonly DependencyProperty CurrentInAnimationProperty = CurrentInAnimationPropertyKey.DependencyProperty;
+
+        private static readonly DependencyPropertyKey CurrentOutAnimationPropertyKey = DependencyProperty.RegisterReadOnly(
+    "CurrentOutAnimation",
+    typeof(Storyboard),
+    typeof(FlipView),
+    new PropertyMetadata(default(Storyboard)));
+
+        public static readonly DependencyProperty CurrentOutAnimationProperty = CurrentOutAnimationPropertyKey.DependencyProperty;
 
         public static readonly DependencyProperty ShowIndexProperty = DependencyProperty.RegisterAttached(
             "ShowIndex",
@@ -35,7 +59,7 @@
             "IndexPlacement",
             typeof(IndexPlacement),
             typeof(FlipView),
-            new PropertyMetadata(IndexPlacement.Above));
+            new FrameworkPropertyMetadata(IndexPlacement.Above, FrameworkPropertyMetadataOptions.AffectsMeasure | FrameworkPropertyMetadataOptions.AffectsArrange));
 
         public static readonly DependencyProperty IndexItemStyleProperty = DependencyProperty.Register(
             "IndexItemStyle",
@@ -47,33 +71,19 @@
             "ShowArrows",
             typeof(bool),
             typeof(FlipView),
-            new FrameworkPropertyMetadata(true, FrameworkPropertyMetadataOptions.AffectsArrange));
+            new FrameworkPropertyMetadata(true, FrameworkPropertyMetadataOptions.AffectsArrange | FrameworkPropertyMetadataOptions.AffectsMeasure));
 
         public static readonly DependencyProperty ArrowPlacementProperty = DependencyProperty.Register(
             "ArrowPlacement",
             typeof(ArrowPlacement),
             typeof(FlipView),
-            new FrameworkPropertyMetadata(default(ArrowPlacement), FrameworkPropertyMetadataOptions.AffectsArrange));
+            new FrameworkPropertyMetadata(default(ArrowPlacement), FrameworkPropertyMetadataOptions.AffectsArrange | FrameworkPropertyMetadataOptions.AffectsMeasure));
 
         public static readonly DependencyProperty ArrowButtonStyleProperty = DependencyProperty.Register(
             "ArrowButtonStyle",
             typeof(Style),
             typeof(FlipView),
             new FrameworkPropertyMetadata(default(Style), FrameworkPropertyMetadataOptions.AffectsMeasure | FrameworkPropertyMetadataOptions.AffectsArrange));
-
-        public static readonly DependencyProperty OtherItemProperty = DependencyProperty.Register(
-            "OtherItem",
-            typeof(object),
-            typeof(FlipView),
-            new PropertyMetadata(null));
-
-        private readonly TranslateTransform _selectedItemTransform = new TranslateTransform();
-        private readonly TranslateTransform _otherItemOffsetTransform = new TranslateTransform();
-        private readonly TransformGroup _otherItemTransform;
-        private AnimationTimeline _animation;
-        private int? _otherIndex = -1;
-        private const string PartSwipePanelName = "PART_SwipePanel";
-        private Panel _partSwipePanel;
 
         static FlipView()
         {
@@ -84,28 +94,61 @@
         {
             CommandBindings.Add(new CommandBinding(NavigationCommands.BrowseBack, OnPreviousExecuted, OnPreviousCanExecute));
             CommandBindings.Add(new CommandBinding(NavigationCommands.BrowseForward, OnNextExecuted, OnNextCanExecute));
-
-            _otherItemTransform = new TransformGroup();
-            _otherItemTransform.Children.Add(_otherItemOffsetTransform);
-            _otherItemTransform.Children.Add(_selectedItemTransform);
+            AddHandler(GesturePanel.GesturedEvent, new GesturedEventhandler(OnGesture));
         }
 
-        public IGestureTracker GestureTracker
+        /// <summary>
+        /// Gets or sets how new content animates in when selected index increases
+        /// </summary>
+        public Storyboard IncreaseInAnimation
         {
-            get { return (IGestureTracker)GetValue(GestureTrackerProperty); }
-            set { SetValue(GestureTrackerProperty, value); }
+            get { return (Storyboard)GetValue(IncreaseInAnimationProperty); }
+            set { SetValue(IncreaseInAnimationProperty, value); }
         }
 
-        public int TransitionTime
+        /// <summary>
+        /// Gets or sets how new content animates out when selected index increases
+        /// </summary>
+        public Storyboard IncreaseOutAnimation
         {
-            get
-            {
-                return (int)GetValue(TransitionTimeProperty);
-            }
-            set
-            {
-                SetValue(TransitionTimeProperty, value);
-            }
+            get { return (Storyboard)GetValue(IncreaseOutAnimationProperty); }
+            set { SetValue(IncreaseOutAnimationProperty, value); }
+        }
+
+        /// <summary>
+        /// Gets or sets how new content animates in when selected index decreases
+        /// </summary>
+        public Storyboard DecreaseInAnimation
+        {
+            get { return (Storyboard)GetValue(DecreaseInAnimationProperty); }
+            set { SetValue(DecreaseInAnimationProperty, value); }
+        }
+
+        /// <summary>
+        /// Gets or sets how new content animates in when selected index decreases
+        /// </summary>
+        public Storyboard DecreaseOutAnimation
+        {
+            get { return (Storyboard)GetValue(DecreaseOutAnimationProperty); }
+            set { SetValue(DecreaseOutAnimationProperty, value); }
+        }
+
+        /// <summary>
+        /// Gets how new content animates in
+        /// </summary>
+        public Storyboard CurrentInAnimation
+        {
+            get { return (Storyboard)GetValue(CurrentInAnimationProperty); }
+            protected set { SetValue(CurrentInAnimationPropertyKey, value); }
+        }
+
+        /// <summary>
+        /// Gets how new content animates out
+        /// </summary>
+        public Storyboard CurrentOutAnimation
+        {
+            get { return (Storyboard)GetValue(CurrentOutAnimationProperty); }
+            protected set { SetValue(CurrentOutAnimationPropertyKey, value); }
         }
 
         public bool ShowIndex
@@ -159,204 +202,29 @@
             set { SetValue(ArrowButtonStyleProperty, value); }
         }
 
-        /// <summary>
-        /// This is the other item that shows during transitions
-        /// </summary>
-        public object OtherItem
-        {
-            get { return (object)GetValue(OtherItemProperty); }
-            set { SetValue(OtherItemProperty, value); }
-        }
-
-        public TranslateTransform SelectedItemTransform
-        {
-            get
-            {
-                return _selectedItemTransform;
-            }
-        }
-
-        internal TranslateTransform OtherItemOffsetTransform
-        {
-            get
-            {
-                return _otherItemOffsetTransform;
-            }
-        }
-
-        public TransformGroup OtherItemTransform
-        {
-            get
-            {
-                return _otherItemTransform;
-            }
-        }
-
-        internal int? OtherIndex
-        {
-            get
-            {
-                return _otherIndex;
-            }
-            set
-            {
-                if (value == _otherIndex)
-                {
-                    return;
-                }
-                _otherIndex = value;
-                if (_otherIndex != null && IsWithinBounds(_otherIndex.Value) && _partSwipePanel != null)
-                {
-                    SetCurrentValue(OtherItemProperty, Items[_otherIndex.Value]);
-                    var sign = OtherIndex > SelectedIndex ? 1 : -1;
-                    _otherItemOffsetTransform.X = sign * _partSwipePanel.ActualWidth;
-                }
-                else
-                {
-                    SetCurrentValue(OtherItemProperty, null);
-                }
-            }
-        }
-
-        public override void OnApplyTemplate()
-        {
-            base.OnApplyTemplate();
-            _partSwipePanel = GetTemplateChild(PartSwipePanelName) as Panel;
-            if (GestureTracker != null && _partSwipePanel != null)
-            {
-                GestureTracker.InputElement = _partSwipePanel;
-                GestureTracker.Gestured += OnGesture;
-            }
-        }
-
         private bool TransitionTo(int newIndex)
         {
-            var animation = TransitionTo(SelectedIndex, newIndex);
-            AnimateTransition(animation);
-            return IsWithinBounds(newIndex);
-        }
-
-        /// <summary>
-        /// Exposed for tests
-        /// </summary>
-        /// <param name="oldIndex"></param>
-        /// <param name="newIndex"></param>
-        /// <param name="velocity"></param>
-        /// <returns></returns>
-        internal AnimationTimeline TransitionTo(int oldIndex, int newIndex, Vector velocity = default(Vector))
-        {
-            if (oldIndex != newIndex)
+            if (newIndex == SelectedIndex)
             {
-                if (IsWithinBounds(newIndex))
+                return false;
+            }
+            var isWithinBounds = IsWithinBounds(newIndex);
+            if (isWithinBounds)
+            {
+                bool isIncrease = newIndex > SelectedIndex;
+                if (isIncrease)
                 {
-                    SelectedIndex = newIndex;
-                    OtherIndex = oldIndex;
+                    CurrentInAnimation = IncreaseInAnimation;
+                    CurrentOutAnimation = IncreaseOutAnimation;
                 }
                 else
                 {
-                    OtherIndex = null;
+                    CurrentInAnimation = DecreaseInAnimation;
+                    CurrentOutAnimation = DecreaseOutAnimation;
                 }
+                SelectedIndex = newIndex;
             }
-            if (_animation != null) // Just replace the items and let the current animation continue
-            {
-                return null;
-            }
-            return CreateTransitionAnimation(new Transition(OtherIndex, SelectedIndex));
-        }
-
-        /// <summary>
-        /// Creates the animation for animating to the next slide
-        /// Returns null if animation is already running
-        /// </summary>
-        /// <param name="transition"></param>
-        /// <returns>null if TransitionTime == 0</returns>
-        internal AnimationTimeline CreateTransitionAnimation(Transition? transition)
-        {
-            if (transition == null || _partSwipePanel == null)
-            {
-                return null;
-            }
-
-            if (_animation != null)
-            {
-                return null;
-            }
-            var actualWidth = _partSwipePanel.ActualWidth;
-            double toValue = 0;
-            if (transition.Value.From != transition.Value.To)
-            {
-                if (_animation == null)
-                {
-                    var sign = transition.Value.From < transition.Value.To ? 1 : -1;
-                    SelectedItemTransform.X = sign * actualWidth;
-                    OtherItemOffsetTransform.X = -1 * sign * actualWidth;
-                }
-            }
-            if (TransitionTime > 0)
-            {
-                double delta = Math.Abs(SelectedItemTransform.X - toValue);
-                var duration = TimeSpan.FromMilliseconds((delta / actualWidth) * TransitionTime);
-                var animation = AnimationFactory.CreateAnimation(SelectedItemTransform.X, 0, duration);
-                return animation;
-            }
-            else
-            {
-                SelectedItemTransform.X = toValue;
-            }
-            return null;
-        }
-
-        /// <summary>
-        /// Applies the animation on SelectedItemTransform.X
-        /// </summary>
-        /// <param name="animation"></param>
-        internal void AnimateTransition(AnimationTimeline animation)
-        {
-            if (_animation != null && animation != null)
-            {
-                _animation.Completed -= OnAnimationCompleted;
-                _animation = null;
-                SelectedItemTransform.BeginAnimation(TranslateTransform.XProperty, null);
-            }
-            if (animation != null)
-            {
-                _animation = animation;
-                animation.Completed += OnAnimationCompleted;
-                SelectedItemTransform.BeginAnimation(TranslateTransform.XProperty, animation);
-            }
-            else
-            {
-                if (_animation == null)
-                {
-                    OnAnimationCompleted(null, null);
-                }
-            }
-        }
-
-        internal void OnAnimationCompleted(object sender, EventArgs args)
-        {
-            //CommandManager.InvalidateRequerySuggested();
-            OtherIndex = null;
-            SelectedItemTransform.BeginAnimation(TranslateTransform.XProperty, null);
-            SelectedItemTransform.X = 0;
-            _animation = null;
-        }
-
-        private static void OnGestureTrackerChanged(DependencyObject o, DependencyPropertyChangedEventArgs e)
-        {
-            var tracker = (IGestureTracker)e.NewValue;
-            var flipView = ((FlipView)o);
-            if (tracker != null && flipView._partSwipePanel != null)
-            {
-                tracker.InputElement = flipView._partSwipePanel;
-                tracker.Gestured += flipView.OnGesture;
-            }
-            var old = (IGestureTracker)e.OldValue;
-            if (old != null)
-            {
-                old.InputElement = null;
-                old.Gestured -= flipView.OnGesture;
-            }
+            return isWithinBounds;
         }
 
         private bool IsWithinBounds(int newIndex)
@@ -366,30 +234,6 @@
                 return false;
             }
             return true;
-        }
-
-        private void OnGesture(object sender, GestureEventArgs e)
-        {
-            var tracker = GestureTracker;
-            if (tracker == null || !ReferenceEquals(tracker.InputElement, _partSwipePanel))
-            {
-                return;
-            }
-            var interpreter = tracker.Interpreter;
-            if (interpreter == null)
-            {
-                return;
-            }
-
-            if (interpreter.IsBack(e.Gesture))
-            {
-                TransitionTo(SelectedIndex - 1);
-            }
-
-            if (interpreter.IsForward(e.Gesture))
-            {
-                TransitionTo(SelectedIndex + 1);
-            }
         }
 
         private void OnPreviousCanExecute(object sender, CanExecuteRoutedEventArgs e)
@@ -412,6 +256,18 @@
         private void OnNextExecuted(object sender, ExecutedRoutedEventArgs e)
         {
             e.Handled = TransitionTo(SelectedIndex + 1);
+        }
+
+        private void OnGesture(object sender, GesturedEventArgs e)
+        {
+            if (e.Gesture == GestureType.SwipeLeft)
+            {
+                TransitionTo(SelectedIndex - 1);
+            }
+            if (e.Gesture == GestureType.SwipeRight)
+            {
+                TransitionTo(SelectedIndex + 1);
+            }
         }
     }
 }

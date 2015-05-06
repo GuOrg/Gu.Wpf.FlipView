@@ -1,0 +1,76 @@
+﻿<UserControl x:Class="Gu.Wpf.FlipView.Demo.Misc.DebugView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:misc="clr-namespace:Gu.Wpf.FlipView.Demo.Misc"
+             d:DesignHeight="300"
+             d:DesignWidth="300"
+             mc:Ignorable="d"
+             >
+    <TabControl>
+        <TabItem Header="InkCanvas">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <InkCanvas Background="Gainsboro"
+                           EditingMode="InkAndGesture"
+                           Gesture="InkCanvas_OnGesture"
+                           MoveEnabled="True"
+                           >
+                    <InkCanvas.DefaultDrawingAttributes>
+                        <DrawingAttributes Color="Transparent" />
+
+                    </InkCanvas.DefaultDrawingAttributes>
+                </InkCanvas>
+                <Button Grid.Column="0"
+                        Width="100"
+                        Height="50"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        Click="ButtonBase_OnClick"
+                        IsManipulationEnabled="False"
+                        >
+                    Clicker
+                </Button>
+
+                <Grid Grid.Column="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <ListBox x:Name="ArgsBox" />
+                    <Button Grid.Row="1"
+                            Click="OnClear"
+                            >
+                        Clear
+                    </Button>
+                </Grid>
+            </Grid>
+
+        </TabItem>
+
+        <TabItem Header="Manipulations">
+            <misc:ManipulationBox />
+        </TabItem>
+
+        <TabItem Header="Mouse">
+            <misc:MouseBox />
+        </TabItem>
+
+        <TabItem Header="Touch">
+            <misc:TouchBox />
+        </TabItem>
+
+        <TabItem Header="Commands">
+            <misc:CommandBox />
+        </TabItem>
+
+        <TabItem Header="CanExecute">
+            <misc:CanExecuteControl />
+        </TabItem>
+
+    </TabControl>
+</UserControl>

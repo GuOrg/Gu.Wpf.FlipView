@@ -1,9 +1,10 @@
 ﻿namespace Gu.Wpf.FlipView
 {
-    using System.Collections.Specialized;
+    using System;
     using System.Windows;
     using System.Windows.Controls;
     using System.Windows.Media.Animation;
+    using System.Windows.Threading;
 
     [TemplatePart(Name = PART_NewContent, Type = typeof(ContentPresenter))]
     [TemplatePart(Name = PART_OldContent, Type = typeof(ContentPresenter))]
@@ -13,38 +14,69 @@
     {
         public const string PART_OldContent = "PART_OldContent";
         public const string PART_NewContent = "PART_NewContent";
-        public static readonly RoutedEvent ContentChangedEvent = EventManager.RegisterRoutedEvent("ContentChanged", RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(TransitionControl));
-        public static readonly RoutedEvent OldContentChangedEvent = EventManager.RegisterRoutedEvent("OldContentChanged", RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(TransitionControl));
-        public static readonly RoutedEvent NewContentChangedEvent = EventManager.RegisterRoutedEvent("NewContentChanged", RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(TransitionControl));
-        public static readonly DependencyProperty OldContentStyleProperty = DependencyProperty.Register("OldContentStyle", typeof(Style), typeof(TransitionControl), new PropertyMetadata(default(Style)));
-        public static readonly DependencyProperty NewContentStyleProperty = DependencyProperty.Register("NewContentStyle", typeof(Style), typeof(TransitionControl), new PropertyMetadata(default(Style)));
 
-        private static readonly DependencyPropertyKey OldContentPropertyKey = DependencyProperty.RegisterReadOnly(
+        public static readonly RoutedEvent ContentChangedEvent = EventManager.RegisterRoutedEvent(
+            "ContentChanged",
+            RoutingStrategy.Bubble,
+            typeof(RoutedEventHandler),
+            typeof(TransitionControl));
+
+        public static readonly RoutedEvent OldContentChangedEvent = EventManager.RegisterRoutedEvent(
+            "OldContentChanged",
+            RoutingStrategy.Bubble,
+            typeof(RoutedEventHandler),
+            typeof(TransitionControl));
+
+        public static readonly RoutedEvent NewContentChangedEvent = EventManager.RegisterRoutedEvent(
+            "NewContentChanged",
+            RoutingStrategy.Bubble,
+            typeof(RoutedEventHandler),
+            typeof(TransitionControl));
+
+        public static readonly DependencyProperty OldContentStyleProperty = DependencyProperty.Register(
+            "OldContentStyle",
+            typeof(Style),
+            typeof(TransitionControl),
+            new PropertyMetadata(default(Style)));
+
+        public static readonly DependencyProperty NewContentStyleProperty = DependencyProperty.Register(
+            "NewContentStyle",
+            typeof(Style),
+            typeof(TransitionControl),
+            new PropertyMetadata(default(Style)));
+
+        private static readonly DependencyPropertyKey oldContentPropertyKey = DependencyProperty.RegisterReadOnly(
             "OldContent",
             typeof(object),
             typeof(TransitionControl),
             new PropertyMetadata(default(object)));
 
-        public static readonly DependencyProperty OldTransitionProperty = DependencyProperty.Register(
-            "OldTransition",
+        public static readonly DependencyProperty InAnimationProperty = DependencyProperty.Register(
+            "InAnimation",
+            typeof(Storyboard),
+            typeof(TransitionControl),
+            new PropertyMetadata(default(Storyboard), OnOldTransitionChanged));
+
+        public static readonly DependencyProperty OutAnimationProperty = DependencyProperty.Register(
+            "OutAnimation",
             typeof(Storyboard),
             typeof(TransitionControl),
             new PropertyMetadata(default(Storyboard)));
 
-        public static readonly DependencyProperty NewTransitionProperty = DependencyProperty.Register(
-            "NewTransition",
-            typeof(Storyboard),
-            typeof(TransitionControl),
-            new PropertyMetadata(default(Storyboard)));
-
+        public static readonly DependencyProperty OldContentProperty = oldContentPropertyKey.DependencyProperty;
+        private readonly AnimationTracker _oldContentAnimationTracker;
         private ContentPresenter _oldContentPresenter;
         private ContentPresenter _newContentPresenter;
-
-        public static readonly DependencyProperty OldContentProperty = OldContentPropertyKey.DependencyProperty;
 
         static TransitionControl()
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(TransitionControl), new FrameworkPropertyMetadata(typeof(TransitionControl)));
+        }
+
+        public TransitionControl()
+        {
+            _oldContentAnimationTracker = new AnimationTracker(null, Dispatcher);
+            _oldContentAnimationTracker.Completed += OnOldContentTransitionCompleted;
         }
 
         public event RoutedEventHandler ContentChanged
@@ -68,7 +100,7 @@
         public object OldContent
         {
             get { return (object)GetValue(OldContentProperty); }
-            protected set { SetValue(OldContentPropertyKey, value); }
+            protected set { SetValue(oldContentPropertyKey, value); }
         }
 
         public Style OldContentStyle
@@ -80,10 +112,10 @@
         /// <summary>
         /// Gest or sets the storyboard that controls how old content animates out of view
         /// </summary>
-        public Storyboard OldTransition
+        public Storyboard InAnimation
         {
-            get { return (Storyboard)GetValue(OldTransitionProperty); }
-            set { SetValue(OldTransitionProperty, value); }
+            get { return (Storyboard)GetValue(InAnimationProperty); }
+            set { SetValue(InAnimationProperty, value); }
         }
 
         public Style NewContentStyle
@@ -95,29 +127,10 @@
         /// <summary>
         /// Gest or sets the storyboard that controls how new content animates into view
         /// </summary>
-        public Storyboard NewTransition
+        public Storyboard OutAnimation
         {
-            get { return (Storyboard)GetValue(NewTransitionProperty); }
-            set { SetValue(NewTransitionProperty, value); }
-        }
-
-        protected override void OnContentChanged(object oldContent, object newContent)
-        {
-            OldContent = oldContent;
-            RaiseEvent(new RoutedEventArgs(ContentChangedEvent, this));
-
-            RaiseEvent(new RoutedEventArgs(OldContentChangedEvent, this));
-            if (_oldContentPresenter != null)
-            {
-                _oldContentPresenter.RaiseEvent(new RoutedEventArgs(ContentChangedEvent, _oldContentPresenter));
-            }
-
-            RaiseEvent(new RoutedEventArgs(NewContentChangedEvent, this));
-            if (_newContentPresenter != null)
-            {
-                _newContentPresenter.RaiseEvent(new RoutedEventArgs(ContentChangedEvent, _newContentPresenter));
-            }
-            base.OnContentChanged(oldContent, newContent);
+            get { return (Storyboard)GetValue(OutAnimationProperty); }
+            set { SetValue(OutAnimationProperty, value); }
         }
 
         public override void OnApplyTemplate()
@@ -125,6 +138,46 @@
             _newContentPresenter = GetTemplateChild(PART_NewContent) as ContentPresenter;
             _oldContentPresenter = GetTemplateChild(PART_OldContent) as ContentPresenter;
             base.OnApplyTemplate();
+        }
+
+        protected override void OnContentChanged(object oldContent, object newContent)
+        {
+            RaiseEvent(new RoutedEventArgs(ContentChangedEvent, this));
+            if (OldContent != oldContent)
+            {
+                OldContent = oldContent;
+                RaiseEvent(new RoutedEventArgs(OldContentChangedEvent, this));
+                if (_oldContentPresenter != null)
+                {
+                    _oldContentAnimationTracker.Run();
+                    _oldContentPresenter.RaiseEvent(new RoutedEventArgs(ContentChangedEvent, _oldContentPresenter));
+                }
+            }
+            if (oldContent != newContent)
+            {
+                RaiseEvent(new RoutedEventArgs(NewContentChangedEvent, this));
+                if (_newContentPresenter != null)
+                {
+                    _newContentPresenter.RaiseEvent(new RoutedEventArgs(ContentChangedEvent, _newContentPresenter));
+                }
+                base.OnContentChanged(oldContent, newContent);
+            }
+        }
+
+        private static void OnOldTransitionChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            var transitionControl = (TransitionControl)d;
+            transitionControl._oldContentAnimationTracker.Update((Storyboard)e.NewValue);
+            transitionControl.OldContent = null;
+        }
+
+        private void OnOldContentTransitionCompleted(object sender, EventArgs e)
+        {
+            OldContent = null;
+            if (_oldContentPresenter != null)
+            {
+                _oldContentPresenter.RaiseEvent(new RoutedEventArgs(ContentChangedEvent, _oldContentPresenter));
+            }
         }
     }
 }

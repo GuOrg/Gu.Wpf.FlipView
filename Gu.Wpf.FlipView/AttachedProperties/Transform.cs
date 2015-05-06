@@ -22,7 +22,7 @@
             "ScaleX",
             typeof(double),
             typeof(Transform),
-            new PropertyMetadata(default(double)));
+            new PropertyMetadata(1.0));
        
         public static readonly DependencyProperty RelativeOffsetYProperty = DependencyProperty.RegisterAttached(
             "RelativeOffsetY",
@@ -42,7 +42,7 @@
             "ScaleY",
             typeof(double),
             typeof(Transform),
-            new PropertyMetadata(default(double)));
+            new PropertyMetadata(1.0));
 
         public static void SetRelativeOffsetX(FrameworkElement element, double value)
         {

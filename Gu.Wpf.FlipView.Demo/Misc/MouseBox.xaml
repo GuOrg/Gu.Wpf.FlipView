@@ -1,0 +1,19 @@
+﻿<misc:EventBox x:Class="Gu.Wpf.FlipView.Demo.Misc.MouseBox"
+                xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                xmlns:misc="clr-namespace:Gu.Wpf.FlipView.Demo.Misc"
+                d:DesignHeight="300"
+                d:DesignWidth="300"
+                mc:Ignorable="d">
+    <misc:EventBox.SwipeArea>
+        <Border x:Name="InputElement"
+                Background="Gainsboro"
+                MouseDown="OnStarted"
+                MouseMove="OnInput"
+                MouseUp="OnEnded">
+            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center">Swipe Here</TextBlock>
+        </Border>
+    </misc:EventBox.SwipeArea>
+</misc:EventBox>

@@ -1,8 +1,5 @@
 ﻿namespace Gu.Wpf.FlipView.Tests
 {
-    using System.Collections.Generic;
-    using System.Windows.Automation.Peers;
-
     using NUnit.Framework;
 
     /// <summary>
@@ -13,10 +10,10 @@
         [Test, RequiresSTA, Explicit("Playing with ui automation")]
         public void TestNameTest()
         {
-            var window = new MainWindow();
-            var windowPeer = new WindowAutomationPeer(window);
-            window.Show();
-            List<AutomationPeer> automationPeers = windowPeer.GetChildren();
+            //var window = new MainWindow();
+            //var windowPeer = new WindowAutomationPeer(window);
+            //window.Show();
+            //List<AutomationPeer> automationPeers = windowPeer.GetChildren();
         }
     }
 }

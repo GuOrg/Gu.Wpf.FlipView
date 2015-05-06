@@ -2,12 +2,12 @@
 {
     public interface IGestureInterpreter
     {
-        bool IsBack(GestureEventArgs args);
+        bool IsSwipeRight(GestureEventArgs args);
 
-        bool IsForward(GestureEventArgs args);
+        bool IsSwipeLeft(GestureEventArgs args);
 
-        bool IsBack(Gesture gesture);
+        bool IsSwipeRight(Gesture gesture);
 
-        bool IsForward(Gesture gesture);
+        bool IsSwipeLeft(Gesture gesture);
     }
 }
