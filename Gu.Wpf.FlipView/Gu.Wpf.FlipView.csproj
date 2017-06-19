@@ -64,7 +64,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Gestures\GesturedEventhandler.cs" />
-    <Compile Include="Internals\AnimationTracker.cs" />
     <Compile Include="Gestures\GesturedEventArgs.cs" />
     <Compile Include="GesturePanel.cs" />
     <Compile Include="Gestures\GestureType.cs" />

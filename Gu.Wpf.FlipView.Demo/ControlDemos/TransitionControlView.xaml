@@ -35,7 +35,6 @@
                                      To="0"
                                      Duration="0:0:0.3" />
                     <DoubleAnimation BeginTime="0:0:0"
-                                     Storyboard.TargetName="{x:Static flipView:TransitionControl.PartOldContent}"
                                      Storyboard.TargetProperty="(flipView:Transform.RelativeOffsetX)"
                                      From="0"
                                      To="1"
@@ -51,7 +50,6 @@
                                      To="1"
                                      Duration="0:0:0.3" />
                     <DoubleAnimation BeginTime="0:0:0"
-                                     Storyboard.TargetName="{x:Static flipView:TransitionControl.PartNewContent}"
                                      Storyboard.TargetProperty="(flipView:Transform.RelativeOffsetX)"
                                      From="-1"
                                      To="0"

@@ -159,10 +159,7 @@
             {
                 this.OldContent = oldContent;
                 this.RaiseEvent(new RoutedEventArgs(OldContentChangedEvent, this));
-                if (this.oldContentPresenter != null)
-                {
-                    this.oldContentPresenter.RaiseEvent(new RoutedEventArgs(ContentChangedEvent, this.oldContentPresenter));
-                }
+                this.oldContentPresenter?.RaiseEvent(new RoutedEventArgs(ContentChangedEvent, this.oldContentPresenter));
             }
 
             if (!ReferenceEquals(oldContent, newContent))
@@ -226,7 +223,6 @@
 
                 return storyboard;
             }
-
         }
     }
 }
