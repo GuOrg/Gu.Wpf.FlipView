@@ -12,7 +12,6 @@
                     <Setter.Value>
                         <TransformGroup>
                             <TranslateTransform X="{Binding Path=(attached:Transform.OffsetX), RelativeSource={RelativeSource AncestorType={x:Type ContentPresenter}}}" Y="{Binding Path=(attached:Transform.OffsetY), RelativeSource={RelativeSource AncestorType={x:Type ContentPresenter}}}" />
-
                             <ScaleTransform ScaleX="{Binding Path=(attached:Transform.ScaleX), RelativeSource={RelativeSource AncestorType={x:Type ContentPresenter}}}" ScaleY="{Binding Path=(attached:Transform.ScaleY), RelativeSource={RelativeSource AncestorType={x:Type ContentPresenter}}}" />
                         </TransformGroup>
                     </Setter.Value>

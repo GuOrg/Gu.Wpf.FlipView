@@ -56,7 +56,7 @@
             typeof(Storyboard),
             typeof(TransitionControl),
             new PropertyMetadata(
-                CreateEmptyStoryboard(), 
+                EmptyStoryboard.Instance, 
                 OnOldTransitionChanged,
                 OnAnimationCoerce));
 
@@ -65,13 +65,12 @@
             typeof(Storyboard),
             typeof(TransitionControl),
             new PropertyMetadata(
-                CreateEmptyStoryboard(),
+                EmptyStoryboard.Instance,
                 null,
                 OnAnimationCoerce));
 
         public static readonly DependencyProperty OldContentProperty = OldContentPropertyKey.DependencyProperty;
 
-        private static readonly Storyboard EmptyStoryboard = CreateEmptyStoryboard();
         private readonly AnimationTracker oldContentAnimationTracker;
         private ContentPresenter oldContentPresenter;
         private ContentPresenter newContentPresenter;
@@ -167,7 +166,7 @@
                 this.newContentPresenter?.RaiseEvent(new RoutedEventArgs(ContentChangedEvent, this.newContentPresenter));
             }
 
-            base.OnContentChanged(null, newContent);
+            base.OnContentChanged(oldContent, newContent);
         }
 
         private static void OnOldTransitionChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
@@ -182,27 +181,33 @@
             var storyboard = basevalue as Storyboard;
             if (storyboard == null)
             {
-                return EmptyStoryboard;
+                return EmptyStoryboard.Instance;
             }
 
             return storyboard;
         }
 
-        private static Storyboard CreateEmptyStoryboard()
-        {
-            var storyboard = new Storyboard { FillBehavior = FillBehavior.Stop };
-            if (storyboard.CanFreeze)
-            {
-                storyboard.Freeze();
-            }
-
-            return storyboard;
-        }
-
-        private void OnOldContentTransitionCompleted(object sender, EventArgs e)
+       private void OnOldContentTransitionCompleted(object sender, EventArgs e)
         {
             base.OnContentChanged(this.OldContent, null);
             this.OldContent = null;
+        }
+
+        private static class EmptyStoryboard
+        {
+            internal static readonly Storyboard Instance = CreateEmptyStoryboard();
+
+            private static Storyboard CreateEmptyStoryboard()
+            {
+                var storyboard = new Storyboard { FillBehavior = FillBehavior.Stop };
+                if (storyboard.CanFreeze)
+                {
+                    storyboard.Freeze();
+                }
+
+                return storyboard;
+            }
+
         }
     }
 }
