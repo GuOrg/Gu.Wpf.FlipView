@@ -11,12 +11,12 @@
     {
         public GesturePanelView()
         {
-            InitializeComponent();
+            this.InitializeComponent();
         }
 
         private void GesturePanel_OnGestured(object sender, GesturedEventArgs e)
         {
-            Gestures.Items.Add(e);
+            this.Gestures.Items.Add(e);
         }
     }
 }

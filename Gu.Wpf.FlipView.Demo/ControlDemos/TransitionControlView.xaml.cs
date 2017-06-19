@@ -11,7 +11,7 @@
     {
         public TransitionControlView()
         {
-            InitializeComponent();
+            this.InitializeComponent();
             this.Items = new[]
                         {
                             new TransitionItem(Brushes.Blue, "1"),

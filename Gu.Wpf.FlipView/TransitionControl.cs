@@ -150,7 +150,6 @@
 
         protected override void OnContentChanged(object oldContent, object newContent)
         {
-            this.RaiseEvent(new RoutedEventArgs(ContentChangedEvent, this));
             if (this.OldContent != oldContent)
             {
                 this.OldContent = oldContent;
@@ -165,11 +164,7 @@
             if (oldContent != newContent)
             {
                 this.RaiseEvent(new RoutedEventArgs(NewContentChangedEvent, this));
-                if (this.newContentPresenter != null)
-                {
-                    this.newContentPresenter.RaiseEvent(new RoutedEventArgs(ContentChangedEvent, this.newContentPresenter));
-                }
-
+                this.newContentPresenter?.RaiseEvent(new RoutedEventArgs(ContentChangedEvent, this.newContentPresenter));
                 base.OnContentChanged(oldContent, newContent);
             }
         }

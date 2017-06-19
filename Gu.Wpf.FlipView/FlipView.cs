@@ -118,6 +118,9 @@
             EventManager.RegisterClassHandler(typeof(FlipView), GesturePanel.GesturedEvent, new GesturedEventhandler(OnGesture));
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="FlipView"/> class.
+        /// </summary>
         public FlipView()
         {
             var binding = new Binding

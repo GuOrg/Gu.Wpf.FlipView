@@ -9,7 +9,7 @@
     {
         public FlipViewDemo()
         {
-            InitializeComponent();
+            this.InitializeComponent();
         }
     }
 }

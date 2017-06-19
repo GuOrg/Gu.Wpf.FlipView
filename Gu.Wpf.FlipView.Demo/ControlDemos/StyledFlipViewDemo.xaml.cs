@@ -9,7 +9,7 @@
     {
         public StyledFlipViewDemo()
         {
-            InitializeComponent();
+            this.InitializeComponent();
         }
     }
 }
