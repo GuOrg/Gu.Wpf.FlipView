@@ -272,6 +272,7 @@
                                 </RepeatButton>
                                 <Border.Style>
                                     <Style BasedOn="{StaticResource ArrowButtonBorderStyle}" TargetType="{x:Type Border}">
+                                        <Setter Property="Grid.Column" Value="1" />
                                         <Style.Triggers>
                                             <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType=flipView:FlipView}, Path=ArrowPlacement}" Value="Inside">
                                                 <Setter Property="Grid.Column" Value="1" />
@@ -295,6 +296,7 @@
                                 </RepeatButton>
                                 <Border.Style>
                                     <Style BasedOn="{StaticResource ArrowButtonBorderStyle}" TargetType="{x:Type Border}">
+                                        <Setter Property="Grid.Column" Value="1" />
                                         <Style.Triggers>
                                             <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType=flipView:FlipView}, Path=ArrowPlacement}" Value="Inside">
                                                 <Setter Property="Grid.Column" Value="1" />
