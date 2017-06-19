@@ -1,3 +1,10 @@
-source https://api.nuget.org/v3/index.json
-
+source http://nuget.org/api/v2
+framework: net45
 nuget NUnit
+
+group Analyzers
+  source http://nuget.org/api/v2
+  nuget StyleCop.Analyzers
+  nuget WpfAnalyzers
+  nuget Gu.Analyzers
+  nuget JetBrains.Annotations
