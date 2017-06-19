@@ -1,0 +1,3 @@
+NUGET
+  remote: https://api.nuget.org/v3/index.json
+    NUnit (2.6.4) - restriction: >= net45

@@ -8,7 +8,7 @@
         <owners>Johan Larsson</owners>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
         <licenseUrl>http://opensource.org/licenses/MIT</licenseUrl>
-        <description>A flipview that works on Win7. Handles mouse and touch.</description>
+        <description>A flip view that works on Win7. Handles mouse and touch.</description>
         <copyright>Copyright ©  2014</copyright>
     </metadata>
     <files>
