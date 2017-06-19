@@ -68,6 +68,7 @@
     <Compile Include="Gestures\GesturedEventArgs.cs" />
     <Compile Include="GesturePanel.cs" />
     <Compile Include="Gestures\GestureType.cs" />
+    <Compile Include="Internals\TimeLineExt.cs" />
     <Compile Include="TransitionControl.cs" />
     <Compile Include="AttachedProperties\Transform.cs" />
     <Page Include="Themes\FlipView.xaml">

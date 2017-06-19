@@ -4,6 +4,7 @@
     using System.Windows;
     using System.Windows.Controls;
     using System.Windows.Media.Animation;
+    using System.Windows.Threading;
     using Gu.Wpf.FlipView.Internals;
 
     [TemplatePart(Name = PartNewContent, Type = typeof(ContentPresenter))]
@@ -56,7 +57,7 @@
             typeof(Storyboard),
             typeof(TransitionControl),
             new PropertyMetadata(
-                EmptyStoryboard.Instance, 
+                EmptyStoryboard.Instance,
                 OnOldTransitionChanged,
                 OnAnimationCoerce));
 
@@ -71,7 +72,8 @@
 
         public static readonly DependencyProperty OldContentProperty = OldContentPropertyKey.DependencyProperty;
 
-        private readonly AnimationTracker oldContentAnimationTracker;
+        private readonly DispatcherTimer timer;
+
         private ContentPresenter oldContentPresenter;
         private ContentPresenter newContentPresenter;
 
@@ -82,8 +84,12 @@
 
         public TransitionControl()
         {
-            this.oldContentAnimationTracker = new AnimationTracker(null, this.Dispatcher);
-            this.oldContentAnimationTracker.Completed += this.OnOldContentTransitionCompleted;
+            this.timer = new DispatcherTimer(
+                TimeSpan.Zero,
+                DispatcherPriority.Background,
+                this.OnOldContentTransitionCompleted,
+                this.Dispatcher);
+            this.timer.Stop();
         }
 
         public event RoutedEventHandler ContentChanged
@@ -155,7 +161,6 @@
                 this.RaiseEvent(new RoutedEventArgs(OldContentChangedEvent, this));
                 if (this.oldContentPresenter != null)
                 {
-                    this.oldContentAnimationTracker.Run();
                     this.oldContentPresenter.RaiseEvent(new RoutedEventArgs(ContentChangedEvent, this.oldContentPresenter));
                 }
             }
@@ -172,12 +177,20 @@
             {
                 this.OldContent = null;
             }
+            else
+            {
+                this.timer.Start();
+            }
         }
 
         private static void OnOldTransitionChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             var transitionControl = (TransitionControl)d;
-            transitionControl.oldContentAnimationTracker.Update((Storyboard)e.NewValue);
+            if (e.NewValue is Storyboard storyboard)
+            {
+                transitionControl.timer.Interval = storyboard.GetTimeToFinished();
+            }
+
             transitionControl.OldContent = null;
         }
 
@@ -192,9 +205,10 @@
             return storyboard;
         }
 
-       private void OnOldContentTransitionCompleted(object sender, EventArgs e)
+        private void OnOldContentTransitionCompleted(object sender, EventArgs e)
         {
             base.OnContentChanged(this.OldContent, null);
+            this.timer.Stop();
             this.OldContent = null;
         }
 
