@@ -25,15 +25,9 @@ namespace Gu.Wpf.FlipView.Gestures
         /// When event is routed the most recent tracker is last
         /// Typically you want to use the first tracker with an interpreter != null
         /// </summary>
-        public IEnumerable<IGestureTracker> GestureTrackers
-        {
-            get
-            {
-                return this.gestureTrackers;
-            }
-        }
+        public IEnumerable<IGestureTracker> GestureTrackers => this.gestureTrackers;
 
-        public Gesture Gesture { get; private set; }
+        public Gesture Gesture { get; }
 
         public IGestureInterpreter Interpreter
         {

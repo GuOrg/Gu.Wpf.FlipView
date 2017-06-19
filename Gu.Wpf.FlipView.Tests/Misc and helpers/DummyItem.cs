@@ -10,7 +10,7 @@ namespace Gu.Wpf.FlipView.Tests.Misc_and_helpers
             this.Number = number;
         }
 
-        public int Number { get; private set; }
+        public int Number { get; }
 
         public override string ToString()
         {

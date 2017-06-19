@@ -13,7 +13,6 @@
             this.InitializeComponent();
         }
 
-
         private void InkCanvas_OnGesture(object sender, InkCanvasGestureEventArgs e)
         {
             var recognitionResults = e.GetGestureRecognitionResults();

@@ -11,10 +11,9 @@ namespace Gu.Wpf.FlipView.Gestures
             this.GestureEventArgs = gestureEventArgs;
         }
 
-        public GestureType Gesture { get; private set; }
+        public GestureType Gesture { get; }
 
-        public GestureEventArgs GestureEventArgs { get; private set; }
+        public GestureEventArgs GestureEventArgs { get; }
     }
-
 
 }

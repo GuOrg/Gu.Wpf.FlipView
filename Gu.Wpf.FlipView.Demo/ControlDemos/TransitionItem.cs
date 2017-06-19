@@ -10,8 +10,8 @@
             this.Text = text;
         }
 
-        public SolidColorBrush Brush { get; private set; }
+        public SolidColorBrush Brush { get; }
 
-        public string Text { get; private set; } 
+        public string Text { get; }
     }
 }

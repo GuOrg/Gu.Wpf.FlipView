@@ -28,8 +28,7 @@ namespace Gu.Wpf.FlipView.Gestures
         {
             get
             {
-                UIElement target;
-                this.inputElement.TryGetTarget(out target);
+                this.inputElement.TryGetTarget(out UIElement target);
                 return target;
             }
 

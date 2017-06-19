@@ -20,6 +20,6 @@
                         };
         }
 
-        public IReadOnlyCollection<TransitionItem> Items { get; private set; }
+        public IReadOnlyCollection<TransitionItem> Items { get; }
     }
 }

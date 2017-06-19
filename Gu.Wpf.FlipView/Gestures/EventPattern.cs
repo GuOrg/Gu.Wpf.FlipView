@@ -11,8 +11,8 @@ namespace Gu.Wpf.FlipView.Gestures
             this.Remove = remove;
         }
 
-        public Action<UIElement> Add { get; private set; }
+        public Action<UIElement> Add { get; }
 
-        public Action<UIElement> Remove { get; private set; }
+        public Action<UIElement> Remove { get; }
     }
 }

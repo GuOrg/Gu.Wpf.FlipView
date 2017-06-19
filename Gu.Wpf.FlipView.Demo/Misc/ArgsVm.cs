@@ -62,7 +62,7 @@
             }
         }
 
-        public string Name { get; private set; }
+        public string Name { get; }
 
         private string StringIt(object o)
         {

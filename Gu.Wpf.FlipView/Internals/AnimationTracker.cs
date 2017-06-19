@@ -11,21 +11,21 @@
     internal class AnimationTracker : DispatcherTimer
     {
         private readonly Dispatcher dispatcher;
-        private Storyboard _storyboard;
+        private Storyboard storyboard;
         private DispatcherTimer timer;
 
         internal AnimationTracker(Storyboard storyboard, Dispatcher dispatcher)
         {
             this.dispatcher = dispatcher;
-            this._storyboard = storyboard;
+            this.storyboard = storyboard;
         }
 
         public event EventHandler Completed;
 
-        internal void Update(Storyboard storyboard)
+        internal void Update(Storyboard @new)
         {
             this.Clear();
-            this._storyboard = storyboard;
+            this.storyboard = @new;
         }
 
         internal void Clear()
@@ -39,17 +39,13 @@
 
         public void Run()
         {
-            if (this._storyboard == null)
+            if (this.storyboard == null)
             {
                 return;
             }
 
-            if (this.timer != null)
-            {
-                this.timer.Stop();
-            }
-
-            this.timer = new DispatcherTimer(GetTimeToFinished(this._storyboard), DispatcherPriority.DataBind, this.OnCompleted, this.dispatcher);
+            this.timer?.Stop();
+            this.timer = new DispatcherTimer(GetTimeToFinished(this.storyboard), DispatcherPriority.DataBind, this.OnCompleted, this.dispatcher);
         }
 
         protected virtual void OnCompleted()

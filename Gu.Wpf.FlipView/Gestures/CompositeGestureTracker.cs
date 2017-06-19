@@ -23,17 +23,11 @@ namespace Gu.Wpf.FlipView.Gestures
 
         public IGestureInterpreter Interpreter { get; set; }
 
-        public ObservableCollection<IGestureTracker> GestureTrackers
-        {
-            get { return this.gestureTrackers; }
-        }
+        public ObservableCollection<IGestureTracker> GestureTrackers => this.gestureTrackers;
 
         public UIElement InputElement
         {
-            get
-            {
-                return this.inputElement;
-            }
+            get => this.inputElement;
 
             set
             {

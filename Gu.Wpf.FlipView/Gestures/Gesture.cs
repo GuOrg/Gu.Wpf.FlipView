@@ -23,28 +23,22 @@
             this.CommandArgs = commandArgs;
         }
    
-        public ExecutedRoutedEventArgs CommandArgs { get; private set; }
+        public ExecutedRoutedEventArgs CommandArgs { get; }
 
-        public IEnumerable<GesturePoint> Points
-        {
-            get
-            {
-                return this.points;
-            }
-        }
+        public Vector Velocity { get; }
 
-        public Vector Velocity { get; private set; }
-        
-        public Vector Delta { get; private set; }
+        public Vector Delta { get; }
+
+        public IEnumerable<GesturePoint> Points => this.points;
 
         public override string ToString()
         {
             if (this.CommandArgs != null)
             {
-                return string.Format("Command: {0}", this.CommandArgs.Command);
+                return $"Command: {this.CommandArgs.Command}";
             }
 
-            return string.Format("Delta: ({0:F0}, {1:F0}),Velocity: ({2:F1}, {3:F1})", this.Delta.X, this.Delta.Y, this.Velocity.X, this.Velocity.Y);
+            return $"Delta: ({this.Delta.X:F0}, {this.Delta.Y:F0}),Velocity: ({this.Velocity.X:F1}, {this.Velocity.Y:F1})";
         }
     }
 }

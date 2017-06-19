@@ -21,14 +21,14 @@
 
         public double MinSwipeVelocity
         {
-            get { return (double)this.GetValue(MinSwipeVelocityProperty); }
-            set { this.SetValue(MinSwipeVelocityProperty, value); }
+            get => (double)this.GetValue(MinSwipeVelocityProperty);
+            set => this.SetValue(MinSwipeVelocityProperty, value);
         }
 
         public double MinSwipeLength
         {
-            get { return (double)this.GetValue(MinSwipeLengthProperty); }
-            set { this.SetValue(MinSwipeLengthProperty, value); }
+            get => (double)this.GetValue(MinSwipeLengthProperty);
+            set => this.SetValue(MinSwipeLengthProperty, value);
         }
 
         public bool IsSwipeRight(GestureEventArgs args)
