@@ -6,7 +6,7 @@
     public enum IndexPlacement
     {
         /// <summary>
-        /// ABove the image.
+        /// Above the image.
         /// </summary>
         Above,
 

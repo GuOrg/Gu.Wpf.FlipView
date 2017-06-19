@@ -89,56 +89,56 @@
 
         public event RoutedEventHandler ContentChanged
         {
-            add { this.AddHandler(ContentChangedEvent, value); }
-            remove { this.RemoveHandler(ContentChangedEvent, value); }
+            add => this.AddHandler(ContentChangedEvent, value);
+            remove => this.RemoveHandler(ContentChangedEvent, value);
         }
 
         public event RoutedEventHandler OldContentChanged
         {
-            add { this.AddHandler(OldContentChangedEvent, value); }
-            remove { this.RemoveHandler(OldContentChangedEvent, value); }
+            add => this.AddHandler(OldContentChangedEvent, value);
+            remove => this.RemoveHandler(OldContentChangedEvent, value);
         }
 
         public event RoutedEventHandler NewContentChanged
         {
-            add { this.AddHandler(NewContentChangedEvent, value); }
-            remove { this.RemoveHandler(NewContentChangedEvent, value); }
+            add => this.AddHandler(NewContentChangedEvent, value);
+            remove => this.RemoveHandler(NewContentChangedEvent, value);
         }
 
         public object OldContent
         {
-            get { return (object)this.GetValue(OldContentProperty); }
-            protected set { this.SetValue(OldContentPropertyKey, value); }
+            get => (object)this.GetValue(OldContentProperty);
+            protected set => this.SetValue(OldContentPropertyKey, value);
         }
 
         public Style OldContentStyle
         {
-            get { return (Style)this.GetValue(OldContentStyleProperty); }
-            set { this.SetValue(OldContentStyleProperty, value); }
+            get => (Style)this.GetValue(OldContentStyleProperty);
+            set => this.SetValue(OldContentStyleProperty, value);
         }
 
         /// <summary>
-        /// Gest or sets the storyboard that controls how old content animates out of view
+        /// Gets or sets the storyboard that controls how old content animates out of view
         /// </summary>
         public Storyboard InAnimation
         {
-            get { return (Storyboard)this.GetValue(InAnimationProperty); }
-            set { this.SetValue(InAnimationProperty, value); }
+            get => (Storyboard)this.GetValue(InAnimationProperty);
+            set => this.SetValue(InAnimationProperty, value);
         }
 
         public Style NewContentStyle
         {
-            get { return (Style)this.GetValue(NewContentStyleProperty); }
-            set { this.SetValue(NewContentStyleProperty, value); }
+            get => (Style)this.GetValue(NewContentStyleProperty);
+            set => this.SetValue(NewContentStyleProperty, value);
         }
 
         /// <summary>
-        /// Gest or sets the storyboard that controls how new content animates into view
+        /// Gets or sets the storyboard that controls how new content animates into view
         /// </summary>
         public Storyboard OutAnimation
         {
-            get { return (Storyboard)this.GetValue(OutAnimationProperty); }
-            set { this.SetValue(OutAnimationProperty, value); }
+            get => (Storyboard)this.GetValue(OutAnimationProperty);
+            set => this.SetValue(OutAnimationProperty, value);
         }
 
         public override void OnApplyTemplate()

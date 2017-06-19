@@ -24,10 +24,10 @@
             <Setter.Value>
                 <ControlTemplate TargetType="ListBoxItem">
                     <Ellipse x:Name="Bd"
+                             Width="20"
+                             Height="20"
                              Margin="{TemplateBinding Padding}"
                              Fill="Transparent"
-                             Height="20"
-                             Width="20"
                              Stroke="{DynamicResource {x:Static SystemColors.ActiveCaptionBrushKey}}"
                              StrokeThickness="1" />
 
@@ -227,7 +227,7 @@
                                      SelectedItem="{Binding SelectedItem, RelativeSource={RelativeSource AncestorType=flipView:FlipView}}">
                                 <ListBox.Template>
                                     <ControlTemplate TargetType="{x:Type ListBox}">
-                                        <ItemsPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                                        <ItemsPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
                                     </ControlTemplate>
                                 </ListBox.Template>
                                 <ListBox.ItemsPanel>
