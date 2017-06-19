@@ -28,6 +28,7 @@
             {
                 Console.WriteLine(@"[assembly: XmlnsDefinition(""{0}"", ""{1}"")]", Uri, s);
             }
+
             CollectionAssert.AreEqual(strings, actuals);
             foreach (var attribute in attributes)
             {

@@ -6,8 +6,9 @@ namespace Gu.Wpf.FlipView.Tests.Misc_and_helpers
 
     public class FakeTouchDevice : TouchDevice
     {
-        private readonly TouchPoint _touchPoint;
+        private readonly TouchPoint touchPoint;
         public static FakeTouchDevice Default = new FakeTouchDevice();
+
         public FakeTouchDevice()
             : base(0)
         {
@@ -15,12 +16,12 @@ namespace Gu.Wpf.FlipView.Tests.Misc_and_helpers
 
         public FakeTouchDevice(TouchPoint touchPoint) : base(0)
         {
-            _touchPoint = touchPoint;
+            this.touchPoint = touchPoint;
         }
 
         public override TouchPoint GetTouchPoint(IInputElement relativeTo)
         {
-            return _touchPoint;
+            return this.touchPoint;
         }
 
         public override TouchPointCollection GetIntermediateTouchPoints(IInputElement relativeTo)

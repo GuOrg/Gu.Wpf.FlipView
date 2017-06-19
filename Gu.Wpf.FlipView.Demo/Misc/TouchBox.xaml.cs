@@ -1,8 +1,6 @@
 ﻿namespace Gu.Wpf.FlipView.Demo.Misc
 {
     using System.Windows.Input;
-
-    using Gu.Wpf.FlipView.Demo.MocksAndHelpers;
     using Gu.Wpf.FlipView.Gestures;
 
     /// <summary>
@@ -10,24 +8,26 @@
     /// </summary>
     public partial class TouchBox : EventBox
     {
-        private bool _gestureStarted;
-        private TouchGestureTracker _tracker;
+        private readonly TouchGestureTracker tracker;
+
+        private bool gestureStarted;
+
         public TouchBox()
         {
-            InitializeComponent();
-            this._tracker = new TouchGestureTracker { InputElement = this.InputElement };
-            this._tracker.Gestured += (_, g) => this.Args.Add(new ArgsVm(g));
+            this.InitializeComponent();
+            this.tracker = new TouchGestureTracker { InputElement = this.InputElement };
+            this.tracker.Gestured += (_, g) => this.Args.Add(new ArgsVm(g));
         }
 
         protected override void OnStarted(object sender, InputEventArgs e)
         {
-            this._gestureStarted = true;
+            this.gestureStarted = true;
             base.OnStarted(sender, e);
         }
 
         protected override void OnInput(object sender, InputEventArgs e)
         {
-            if (this._gestureStarted)
+            if (this.gestureStarted)
             {
                 base.OnInput(sender, e);
             }
@@ -35,7 +35,7 @@
 
         protected override void OnEnded(object sender, InputEventArgs e)
         {
-            this._gestureStarted = false;
+            this.gestureStarted = false;
             base.OnEnded(sender, e);
         }
     }

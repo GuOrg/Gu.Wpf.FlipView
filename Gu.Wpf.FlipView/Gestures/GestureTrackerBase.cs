@@ -7,15 +7,17 @@ namespace Gu.Wpf.FlipView.Gestures
     public abstract class GestureTrackerBase<TArgs> : Freezable, IGestureTracker
     {
         protected readonly List<GesturePoint> Points = new List<GesturePoint>();
-        private readonly WeakReference<UIElement> _inputElement = new WeakReference<UIElement>(null);
         protected bool IsGesturing;
         protected EventPattern[] Patterns;
-        private bool _disposed = false;
+
+        private readonly WeakReference<UIElement> inputElement = new WeakReference<UIElement>(null);
+
+        private bool disposed = false;
 
         protected GestureTrackerBase(params EventPattern[] patterns)
         {
-            Patterns = patterns;
-            Interpreter = new GestureInterpreter();
+            this.Patterns = patterns;
+            this.Interpreter = new GestureInterpreter();
         }
 
         public event EventHandler<GestureEventArgs> Gestured;
@@ -27,51 +29,54 @@ namespace Gu.Wpf.FlipView.Gestures
             get
             {
                 UIElement target;
-                _inputElement.TryGetTarget(out target);
+                this.inputElement.TryGetTarget(out target);
                 return target;
             }
+
             set
             {
-                var old = InputElement;
+                var old = this.InputElement;
                 if (old != null)
                 {
-                    foreach (var pattern in Patterns)
+                    foreach (var pattern in this.Patterns)
                     {
                         pattern.Remove(old);
                     }
                 }
+
                 if (value != null)
                 {
-                    foreach (var pattern in Patterns)
+                    foreach (var pattern in this.Patterns)
                     {
                         pattern.Add(value);
                     }
                 }
-                _inputElement.SetTarget(value);
+
+                this.inputElement.SetTarget(value);
             }
         }
 
         protected virtual void OnStart(object sender, TArgs e)
         {
-            Points.Clear();
-            if (TryAddPoint(e))
+            this.Points.Clear();
+            if (this.TryAddPoint(e))
             {
-                IsGesturing = true;
+                this.IsGesturing = true;
             }
         }
 
         protected virtual void OnMove(object sender, TArgs e)
         {
-            TryAddPoint(e);
+            this.TryAddPoint(e);
         }
 
         protected virtual void OnEnd(object sender, TArgs e)
         {
-            if (IsGesturing)
+            if (this.IsGesturing)
             {
-                TryAddPoint(e);
-                IsGesturing = false;
-                OnGestured(new Gesture(Points.ToArray()));
+                this.TryAddPoint(e);
+                this.IsGesturing = false;
+                this.OnGestured(new Gesture(this.Points.ToArray()));
             }
         }
 
@@ -79,11 +84,7 @@ namespace Gu.Wpf.FlipView.Gestures
 
         internal virtual void OnGestured(Gesture e)
         {
-            var handler = Gestured;
-            if (handler != null)
-            {
-                handler(this, new GestureEventArgs(this, e));
-            }
+            this.Gestured?.Invoke(this, new GestureEventArgs(this, e));
         }
 
         /// <summary>
@@ -92,7 +93,7 @@ namespace Gu.Wpf.FlipView.Gestures
         /// </summary>
         public void Dispose()
         {
-            Dispose(true);
+            this.Dispose(true);
             GC.SuppressFinalize(this);
         }
 
@@ -102,23 +103,24 @@ namespace Gu.Wpf.FlipView.Gestures
         /// <param name="disposing">true: safe to free managed resources</param>
         protected virtual void Dispose(bool disposing)
         {
-            if (_disposed)
+            if (this.disposed)
             {
                 return;
             }
 
             if (disposing)
             {
-                var element = InputElement;
+                var element = this.InputElement;
                 if (element != null)
                 {
-                    foreach (var pattern in Patterns)
+                    foreach (var pattern in this.Patterns)
                     {
                         pattern.Remove(element);
                     }
                 }
             }
-            _disposed = true;
+
+            this.disposed = true;
         }
     }
 }

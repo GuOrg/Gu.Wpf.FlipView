@@ -6,10 +6,12 @@
     {
         public TransitionItem(SolidColorBrush brush, string text)
         {
-            Brush = brush;
-            Text = text;
+            this.Brush = brush;
+            this.Text = text;
         }
+
         public SolidColorBrush Brush { get; private set; }
+
         public string Text { get; private set; } 
     }
 }

@@ -12,7 +12,7 @@
         public TransitionControlView()
         {
             InitializeComponent();
-            Items = new[]
+            this.Items = new[]
                         {
                             new TransitionItem(Brushes.Blue, "1"),
                             new TransitionItem(Brushes.Red, "2"),

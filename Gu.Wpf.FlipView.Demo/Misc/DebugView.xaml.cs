@@ -10,7 +10,7 @@
     {
         public DebugView()
         {
-            InitializeComponent();
+            this.InitializeComponent();
         }
 
 
@@ -25,10 +25,12 @@
                 this.ArgsBox.Items.Insert(0, gesture);
             }
         }
+
         private void OnClear(object sender, RoutedEventArgs e)
         {
             this.ArgsBox.Items.Clear();
         }
+
         private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
         {
             this.ArgsBox.Items.Insert(0, "Click");

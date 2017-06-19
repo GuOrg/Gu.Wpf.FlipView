@@ -5,8 +5,6 @@
     using System.Windows.Controls;
     using System.Windows.Input;
 
-    using Gu.Wpf.FlipView.Demo.MocksAndHelpers;
-
     public class EventBox : UserControl
     {
         public static RoutedUICommand ClearCommand = new RoutedUICommand("Clear", "Clear", typeof(EventBox));
@@ -17,13 +15,13 @@
             typeof(global::Gu.Wpf.FlipView.Demo.Misc.EventBox),
             new PropertyMetadata(default(FrameworkElement)));
 
-        private readonly ObservableCollection<object> _args = new ObservableCollection<object>();
+        private readonly ObservableCollection<object> args = new ObservableCollection<object>();
 
         static EventBox()
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(EventBox), new FrameworkPropertyMetadata(typeof(EventBox)));
         }
-       
+
         public EventBox()
         {
             this.CommandBindings.Add(new CommandBinding(ClearCommand, this.ClearExecuted));
@@ -37,28 +35,28 @@
 
         public ObservableCollection<object> Args
         {
-            get { return this._args; }
+            get { return this.args; }
         }
 
         protected virtual void OnStarted(object sender, InputEventArgs e)
         {
-            this._args.Clear();
-            this._args.Add(new ArgsVm(e));
+            this.args.Clear();
+            this.args.Add(new ArgsVm(e));
         }
 
         protected virtual void OnInput(object sender, InputEventArgs e)
         {
-            this._args.Add(new ArgsVm(e));
+            this.args.Add(new ArgsVm(e));
         }
 
         protected virtual void OnEnded(object sender, InputEventArgs e)
         {
-            this._args.Add(new ArgsVm(e));
+            this.args.Add(new ArgsVm(e));
         }
 
         protected virtual void ClearExecuted(object sender, ExecutedRoutedEventArgs executedRoutedEventArgs)
         {
-            this._args.Clear();
+            this.args.Clear();
         }
     }
 }

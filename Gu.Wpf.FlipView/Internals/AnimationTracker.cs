@@ -10,49 +10,51 @@
     /// </summary>
     internal class AnimationTracker : DispatcherTimer
     {
-        private readonly Dispatcher _dispatcher;
+        private readonly Dispatcher dispatcher;
         private Storyboard _storyboard;
-        private DispatcherTimer _timer;
+        private DispatcherTimer timer;
 
         internal AnimationTracker(Storyboard storyboard, Dispatcher dispatcher)
         {
-            _dispatcher = dispatcher;
-            _storyboard = storyboard;
+            this.dispatcher = dispatcher;
+            this._storyboard = storyboard;
         }
 
         public event EventHandler Completed;
 
         internal void Update(Storyboard storyboard)
         {
-            Clear();
-            _storyboard = storyboard;
+            this.Clear();
+            this._storyboard = storyboard;
         }
 
         internal void Clear()
         {
-            if (_timer != null)
+            if (this.timer != null)
             {
-                _timer.Stop();
-                _timer = null;
+                this.timer.Stop();
+                this.timer = null;
             }
         }
 
         public void Run()
         {
-            if (_storyboard == null)
+            if (this._storyboard == null)
             {
                 return;
             }
-            if (_timer != null)
+
+            if (this.timer != null)
             {
-                _timer.Stop();
+                this.timer.Stop();
             }
-            _timer = new DispatcherTimer(GetTimeToFinished(_storyboard), DispatcherPriority.DataBind, OnCompleted, _dispatcher);
+
+            this.timer = new DispatcherTimer(GetTimeToFinished(this._storyboard), DispatcherPriority.DataBind, this.OnCompleted, this.dispatcher);
         }
 
         protected virtual void OnCompleted()
         {
-            var handler = Completed;
+            var handler = this.Completed;
             if (handler != null)
             {
                 handler(this, EventArgs.Empty);
@@ -66,6 +68,7 @@
                 var beginTime = timeline.BeginTime ?? TimeSpan.Zero;
                 return beginTime + timeline.Duration.TimeSpan;
             }
+
             var storyboard = timeline as Storyboard;
             if (storyboard != null)
             {
@@ -73,14 +76,16 @@
                 {
                     return TimeSpan.Zero;
                 }
+
                 return storyboard.Children.Max(x => GetTimeToFinished(x));
             }
+
             throw new NotImplementedException(string.Format("GetTimeToFinished not implemented for: {0}", timeline.GetType().FullName));
         }
 
         private void OnCompleted(object sender, EventArgs e)
         {
-            OnCompleted();
+            this.OnCompleted();
         }
     }
 }

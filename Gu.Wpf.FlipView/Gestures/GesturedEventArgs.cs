@@ -7,11 +7,12 @@ namespace Gu.Wpf.FlipView.Gestures
         public GesturedEventArgs(GestureType gesture, GestureEventArgs gestureEventArgs)
             : base(GesturePanel.GesturedEvent)
         {
-            Gesture = gesture;
-            GestureEventArgs = gestureEventArgs;
+            this.Gesture = gesture;
+            this.GestureEventArgs = gestureEventArgs;
         }
 
         public GestureType Gesture { get; private set; }
+
         public GestureEventArgs GestureEventArgs { get; private set; }
     }
 

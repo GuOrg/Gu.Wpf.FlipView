@@ -2,8 +2,6 @@
 {
     using System.Windows.Input;
 
-    using Gu.Wpf.FlipView.Demo.MocksAndHelpers;
-
     /// <summary>
     /// Interaction logic for ManipulationBox.xaml
     /// </summary>
@@ -12,7 +10,7 @@
         //private readonly ManipulationGestureFinder _manipulationGestureFinder;
         public ManipulationBox()
         {
-            InitializeComponent();
+            this.InitializeComponent();
             //_manipulationGestureFinder = new ManipulationGestureFinder { InputElement = InputElement };
         }
 

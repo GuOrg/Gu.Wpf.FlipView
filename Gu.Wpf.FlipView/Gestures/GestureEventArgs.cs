@@ -6,18 +6,19 @@ namespace Gu.Wpf.FlipView.Gestures
 
     public class GestureEventArgs : EventArgs
     {
-        private readonly List<IGestureTracker> _gestureTrackers = new List<IGestureTracker>();
+        private readonly List<IGestureTracker> gestureTrackers = new List<IGestureTracker>();
 
         public GestureEventArgs(IGestureTracker tracker, Gesture gesture)
         {
-            _gestureTrackers.Add(tracker);
-            Gesture = gesture;
+            this.gestureTrackers.Add(tracker);
+            this.Gesture = gesture;
         }
+
         public GestureEventArgs(IGestureTracker tracker, GestureEventArgs args)
         {
-            _gestureTrackers.AddRange(args.GestureTrackers);
-            _gestureTrackers.Add(tracker);
-            Gesture = args.Gesture;
+            this.gestureTrackers.AddRange(args.GestureTrackers);
+            this.gestureTrackers.Add(tracker);
+            this.Gesture = args.Gesture;
         }
 
         /// <summary>
@@ -28,7 +29,7 @@ namespace Gu.Wpf.FlipView.Gestures
         {
             get
             {
-                return _gestureTrackers;
+                return this.gestureTrackers;
             }
         }
 
@@ -38,11 +39,12 @@ namespace Gu.Wpf.FlipView.Gestures
         {
             get
             {
-                var tracker = _gestureTrackers.FirstOrDefault(x => x.Interpreter != null);
+                var tracker = this.gestureTrackers.FirstOrDefault(x => x.Interpreter != null);
                 if (tracker == null)
                 {
                     return null;
                 }
+
                 return tracker.Interpreter;
             }
         }

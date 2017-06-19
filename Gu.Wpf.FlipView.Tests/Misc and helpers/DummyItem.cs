@@ -7,12 +7,14 @@ namespace Gu.Wpf.FlipView.Tests.Misc_and_helpers
     {
         public DummyItem(int number)
         {
-            Number = number;
+            this.Number = number;
         }
+
         public int Number { get; private set; }
+
         public override string ToString()
         {
-            return string.Format("{0}", Number);
+            return string.Format("{0}", this.Number);
         }
     }
 }

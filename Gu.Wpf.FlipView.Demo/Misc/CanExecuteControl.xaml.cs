@@ -9,22 +9,25 @@
     /// </summary>
     public partial class CanExecuteControl : UserControl
     {
-        private bool _canBoost = true;
+        private bool canBoost = true;
+
         public CanExecuteControl()
         {
-            InitializeComponent();
+            this.InitializeComponent();
             this.CommandBindings.Add(new CommandBinding(MediaCommands.BoostBass, this.Executed, this.CanExecute));
         }
+
         private void CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
-            e.CanExecute = this._canBoost;
+            e.CanExecute = this.canBoost;
         }
+
         private async void Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            this._canBoost = false;
+            this.canBoost = false;
             await Task.Delay(500);
             this.Boosts.Items.Add("boosted");
-            this._canBoost = true;
+            this.canBoost = true;
 
             //CommandManager.InvalidateRequerySuggested();
             //var args = new MouseButtonEventArgs(Mouse.PrimaryDevice, 0, MouseButton.Left)

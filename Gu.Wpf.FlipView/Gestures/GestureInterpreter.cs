@@ -21,14 +21,14 @@
 
         public double MinSwipeVelocity
         {
-            get { return (double)GetValue(MinSwipeVelocityProperty); }
-            set { SetValue(MinSwipeVelocityProperty, value); }
+            get { return (double)this.GetValue(MinSwipeVelocityProperty); }
+            set { this.SetValue(MinSwipeVelocityProperty, value); }
         }
 
         public double MinSwipeLength
         {
-            get { return (double)GetValue(MinSwipeLengthProperty); }
-            set { SetValue(MinSwipeLengthProperty, value); }
+            get { return (double)this.GetValue(MinSwipeLengthProperty); }
+            set { this.SetValue(MinSwipeLengthProperty, value); }
         }
 
         public bool IsSwipeRight(GestureEventArgs args)
@@ -38,20 +38,23 @@
             {
                 return false;
             }
+
             var gesture = args.Gesture;
             if (IsCommand(gesture, NavigationCommands.BrowseBack))
             {
                 return true;
             }
+
             return interpreter.IsSwipeRight(gesture);
         }
 
         public bool IsSwipeRight(Gesture gesture)
         {
-            if (IsLongEnough(gesture, MinSwipeLength) && IsFastEnough(gesture, MinSwipeVelocity) && IsHorizontalEnough(gesture))
+            if (IsLongEnough(gesture, this.MinSwipeLength) && IsFastEnough(gesture, this.MinSwipeVelocity) && this.IsHorizontalEnough(gesture))
             {
                 return gesture.Delta.X > 0;
             }
+
             return false;
         }
 
@@ -62,20 +65,23 @@
             {
                 return false;
             }
+
             var gesture = args.Gesture;
             if (IsCommand(gesture, NavigationCommands.BrowseForward))
             {
                 return true;
             }
+
             return interpreter.IsSwipeLeft(gesture);
         }
 
         public bool IsSwipeLeft(Gesture gesture)
         {
-            if (IsLongEnough(gesture, MinSwipeLength) && IsFastEnough(gesture, MinSwipeVelocity) && IsHorizontalEnough(gesture))
+            if (IsLongEnough(gesture, this.MinSwipeLength) && IsFastEnough(gesture, this.MinSwipeVelocity) && this.IsHorizontalEnough(gesture))
             {
                 return gesture.Delta.X < 0;
             }
+
             return false;
         }
 
@@ -91,6 +97,7 @@
             {
                 return false;
             }
+
             return true;
         }
 
@@ -101,6 +108,7 @@
             {
                 return false;
             }
+
             return true;
         }
 
@@ -115,6 +123,7 @@
                     return false;
                 }
             }
+
             return true;
         }
 

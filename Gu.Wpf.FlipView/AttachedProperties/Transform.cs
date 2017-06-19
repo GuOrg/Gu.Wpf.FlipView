@@ -111,6 +111,7 @@
             {
                 return;
             }
+
             var value = (double)e.NewValue;
             fe.SetValue(OffsetXProperty,  value * fe.ActualWidth);
         }
@@ -122,6 +123,7 @@
             {
                 return;
             }
+
             var value = (double)e.NewValue;
             fe.SetValue(OffsetYProperty, value * fe.ActualHeight);
         }

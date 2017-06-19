@@ -9,7 +9,7 @@
     {
         public ControlsView()
         {
-            InitializeComponent();
+            this.InitializeComponent();
         }
     }
 }

@@ -1,13 +1,10 @@
-﻿using System.Windows.Data;
-
-namespace Gu.Wpf.FlipView
+﻿namespace Gu.Wpf.FlipView
 {
     using System.Windows;
-    using System.Windows.Controls;
     using System.Windows.Controls.Primitives;
+    using System.Windows.Data;
     using System.Windows.Input;
     using System.Windows.Media.Animation;
-
     using Gu.Wpf.FlipView.Gestures;
 
     public class FlipView : Selector
@@ -90,8 +87,8 @@ namespace Gu.Wpf.FlipView
 
         private static readonly DependencyPropertyKey DeferredSelectedItemPropertyKey = DependencyProperty.RegisterReadOnly(
             "DeferredSelectedItem",
-            typeof (object),
-            typeof (FlipView),
+            typeof(object),
+            typeof(FlipView),
             new PropertyMetadata(default(object)));
 
         public static readonly DependencyProperty DeferredSelectedItemProperty = DeferredSelectedItemPropertyKey.DependencyProperty;
@@ -105,7 +102,7 @@ namespace Gu.Wpf.FlipView
                 null,
                 CoerceSelectedIndexProxy));
 
-        private int _previousIndex = -1;
+        private int previousIndex = -1;
 
         static FlipView()
         {
@@ -114,16 +111,16 @@ namespace Gu.Wpf.FlipView
 
         public FlipView()
         {
-            CommandBindings.Add(new CommandBinding(NavigationCommands.BrowseBack, OnPreviousExecuted, OnPreviousCanExecute));
-            CommandBindings.Add(new CommandBinding(NavigationCommands.BrowseForward, OnNextExecuted, OnNextCanExecute));
-            AddHandler(GesturePanel.GesturedEvent, new GesturedEventhandler(OnGesture));
+            this.CommandBindings.Add(new CommandBinding(NavigationCommands.BrowseBack, this.OnPreviousExecuted, this.OnPreviousCanExecute));
+            this.CommandBindings.Add(new CommandBinding(NavigationCommands.BrowseForward, this.OnNextExecuted, this.OnNextCanExecute));
+            this.AddHandler(GesturePanel.GesturedEvent, new GesturedEventhandler(this.OnGesture));
             var binding = new Binding
-                {
-                    Source = this,
-                    Path = new PropertyPath(SelectedIndexProperty),
-                    Mode = BindingMode.OneWay,
-                    UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged,
-                };
+            {
+                Source = this,
+                Path = new PropertyPath(SelectedIndexProperty),
+                Mode = BindingMode.OneWay,
+                UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged,
+            };
             BindingOperations.SetBinding(this, SelectedIndexProxyProperty, binding);
         }
 
@@ -132,8 +129,8 @@ namespace Gu.Wpf.FlipView
         /// </summary>
         public Storyboard IncreaseInAnimation
         {
-            get { return (Storyboard)GetValue(IncreaseInAnimationProperty); }
-            set { SetValue(IncreaseInAnimationProperty, value); }
+            get { return (Storyboard)this.GetValue(IncreaseInAnimationProperty); }
+            set { this.SetValue(IncreaseInAnimationProperty, value); }
         }
 
         /// <summary>
@@ -141,8 +138,8 @@ namespace Gu.Wpf.FlipView
         /// </summary>
         public Storyboard IncreaseOutAnimation
         {
-            get { return (Storyboard)GetValue(IncreaseOutAnimationProperty); }
-            set { SetValue(IncreaseOutAnimationProperty, value); }
+            get { return (Storyboard)this.GetValue(IncreaseOutAnimationProperty); }
+            set { this.SetValue(IncreaseOutAnimationProperty, value); }
         }
 
         /// <summary>
@@ -150,8 +147,8 @@ namespace Gu.Wpf.FlipView
         /// </summary>
         public Storyboard DecreaseInAnimation
         {
-            get { return (Storyboard)GetValue(DecreaseInAnimationProperty); }
-            set { SetValue(DecreaseInAnimationProperty, value); }
+            get { return (Storyboard)this.GetValue(DecreaseInAnimationProperty); }
+            set { this.SetValue(DecreaseInAnimationProperty, value); }
         }
 
         /// <summary>
@@ -159,8 +156,8 @@ namespace Gu.Wpf.FlipView
         /// </summary>
         public Storyboard DecreaseOutAnimation
         {
-            get { return (Storyboard)GetValue(DecreaseOutAnimationProperty); }
-            set { SetValue(DecreaseOutAnimationProperty, value); }
+            get { return (Storyboard)this.GetValue(DecreaseOutAnimationProperty); }
+            set { this.SetValue(DecreaseOutAnimationProperty, value); }
         }
 
         /// <summary>
@@ -168,8 +165,8 @@ namespace Gu.Wpf.FlipView
         /// </summary>
         public Storyboard CurrentInAnimation
         {
-            get { return (Storyboard)GetValue(CurrentInAnimationProperty); }
-            protected set { SetValue(CurrentInAnimationPropertyKey, value); }
+            get { return (Storyboard)this.GetValue(CurrentInAnimationProperty); }
+            protected set { this.SetValue(CurrentInAnimationPropertyKey, value); }
         }
 
         /// <summary>
@@ -177,8 +174,8 @@ namespace Gu.Wpf.FlipView
         /// </summary>
         public Storyboard CurrentOutAnimation
         {
-            get { return (Storyboard)GetValue(CurrentOutAnimationProperty); }
-            protected set { SetValue(CurrentOutAnimationPropertyKey, value); }
+            get { return (Storyboard)this.GetValue(CurrentOutAnimationProperty); }
+            protected set { this.SetValue(CurrentOutAnimationPropertyKey, value); }
         }
 
         /// <summary>
@@ -187,20 +184,20 @@ namespace Gu.Wpf.FlipView
         /// </summary>
         public object DeferredSelectedItem
         {
-            get { return (object)GetValue(DeferredSelectedItemProperty); }
-            protected set { SetValue(DeferredSelectedItemPropertyKey, value); }
+            get { return (object)this.GetValue(DeferredSelectedItemProperty); }
+            protected set { this.SetValue(DeferredSelectedItemPropertyKey, value); }
         }
 
         public bool ShowIndex
         {
-            get { return (bool)GetValue(ShowIndexProperty); }
-            set { SetValue(ShowIndexProperty, value); }
+            get { return (bool)this.GetValue(ShowIndexProperty); }
+            set { this.SetValue(ShowIndexProperty, value); }
         }
 
         public IndexPlacement IndexPlacement
         {
-            get { return (IndexPlacement)GetValue(IndexPlacementProperty); }
-            set { SetValue(IndexPlacementProperty, value); }
+            get { return (IndexPlacement)this.GetValue(IndexPlacementProperty); }
+            set { this.SetValue(IndexPlacementProperty, value); }
         }
 
         /// <summary>
@@ -208,34 +205,34 @@ namespace Gu.Wpf.FlipView
         /// </summary>
         public Style IndexItemStyle
         {
-            get { return (Style)GetValue(IndexItemStyleProperty); }
-            set { SetValue(IndexItemStyleProperty, value); }
+            get { return (Style)this.GetValue(IndexItemStyleProperty); }
+            set { this.SetValue(IndexItemStyleProperty, value); }
         }
 
         public bool ShowArrows
         {
-            get { return (bool)GetValue(ShowArrowsProperty); }
-            set { SetValue(ShowArrowsProperty, value); }
+            get { return (bool)this.GetValue(ShowArrowsProperty); }
+            set { this.SetValue(ShowArrowsProperty, value); }
         }
 
         public ArrowPlacement ArrowPlacement
         {
-            get { return (ArrowPlacement)GetValue(ArrowPlacementProperty); }
-            set { SetValue(ArrowPlacementProperty, value); }
+            get { return (ArrowPlacement)this.GetValue(ArrowPlacementProperty); }
+            set { this.SetValue(ArrowPlacementProperty, value); }
         }
 
         public Style ArrowButtonStyle
         {
-            get { return (Style)GetValue(ArrowButtonStyleProperty); }
-            set { SetValue(ArrowButtonStyleProperty, value); }
+            get { return (Style)this.GetValue(ArrowButtonStyleProperty); }
+            set { this.SetValue(ArrowButtonStyleProperty, value); }
         }
 
         private static object CoerceSelectedIndexProxy(DependencyObject d, object basevalue)
         {
             var flipView = (FlipView)d;
             var index = (int)basevalue;
-            flipView.PreviewSelectedIndexChanged(flipView._previousIndex, index);
-            flipView._previousIndex = index;
+            flipView.PreviewSelectedIndexChanged(flipView.previousIndex, index);
+            flipView.previousIndex = index;
             return basevalue;
         }
 
@@ -243,76 +240,81 @@ namespace Gu.Wpf.FlipView
         {
             if (previousIndex == -1 || (previousIndex == newIndex))
             {
-                CurrentInAnimation = null;
-                CurrentOutAnimation = null;
+                this.CurrentInAnimation = null;
+                this.CurrentOutAnimation = null;
             }
             else if (newIndex > previousIndex)
             {
-                CurrentInAnimation = IncreaseInAnimation;
-                CurrentOutAnimation = IncreaseOutAnimation;
+                this.CurrentInAnimation = this.IncreaseInAnimation;
+                this.CurrentOutAnimation = this.IncreaseOutAnimation;
             }
             else
             {
-                CurrentInAnimation = DecreaseInAnimation;
-                CurrentOutAnimation = DecreaseOutAnimation;
+                this.CurrentInAnimation = this.DecreaseInAnimation;
+                this.CurrentOutAnimation = this.DecreaseOutAnimation;
             }
-            DeferredSelectedItem = SelectedItem;
+
+            this.DeferredSelectedItem = this.SelectedItem;
         }
 
         private bool TransitionTo(int newIndex)
         {
-            if (newIndex == SelectedIndex)
+            if (newIndex == this.SelectedIndex)
             {
                 return false;
             }
-            var isWithinBounds = IsWithinBounds(newIndex);
+
+            var isWithinBounds = this.IsWithinBounds(newIndex);
             if (isWithinBounds)
             {
-                SelectedIndex = newIndex;
+                this.SetCurrentValue(SelectedIndexProperty, newIndex);
             }
+
             return isWithinBounds;
         }
 
         private bool IsWithinBounds(int newIndex)
         {
-            if (newIndex < 0 || newIndex > (Items.Count - 1))
+            if (newIndex < 0 || newIndex > (this.Items.Count - 1))
             {
                 return false;
             }
+
             return true;
         }
 
         private void OnPreviousCanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
-            e.CanExecute = IsWithinBounds(SelectedIndex - 1);
+            e.CanExecute = this.IsWithinBounds(this.SelectedIndex - 1);
             e.Handled = true;
         }
 
         private void OnPreviousExecuted(object sender, ExecutedRoutedEventArgs e)
         {
-            e.Handled = TransitionTo(SelectedIndex - 1);
+            e.Handled = this.TransitionTo(this.SelectedIndex - 1);
         }
 
         private void OnNextCanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
-            e.CanExecute = IsWithinBounds(SelectedIndex + 1);
+            e.CanExecute = this.IsWithinBounds(this.SelectedIndex + 1);
             e.Handled = true;
         }
 
         private void OnNextExecuted(object sender, ExecutedRoutedEventArgs e)
         {
-            e.Handled = TransitionTo(SelectedIndex + 1);
+            e.Handled = this.TransitionTo(this.SelectedIndex + 1);
         }
 
         private void OnGesture(object sender, GesturedEventArgs e)
         {
             if (e.Gesture == GestureType.SwipeLeft)
             {
-                TransitionTo(SelectedIndex + 1);
+                this.TransitionTo(this.SelectedIndex + 1);
             }
+
             if (e.Gesture == GestureType.SwipeRight)
             {
-                TransitionTo(SelectedIndex - 1);
+                this.TransitionTo(this.SelectedIndex - 1);
             }
         }
     }

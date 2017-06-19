@@ -8,15 +8,15 @@ namespace Gu.Wpf.FlipView.Gestures
 
     public class CompositeGestureTracker : IGestureTracker
     {
-        private readonly ObservableCollection<IGestureTracker> _gestureTrackers = new ObservableCollection<IGestureTracker>();
-        private bool _disposed = false;
+        private readonly ObservableCollection<IGestureTracker> gestureTrackers = new ObservableCollection<IGestureTracker>();
+        private bool disposed = false;
 
-        private UIElement _inputElement;
+        private UIElement inputElement;
 
         public CompositeGestureTracker()
         {
-            GestureTrackers.CollectionChanged += GestureFindersOnCollectionChanged;
-            Interpreter = new GestureInterpreter();
+            this.GestureTrackers.CollectionChanged += this.GestureFindersOnCollectionChanged;
+            this.Interpreter = new GestureInterpreter();
         }
 
         public event EventHandler<GestureEventArgs> Gestured;
@@ -25,19 +25,20 @@ namespace Gu.Wpf.FlipView.Gestures
 
         public ObservableCollection<IGestureTracker> GestureTrackers
         {
-            get { return _gestureTrackers; }
+            get { return this.gestureTrackers; }
         }
 
         public UIElement InputElement
         {
             get
             {
-                return _inputElement;
+                return this.inputElement;
             }
+
             set
             {
-                _inputElement = value;
-                foreach (var tracker in GestureTrackers.Where(x => x != null))
+                this.inputElement = value;
+                foreach (var tracker in this.GestureTrackers.Where(x => x != null))
                 {
                     tracker.InputElement = value;
                 }
@@ -50,7 +51,7 @@ namespace Gu.Wpf.FlipView.Gestures
         /// </summary>
         public void Dispose()
         {
-            Dispose(true);
+            this.Dispose(true);
             GC.SuppressFinalize(this);
         }
 
@@ -60,24 +61,25 @@ namespace Gu.Wpf.FlipView.Gestures
         /// <param name="disposing">true: safe to free managed resources</param>
         protected virtual void Dispose(bool disposing)
         {
-            if (_disposed)
+            if (this.disposed)
             {
                 return;
             }
 
             if (disposing)
             {
-                foreach (var gestureFinder in GestureTrackers)
+                foreach (var gestureFinder in this.GestureTrackers)
                 {
                     gestureFinder.Dispose();
                 }
             }
-            _disposed = true;
+
+            this.disposed = true;
         }
 
         protected virtual void OnGestured(Gesture e)
         {
-            var handler = Gestured;
+            var handler = this.Gestured;
             if (handler != null)
             {
                 handler(this, new GestureEventArgs(this, e));
@@ -86,7 +88,7 @@ namespace Gu.Wpf.FlipView.Gestures
 
         private void OnSubfinderGestured(object sender, GestureEventArgs e)
         {
-            var handler = Gestured;
+            var handler = this.Gestured;
             if (handler != null)
             {
                 handler(this, new GestureEventArgs(this, e));
@@ -99,10 +101,11 @@ namespace Gu.Wpf.FlipView.Gestures
             {
                 foreach (var finder in e.NewItems.OfType<IGestureTracker>())
                 {
-                    finder.InputElement = InputElement;
-                    finder.Gestured += OnSubfinderGestured;
+                    finder.InputElement = this.InputElement;
+                    finder.Gestured += this.OnSubfinderGestured;
                 }
             }
+
             if (e.OldItems != null)
             {
                 foreach (var finder in e.OldItems.OfType<IGestureTracker>())
@@ -110,7 +113,7 @@ namespace Gu.Wpf.FlipView.Gestures
                     if (finder != null)
                     {
                         finder.InputElement = null;
-                        finder.Gestured -= OnSubfinderGestured;
+                        finder.Gestured -= this.OnSubfinderGestured;
                     }
                 }
             }
