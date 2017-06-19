@@ -64,7 +64,8 @@
                  Grid.Row="1"
                  HorizontalContentAlignment="Stretch"
                  VerticalContentAlignment="Stretch"
-                 ItemsSource="{Binding Items, RelativeSource={RelativeSource AncestorType={x:Type controlDemos:TransitionControlView}}}">
+                 ItemsSource="{Binding Items,
+                                       RelativeSource={RelativeSource AncestorType={x:Type controlDemos:TransitionControlView}}}">
             <ListBox.ItemsPanel>
                 <ItemsPanelTemplate>
                     <UniformGrid Columns="{Binding Items.Count, RelativeSource={RelativeSource AncestorType={x:Type controlDemos:TransitionControlView}}}" Rows="1" />
