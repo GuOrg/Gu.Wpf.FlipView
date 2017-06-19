@@ -165,8 +165,9 @@
             {
                 this.RaiseEvent(new RoutedEventArgs(NewContentChangedEvent, this));
                 this.newContentPresenter?.RaiseEvent(new RoutedEventArgs(ContentChangedEvent, this.newContentPresenter));
-                base.OnContentChanged(oldContent, newContent);
             }
+
+            base.OnContentChanged(null, newContent);
         }
 
         private static void OnOldTransitionChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
@@ -200,6 +201,7 @@
 
         private void OnOldContentTransitionCompleted(object sender, EventArgs e)
         {
+            base.OnContentChanged(this.OldContent, null);
             this.OldContent = null;
         }
     }
