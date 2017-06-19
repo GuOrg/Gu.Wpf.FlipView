@@ -23,7 +23,7 @@
             typeof(double),
             typeof(Transform),
             new PropertyMetadata(1.0));
-       
+
         public static readonly DependencyProperty RelativeOffsetYProperty = DependencyProperty.RegisterAttached(
             "RelativeOffsetY",
             typeof(double),
@@ -83,7 +83,7 @@
         {
             return (double)element.GetValue(RelativeOffsetYProperty);
         }
-        
+
         public static void SetOffsetY(DependencyObject element, double value)
         {
             element.SetValue(OffsetYProperty, value);
@@ -113,7 +113,7 @@
             }
 
             var value = (double)e.NewValue;
-            fe.SetValue(OffsetXProperty,  value * fe.ActualWidth);
+            fe.SetCurrentValue(OffsetXProperty, value * fe.ActualWidth);
         }
 
         private static void OnRelativeOffsetYChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
@@ -125,7 +125,7 @@
             }
 
             var value = (double)e.NewValue;
-            fe.SetValue(OffsetYProperty, value * fe.ActualHeight);
+            fe.SetCurrentValue(OffsetYProperty, value * fe.ActualHeight);
         }
     }
 }

@@ -41,7 +41,7 @@
         {
             this.args = args;
             this.info = info;
-            this.Name = string.Format("{0}: {1}", info.Name, this.StringIt(args));
+            this.Name = $"{info.Name}: {this.StringIt(args)}";
         }
 
         public IEnumerable<ArgsVm> Children
@@ -80,13 +80,13 @@
             var v = o as Vector?;
             if (v != null)
             {
-                return string.Format("({0:F1}, {1:F1})", v.Value.X, v.Value.Y);
+                return $"({v.Value.X:F1}, {v.Value.Y:F1})";
             }
 
             var p = o as Point?;
             if (p != null)
             {
-                return string.Format("({0:F1}, {1:F1})", p.Value.X, p.Value.Y);
+                return $"({p.Value.X:F1}, {p.Value.Y:F1})";
             }
 
             return o.ToString();

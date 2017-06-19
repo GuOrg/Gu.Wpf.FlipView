@@ -14,7 +14,7 @@ namespace Gu.Wpf.FlipView.Tests.Misc_and_helpers
 
         public override string ToString()
         {
-            return string.Format("{0}", this.Number);
+            return $"{this.Number}";
         }
     }
 }

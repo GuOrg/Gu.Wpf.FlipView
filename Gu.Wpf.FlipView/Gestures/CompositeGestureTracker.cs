@@ -6,6 +6,9 @@ namespace Gu.Wpf.FlipView.Gestures
     using System.Linq;
     using System.Windows;
 
+    /// <summary>
+    /// A tracker that tracks both mouse and touch.
+    /// </summary>
     public class CompositeGestureTracker : IGestureTracker
     {
         private readonly ObservableCollection<IGestureTracker> gestureTrackers = new ObservableCollection<IGestureTracker>();
@@ -73,20 +76,12 @@ namespace Gu.Wpf.FlipView.Gestures
 
         protected virtual void OnGestured(Gesture e)
         {
-            var handler = this.Gestured;
-            if (handler != null)
-            {
-                handler(this, new GestureEventArgs(this, e));
-            }
+            this.Gestured?.Invoke(this, new GestureEventArgs(this, e));
         }
 
         private void OnSubfinderGestured(object sender, GestureEventArgs e)
         {
-            var handler = this.Gestured;
-            if (handler != null)
-            {
-                handler(this, new GestureEventArgs(this, e));
-            }
+            this.Gestured?.Invoke(this, new GestureEventArgs(this, e));
         }
 
         private void GestureFindersOnCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)

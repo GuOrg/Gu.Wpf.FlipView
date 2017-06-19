@@ -45,16 +45,12 @@
             }
 
             this.timer?.Stop();
-            this.timer = new DispatcherTimer(GetTimeToFinished(this.storyboard), DispatcherPriority.DataBind, this.OnCompleted, this.dispatcher);
+            this.timer = new DispatcherTimer(GetTimeToFinished(this.storyboard), DispatcherPriority.Render, this.OnCompleted, this.dispatcher);
         }
 
         protected virtual void OnCompleted()
         {
-            var handler = this.Completed;
-            if (handler != null)
-            {
-                handler(this, EventArgs.Empty);
-            }
+            this.Completed?.Invoke(this, EventArgs.Empty);
         }
 
         private static TimeSpan GetTimeToFinished(Timeline timeline)
@@ -76,7 +72,7 @@
                 return storyboard.Children.Max(x => GetTimeToFinished(x));
             }
 
-            throw new NotImplementedException(string.Format("GetTimeToFinished not implemented for: {0}", timeline.GetType().FullName));
+            throw new NotImplementedException($"GetTimeToFinished not implemented for: {timeline.GetType().FullName}");
         }
 
         private void OnCompleted(object sender, EventArgs e)

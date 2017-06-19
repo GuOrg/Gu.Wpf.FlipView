@@ -7,6 +7,9 @@
     using System.Windows.Media.Animation;
     using Gu.Wpf.FlipView.Gestures;
 
+    /// <summary>
+    /// A <see cref="Selector"/> for navigating the content.
+    /// </summary>
     public class FlipView : Selector
     {
         public static readonly DependencyProperty IncreaseInAnimationProperty = DependencyProperty.Register(
@@ -107,13 +110,16 @@
         static FlipView()
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(FlipView), new FrameworkPropertyMetadata(typeof(FlipView)));
+            IsTabStopProperty.OverrideMetadata(typeof(FlipView), new FrameworkPropertyMetadata(false));
+            KeyboardNavigation.DirectionalNavigationProperty.OverrideMetadata(typeof(FlipView), new FrameworkPropertyMetadata(KeyboardNavigationMode.Contained));
+            KeyboardNavigation.TabNavigationProperty.OverrideMetadata(typeof(FlipView), new FrameworkPropertyMetadata(KeyboardNavigationMode.Once));
+            CommandManager.RegisterClassCommandBinding(typeof(FlipView), new CommandBinding(NavigationCommands.BrowseBack, OnPreviousExecuted, OnPreviousCanExecute));
+            CommandManager.RegisterClassCommandBinding(typeof(FlipView), new CommandBinding(NavigationCommands.BrowseForward, OnNextExecuted, OnNextCanExecute));
+            EventManager.RegisterClassHandler(typeof(FlipView), GesturePanel.GesturedEvent, new GesturedEventhandler(OnGesture));
         }
 
         public FlipView()
         {
-            this.CommandBindings.Add(new CommandBinding(NavigationCommands.BrowseBack, this.OnPreviousExecuted, this.OnPreviousCanExecute));
-            this.CommandBindings.Add(new CommandBinding(NavigationCommands.BrowseForward, this.OnNextExecuted, this.OnNextCanExecute));
-            this.AddHandler(GesturePanel.GesturedEvent, new GesturedEventhandler(this.OnGesture));
             var binding = new Binding
             {
                 Source = this,
@@ -257,6 +263,56 @@
             this.DeferredSelectedItem = this.SelectedItem;
         }
 
+        private static void OnPreviousCanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            if (sender is FlipView flipView)
+            {
+                e.CanExecute = flipView.IsWithinBounds(flipView.SelectedIndex - 1);
+                e.Handled = true;
+            }
+        }
+
+        private static void OnPreviousExecuted(object sender, ExecutedRoutedEventArgs e)
+        {
+            if (sender is FlipView flipView)
+            {
+                e.Handled = flipView.TransitionTo(flipView.SelectedIndex - 1);
+            }
+        }
+
+        private static void OnNextCanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            if (sender is FlipView flipView)
+            {
+                e.CanExecute = flipView.IsWithinBounds(flipView.SelectedIndex + 1);
+                e.Handled = true;
+            }
+        }
+
+        private static void OnNextExecuted(object sender, ExecutedRoutedEventArgs e)
+        {
+            if (sender is FlipView flipView)
+            {
+                e.Handled = flipView.TransitionTo(flipView.SelectedIndex + 1);
+            }
+        }
+
+        private static void OnGesture(object sender, GesturedEventArgs e)
+        {
+            if (sender is FlipView flipView)
+            {
+                if (e.Gesture == GestureType.SwipeLeft)
+                {
+                    flipView.TransitionTo(flipView.SelectedIndex + 1);
+                }
+
+                if (e.Gesture == GestureType.SwipeRight)
+                {
+                    flipView.TransitionTo(flipView.SelectedIndex - 1);
+                }
+            }
+        }
+
         private bool TransitionTo(int newIndex)
         {
             if (newIndex == this.SelectedIndex)
@@ -281,41 +337,6 @@
             }
 
             return true;
-        }
-
-        private void OnPreviousCanExecute(object sender, CanExecuteRoutedEventArgs e)
-        {
-            e.CanExecute = this.IsWithinBounds(this.SelectedIndex - 1);
-            e.Handled = true;
-        }
-
-        private void OnPreviousExecuted(object sender, ExecutedRoutedEventArgs e)
-        {
-            e.Handled = this.TransitionTo(this.SelectedIndex - 1);
-        }
-
-        private void OnNextCanExecute(object sender, CanExecuteRoutedEventArgs e)
-        {
-            e.CanExecute = this.IsWithinBounds(this.SelectedIndex + 1);
-            e.Handled = true;
-        }
-
-        private void OnNextExecuted(object sender, ExecutedRoutedEventArgs e)
-        {
-            e.Handled = this.TransitionTo(this.SelectedIndex + 1);
-        }
-
-        private void OnGesture(object sender, GesturedEventArgs e)
-        {
-            if (e.Gesture == GestureType.SwipeLeft)
-            {
-                this.TransitionTo(this.SelectedIndex + 1);
-            }
-
-            if (e.Gesture == GestureType.SwipeRight)
-            {
-                this.TransitionTo(this.SelectedIndex - 1);
-            }
         }
     }
 }
