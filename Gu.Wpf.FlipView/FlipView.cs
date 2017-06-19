@@ -135,8 +135,8 @@
         /// </summary>
         public Storyboard IncreaseInAnimation
         {
-            get { return (Storyboard)this.GetValue(IncreaseInAnimationProperty); }
-            set { this.SetValue(IncreaseInAnimationProperty, value); }
+            get => (Storyboard)this.GetValue(IncreaseInAnimationProperty);
+            set => this.SetValue(IncreaseInAnimationProperty, value);
         }
 
         /// <summary>
@@ -144,8 +144,8 @@
         /// </summary>
         public Storyboard IncreaseOutAnimation
         {
-            get { return (Storyboard)this.GetValue(IncreaseOutAnimationProperty); }
-            set { this.SetValue(IncreaseOutAnimationProperty, value); }
+            get => (Storyboard)this.GetValue(IncreaseOutAnimationProperty);
+            set => this.SetValue(IncreaseOutAnimationProperty, value);
         }
 
         /// <summary>
@@ -153,8 +153,8 @@
         /// </summary>
         public Storyboard DecreaseInAnimation
         {
-            get { return (Storyboard)this.GetValue(DecreaseInAnimationProperty); }
-            set { this.SetValue(DecreaseInAnimationProperty, value); }
+            get => (Storyboard)this.GetValue(DecreaseInAnimationProperty);
+            set => this.SetValue(DecreaseInAnimationProperty, value);
         }
 
         /// <summary>
@@ -162,8 +162,8 @@
         /// </summary>
         public Storyboard DecreaseOutAnimation
         {
-            get { return (Storyboard)this.GetValue(DecreaseOutAnimationProperty); }
-            set { this.SetValue(DecreaseOutAnimationProperty, value); }
+            get => (Storyboard)this.GetValue(DecreaseOutAnimationProperty);
+            set => this.SetValue(DecreaseOutAnimationProperty, value);
         }
 
         /// <summary>
@@ -171,8 +171,8 @@
         /// </summary>
         public Storyboard CurrentInAnimation
         {
-            get { return (Storyboard)this.GetValue(CurrentInAnimationProperty); }
-            protected set { this.SetValue(CurrentInAnimationPropertyKey, value); }
+            get => (Storyboard)this.GetValue(CurrentInAnimationProperty);
+            protected set => this.SetValue(CurrentInAnimationPropertyKey, value);
         }
 
         /// <summary>
@@ -180,30 +180,30 @@
         /// </summary>
         public Storyboard CurrentOutAnimation
         {
-            get { return (Storyboard)this.GetValue(CurrentOutAnimationProperty); }
-            protected set { this.SetValue(CurrentOutAnimationPropertyKey, value); }
+            get => (Storyboard)this.GetValue(CurrentOutAnimationProperty);
+            protected set => this.SetValue(CurrentOutAnimationPropertyKey, value);
         }
 
         /// <summary>
-        /// This is updated to SelectedItem after the animations are adjusted for the transtition.
+        /// This is updated to SelectedItem after the animations are adjusted for the transition.
         /// This is the property the TransitionControl should be bound to
         /// </summary>
         public object DeferredSelectedItem
         {
-            get { return (object)this.GetValue(DeferredSelectedItemProperty); }
-            protected set { this.SetValue(DeferredSelectedItemPropertyKey, value); }
+            get => (object)this.GetValue(DeferredSelectedItemProperty);
+            protected set => this.SetValue(DeferredSelectedItemPropertyKey, value);
         }
 
         public bool ShowIndex
         {
-            get { return (bool)this.GetValue(ShowIndexProperty); }
-            set { this.SetValue(ShowIndexProperty, value); }
+            get => (bool)this.GetValue(ShowIndexProperty);
+            set => this.SetValue(ShowIndexProperty, value);
         }
 
         public IndexPlacement IndexPlacement
         {
-            get { return (IndexPlacement)this.GetValue(IndexPlacementProperty); }
-            set { this.SetValue(IndexPlacementProperty, value); }
+            get => (IndexPlacement)this.GetValue(IndexPlacementProperty);
+            set => this.SetValue(IndexPlacementProperty, value);
         }
 
         /// <summary>
@@ -211,26 +211,26 @@
         /// </summary>
         public Style IndexItemStyle
         {
-            get { return (Style)this.GetValue(IndexItemStyleProperty); }
-            set { this.SetValue(IndexItemStyleProperty, value); }
+            get => (Style)this.GetValue(IndexItemStyleProperty);
+            set => this.SetValue(IndexItemStyleProperty, value);
         }
 
         public bool ShowArrows
         {
-            get { return (bool)this.GetValue(ShowArrowsProperty); }
-            set { this.SetValue(ShowArrowsProperty, value); }
+            get => (bool)this.GetValue(ShowArrowsProperty);
+            set => this.SetValue(ShowArrowsProperty, value);
         }
 
         public ArrowPlacement ArrowPlacement
         {
-            get { return (ArrowPlacement)this.GetValue(ArrowPlacementProperty); }
-            set { this.SetValue(ArrowPlacementProperty, value); }
+            get => (ArrowPlacement)this.GetValue(ArrowPlacementProperty);
+            set => this.SetValue(ArrowPlacementProperty, value);
         }
 
         public Style ArrowButtonStyle
         {
-            get { return (Style)this.GetValue(ArrowButtonStyleProperty); }
-            set { this.SetValue(ArrowButtonStyleProperty, value); }
+            get => (Style)this.GetValue(ArrowButtonStyleProperty);
+            set => this.SetValue(ArrowButtonStyleProperty, value);
         }
 
         private static object CoerceSelectedIndexProxy(DependencyObject d, object basevalue)
