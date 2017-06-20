@@ -13,6 +13,10 @@
             <controlDemos:FlipViewDemo />
         </TabItem>
 
+        <TabItem Header="FlipView DataTemplate">
+            <controlDemos:FlipViewDataTemplateView />
+        </TabItem>
+        
         <TabItem Header="TransitionControl">
             <controlDemos:TransitionControlView />
         </TabItem>

@@ -67,6 +67,9 @@
     <Compile Include="ControlDemos\ControlsView.xaml.cs">
       <DependentUpon>ControlsView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ControlDemos\FlipViewDataTemplateView.xaml.cs">
+      <DependentUpon>FlipViewDataTemplateView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ControlDemos\FlipViewDemo.xaml.cs">
       <DependentUpon>FlipViewDemo.xaml</DependentUpon>
     </Compile>
@@ -101,6 +104,10 @@
     </Compile>
     <Compile Include="ControlDemos\TransitionItem.cs" />
     <Page Include="ControlDemos\ControlsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ControlDemos\FlipViewDataTemplateView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
