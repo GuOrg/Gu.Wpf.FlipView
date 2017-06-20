@@ -312,7 +312,7 @@
                                                    Grid.Column="1"
                                                    Background="Transparent"
                                                    ClipToBounds="True">
-                                <flipView:TransitionControl Content="{TemplateBinding DeferredSelectedItem}"
+                                <flipView:TransitionControl Content="{TemplateBinding SelectedItem}"
                                                             ContentStringFormat="{TemplateBinding ItemStringFormat}"
                                                             ContentTemplate="{TemplateBinding ItemTemplate}"
                                                             ContentTemplateSelector="{TemplateBinding ItemTemplateSelector}"

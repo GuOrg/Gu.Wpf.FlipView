@@ -28,8 +28,7 @@
             <flipView:FlipView.ItemTemplate>
                 <DataTemplate DataType="{x:Type local:Person}">
                     <Border Background="#f1eef6">
-                        <TextBlock HorizontalAlignment="Center"
-                                   VerticalAlignment="Center">
+                        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center">
                             <TextBlock.Text>
                                 <MultiBinding StringFormat="{}{0} {1}">
                                     <Binding Path="FirstName" />

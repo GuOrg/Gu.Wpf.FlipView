@@ -2,7 +2,6 @@
 {
     using System.Windows;
     using System.Windows.Controls.Primitives;
-    using System.Windows.Data;
     using System.Windows.Input;
     using System.Windows.Media.Animation;
     using Gu.Wpf.FlipView.Gestures;
@@ -88,49 +87,21 @@
             typeof(FlipView),
             new FrameworkPropertyMetadata(default(Style), FrameworkPropertyMetadataOptions.AffectsMeasure | FrameworkPropertyMetadataOptions.AffectsArrange));
 
-        private static readonly DependencyPropertyKey DeferredSelectedItemPropertyKey = DependencyProperty.RegisterReadOnly(
-            "DeferredSelectedItem",
-            typeof(object),
-            typeof(FlipView),
-            new PropertyMetadata(default(object)));
-
-        public static readonly DependencyProperty DeferredSelectedItemProperty = DeferredSelectedItemPropertyKey.DependencyProperty;
-
-        private static readonly DependencyProperty SelectedIndexProxyProperty = DependencyProperty.Register(
-            "SelectedIndexProxy",
-            typeof(int),
-            typeof(FlipView),
-            new PropertyMetadata(
-                -1,
-                null,
-                CoerceSelectedIndexProxy));
-
-        private int previousIndex = -1;
-
         static FlipView()
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(FlipView), new FrameworkPropertyMetadata(typeof(FlipView)));
             IsTabStopProperty.OverrideMetadata(typeof(FlipView), new FrameworkPropertyMetadata(false));
+            var metadata = (FrameworkPropertyMetadata)SelectedIndexProperty.GetMetadata(typeof(Selector));
+            SelectedIndexProperty.OverrideMetadata(typeof(FlipView), new FrameworkPropertyMetadata(
+                metadata.DefaultValue,
+                FrameworkPropertyMetadataOptions.BindsTwoWayByDefault | FrameworkPropertyMetadataOptions.Journal,
+                metadata.PropertyChangedCallback,
+                (d, basevalue) => CoerceSelectedIndexProxy(d, metadata.CoerceValueCallback.Invoke(d, basevalue))));
             KeyboardNavigation.DirectionalNavigationProperty.OverrideMetadata(typeof(FlipView), new FrameworkPropertyMetadata(KeyboardNavigationMode.Contained));
             KeyboardNavigation.TabNavigationProperty.OverrideMetadata(typeof(FlipView), new FrameworkPropertyMetadata(KeyboardNavigationMode.Once));
             CommandManager.RegisterClassCommandBinding(typeof(FlipView), new CommandBinding(NavigationCommands.BrowseBack, OnPreviousExecuted, OnPreviousCanExecute));
             CommandManager.RegisterClassCommandBinding(typeof(FlipView), new CommandBinding(NavigationCommands.BrowseForward, OnNextExecuted, OnNextCanExecute));
             EventManager.RegisterClassHandler(typeof(FlipView), GesturePanel.GesturedEvent, new GesturedEventhandler(OnGesture));
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="FlipView"/> class.
-        /// </summary>
-        public FlipView()
-        {
-            var binding = new Binding
-            {
-                Source = this,
-                Path = new PropertyPath(SelectedIndexProperty),
-                Mode = BindingMode.OneWay,
-                UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged,
-            };
-            BindingOperations.SetBinding(this, SelectedIndexProxyProperty, binding);
         }
 
         /// <summary>
@@ -187,16 +158,6 @@
             protected set => this.SetValue(CurrentOutAnimationPropertyKey, value);
         }
 
-        /// <summary>
-        /// This is updated to SelectedItem after the animations are adjusted for the transition.
-        /// This is the property the TransitionControl should be bound to
-        /// </summary>
-        public object DeferredSelectedItem
-        {
-            get => (object)this.GetValue(DeferredSelectedItemProperty);
-            protected set => this.SetValue(DeferredSelectedItemPropertyKey, value);
-        }
-
         public bool ShowIndex
         {
             get => (bool)this.GetValue(ShowIndexProperty);
@@ -238,10 +199,12 @@
 
         private static object CoerceSelectedIndexProxy(DependencyObject d, object basevalue)
         {
-            var flipView = (FlipView)d;
-            var index = (int)basevalue;
-            flipView.PreviewSelectedIndexChanged(flipView.previousIndex, index);
-            flipView.previousIndex = index;
+            if (basevalue is int index)
+            {
+                var flipView = (FlipView)d;
+                flipView.PreviewSelectedIndexChanged(flipView.SelectedIndex, index);
+            }
+
             return basevalue;
         }
 
@@ -262,8 +225,6 @@
                 this.CurrentInAnimation = this.DecreaseInAnimation;
                 this.CurrentOutAnimation = this.DecreaseOutAnimation;
             }
-
-            this.DeferredSelectedItem = this.SelectedItem;
         }
 
         private static void OnPreviousCanExecute(object sender, CanExecuteRoutedEventArgs e)
