@@ -6,15 +6,17 @@ namespace Gu.Wpf.FlipView.Tests.Misc_and_helpers
 
     public class FakeTouchDevice : TouchDevice
     {
-        private readonly TouchPoint touchPoint;
         public static FakeTouchDevice Default = new FakeTouchDevice();
+
+        private readonly TouchPoint touchPoint;
 
         public FakeTouchDevice()
             : base(0)
         {
         }
 
-        public FakeTouchDevice(TouchPoint touchPoint) : base(0)
+        public FakeTouchDevice(TouchPoint touchPoint)
+            : base(0)
         {
             this.touchPoint = touchPoint;
         }

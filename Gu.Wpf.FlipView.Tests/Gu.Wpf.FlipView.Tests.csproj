@@ -59,7 +59,6 @@
     <Compile Include="Misc and helpers\FakeTouchDevice.cs" />
     <Compile Include="Misc and helpers\FlipViewTestExt.cs" />
     <Compile Include="FlipViewTests.cs" />
-    <Compile Include="FlipViewUiTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

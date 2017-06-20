@@ -1,5 +1,6 @@
 ﻿namespace Gu.Wpf.FlipView.Tests
 {
+    using System.Threading;
     using System.Windows.Input;
 
     using Gu.Wpf.FlipView;
@@ -7,10 +8,7 @@
 
     using NUnit.Framework;
 
-    /// <summary>
-    /// Tests for the external api
-    /// </summary>
-    [RequiresSTA]
+    [Apartment(ApartmentState.STA)]
     public class FlipViewTests
     {
         private FlipView flipView;
@@ -29,7 +27,7 @@
         [TestCase(2, true, false)]
         public void CanExecutePreviousAndNext(int index, bool canPrevious, bool canNext)
         {
-            this.flipView.SelectedIndex = index;
+            this.flipView.SetCurrentValue(System.Windows.Controls.Primitives.Selector.SelectedIndexProperty, index);
             Assert.AreEqual(canPrevious, NavigationCommands.BrowseBack.CanExecute(null, this.flipView));
             Assert.AreEqual(canNext, NavigationCommands.BrowseForward.CanExecute(null, this.flipView));
         }
@@ -38,7 +36,7 @@
         [TestCase(1, 0)]
         public void BrowseBack(int from, int expectedTo)
         {
-            this.flipView.SelectedIndex = from;
+            this.flipView.SetCurrentValue(System.Windows.Controls.Primitives.Selector.SelectedIndexProperty, from);
             NavigationCommands.BrowseBack.Execute(null, this.flipView);
             Assert.AreSame(this.flipView.Items[expectedTo], this.flipView.SelectedItem);
         }
@@ -47,7 +45,7 @@
         [TestCase(2, 2)]
         public void BrowseForward(int from, int expectedTo)
         {
-            this.flipView.SelectedIndex = from;
+            this.flipView.SetCurrentValue(System.Windows.Controls.Primitives.Selector.SelectedIndexProperty, from);
             NavigationCommands.BrowseForward.Execute(null, this.flipView);
             Assert.AreSame(this.flipView.Items[expectedTo], this.flipView.SelectedItem);
         }

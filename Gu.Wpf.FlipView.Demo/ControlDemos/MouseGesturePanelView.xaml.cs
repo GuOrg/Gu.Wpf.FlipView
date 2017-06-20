@@ -1,15 +1,11 @@
 ﻿namespace Gu.Wpf.FlipView.Demo.ControlDemos
 {
     using System.Windows.Controls;
-
     using Gu.Wpf.FlipView.Gestures;
 
-    /// <summary>
-    /// Interaction logic for GesturePanel.xaml
-    /// </summary>
-    public partial class GesturePanelView : UserControl
+    public partial class MouseGesturePanelView : UserControl
     {
-        public GesturePanelView()
+        public MouseGesturePanelView()
         {
             this.InitializeComponent();
         }

@@ -14,5 +14,12 @@ namespace Gu.Wpf.FlipView.Gestures
         public Action<UIElement> Add { get; }
 
         public Action<UIElement> Remove { get; }
+
+        public static EventPattern Create(RoutedEvent routedEvent, Delegate handler)
+        {
+            return new EventPattern(
+                e => e.AddHandler(routedEvent, handler),
+                e => e.RemoveHandler(routedEvent, handler));
+        }
     }
 }

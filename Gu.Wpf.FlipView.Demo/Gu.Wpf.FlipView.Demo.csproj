@@ -74,12 +74,15 @@
     <Compile Include="ControlDemos\FlipViewDemo.xaml.cs">
       <DependentUpon>FlipViewDemo.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ControlDemos\MouseGesturePanelView.xaml.cs">
+      <DependentUpon>MouseGesturePanelView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ControlDemos\Person.cs" />
     <Compile Include="ControlDemos\StyledFlipViewDemo.xaml.cs">
       <DependentUpon>StyledFlipViewDemo.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ControlDemos\GesturePanelView.xaml.cs">
-      <DependentUpon>GesturePanelView.xaml</DependentUpon>
+    <Compile Include="ControlDemos\TouchGesturePanelView.xaml.cs">
+      <DependentUpon>TouchGesturePanelView.xaml</DependentUpon>
     </Compile>
     <Compile Include="ControlDemos\TransitionControlView.xaml.cs">
       <DependentUpon>TransitionControlView.xaml</DependentUpon>
@@ -123,7 +126,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="ControlDemos\GesturePanelView.xaml">
+    <Page Include="ControlDemos\MouseGesturePanelView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ControlDemos\TouchGesturePanelView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
