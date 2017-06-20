@@ -314,7 +314,10 @@
                                                    Grid.Column="1"
                                                    Background="Transparent"
                                                    ClipToBounds="True">
-                                <flipView:TransitionControl Content="{TemplateBinding DeferredSelectedItem}"
+                                <flipView:TransitionControl Content="{Binding DeferredSelectedItem, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type flipView:FlipView}}}"
+                                                            ContentTemplate="{TemplateBinding ItemTemplate}"
+                                                            ContentTemplateSelector="{TemplateBinding ItemTemplateSelector}"
+                                                            ContentStringFormat="{TemplateBinding ItemStringFormat}"
                                                             InAnimation="{TemplateBinding CurrentOutAnimation}"
                                                             OutAnimation="{TemplateBinding CurrentInAnimation}" />
                             </flipView:GesturePanel>

@@ -5,9 +5,9 @@
     <Style TargetType="{x:Type flipView:TransitionControl}">
         <Style.Resources>
             <Style x:Key="ContentPresenterStyle" TargetType="{x:Type ContentPresenter}">
-                <Setter Property="ContentStringFormat" Value="{Binding ContentStringFormat, RelativeSource={RelativeSource AncestorType={x:Type flipView:TransitionControl}}}" />
-                <Setter Property="ContentTemplate" Value="{Binding ContentTemplate, RelativeSource={RelativeSource AncestorType={x:Type flipView:TransitionControl}}}" />
-                <Setter Property="ContentTemplateSelector" Value="{Binding ContentTemplateSelector, RelativeSource={RelativeSource AncestorType={x:Type flipView:TransitionControl}}}" />
+                <Setter Property="ContentStringFormat" Value="{Binding ContentStringFormat, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type flipView:TransitionControl}}}" />
+                <Setter Property="ContentTemplate" Value="{Binding ContentTemplate, RelativeSource={RelativeSource FindAncestor,  AncestorType={x:Type flipView:TransitionControl}}}" />
+                <Setter Property="ContentTemplateSelector" Value="{Binding ContentTemplateSelector, RelativeSource={RelativeSource FindAncestor,  AncestorType={x:Type flipView:TransitionControl}}}" />
                 <Setter Property="RenderTransform">
                     <Setter.Value>
                         <TransformGroup>
@@ -60,7 +60,7 @@
                             BorderThickness="{TemplateBinding BorderThickness}">
                         <Grid Margin="{TemplateBinding Padding}">
                             <ContentPresenter x:Name="PART_OldContent"
-                                              ContentSource="OldContent"
+                                              Content="{Binding OldContent, RelativeSource={RelativeSource FindAncestor, AncestorType=flipView:TransitionControl}}"
                                               Style="{TemplateBinding OldContentStyle}">
                                 <ContentPresenter.Triggers>
                                     <EventTrigger RoutedEvent="ContentChanged">
@@ -70,7 +70,7 @@
                             </ContentPresenter>
 
                             <ContentPresenter x:Name="PART_NewContent"
-                                              Content="{TemplateBinding Content}"
+                                              Content="{Binding Content, RelativeSource={RelativeSource FindAncestor, AncestorType=flipView:TransitionControl}}"
                                               Style="{TemplateBinding NewContentStyle}">
                                 <ContentPresenter.Triggers>
                                     <EventTrigger RoutedEvent="ContentChanged">

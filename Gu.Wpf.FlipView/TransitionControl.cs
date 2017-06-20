@@ -155,28 +155,28 @@
 
         protected override void OnContentChanged(object oldContent, object newContent)
         {
+            base.OnContentChanged(oldContent, newContent);
             if (!ReferenceEquals(this.OldContent, oldContent))
             {
                 this.OldContent = oldContent;
                 this.RaiseEvent(new RoutedEventArgs(OldContentChangedEvent, this));
-                this.oldContentPresenter?.RaiseEvent(new RoutedEventArgs(ContentChangedEvent, this.oldContentPresenter));
+                this.oldContentPresenter?.RaiseEvent(
+                    new RoutedEventArgs(ContentChangedEvent, this.oldContentPresenter));
             }
 
-            if (!ReferenceEquals(oldContent, newContent))
+            if (this.IsLoaded)
             {
                 this.RaiseEvent(new RoutedEventArgs(NewContentChangedEvent, this));
                 this.newContentPresenter?.RaiseEvent(new RoutedEventArgs(ContentChangedEvent, this.newContentPresenter));
-            }
-
-            base.OnContentChanged(oldContent, newContent);
-            this.RaiseEvent(new RoutedEventArgs(ContentChangedEvent, this));
-            if (ReferenceEquals(this.OutAnimation, EmptyStoryboard.Instance))
-            {
-                this.OldContent = null;
-            }
-            else
-            {
-                this.timer.Start();
+                this.RaiseEvent(new RoutedEventArgs(ContentChangedEvent, this));
+                if (ReferenceEquals(this.OutAnimation, EmptyStoryboard.Instance))
+                {
+                    this.OldContent = null;
+                }
+                else
+                {
+                    this.timer.Start();
+                }
             }
         }
 
