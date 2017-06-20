@@ -7,11 +7,6 @@
              d:DesignHeight="300"
              d:DesignWidth="300"
              mc:Ignorable="d">
-    <UserControl.Resources>
-        <DataTemplate DataType="{x:Type flipView:GesturedEventArgs}">
-            <TextBlock Text="{Binding Gesture}" />
-        </DataTemplate>
-    </UserControl.Resources>
     <Grid flipView:GesturePanel.Gestured="GesturePanel_OnGestured">
         <Grid.ColumnDefinitions>
             <ColumnDefinition />
@@ -36,7 +31,7 @@
                                Canvas.Top="50"
                                Width="100"
                                Height="100"
-                               Fill="Red"/>
+                               Fill="Red" />
                 </Canvas>
             </flipView:GesturePanel>
         </GroupBox>

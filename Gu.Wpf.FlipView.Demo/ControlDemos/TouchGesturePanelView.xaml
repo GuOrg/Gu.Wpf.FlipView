@@ -7,11 +7,6 @@
              d:DesignHeight="600"
              d:DesignWidth="600"
              mc:Ignorable="d">
-    <UserControl.Resources>
-        <DataTemplate DataType="{x:Type flipView:GesturedEventArgs}">
-            <TextBlock Text="{Binding Gesture}" />
-        </DataTemplate>
-    </UserControl.Resources>
     <Grid flipView:GesturePanel.Gestured="GesturePanel_OnGestured">
         <Grid.ColumnDefinitions>
             <ColumnDefinition />
@@ -29,7 +24,8 @@
                                Canvas.Top="100"
                                Width="100"
                                Height="100"
-                               flipView:Transform.RelativeOffsetX="{Binding Value, ElementName=PercentX}"
+                               flipView:Transform.RelativeOffsetX="{Binding Value,
+                                                                            ElementName=PercentX}"
                                Fill="Red">
                         <Rectangle.RenderTransform>
                             <TranslateTransform X="{Binding (flipView:Transform.OffsetX), ElementName=Rectangle}" />

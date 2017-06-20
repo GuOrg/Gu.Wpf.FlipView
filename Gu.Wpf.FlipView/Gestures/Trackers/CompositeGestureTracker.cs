@@ -65,7 +65,7 @@ namespace Gu.Wpf.FlipView.Gestures
         /// <inheritdoc />
         protected override void RemoveItem(int index)
         {
-            var tracker = base.Items[index];
+            var tracker = this.Items[index];
             tracker.InputElement = null;
             tracker.Gestured -= this.OnGestured;
             base.RemoveItem(index);

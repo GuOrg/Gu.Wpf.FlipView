@@ -15,7 +15,7 @@
         <TabItem Header="FlipView images">
             <controlDemos:ImagesFlipView />
         </TabItem>
-        
+
         <TabItem Header="FlipView DataTemplate">
             <controlDemos:FlipViewDataTemplateView />
         </TabItem>
@@ -27,7 +27,7 @@
         <TabItem Header="TransitionControl custom animations">
             <controlDemos:TransitionControlStyledView />
         </TabItem>
-        
+
         <TabItem Header="GesturePanelView (touch)">
             <controlDemos:TouchGesturePanelView />
         </TabItem>
@@ -35,11 +35,11 @@
         <TabItem Header="GesturePanelView (mouse)">
             <controlDemos:MouseGesturePanelView />
         </TabItem>
-       
+
         <TabItem Header="GesturePanelView (mouse and touch)">
             <controlDemos:CompositeGesturePanelView />
         </TabItem>
-        
+
         <!--  Providing a sample of how to style it  -->
         <TabItem Header="FlipView Styles">
             <controlDemos:StyledFlipViewDemo />
