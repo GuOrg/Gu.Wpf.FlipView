@@ -20,12 +20,8 @@ namespace Gu.Wpf.FlipView.Gestures
                                     EventSubscriber.Create(UIElement.PreviewTouchMoveEvent, new EventHandler<TouchEventArgs>(this.OnMove)),
                                     EventSubscriber.Create(UIElement.PreviewTouchUpEvent, new EventHandler<TouchEventArgs>(this.OnEnd)),
                                     EventSubscriber.Create(UIElement.TouchLeaveEvent, new EventHandler<TouchEventArgs>(this.OnEnd)),
-                                    new EventSubscriber(
-                                        x => x.CommandBindings.Add(new CommandBinding(NavigationCommands.BrowseForward, this.OnBrowseForward)),
-                                        x => x.CommandBindings.Remove(new CommandBinding(NavigationCommands.BrowseForward, this.OnBrowseForward))),
-                                    new EventSubscriber(
-                                        x => x.CommandBindings.Add(new CommandBinding(NavigationCommands.BrowseBack, this.OnBrowseBack)),
-                                        x => x.CommandBindings.Remove(new CommandBinding(NavigationCommands.BrowseBack, this.OnBrowseBack)))
+                                    EventSubscriber.Create(NavigationCommands.BrowseForward, this.OnBrowseForward),
+                                    EventSubscriber.Create(NavigationCommands.BrowseBack, this.OnBrowseBack),
                                 };
         }
 

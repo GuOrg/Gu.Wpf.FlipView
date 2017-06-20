@@ -16,19 +16,17 @@
     </gestures:TouchGestureTracker>
 
     <gestures:CompositeGestureTracker x:Key="CompositeGestureTracker" x:Shared="False">
-        <gestures:CompositeGestureTracker.Trackers>
-            <gestures:MouseGestureTracker>
-                <gestures:MouseGestureTracker.Interpreter>
-                    <gestures:GestureInterpreter MinSwipeLength="40" MinSwipeVelocity="1" />
-                </gestures:MouseGestureTracker.Interpreter>
-            </gestures:MouseGestureTracker>
+        <gestures:MouseGestureTracker>
+            <gestures:MouseGestureTracker.Interpreter>
+                <gestures:GestureInterpreter MinSwipeLength="40" MinSwipeVelocity="1" />
+            </gestures:MouseGestureTracker.Interpreter>
+        </gestures:MouseGestureTracker>
 
-            <gestures:TouchGestureTracker>
-                <gestures:TouchGestureTracker.Interpreter>
-                    <gestures:GestureInterpreter MinSwipeLength="50" MinSwipeVelocity="1" />
-                </gestures:TouchGestureTracker.Interpreter>
-            </gestures:TouchGestureTracker>
-        </gestures:CompositeGestureTracker.Trackers>
+        <gestures:TouchGestureTracker>
+            <gestures:TouchGestureTracker.Interpreter>
+                <gestures:GestureInterpreter MinSwipeLength="50" MinSwipeVelocity="1" />
+            </gestures:TouchGestureTracker.Interpreter>
+        </gestures:TouchGestureTracker>
     </gestures:CompositeGestureTracker>
 
     <Style TargetType="{x:Type flipView:GesturePanel}">

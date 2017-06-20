@@ -15,6 +15,7 @@ namespace Gu.Wpf.FlipView.Gestures
         private UIElement inputElement;
         private IReadOnlyList<IGestureTracker> trackers;
 
+        /// <inheritdoc />
         public event EventHandler<GestureEventArgs> Gestured;
 
         public IReadOnlyList<IGestureTracker> Trackers
@@ -52,6 +53,110 @@ namespace Gu.Wpf.FlipView.Gestures
             }
         }
 
+        /// <inheritdoc />
+        int ICollection.Count => this.trackers?.Count ?? 0;
+
+        /// <inheritdoc />
+        object ICollection.SyncRoot => throw new NotSupportedException();
+
+        /// <inheritdoc />
+        bool ICollection.IsSynchronized => throw new NotSupportedException();
+
+        /// <inheritdoc />
+        bool IList.IsReadOnly => false;
+
+        /// <inheritdoc />
+        bool IList.IsFixedSize => false;
+
+        /// <inheritdoc />
+        object IList.this[int index]
+        {
+            get => this.trackers[index];
+            set
+            {
+                var temp = this.trackers == null
+                    ? new List<IGestureTracker>()
+                    : new List<IGestureTracker>(this.trackers);
+                temp[index] = (IGestureTracker)value;
+                this.Trackers = temp;
+            }
+        }
+
+        /// <inheritdoc />
+        void IList.Insert(int index, object value) => throw new NotSupportedException();
+
+        /// <inheritdoc />
+        void IList.Remove(object value)
+        {
+            var temp = new List<IGestureTracker>(this.trackers);
+            temp.Remove((IGestureTracker)value);
+            this.Trackers = temp;
+        }
+
+        /// <inheritdoc />
+        void IList.RemoveAt(int index)
+        {
+            var temp = new List<IGestureTracker>(this.trackers);
+            temp.RemoveAt(index);
+            this.Trackers = temp;
+        }
+
+        /// <inheritdoc />
+        int IList.Add(object value)
+        {
+            var temp = this.trackers == null
+                ? new List<IGestureTracker>()
+                : new List<IGestureTracker>(this.trackers);
+            temp.Add((IGestureTracker)value);
+            this.Trackers = temp;
+            return temp.Count - 1;
+        }
+
+        /// <inheritdoc />
+        void IList.Clear() => this.Trackers = null;
+
+        /// <inheritdoc />
+        IEnumerator IEnumerable.GetEnumerator() => this.trackers?.GetEnumerator() ?? EmptyEnumerator.Instance;
+
+        /// <inheritdoc />
+        void ICollection.CopyTo(Array array, int index)
+        {
+            if (this.trackers == null)
+            {
+                return;
+            }
+
+            for (var i = 0; i < this.trackers.Count; i++)
+            {
+                array.SetValue(this.trackers[i], i + index);
+            }
+        }
+
+        /// <inheritdoc />
+        bool IList.Contains(object value) => this.trackers?.Contains(value) == true;
+
+        /// <inheritdoc />
+        int IList.IndexOf(object value)
+        {
+            if (this.trackers == null)
+            {
+                return -1;
+            }
+
+            for (var i = 0; i < this.trackers.Count; i++)
+            {
+                if (Equals(value, this.trackers[i]))
+                {
+                    return i;
+                }
+            }
+
+            return -1;
+        }
+
+        /// <summary>
+        /// Notify that a gesture was detected to any subscribers.
+        /// </summary>
         protected virtual void OnGestured(GestureEventArgs e)
         {
             this.Gestured?.Invoke(this, e);
@@ -59,7 +164,7 @@ namespace Gu.Wpf.FlipView.Gestures
 
         private void OnGestured(object sender, GestureEventArgs e)
         {
-            this.Gestured?.Invoke(this, e);
+            this.OnGestured(e);
         }
 
         private void TrackersChanged(IReadOnlyList<IGestureTracker> old, IReadOnlyList<IGestureTracker> @new)
@@ -85,47 +190,5 @@ namespace Gu.Wpf.FlipView.Gestures
                 }
             }
         }
-
-        IEnumerator IEnumerable.GetEnumerator() => this.trackers?.GetEnumerator() ?? EmptyEnumerator.Instance;
-
-        void ICollection.CopyTo(Array array, int index) => throw new NotSupportedException();
-
-        int ICollection.Count => this.trackers?.Count ?? 0;
-
-        object ICollection.SyncRoot => throw new NotSupportedException();
-
-        bool ICollection.IsSynchronized => throw new NotSupportedException();
-
-        int IList.Add(object value)
-        {
-            var item = (IEnumerable<IGestureTracker>)value;
-            this.trackers = new List<IGestureTracker>(this.trackers?.Concat(item) ?? new[] { item });
-            return this.trackers.Count - 1;
-        }
-
-        bool IList.Contains(object value) => this.trackers.Contains(value);
-
-        void IList.Clear() => this.trackers = null;
-
-        int IList.IndexOf(object value) => this.trackers?.Contains(value) ?? false;
-
-        void IList.Insert(int index, object value) => throw new NotSupportedException();
-
-        void IList.Remove(object value) => this.trackers = t
-
-        void IList.RemoveAt(int index)
-        {
-            throw new NotImplementedException();
-        }
-
-        object IList.this[int index]
-        {
-            get { return this.trackers[index]; }
-            set { throw new NotImplementedException(); }
-        }
-
-        bool IList.IsReadOnly => false;
-
-        bool IList.IsFixedSize => false;
     }
 }

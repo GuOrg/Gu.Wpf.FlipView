@@ -2,6 +2,7 @@ namespace Gu.Wpf.FlipView.Gestures
 {
     using System;
     using System.Windows;
+    using System.Windows.Input;
 
     /// <summary>
     /// A class for subscribing and unsubscribing to an event.
@@ -40,6 +41,20 @@ namespace Gu.Wpf.FlipView.Gestures
             return new EventSubscriber(
                 e => e.AddHandler(routedEvent, handler),
                 e => e.RemoveHandler(routedEvent, handler));
+        }
+
+        /// <summary>
+        /// Create an <see cref="EventSubscriber"/>
+        /// </summary>
+        /// <param name="command">The command.</param>
+        /// <param name="onExecuted">The executed handler</param>
+        /// <returns>A new <see cref="EventSubscriber"/></returns>
+        public static EventSubscriber Create(RoutedCommand command, ExecutedRoutedEventHandler onExecuted)
+        {
+            var binding = new CommandBinding(command, onExecuted);
+            return new EventSubscriber(
+                x => x.CommandBindings.Add(binding),
+                x => x.CommandBindings.Remove(binding));
         }
     }
 }
