@@ -6,12 +6,7 @@ namespace Gu.Wpf.FlipView.Gestures
 
     public abstract class GestureTrackerBase<TArgs> : Freezable, IGestureTracker
     {
-        protected readonly List<GesturePoint> Points = new List<GesturePoint>();
-        protected bool IsGesturing;
-        protected EventSubscriber[] Subscribers;
-
-        private readonly WeakReference<UIElement> inputElement = new WeakReference<UIElement>(null);
-
+        private UIElement inputElement;
         private bool disposed = false;
 
         protected GestureTrackerBase(params EventSubscriber[] subscribers)
@@ -24,62 +19,74 @@ namespace Gu.Wpf.FlipView.Gestures
 
         public IGestureInterpreter Interpreter { get; set; }
 
+        public bool IsGesturing { get; protected set; }
+
         public UIElement InputElement
         {
-            get
-            {
-                this.inputElement.TryGetTarget(out UIElement target);
-                return target;
-            }
+            get => this.inputElement;
 
             set
             {
-                var old = this.InputElement;
+                var old = this.inputElement;
                 if (old != null)
                 {
-                    foreach (var pattern in this.Subscribers)
+                    foreach (var subscriber in this.Subscribers)
                     {
-                        pattern.RemoveHandler(old);
+                        subscriber.RemoveHandler(old);
                     }
                 }
 
                 if (value != null)
                 {
-                    foreach (var pattern in this.Subscribers)
+                    foreach (var subscriber in this.Subscribers)
                     {
-                        pattern.AddHandler(value);
+                        subscriber.AddHandler(value);
                     }
                 }
 
-                this.inputElement.SetTarget(value);
+                this.inputElement = value;
             }
         }
+
+        protected IReadOnlyList<EventSubscriber> Subscribers { get; set; }
+
+        protected List<GesturePoint> Points { get; } = new List<GesturePoint>();
 
         protected virtual void OnStart(object sender, TArgs e)
         {
             this.Points.Clear();
-            if (this.TryAddPoint(e))
+            if (this.TryAddPoint(e, out GesturePoint point))
             {
+                this.Points.Add(point);
                 this.IsGesturing = true;
             }
         }
 
         protected virtual void OnMove(object sender, TArgs e)
         {
-            this.TryAddPoint(e);
+            if (this.TryAddPoint(e, out GesturePoint point))
+            {
+                this.Points.Add(point);
+            }
         }
 
         protected virtual void OnEnd(object sender, TArgs e)
         {
             if (this.IsGesturing)
             {
-                this.TryAddPoint(e);
+                if (this.TryAddPoint(e, out GesturePoint point))
+                {
+                    this.Points.Add(point);
+                }
+
                 this.IsGesturing = false;
-                this.OnGestured(new Gesture(this.Points.ToArray()));
+                this.OnGestured(new Gesture(this.Points));
             }
+
+            this.Points.Clear();
         }
 
-        protected abstract bool TryAddPoint(TArgs args);
+        protected abstract bool TryAddPoint(TArgs args, out GesturePoint point);
 
         internal virtual void OnGestured(Gesture e)
         {

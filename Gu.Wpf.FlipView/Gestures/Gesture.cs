@@ -4,15 +4,12 @@
     using System.Windows;
     using System.Windows.Input;
 
-    public class Gesture 
+    public class Gesture
     {
-        private readonly GesturePoint[] points;
-
-        public Gesture(GesturePoint[] points)
+        public Gesture(IReadOnlyList<GesturePoint> points)
         {
-            this.points = points;
-            var first = this.points[0];
-            var last = this.points[this.points.Length - 1];
+            var first = points[0];
+            var last = points[points.Count - 1];
             var duration = last.Time - first.Time;
             this.Delta = last.Point - first.Point;
             this.Velocity = new Vector(this.Delta.X / duration, this.Delta.Y / duration);
@@ -22,14 +19,12 @@
         {
             this.CommandArgs = commandArgs;
         }
-   
+
         public ExecutedRoutedEventArgs CommandArgs { get; }
 
         public Vector Velocity { get; }
 
         public Vector Delta { get; }
-
-        public IEnumerable<GesturePoint> Points => this.points;
 
         public override string ToString()
         {
