@@ -59,7 +59,7 @@
             new PropertyMetadata(
                 EmptyStoryboard.Instance,
                 OnOldTransitionChanged,
-                OnAnimationCoerce));
+               (_, v) => OnAnimationCoerce(v)));
 
         public static readonly DependencyProperty OutAnimationProperty = DependencyProperty.Register(
             "OutAnimation",
@@ -68,7 +68,7 @@
             new PropertyMetadata(
                 EmptyStoryboard.Instance,
                 null,
-                OnAnimationCoerce));
+                (_, v) => OnAnimationCoerce(v)));
 
         public static readonly DependencyProperty OldContentProperty = OldContentPropertyKey.DependencyProperty;
 
@@ -146,6 +146,7 @@
             set => this.SetValue(OutAnimationProperty, value);
         }
 
+        /// <inheritdoc />
         public override void OnApplyTemplate()
         {
             this.newContentPresenter = this.GetTemplateChild(PartNewContent) as ContentPresenter;
@@ -153,6 +154,7 @@
             base.OnApplyTemplate();
         }
 
+        /// <inheritdoc />
         protected override void OnContentChanged(object oldContent, object newContent)
         {
             base.OnContentChanged(oldContent, newContent);
@@ -173,25 +175,31 @@
                 {
                     this.OldContent = null;
                 }
-                else
+                else if (this.timer?.Interval > TimeSpan.Zero)
                 {
                     this.timer.Start();
                 }
             }
         }
 
-        private static void OnOldTransitionChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        /// <summary>
+        /// Called when the animation for the old value changes.
+        /// </summary>
+        /// <param name="newAnimation">The storyboard for animating a value out of the view.</param>
+        protected virtual void OnOldTransitionChanged(Storyboard newAnimation)
         {
-            var transitionControl = (TransitionControl)d;
-            if (e.NewValue is Storyboard storyboard)
-            {
-                transitionControl.timer.Interval = storyboard.GetTimeToFinished();
-            }
+            this.timer.Interval = newAnimation?.GetTimeToFinished() ?? TimeSpan.Zero;
 
-            transitionControl.OldContent = null;
+            base.OnContentChanged(this.OldContent, null);
+            this.OldContent = null;
         }
 
-        private static object OnAnimationCoerce(DependencyObject d, object basevalue)
+        private static void OnOldTransitionChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            ((TransitionControl)d).OnOldTransitionChanged(e.NewValue as Storyboard);
+        }
+
+        private static object OnAnimationCoerce(object basevalue)
         {
             var storyboard = basevalue as Storyboard;
             if (storyboard == null)

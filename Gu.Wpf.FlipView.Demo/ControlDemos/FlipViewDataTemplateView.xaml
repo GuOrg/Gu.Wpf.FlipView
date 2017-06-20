@@ -9,7 +9,7 @@
              d:DesignWidth="300"
              mc:Ignorable="d">
     <UserControl.DataContext>
-        <local:ViewModel />
+        <local:FlipViewDataTemplateViewModel />
     </UserControl.DataContext>
     <Grid>
         <Grid.RowDefinitions>
@@ -23,12 +23,13 @@
         </Grid.ColumnDefinitions>
         <flipView:FlipView x:Name="FlipView"
                            Grid.Column="1"
-                           DataContext="{Binding People}"
+                           ItemsSource="{Binding People}"
                            SelectedIndex="1">
             <flipView:FlipView.ItemTemplate>
                 <DataTemplate DataType="{x:Type local:Person}">
                     <Border Background="#f1eef6">
-                        <TextBlock>
+                        <TextBlock HorizontalAlignment="Center"
+                                   VerticalAlignment="Center">
                             <TextBlock.Text>
                                 <MultiBinding StringFormat="{}{0} {1}">
                                     <Binding Path="FirstName" />
@@ -39,13 +40,6 @@
                     </Border>
                 </DataTemplate>
             </flipView:FlipView.ItemTemplate>
-            <flipView:FlipView.Resources>
-                <Style TargetType="TextBlock">
-                    <Setter Property="FontSize" Value="70" />
-                    <Setter Property="HorizontalAlignment" Value="Center" />
-                    <Setter Property="VerticalAlignment" Value="Center" />
-                </Style>
-            </flipView:FlipView.Resources>
         </flipView:FlipView>
         <Grid Grid.Row="1"
               Grid.Column="0"
@@ -56,15 +50,13 @@
                 <CheckBox Content="ShowIndex" IsChecked="{Binding ElementName=FlipView, Path=ShowIndex}" />
                 <ComboBox Width="100"
                           HorizontalAlignment="Left"
-                          SelectedItem="{Binding ElementName=FlipView,
-                                                 Path=ArrowPlacement}">
+                          SelectedItem="{Binding ElementName=FlipView, Path=ArrowPlacement}">
                     <flipView:ArrowPlacement>Inside</flipView:ArrowPlacement>
                     <flipView:ArrowPlacement>Outside</flipView:ArrowPlacement>
                 </ComboBox>
                 <ComboBox Width="100"
                           HorizontalAlignment="Left"
-                          SelectedItem="{Binding ElementName=FlipView,
-                                                 Path=IndexPlacement}">
+                          SelectedItem="{Binding ElementName=FlipView, Path=IndexPlacement}">
                     <flipView:IndexPlacement>Above</flipView:IndexPlacement>
                     <flipView:IndexPlacement>Below</flipView:IndexPlacement>
                 </ComboBox>

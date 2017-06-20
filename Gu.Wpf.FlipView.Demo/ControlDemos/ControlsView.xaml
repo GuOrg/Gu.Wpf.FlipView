@@ -6,9 +6,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              d:DesignHeight="300"
              d:DesignWidth="300"
-             mc:Ignorable="d"
-             >
-    <TabControl>
+             mc:Ignorable="d">
+    <TabControl SelectedIndex="1">
         <TabItem Header="FlipView">
             <controlDemos:FlipViewDemo />
         </TabItem>
@@ -16,7 +15,7 @@
         <TabItem Header="FlipView DataTemplate">
             <controlDemos:FlipViewDataTemplateView />
         </TabItem>
-        
+
         <TabItem Header="TransitionControl">
             <controlDemos:TransitionControlView />
         </TabItem>

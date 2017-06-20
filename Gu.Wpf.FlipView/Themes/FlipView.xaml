@@ -223,10 +223,8 @@
                                      Background="Transparent"
                                      BorderThickness="0"
                                      ItemContainerStyle="{TemplateBinding IndexItemStyle}"
-                                     ItemsSource="{Binding Items,
-                                                           RelativeSource={RelativeSource AncestorType=flipView:FlipView}}"
-                                     SelectedItem="{Binding SelectedItem,
-                                                            RelativeSource={RelativeSource AncestorType=flipView:FlipView}}">
+                                     ItemsSource="{Binding Items, RelativeSource={RelativeSource AncestorType=flipView:FlipView}}"
+                                     SelectedItem="{Binding SelectedItem, RelativeSource={RelativeSource AncestorType=flipView:FlipView}}">
                                 <ListBox.Template>
                                     <ControlTemplate TargetType="{x:Type ListBox}">
                                         <ItemsPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
@@ -274,16 +272,17 @@
                                     <Style BasedOn="{StaticResource ArrowButtonBorderStyle}" TargetType="{x:Type Border}">
                                         <Setter Property="Grid.Column" Value="1" />
                                         <Style.Triggers>
-                                            <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType=flipView:FlipView}, Path=ArrowPlacement}" Value="Inside">
+                                            <DataTrigger Binding="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ArrowPlacement}" Value="Inside">
                                                 <Setter Property="Grid.Column" Value="1" />
                                             </DataTrigger>
-                                            <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType=flipView:FlipView}, Path=ArrowPlacement}" Value="Outside">
+                                            <DataTrigger Binding="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ArrowPlacement}" Value="Outside">
                                                 <Setter Property="Grid.Column" Value="0" />
                                             </DataTrigger>
                                         </Style.Triggers>
                                     </Style>
                                 </Border.Style>
                             </Border>
+
                             <!--  ReSharper disable once Xaml.MissingGridIndex Set in style  -->
                             <Border x:Name="RightArrow" Grid.Row="1">
                                 <RepeatButton x:Name="RightArrowButton"
@@ -298,10 +297,10 @@
                                     <Style BasedOn="{StaticResource ArrowButtonBorderStyle}" TargetType="{x:Type Border}">
                                         <Setter Property="Grid.Column" Value="1" />
                                         <Style.Triggers>
-                                            <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType=flipView:FlipView}, Path=ArrowPlacement}" Value="Inside">
+                                            <DataTrigger Binding="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ArrowPlacement}" Value="Inside">
                                                 <Setter Property="Grid.Column" Value="1" />
                                             </DataTrigger>
-                                            <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType=flipView:FlipView}, Path=ArrowPlacement}" Value="Outside">
+                                            <DataTrigger Binding="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ArrowPlacement}" Value="Outside">
                                                 <Setter Property="Grid.Column" Value="2" />
                                             </DataTrigger>
                                         </Style.Triggers>
@@ -309,15 +308,14 @@
                                 </Border.Style>
                             </Border>
 
-                            <!--  ReSharper disable once Xaml.MissingGridIndex Set in style  -->
                             <flipView:GesturePanel Grid.Row="1"
                                                    Grid.Column="1"
                                                    Background="Transparent"
                                                    ClipToBounds="True">
-                                <flipView:TransitionControl Content="{Binding DeferredSelectedItem, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type flipView:FlipView}}}"
+                                <flipView:TransitionControl Content="{TemplateBinding DeferredSelectedItem}"
+                                                            ContentStringFormat="{TemplateBinding ItemStringFormat}"
                                                             ContentTemplate="{TemplateBinding ItemTemplate}"
                                                             ContentTemplateSelector="{TemplateBinding ItemTemplateSelector}"
-                                                            ContentStringFormat="{TemplateBinding ItemStringFormat}"
                                                             InAnimation="{TemplateBinding CurrentOutAnimation}"
                                                             OutAnimation="{TemplateBinding CurrentInAnimation}" />
                             </flipView:GesturePanel>
