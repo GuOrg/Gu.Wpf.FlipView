@@ -1,0 +1,74 @@
+﻿<UserControl x:Class="Gu.Wpf.FlipView.Demo.ControlDemos.TransitionControlStyledView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:controlDemos="clr-namespace:Gu.Wpf.FlipView.Demo.ControlDemos"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:flipView="http://gu.se/FlipView"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             d:DesignHeight="300"
+             d:DesignWidth="300"
+             mc:Ignorable="d">
+    <UserControl.Resources>
+        <DataTemplate DataType="{x:Type controlDemos:TransitionItem}">
+            <Border HorizontalAlignment="Stretch"
+                    VerticalAlignment="Stretch"
+                    Background="{Binding Brush}">
+                <TextBlock HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           FontSize="72"
+                           Text="{Binding Text}" />
+            </Border>
+        </DataTemplate>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <flipView:TransitionControl Content="{Binding SelectedItem, ElementName=ListBox}">
+            <flipView:TransitionControl.InAnimation>
+                <Storyboard>
+                    <DoubleAnimation BeginTime="0:0:0"
+                                     Storyboard.TargetProperty="Opacity"
+                                     From="1"
+                                     To="0"
+                                     Duration="0:0:0.3" />
+                    <DoubleAnimation BeginTime="0:0:0"
+                                     Storyboard.TargetProperty="(flipView:Transform.RelativeOffsetX)"
+                                     From="0"
+                                     To="1"
+                                     Duration="0:0:0.3" />
+                </Storyboard>
+            </flipView:TransitionControl.InAnimation>
+
+            <flipView:TransitionControl.OutAnimation>
+                <Storyboard>
+                    <DoubleAnimation BeginTime="0:0:0"
+                                     Storyboard.TargetProperty="Opacity"
+                                     From="0"
+                                     To="1"
+                                     Duration="0:0:0.3" />
+                    <DoubleAnimation BeginTime="0:0:0"
+                                     Storyboard.TargetProperty="(flipView:Transform.RelativeOffsetX)"
+                                     From="-1"
+                                     To="0"
+                                     Duration="0:0:0.3" />
+                </Storyboard>
+            </flipView:TransitionControl.OutAnimation>
+        </flipView:TransitionControl>
+
+        <ListBox x:Name="ListBox"
+                 Grid.Row="1"
+                 HorizontalContentAlignment="Stretch"
+                 VerticalContentAlignment="Stretch"
+                 ItemsSource="{Binding Items,
+                                       RelativeSource={RelativeSource AncestorType={x:Type controlDemos:TransitionControlStyledView}}}">
+            <ListBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <UniformGrid Columns="{Binding Items.Count, RelativeSource={RelativeSource AncestorType={x:Type controlDemos:TransitionControlStyledView}}}" Rows="1" />
+                </ItemsPanelTemplate>
+            </ListBox.ItemsPanel>
+        </ListBox>
+    </Grid>
+</UserControl>

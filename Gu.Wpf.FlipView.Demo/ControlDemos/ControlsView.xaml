@@ -20,6 +20,10 @@
             <controlDemos:TransitionControlView />
         </TabItem>
 
+        <TabItem Header="TransitionControl custom animations">
+            <controlDemos:TransitionControlStyledView />
+        </TabItem>
+        
         <TabItem Header="GesturePanelView">
             <controlDemos:GesturePanelView />
         </TabItem>

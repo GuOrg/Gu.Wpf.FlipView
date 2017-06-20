@@ -79,6 +79,9 @@
     <Compile Include="ControlDemos\GesturePanelView.xaml.cs">
       <DependentUpon>GesturePanelView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ControlDemos\TransitionControlView.xaml.cs">
+      <DependentUpon>TransitionControlView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Misc\CanExecuteControl.xaml.cs">
       <DependentUpon>CanExecuteControl.xaml</DependentUpon>
     </Compile>
@@ -99,8 +102,8 @@
       <DependentUpon>TouchBox.xaml</DependentUpon>
     </Compile>
     <Compile Include="Misc\ArgsVm.cs" />
-    <Compile Include="ControlDemos\TransitionControlView.xaml.cs">
-      <DependentUpon>TransitionControlView.xaml</DependentUpon>
+    <Compile Include="ControlDemos\TransitionControlStyledView.xaml.cs">
+      <DependentUpon>TransitionControlStyledView.xaml</DependentUpon>
     </Compile>
     <Compile Include="ControlDemos\TransitionItem.cs" />
     <Page Include="ControlDemos\ControlsView.xaml">
@@ -120,6 +123,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ControlDemos\StyledFlipViewDemo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ControlDemos\TransitionControlView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -163,7 +170,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="ControlDemos\TransitionControlView.xaml">
+    <Page Include="ControlDemos\TransitionControlStyledView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
