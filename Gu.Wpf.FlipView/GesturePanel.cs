@@ -86,6 +86,11 @@
 
         private static void OnGestureTrackerChanged(DependencyObject o, DependencyPropertyChangedEventArgs e)
         {
+            if (ReferenceEquals(e.OldValue, e.NewValue))
+            {
+                return;
+            }
+
             ((GesturePanel)o).OnGestureTrackerChanged((IGestureTracker)e.OldValue, (IGestureTracker)e.NewValue);
         }
     }
