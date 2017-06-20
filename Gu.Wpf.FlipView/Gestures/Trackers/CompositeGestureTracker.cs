@@ -1,39 +1,22 @@
 namespace Gu.Wpf.FlipView.Gestures
 {
     using System;
-    using System.Collections;
     using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     using System.Linq;
     using System.Windows;
-    using Gu.Wpf.FlipView.Internals;
 
     /// <summary>
     /// A tracker that tracks both mouse and touch.
     /// </summary>
-    public class CompositeGestureTracker : IGestureTracker, IList
+    public class CompositeGestureTracker : Collection<IGestureTracker>, IGestureTracker
     {
         private UIElement inputElement;
-        private IReadOnlyList<IGestureTracker> trackers;
 
         /// <inheritdoc />
         public event EventHandler<GestureEventArgs> Gestured;
 
-        public IReadOnlyList<IGestureTracker> Trackers
-        {
-            get => this.trackers;
-
-            set
-            {
-                if (ReferenceEquals(this.trackers, value))
-                {
-                    return;
-                }
-
-                this.TrackersChanged(this.trackers, value);
-                this.trackers = value;
-            }
-        }
-
+        /// <inheritdoc />
         public UIElement InputElement
         {
             get => this.inputElement;
@@ -46,112 +29,11 @@ namespace Gu.Wpf.FlipView.Gestures
                 }
 
                 this.inputElement = value;
-                foreach (var tracker in this.trackers.Where(x => x != null))
+                foreach (var tracker in this.Where(x => x != null))
                 {
                     tracker.InputElement = value;
                 }
             }
-        }
-
-        /// <inheritdoc />
-        int ICollection.Count => this.trackers?.Count ?? 0;
-
-        /// <inheritdoc />
-        object ICollection.SyncRoot => throw new NotSupportedException();
-
-        /// <inheritdoc />
-        bool ICollection.IsSynchronized => throw new NotSupportedException();
-
-        /// <inheritdoc />
-        bool IList.IsReadOnly => false;
-
-        /// <inheritdoc />
-        bool IList.IsFixedSize => false;
-
-        /// <inheritdoc />
-        object IList.this[int index]
-        {
-            get => this.trackers[index];
-            set
-            {
-                var temp = this.trackers == null
-                    ? new List<IGestureTracker>()
-                    : new List<IGestureTracker>(this.trackers);
-                temp[index] = (IGestureTracker)value;
-                this.Trackers = temp;
-            }
-        }
-
-        /// <inheritdoc />
-        void IList.Insert(int index, object value) => throw new NotSupportedException();
-
-        /// <inheritdoc />
-        void IList.Remove(object value)
-        {
-            var temp = new List<IGestureTracker>(this.trackers);
-            temp.Remove((IGestureTracker)value);
-            this.Trackers = temp;
-        }
-
-        /// <inheritdoc />
-        void IList.RemoveAt(int index)
-        {
-            var temp = new List<IGestureTracker>(this.trackers);
-            temp.RemoveAt(index);
-            this.Trackers = temp;
-        }
-
-        /// <inheritdoc />
-        int IList.Add(object value)
-        {
-            var temp = this.trackers == null
-                ? new List<IGestureTracker>()
-                : new List<IGestureTracker>(this.trackers);
-            temp.Add((IGestureTracker)value);
-            this.Trackers = temp;
-            return temp.Count - 1;
-        }
-
-        /// <inheritdoc />
-        void IList.Clear() => this.Trackers = null;
-
-        /// <inheritdoc />
-        IEnumerator IEnumerable.GetEnumerator() => this.trackers?.GetEnumerator() ?? EmptyEnumerator.Instance;
-
-        /// <inheritdoc />
-        void ICollection.CopyTo(Array array, int index)
-        {
-            if (this.trackers == null)
-            {
-                return;
-            }
-
-            for (var i = 0; i < this.trackers.Count; i++)
-            {
-                array.SetValue(this.trackers[i], i + index);
-            }
-        }
-
-        /// <inheritdoc />
-        bool IList.Contains(object value) => this.trackers?.Contains(value) == true;
-
-        /// <inheritdoc />
-        int IList.IndexOf(object value)
-        {
-            if (this.trackers == null)
-            {
-                return -1;
-            }
-
-            for (var i = 0; i < this.trackers.Count; i++)
-            {
-                if (Equals(value, this.trackers[i]))
-                {
-                    return i;
-                }
-            }
-
-            return -1;
         }
 
         /// <summary>
@@ -160,6 +42,41 @@ namespace Gu.Wpf.FlipView.Gestures
         protected virtual void OnGestured(GestureEventArgs e)
         {
             this.Gestured?.Invoke(this, e);
+        }
+
+        /// <inheritdoc />
+        protected override void ClearItems()
+        {
+            foreach (var tracker in this)
+            {
+                tracker.InputElement = null;
+                tracker.Gestured -= this.OnGestured;
+            }
+        }
+
+        /// <inheritdoc />
+        protected override void InsertItem(int index, IGestureTracker item)
+        {
+            item.InputElement = this.InputElement;
+            item.Gestured += this.OnGestured;
+            base.InsertItem(index, item);
+        }
+
+        /// <inheritdoc />
+        protected override void RemoveItem(int index)
+        {
+            var tracker = base.Items[index];
+            tracker.InputElement = null;
+            tracker.Gestured -= this.OnGestured;
+            base.RemoveItem(index);
+        }
+
+        /// <inheritdoc />
+        protected override void SetItem(int index, IGestureTracker item)
+        {
+            item.InputElement = this.InputElement;
+            item.Gestured += this.OnGestured;
+            base.SetItem(index, item);
         }
 
         private void OnGestured(object sender, GestureEventArgs e)
@@ -175,19 +92,14 @@ namespace Gu.Wpf.FlipView.Gestures
                 {
                     if (tracker != null)
                     {
-                        tracker.InputElement = null;
-                        tracker.Gestured -= this.OnGestured;
+
                     }
                 }
             }
 
             if (@new != null)
             {
-                foreach (var tracker in @new)
-                {
-                    tracker.InputElement = this.InputElement;
-                    tracker.Gestured += this.OnGestured;
-                }
+
             }
         }
     }

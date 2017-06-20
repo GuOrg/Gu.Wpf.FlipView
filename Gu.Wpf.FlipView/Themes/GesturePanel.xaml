@@ -36,7 +36,7 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type flipView:GesturePanel}">
                     <Border Background="{TemplateBinding Background}">
-                        <ContentPresenter  />
+                        <ContentPresenter />
                     </Border>
                 </ControlTemplate>
             </Setter.Value>

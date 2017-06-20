@@ -62,6 +62,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ControlDemos\CompositeGesturePanelView.xaml.cs">
+      <DependentUpon>CompositeGesturePanelView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ControlDemos\ControlsView.xaml.cs">
       <DependentUpon>ControlsView.xaml</DependentUpon>
     </Compile>
@@ -114,6 +117,10 @@
       <DependentUpon>TransitionControlStyledView.xaml</DependentUpon>
     </Compile>
     <Compile Include="ControlDemos\TransitionItem.cs" />
+    <Page Include="ControlDemos\CompositeGesturePanelView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="ControlDemos\ControlsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
