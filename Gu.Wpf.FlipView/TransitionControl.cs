@@ -46,12 +46,6 @@
             typeof(TransitionControl),
             new PropertyMetadata(default(Style)));
 
-        private static readonly DependencyPropertyKey OldContentPropertyKey = DependencyProperty.RegisterReadOnly(
-            "OldContent",
-            typeof(object),
-            typeof(TransitionControl),
-            new PropertyMetadata(default(object)));
-
         public static readonly DependencyProperty InAnimationProperty = DependencyProperty.Register(
             "InAnimation",
             typeof(Storyboard),
@@ -70,9 +64,18 @@
                 null,
                 (_, v) => OnAnimationCoerce(v)));
 
+        private static readonly DependencyPropertyKey OldContentPropertyKey = DependencyProperty.RegisterReadOnly(
+            "OldContent",
+            typeof(object),
+            typeof(TransitionControl),
+            new PropertyMetadata(default(object)));
+
         public static readonly DependencyProperty OldContentProperty = OldContentPropertyKey.DependencyProperty;
 
         private readonly DispatcherTimer timer;
+        private readonly RoutedEventArgs contentChangedEventArgs;
+        private readonly RoutedEventArgs oldContentChangedEventArgs;
+        private readonly RoutedEventArgs newContentChangedEventArgs;
 
         private ContentPresenter oldContentPresenter;
         private ContentPresenter newContentPresenter;
@@ -87,9 +90,12 @@
             this.timer = new DispatcherTimer(
                 TimeSpan.Zero,
                 DispatcherPriority.Background,
-                this.OnOldContentTransitionCompleted,
+                (_, __) => this.OnOldContentTransitionCompleted(),
                 this.Dispatcher);
             this.timer.Stop();
+            this.contentChangedEventArgs = new RoutedEventArgs(ContentChangedEvent, this);
+            this.oldContentChangedEventArgs = new RoutedEventArgs(OldContentChangedEvent, this);
+            this.newContentChangedEventArgs = new RoutedEventArgs(NewContentChangedEvent, this);
         }
 
         public event RoutedEventHandler ContentChanged
@@ -110,12 +116,18 @@
             remove => this.RemoveHandler(NewContentChangedEvent, value);
         }
 
+        /// <summary>
+        /// Gets the content being removed.
+        /// </summary>
         public object OldContent
         {
             get => (object)this.GetValue(OldContentProperty);
             protected set => this.SetValue(OldContentPropertyKey, value);
         }
 
+        /// <summary>
+        /// Gets or sets the style for the old content presenter.
+        /// </summary>
         public Style OldContentStyle
         {
             get => (Style)this.GetValue(OldContentStyleProperty);
@@ -131,6 +143,9 @@
             set => this.SetValue(InAnimationProperty, value);
         }
 
+        /// <summary>
+        /// Gets or sets the style for the new content presenter.
+        /// </summary>
         public Style NewContentStyle
         {
             get => (Style)this.GetValue(NewContentStyleProperty);
@@ -161,21 +176,22 @@
             if (!ReferenceEquals(this.OldContent, oldContent))
             {
                 this.OldContent = oldContent;
-                this.RaiseEvent(new RoutedEventArgs(OldContentChangedEvent, this));
-                this.oldContentPresenter?.RaiseEvent(
-                    new RoutedEventArgs(ContentChangedEvent, this.oldContentPresenter));
+                this.RaiseEvent(this.oldContentChangedEventArgs);
+                this.oldContentPresenter?.RaiseEvent(new RoutedEventArgs(ContentChangedEvent, this.oldContentPresenter));
             }
 
             if (this.IsLoaded)
             {
-                this.RaiseEvent(new RoutedEventArgs(NewContentChangedEvent, this));
+                this.RaiseEvent(this.newContentChangedEventArgs);
                 this.newContentPresenter?.RaiseEvent(new RoutedEventArgs(ContentChangedEvent, this.newContentPresenter));
-                this.RaiseEvent(new RoutedEventArgs(ContentChangedEvent, this));
-                if (ReferenceEquals(this.OutAnimation, EmptyStoryboard.Instance))
+                this.RaiseEvent(this.contentChangedEventArgs);
+                if (ReferenceEquals(this.OutAnimation, EmptyStoryboard.Instance) ||
+                    this.timer == null ||
+                    this.timer.Interval == TimeSpan.Zero)
                 {
                     this.OldContent = null;
                 }
-                else if (this.timer?.Interval > TimeSpan.Zero)
+                else
                 {
                     this.timer.Start();
                 }
@@ -194,6 +210,16 @@
             this.OldContent = null;
         }
 
+        /// <summary>
+        /// Called when the animation finishes for the old content.
+        /// </summary>
+        protected virtual void OnOldContentTransitionCompleted()
+        {
+            base.OnContentChanged(this.OldContent, null);
+            this.timer.Stop();
+            this.OldContent = null;
+        }
+
         private static void OnOldTransitionChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             ((TransitionControl)d).OnOldTransitionChanged(e.NewValue as Storyboard);
@@ -208,13 +234,6 @@
             }
 
             return storyboard;
-        }
-
-        private void OnOldContentTransitionCompleted(object sender, EventArgs e)
-        {
-            base.OnContentChanged(this.OldContent, null);
-            this.timer.Stop();
-            this.OldContent = null;
         }
 
         private static class EmptyStoryboard
