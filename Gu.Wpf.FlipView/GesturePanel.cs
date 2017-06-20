@@ -13,7 +13,7 @@
     public class GesturePanel : ContentControl
     {
 #pragma warning disable SA1600 // Elements must be documented
-        public static readonly RoutedEvent GesturedEvent = EventManager.RegisterRoutedEvent("Gestured", RoutingStrategy.Bubble, typeof(GesturedEventhandler), typeof(GesturePanel));
+        public static readonly RoutedEvent GesturedEvent = EventManager.RegisterRoutedEvent("Gestured", RoutingStrategy.Bubble, typeof(GesturedEventHandler), typeof(GesturePanel));
 
         public static readonly DependencyProperty GestureTrackerProperty = DependencyProperty.Register(
             "GestureTracker",
@@ -40,7 +40,7 @@
         /// <summary>
         /// Notifies when a gesture was detected.
         /// </summary>
-        public event GesturedEventhandler Gestured
+        public event GesturedEventHandler Gestured
         {
             add => this.AddHandler(GesturedEvent, value);
             remove => this.RemoveHandler(GesturedEvent, value);
@@ -55,6 +55,12 @@
             set => this.SetValue(GestureTrackerProperty, value);
         }
 
+        /// <summary>
+        /// Called when <see cref="GestureTracker"/> changes value.
+        /// Note that the tracker is not disposable so input element should be set to null for the old tracker.
+        /// </summary>
+        /// <param name="oldTracker">The old tracker.</param>
+        /// <param name="newTracker">The new tracker.</param>
         protected virtual void OnGestureTrackerChanged(IGestureTracker oldTracker, IGestureTracker newTracker)
         {
             if (oldTracker != null)
@@ -70,6 +76,9 @@
             }
         }
 
+        /// <summary>
+        /// Called by the <see cref="GestureTracker"/> when it detects a gesture.
+        /// </summary>
         protected virtual void OnGesture(object sender, GestureEventArgs e)
         {
             this.RaiseEvent(new GesturedEventArgs(e.Type, e));

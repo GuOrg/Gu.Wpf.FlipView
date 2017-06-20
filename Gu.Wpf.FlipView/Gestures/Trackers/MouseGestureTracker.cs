@@ -15,10 +15,10 @@ namespace Gu.Wpf.FlipView.Gestures
         {
             this.Subscribers = new[]
                             {
-                                EventSubscriber.Create(UIElement.PreviewMouseLeftButtonDownEvent, new MouseButtonEventHandler(this.OnStart)),
-                                EventSubscriber.Create(UIElement.PreviewMouseMoveEvent, new MouseEventHandler(this.OnMove)),
-                                EventSubscriber.Create(UIElement.PreviewMouseLeftButtonUpEvent, new MouseButtonEventHandler(this.OnEnd)),
-                                EventSubscriber.Create(UIElement.MouseLeaveEvent, new MouseEventHandler(this.OnEnd)),
+                                SubscribeInfo.Create(UIElement.PreviewMouseLeftButtonDownEvent, new MouseButtonEventHandler(this.OnStart)),
+                                SubscribeInfo.Create(UIElement.PreviewMouseMoveEvent, new MouseEventHandler(this.OnMove)),
+                                SubscribeInfo.Create(UIElement.PreviewMouseLeftButtonUpEvent, new MouseButtonEventHandler(this.OnEnd)),
+                                SubscribeInfo.Create(UIElement.MouseLeaveEvent, new MouseEventHandler(this.OnEnd)),
                             };
         }
 

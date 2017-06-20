@@ -7,14 +7,14 @@ namespace Gu.Wpf.FlipView.Gestures
     /// <summary>
     /// A class for subscribing and unsubscribing to an event.
     /// </summary>
-    public class EventSubscriber
+    public class SubscribeInfo
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="EventSubscriber"/> class.
+        /// Initializes a new instance of the <see cref="SubscribeInfo"/> class.
         /// </summary>
         /// <param name="addHandler">e => e.AddHandler(routedEvent, handler)</param>
         /// <param name="removeHandler"> e => e.RemoveHandler(routedEvent, handler)</param>
-        public EventSubscriber(Action<UIElement> addHandler, Action<UIElement> removeHandler)
+        public SubscribeInfo(Action<UIElement> addHandler, Action<UIElement> removeHandler)
         {
             this.AddHandler = addHandler;
             this.RemoveHandler = removeHandler;
@@ -31,28 +31,28 @@ namespace Gu.Wpf.FlipView.Gestures
         public Action<UIElement> RemoveHandler { get; }
 
         /// <summary>
-        /// Create an <see cref="EventSubscriber"/>
+        /// Create an <see cref="SubscribeInfo"/>
         /// </summary>
         /// <param name="routedEvent">The event.</param>
         /// <param name="handler">The event handler</param>
-        /// <returns>A new <see cref="EventSubscriber"/></returns>
-        public static EventSubscriber Create(RoutedEvent routedEvent, Delegate handler)
+        /// <returns>A new <see cref="SubscribeInfo"/></returns>
+        public static SubscribeInfo Create(RoutedEvent routedEvent, Delegate handler)
         {
-            return new EventSubscriber(
+            return new SubscribeInfo(
                 e => e.AddHandler(routedEvent, handler),
                 e => e.RemoveHandler(routedEvent, handler));
         }
 
         /// <summary>
-        /// Create an <see cref="EventSubscriber"/>
+        /// Create an <see cref="SubscribeInfo"/>
         /// </summary>
         /// <param name="command">The command.</param>
         /// <param name="onExecuted">The executed handler</param>
-        /// <returns>A new <see cref="EventSubscriber"/></returns>
-        public static EventSubscriber Create(RoutedCommand command, ExecutedRoutedEventHandler onExecuted)
+        /// <returns>A new <see cref="SubscribeInfo"/></returns>
+        public static SubscribeInfo Create(RoutedCommand command, ExecutedRoutedEventHandler onExecuted)
         {
             var binding = new CommandBinding(command, onExecuted);
-            return new EventSubscriber(
+            return new SubscribeInfo(
                 x => x.CommandBindings.Add(binding),
                 x => x.CommandBindings.Remove(binding));
         }

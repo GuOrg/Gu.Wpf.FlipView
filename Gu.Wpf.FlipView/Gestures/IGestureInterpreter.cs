@@ -12,6 +12,8 @@
         /// Check if <paramref name="points"/> is a gesture.
         /// </summary>
         /// <param name="points">The points registered by the tracker.</param>
+        /// <param name="gestureEventArgs">The event args with the detected gesture if any</param>
+        /// <returns>True if <paramref name="points"/> is interpreted as a gesture.</returns>
         bool TryGetGesture(IReadOnlyList<GesturePoint> points, out GestureEventArgs gestureEventArgs);
 
         /// <summary>
@@ -19,6 +21,8 @@
         /// Some hardware turns swipes into navigation commands.
         /// </summary>
         /// <param name="executed">The event args for the command that executed.</param>
+        /// <param name="gestureEventArgs">The event args with the detected gesture if any</param>
+        /// <returns>True if <paramref name="executed"/> is interpreted as a gesture.</returns>
         bool TryGetGesture(ExecutedRoutedEventArgs executed, out GestureEventArgs gestureEventArgs);
     }
 }

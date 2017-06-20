@@ -116,11 +116,12 @@
 
         /// <summary>
         /// Gets the content being removed.
+        /// This will be set to null when the animation finishes.
         /// </summary>
         public object OldContent
         {
             get => (object)this.GetValue(OldContentProperty);
-            protected set => this.SetValue(OldContentPropertyKey, value);
+            private set => this.SetValue(OldContentPropertyKey, value);
         }
 
         /// <summary>
