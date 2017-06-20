@@ -85,17 +85,17 @@
         }
 
         /// <inheritdoc />
-        public bool TryGetGesture(ExecutedRoutedEventArgs eventArgs, out GestureEventArgs gestureEventArgs)
+        public bool TryGetGesture(ExecutedRoutedEventArgs executed, out GestureEventArgs gestureEventArgs)
         {
             gestureEventArgs = null;
-            if (eventArgs.Command == NavigationCommands.BrowseForward)
+            if (executed.Command == NavigationCommands.BrowseForward)
             {
-                gestureEventArgs = new CommandGestureEventArgs(GestureType.SwipeLeft, eventArgs);
+                gestureEventArgs = new CommandGestureEventArgs(GestureType.SwipeLeft, executed);
             }
 
-            if (eventArgs.Command == NavigationCommands.BrowseBack)
+            if (executed.Command == NavigationCommands.BrowseBack)
             {
-                gestureEventArgs = new CommandGestureEventArgs(GestureType.SwipeRight, eventArgs);
+                gestureEventArgs = new CommandGestureEventArgs(GestureType.SwipeRight, executed);
             }
 
             return gestureEventArgs != null;

@@ -215,8 +215,10 @@
                                      Background="Transparent"
                                      BorderThickness="0"
                                      ItemContainerStyle="{TemplateBinding IndexItemStyle}"
-                                     ItemsSource="{Binding Items, RelativeSource={RelativeSource AncestorType=flipView:FlipView}}"
-                                     SelectedItem="{Binding SelectedItem, RelativeSource={RelativeSource AncestorType=flipView:FlipView}}">
+                                     ItemsSource="{Binding Items,
+                                                           RelativeSource={RelativeSource AncestorType=flipView:FlipView}}"
+                                     SelectedItem="{Binding SelectedItem,
+                                                            RelativeSource={RelativeSource AncestorType=flipView:FlipView}}">
                                 <ListBox.Template>
                                     <ControlTemplate TargetType="{x:Type ListBox}">
                                         <ItemsPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />

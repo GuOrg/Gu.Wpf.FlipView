@@ -9,7 +9,8 @@
 
     public class DumpCommands
     {
-        [Test, Explicit]
+        [Test]
+        [Explicit]
         public void DumpBindings()
         {
             // CommandBindings.Add(new CommandBinding(NavigationCommands.BrowseForward, (sender, args) => Args.Add("Forward")));

@@ -1,11 +1,19 @@
 ﻿<Application x:Class="Gu.Wpf.FlipView.Demo.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:flipView="http://gu.se/FlipView"
              xmlns:misc="clr-namespace:Gu.Wpf.FlipView.Demo.Misc"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
         <HierarchicalDataTemplate DataType="{x:Type misc:ArgsVm}" ItemsSource="{Binding Children}">
             <TextBlock Text="{Binding Name}" />
         </HierarchicalDataTemplate>
+
+        <DataTemplate DataType="{x:Type flipView:GesturedEventArgs}">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="{Binding Gesture}" />
+                <TextBlock Text="{Binding GestureEventArgs}" />
+            </StackPanel>
+        </DataTemplate>
     </Application.Resources>
 </Application>

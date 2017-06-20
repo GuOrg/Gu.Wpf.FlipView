@@ -16,12 +16,12 @@ namespace Gu.Wpf.FlipView.Gestures
         {
             this.Subscribers = new[]
                                 {
-                                    EventSubscriber.Create(UIElement.PreviewTouchDownEvent, new EventHandler<TouchEventArgs>(this.OnStart)),
-                                    EventSubscriber.Create(UIElement.PreviewTouchMoveEvent, new EventHandler<TouchEventArgs>(this.OnMove)),
-                                    EventSubscriber.Create(UIElement.PreviewTouchUpEvent, new EventHandler<TouchEventArgs>(this.OnEnd)),
-                                    EventSubscriber.Create(UIElement.TouchLeaveEvent, new EventHandler<TouchEventArgs>(this.OnEnd)),
-                                    EventSubscriber.Create(NavigationCommands.BrowseForward, this.OnBrowseForward),
-                                    EventSubscriber.Create(NavigationCommands.BrowseBack, this.OnBrowseBack),
+                                    SubscribeInfo.Create(UIElement.PreviewTouchDownEvent, new EventHandler<TouchEventArgs>(this.OnStart)),
+                                    SubscribeInfo.Create(UIElement.PreviewTouchMoveEvent, new EventHandler<TouchEventArgs>(this.OnMove)),
+                                    SubscribeInfo.Create(UIElement.PreviewTouchUpEvent, new EventHandler<TouchEventArgs>(this.OnEnd)),
+                                    SubscribeInfo.Create(UIElement.TouchLeaveEvent, new EventHandler<TouchEventArgs>(this.OnEnd)),
+                                    SubscribeInfo.Create(NavigationCommands.BrowseForward, this.OnBrowseForward),
+                                    SubscribeInfo.Create(NavigationCommands.BrowseBack, this.OnBrowseBack),
                                 };
         }
 

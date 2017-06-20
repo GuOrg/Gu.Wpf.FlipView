@@ -67,7 +67,6 @@
     <Compile Include="GesturePanel.cs" />
     <Compile Include="Gestures\GestureType.cs" />
     <Compile Include="Gestures\EventArgs\InputGestureEventArgs.cs" />
-    <Compile Include="Internals\EmptyEnumerator.cs" />
     <Compile Include="Internals\TimeLineExt.cs" />
     <Compile Include="TransitionControl.cs" />
     <Compile Include="AttachedProperties\Transform.cs" />
@@ -81,7 +80,7 @@
     </Page>
     <Compile Include="ArrowPlacement.cs" />
     <Compile Include="Gestures\Trackers\CompositeGestureTracker.cs" />
-    <Compile Include="Gestures\Trackers\EventSubscriber.cs" />
+    <Compile Include="Gestures\Trackers\SubscribeInfo.cs" />
     <Compile Include="Gestures\EventArgs\GestureEventArgs.cs" />
     <Compile Include="Gestures\Trackers\GestureTrackerBase.cs" />
     <Compile Include="Gestures\GestureInterpreter.cs" />

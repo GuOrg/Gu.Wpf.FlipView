@@ -1,4 +1,7 @@
 namespace Gu.Wpf.FlipView.Gestures
 {
-    public delegate void GesturedEventhandler(object sender, GesturedEventArgs e);
+    /// <summary>
+    /// Handler for the gesture event.
+    /// </summary>
+    public delegate void GesturedEventHandler(object sender, GesturedEventArgs e);
 }

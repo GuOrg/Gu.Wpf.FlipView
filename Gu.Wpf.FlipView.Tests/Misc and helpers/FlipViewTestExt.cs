@@ -9,13 +9,13 @@ namespace Gu.Wpf.FlipView.Tests.Misc_and_helpers
 
     public static class FlipViewTestExt
     {
-        public static FieldInfo IsAnimating;
+        private static readonly FieldInfo IsAnimating;
 
-        public static FieldInfo PartSwipePanel;
+        private static FieldInfo partSwipePanel;
 
         static FlipViewTestExt()
         {
-            PartSwipePanel = typeof(FlipView).GetField("_partSwipePanel", BindingFlags.Instance | BindingFlags.NonPublic);
+            partSwipePanel = typeof(FlipView).GetField("_partSwipePanel", BindingFlags.Instance | BindingFlags.NonPublic);
             IsAnimating = typeof(FlipView).GetField("_animation", BindingFlags.Instance | BindingFlags.NonPublic);
         }
 
