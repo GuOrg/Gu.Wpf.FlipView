@@ -1,5 +1,6 @@
 group Test
   NUnit
+  FlaUI.UIA3
 
 group Analyzers
   JetBrains.Annotations
