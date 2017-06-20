@@ -20,6 +20,7 @@
                 </Style.Triggers>
             </Style>
         </Style.Resources>
+        <Setter Property="ClipToBounds" Value="True" />
         <Setter Property="OldContentStyle" Value="{StaticResource ContentPresenterStyle}" />
         <Setter Property="NewContentStyle" Value="{StaticResource ContentPresenterStyle}" />
 
