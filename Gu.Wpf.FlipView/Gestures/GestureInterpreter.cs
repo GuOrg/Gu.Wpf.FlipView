@@ -4,14 +4,17 @@
     using System.Windows;
     using System.Windows.Input;
 
+    /// <summary>
+    /// The default interpreter of gestures.
+    /// </summary>
     public class GestureInterpreter : Freezable, IGestureInterpreter
     {
-        public static readonly DependencyProperty MinSwipeVelocityProperty =
-            DependencyProperty.Register(
-                "MinSwipeVelocity",
-                typeof(double),
-                typeof(GestureInterpreter),
-                new PropertyMetadata(1.0));
+#pragma warning disable SA1600 // Elements must be documented
+        public static readonly DependencyProperty MinSwipeVelocityProperty = DependencyProperty.Register(
+            "MinSwipeVelocity",
+            typeof(double),
+            typeof(GestureInterpreter),
+            new PropertyMetadata(1.0));
 
         public static readonly DependencyProperty MinSwipeLengthProperty = DependencyProperty.Register(
             "MinSwipeLength",
@@ -19,19 +22,43 @@
             typeof(GestureInterpreter),
             new PropertyMetadata(50.0));
 
+        public static readonly DependencyProperty MaxDeviationFromHorizontalProperty = DependencyProperty.Register(
+            "MaxDeviationFromHorizontal",
+            typeof(double),
+            typeof(GestureInterpreter),
+            new PropertyMetadata(30.0));
+#pragma warning restore SA1600 // Elements must be documented
+
+        /// <summary>
+        /// Gets or sets the minimum velocity for a gesture to be considered a swipe.
+        /// </summary>
         public double MinSwipeVelocity
         {
             get => (double)this.GetValue(MinSwipeVelocityProperty);
             set => this.SetValue(MinSwipeVelocityProperty, value);
         }
 
+        /// <summary>
+        /// Gets or sets the minimum length for a gesture to be considered a swipe.
+        /// </summary>
         public double MinSwipeLength
         {
             get => (double)this.GetValue(MinSwipeLengthProperty);
             set => this.SetValue(MinSwipeLengthProperty, value);
         }
 
-        public bool IsSwipeRight(GestureEventArgs args)
+        /// <summary>
+        /// Gets or sets the maximum angle from horizontal for a swipe to be a swipe left or right.
+        /// In degrees.
+        /// </summary>
+        public double MaxDeviationFromHorizontal
+        {
+            get => (double)this.GetValue(MaxDeviationFromHorizontalProperty);
+            set => this.SetValue(MaxDeviationFromHorizontalProperty, value);
+        }
+
+        /// <inheritdoc />
+        public virtual bool IsSwipeRight(GestureEventArgs args)
         {
             var interpreter = args.Interpreter;
             if (interpreter == null)
@@ -48,9 +75,12 @@
             return interpreter.IsSwipeRight(gesture);
         }
 
-        public bool IsSwipeRight(Gesture gesture)
+        /// <inheritdoc />
+        public virtual bool IsSwipeRight(Gesture gesture)
         {
-            if (IsLongEnough(gesture, this.MinSwipeLength) && IsFastEnough(gesture, this.MinSwipeVelocity) && this.IsHorizontalEnough(gesture))
+            if (IsLongEnough(gesture, this.MinSwipeLength) &&
+                IsFastEnough(gesture, this.MinSwipeVelocity) &&
+                IsHorizontalEnough(gesture, this.MaxDeviationFromHorizontal))
             {
                 return gesture.Delta.X > 0;
             }
@@ -58,7 +88,8 @@
             return false;
         }
 
-        public bool IsSwipeLeft(GestureEventArgs args)
+        /// <inheritdoc />
+        public virtual bool IsSwipeLeft(GestureEventArgs args)
         {
             var interpreter = args.Interpreter;
             if (interpreter == null)
@@ -75,9 +106,12 @@
             return interpreter.IsSwipeLeft(gesture);
         }
 
-        public bool IsSwipeLeft(Gesture gesture)
+        /// <inheritdoc />
+        public virtual bool IsSwipeLeft(Gesture gesture)
         {
-            if (IsLongEnough(gesture, this.MinSwipeLength) && IsFastEnough(gesture, this.MinSwipeVelocity) && this.IsHorizontalEnough(gesture))
+            if (IsLongEnough(gesture, this.MinSwipeLength) &&
+                IsFastEnough(gesture, this.MinSwipeVelocity) &&
+                IsHorizontalEnough(gesture, this.MaxDeviationFromHorizontal))
             {
                 return gesture.Delta.X < 0;
             }
@@ -85,12 +119,18 @@
             return false;
         }
 
+        /// <inheritdoc />
+        protected override Freezable CreateInstanceCore()
+        {
+            return new GestureInterpreter();
+        }
+
         private static bool IsCommand(Gesture gesture, RoutedCommand command)
         {
             return gesture.CommandArgs != null && gesture.CommandArgs.Command == command;
         }
 
-        internal static bool IsLongEnough(Gesture gesture, double minSwipeLength)
+        private static bool IsLongEnough(Gesture gesture, double minSwipeLength)
         {
             var delta = gesture.Delta;
             if (Math.Abs(delta.X) < minSwipeLength)
@@ -101,35 +141,15 @@
             return true;
         }
 
-        internal static bool IsFastEnough(Gesture gesture, double minSwipeVelocity)
+        private static bool IsFastEnough(Gesture gesture, double minSwipeVelocity)
         {
-            var delta = gesture.Velocity;
-            if (Math.Abs(delta.X) < minSwipeVelocity)
-            {
-                return false;
-            }
-
-            return true;
+            return gesture.Velocity >= minSwipeVelocity;
         }
 
-        private bool IsHorizontalEnough(Gesture gesture)
+        private static bool IsHorizontalEnough(Gesture gesture, double threshold)
         {
-            var xs = new double[] { gesture.Delta.X, gesture.Velocity.X };
-            var ys = new double[] { gesture.Delta.Y, gesture.Velocity.Y };
-            for (int i = 0; i < 2; i++)
-            {
-                if (Math.Abs(xs[i]) < (2 * Math.Abs(ys[i])))
-                {
-                    return false;
-                }
-            }
-
-            return true;
-        }
-
-        protected override Freezable CreateInstanceCore()
-        {
-            return new GestureInterpreter();
+            var a = Math.Atan2(Math.Abs(gesture.Delta.Y), Math.Abs(gesture.Delta.X)) * 180 / Math.PI;
+            return a < threshold;
         }
     }
 }

@@ -84,7 +84,6 @@
     <Compile Include="Gestures\GestureTrackerBase.cs" />
     <Compile Include="Gestures\GestureInterpreter.cs" />
     <Compile Include="Gestures\IGestureInterpreter.cs" />
-    <Compile Include="Gestures\ManipulationGestureFinder.cs" />
     <Compile Include="Gestures\IGestureTracker.cs" />
     <Compile Include="Gestures\MouseGestureTracker.cs" />
     <Compile Include="Gestures\GesturePoint.cs" />

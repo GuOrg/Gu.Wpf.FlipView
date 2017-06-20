@@ -29,7 +29,7 @@ namespace Gu.Wpf.FlipView.Gestures
         }
 
         /// <inheritdoc/>
-        protected override bool TryAddPoint(MouseEventArgs args, out GesturePoint point)
+        protected override bool TryGetPoint(MouseEventArgs args, out GesturePoint point)
         {
             var inputElement = this.InputElement;
 

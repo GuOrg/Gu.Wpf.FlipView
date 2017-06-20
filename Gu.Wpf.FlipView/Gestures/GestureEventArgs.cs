@@ -27,20 +27,11 @@ namespace Gu.Wpf.FlipView.Gestures
         /// </summary>
         public IEnumerable<IGestureTracker> GestureTrackers => this.gestureTrackers;
 
+        /// <summary>
+        /// The detected gesture.
+        /// </summary>
         public Gesture Gesture { get; }
 
-        public IGestureInterpreter Interpreter
-        {
-            get
-            {
-                var tracker = this.gestureTrackers.FirstOrDefault(x => x.Interpreter != null);
-                if (tracker == null)
-                {
-                    return null;
-                }
-
-                return tracker.Interpreter;
-            }
-        }
+        public IGestureInterpreter Interpreter => this.gestureTrackers.FirstOrDefault(x => x.Interpreter != null)?.Interpreter;
     }
 }

@@ -12,7 +12,7 @@
             var last = points[points.Count - 1];
             var duration = last.Time - first.Time;
             this.Delta = last.Point - first.Point;
-            this.Velocity = new Vector(this.Delta.X / duration, this.Delta.Y / duration);
+            this.Velocity = this.Delta.Length / duration;
         }
 
         public Gesture(ExecutedRoutedEventArgs commandArgs)
@@ -22,7 +22,7 @@
 
         public ExecutedRoutedEventArgs CommandArgs { get; }
 
-        public Vector Velocity { get; }
+        public double Velocity { get; }
 
         public Vector Delta { get; }
 
@@ -33,7 +33,7 @@
                 return $"Command: {this.CommandArgs.Command}";
             }
 
-            return $"Delta: ({this.Delta.X:F0}, {this.Delta.Y:F0}),Velocity: ({this.Velocity.X:F1}, {this.Velocity.Y:F1})";
+            return $"Delta: ({this.Delta.X:F0}, {this.Delta.Y:F0}) Velocity: {this.Velocity:F1}";
         }
     }
 }
