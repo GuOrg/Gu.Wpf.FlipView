@@ -4,9 +4,6 @@
     using System.Windows.Controls;
     using System.Windows.Input;
 
-    /// <summary>
-    /// Interaction logic for CanExecuteControl.xaml
-    /// </summary>
     public partial class CanExecuteControl : UserControl
     {
         private bool canBoost = true;
@@ -28,13 +25,6 @@
             await Task.Delay(500);
             this.Boosts.Items.Add("boosted");
             this.canBoost = true;
-
-            //CommandManager.InvalidateRequerySuggested();
-            //var args = new MouseButtonEventArgs(Mouse.PrimaryDevice, 0, MouseButton.Left)
-            //{
-            //    RoutedEvent = MouseUpEvent
-            //};
-            //Button.RaiseEvent(args);
         }
     }
 }

@@ -12,6 +12,10 @@
             <controlDemos:FlipViewDemo />
         </TabItem>
 
+        <TabItem Header="FlipView">
+            <controlDemos:ImagesFlipView />
+        </TabItem>
+        
         <TabItem Header="FlipView DataTemplate">
             <controlDemos:FlipViewDataTemplateView />
         </TabItem>

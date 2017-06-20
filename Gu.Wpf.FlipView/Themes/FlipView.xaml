@@ -44,14 +44,6 @@
         </Setter>
     </Style>
 
-    <Style x:Key="ContentStyle" TargetType="{x:Type ContentPresenter}">
-        <Setter Property="HorizontalAlignment" Value="{Binding HorizontalContentAlignment, RelativeSource={RelativeSource TemplatedParent}}" />
-        <Setter Property="VerticalAlignment" Value="{Binding VerticalContentAlignment, RelativeSource={RelativeSource TemplatedParent}}" />
-        <Setter Property="ContentTemplate" Value="{Binding ItemTemplate, RelativeSource={RelativeSource TemplatedParent}}" />
-        <Setter Property="ContentTemplateSelector" Value="{Binding ItemTemplateSelector, RelativeSource={RelativeSource TemplatedParent}}" />
-        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
-    </Style>
-
     <Style x:Key="ArrowButtonStyle" TargetType="{x:Type RepeatButton}">
         <Setter Property="FocusVisualStyle" Value="{x:Null}" />
         <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" />

@@ -7,10 +7,13 @@
     using System.Windows.Threading;
     using Gu.Wpf.FlipView.Internals;
 
+    /// <summary>
+    /// A <see cref="ContentControl"/> that animates transitions when content changes.
+    /// </summary>
     [TemplatePart(Name = PartNewContent, Type = typeof(ContentPresenter))]
     [TemplatePart(Name = PartOldContent, Type = typeof(ContentPresenter))]
-    [StyleTypedProperty(Property = "NewContentStyle", StyleTargetType = typeof(ContentPresenter))]
-    [StyleTypedProperty(Property = "OldContentStyle", StyleTargetType = typeof(ContentPresenter))]
+    [StyleTypedProperty(Property = nameof(TransitionControl.NewContentStyle), StyleTargetType = typeof(ContentPresenter))]
+    [StyleTypedProperty(Property = nameof(TransitionControl.OldContentStyle), StyleTargetType = typeof(ContentPresenter))]
     public class TransitionControl : ContentControl
     {
         public const string PartOldContent = "PART_OldContent";

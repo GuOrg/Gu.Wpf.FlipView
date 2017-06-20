@@ -9,8 +9,13 @@
     /// <summary>
     /// A <see cref="Selector"/> for navigating the content.
     /// </summary>
+    [StyleTypedProperty(Property =nameof(FlipView.IndexItemStyle), StyleTargetType = typeof(System.Windows.Controls.ListBoxItem))]
+    [StyleTypedProperty(Property =nameof(FlipView.ArrowButtonStyle), StyleTargetType = typeof(System.Windows.Controls.Primitives.RepeatButton))]
     public class FlipView : Selector
     {
+#pragma warning disable SA1202 // Elements must be ordered by access
+#pragma warning disable SA1600 // Elements must be documented
+
         public static readonly DependencyProperty IncreaseInAnimationProperty = DependencyProperty.Register(
             "IncreaseInAnimation",
             typeof(Storyboard),
@@ -86,6 +91,8 @@
             typeof(Style),
             typeof(FlipView),
             new FrameworkPropertyMetadata(default(Style), FrameworkPropertyMetadataOptions.AffectsMeasure | FrameworkPropertyMetadataOptions.AffectsArrange));
+#pragma warning restore SA1202 // Elements must be ordered by access
+#pragma warning restore SA1600 // Elements must be documented
 
         static FlipView()
         {
@@ -141,7 +148,7 @@
         }
 
         /// <summary>
-        /// Gets how new content animates in
+        /// Gets or sets how new content animates in
         /// </summary>
         public Storyboard CurrentInAnimation
         {
@@ -150,7 +157,7 @@
         }
 
         /// <summary>
-        /// Gets how new content animates out
+        /// Gets or sets how new content animates out
         /// </summary>
         public Storyboard CurrentOutAnimation
         {
@@ -158,12 +165,18 @@
             protected set => this.SetValue(CurrentOutAnimationPropertyKey, value);
         }
 
+        /// <summary>
+        /// Gets or sets a value indicating whether the index should be visible.
+        /// </summary>
         public bool ShowIndex
         {
             get => (bool)this.GetValue(ShowIndexProperty);
             set => this.SetValue(ShowIndexProperty, value);
         }
 
+        /// <summary>
+        /// Gets or sets a value specifying where the index should be rendered.
+        /// </summary>
         public IndexPlacement IndexPlacement
         {
             get => (IndexPlacement)this.GetValue(IndexPlacementProperty);
@@ -171,7 +184,7 @@
         }
 
         /// <summary>
-        /// A style for how the index items looks, BasedOn ListboxItem
+        /// Gets or sets a style for the index items looks TargetType="ListBoxItem"
         /// </summary>
         public Style IndexItemStyle
         {
@@ -179,35 +192,38 @@
             set => this.SetValue(IndexItemStyleProperty, value);
         }
 
+        /// <summary>
+        /// Gets or sets a value indicating whether the navigation buttons should be visible.
+        /// </summary>
         public bool ShowArrows
         {
             get => (bool)this.GetValue(ShowArrowsProperty);
             set => this.SetValue(ShowArrowsProperty, value);
         }
 
+        /// <summary>
+        /// Gets or sets a value specifying where the navigation buttons should be rendered.
+        /// </summary>
         public ArrowPlacement ArrowPlacement
         {
             get => (ArrowPlacement)this.GetValue(ArrowPlacementProperty);
             set => this.SetValue(ArrowPlacementProperty, value);
         }
 
+        /// <summary>
+        /// Gets or sets a style for the navigation buttons TargetType="RepeatButton"
+        /// </summary>
         public Style ArrowButtonStyle
         {
             get => (Style)this.GetValue(ArrowButtonStyleProperty);
             set => this.SetValue(ArrowButtonStyleProperty, value);
         }
 
-        private static object CoerceSelectedIndexProxy(DependencyObject d, object basevalue)
-        {
-            if (basevalue is int index)
-            {
-                var flipView = (FlipView)d;
-                flipView.PreviewSelectedIndexChanged(flipView.SelectedIndex, index);
-            }
-
-            return basevalue;
-        }
-
+        /// <summary>
+        /// Called before3 selected index changes
+        /// </summary>
+        /// <param name="previousIndex">The old index</param>
+        /// <param name="newIndex">The new index</param>
         protected virtual void PreviewSelectedIndexChanged(int previousIndex, int newIndex)
         {
             if (previousIndex == -1 || (previousIndex == newIndex))
@@ -225,6 +241,17 @@
                 this.CurrentInAnimation = this.DecreaseInAnimation;
                 this.CurrentOutAnimation = this.DecreaseOutAnimation;
             }
+        }
+
+        private static object CoerceSelectedIndexProxy(DependencyObject d, object basevalue)
+        {
+            if (basevalue is int index)
+            {
+                var flipView = (FlipView)d;
+                flipView.PreviewSelectedIndexChanged(flipView.SelectedIndex, index);
+            }
+
+            return basevalue;
         }
 
         private static void OnPreviousCanExecute(object sender, CanExecuteRoutedEventArgs e)

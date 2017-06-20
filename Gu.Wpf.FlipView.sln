@@ -5,6 +5,7 @@ VisualStudioVersion = 15.0.26430.13
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".paket", ".paket", "{3C205845-3BC1-4EBC-8474-1648888A5320}"
 	ProjectSection(SolutionItems) = preProject
+		appveyor.yml = appveyor.yml
 		paket.dependencies = paket.dependencies
 		paket.lock = paket.lock
 		.paket\Readme.paket.md = .paket\Readme.paket.md
@@ -17,6 +18,12 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gu.Wpf.FlipView.Tests", "Gu.Wpf.FlipView.Tests\Gu.Wpf.FlipView.Tests.csproj", "{1F09BF2F-02C3-4B8B-9042-17C042F1C5F7}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gu.Wpf.FlipView.UiTests", "Gu.Wpf.FlipView.UiTests\Gu.Wpf.FlipView.UiTests.csproj", "{21DFC04F-7CD0-4F16-B5A8-9822D7806506}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".docs", ".docs", "{3C608586-A38A-4AF2-9C6D-1AB0DAB8F0CD}"
+	ProjectSection(SolutionItems) = preProject
+		LICENSE = LICENSE
+		README.md = README.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

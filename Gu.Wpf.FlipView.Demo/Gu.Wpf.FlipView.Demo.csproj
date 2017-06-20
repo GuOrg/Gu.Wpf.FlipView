@@ -24,6 +24,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>Gu.Wpf.FlipView.Demo.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -33,6 +34,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>Gu.Wpf.FlipView.Demo.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'CreateNugetPackage|AnyCPU'">
     <OutputPath>bin\CreateNugetPackage\</OutputPath>
@@ -41,7 +43,7 @@
     <DebugType>pdbonly</DebugType>
     <PlatformTarget>AnyCPU</PlatformTarget>
     <ErrorReport>prompt</ErrorReport>
-    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet>Gu.Wpf.FlipView.Demo.ruleset</CodeAnalysisRuleSet>
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
@@ -81,6 +83,9 @@
     </Compile>
     <Compile Include="ControlDemos\TransitionControlView.xaml.cs">
       <DependentUpon>TransitionControlView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ControlDemos\ImagesFlipView.xaml.cs">
+      <DependentUpon>ImagesFlipView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Misc\CanExecuteControl.xaml.cs">
       <DependentUpon>CanExecuteControl.xaml</DependentUpon>
@@ -127,6 +132,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ControlDemos\TransitionControlView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ControlDemos\ImagesFlipView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -184,6 +193,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="Gu.Wpf.FlipView.Demo.ruleset" />
     <None Include="paket.references" />
   </ItemGroup>
   <ItemGroup>
