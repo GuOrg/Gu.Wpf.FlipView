@@ -19,6 +19,7 @@ A flipview for WPF, handles touch &amp; mouse swipe.
   - [ShowArrows](#showarrows)
   - [ArrowPlacement](#arrowplacement)
   - [ArrowButtonStyle](#arrowbuttonstyle)
+  - [Samples](#samples)
 
 # FlipView
 A selector that transitions when selecteditem changes.
@@ -59,6 +60,8 @@ Specifies where navigation buttons are rendered.
 
 ## ArrowButtonStyle
 A style with `TargetType="RepeatButton"` for how to render navigation buttons.
+
+## Samples
 
 Sample slideshow images:
 
