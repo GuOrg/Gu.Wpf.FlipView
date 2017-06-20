@@ -15,5 +15,4 @@ namespace Gu.Wpf.FlipView.Gestures
 
         public GestureEventArgs GestureEventArgs { get; }
     }
-
 }

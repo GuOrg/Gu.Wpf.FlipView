@@ -3,9 +3,18 @@ namespace Gu.Wpf.FlipView.Gestures
     using System;
     using System.Collections.Generic;
     using System.Windows;
+    using System.Windows.Input;
 
     public abstract class GestureTrackerBase<TArgs> : Freezable, IGestureTracker
     {
+        public static readonly DependencyPropertyKey IsGesturingPropertyKey = DependencyProperty.RegisterReadOnly(
+            "IsGesturing",
+            typeof(bool), 
+            typeof(GestureTrackerBase<TArgs>),
+            new PropertyMetadata(default(bool)));
+
+        public static readonly DependencyProperty IsGesturingProperty = IsGesturingPropertyKey.DependencyProperty;
+
         private readonly List<GesturePoint> points = new List<GesturePoint>();
 
         private UIElement inputElement;
@@ -19,9 +28,13 @@ namespace Gu.Wpf.FlipView.Gestures
 
         public event EventHandler<GestureEventArgs> Gestured;
 
-        public IGestureInterpreter Interpreter { get; set; }
+        public bool IsGesturing
+        {
+            get => (bool)this.GetValue(IsGesturingProperty);
+            set => this.SetValue(IsGesturingPropertyKey, value);
+        }
 
-        public bool IsGesturing { get; protected set; }
+        public IGestureInterpreter Interpreter { get; set; }
 
         public UIElement InputElement
         {
@@ -29,6 +42,11 @@ namespace Gu.Wpf.FlipView.Gestures
 
             set
             {
+                if (ReferenceEquals(this.inputElement, value))
+                {
+                    return;
+                }
+
                 var old = this.inputElement;
                 if (old != null)
                 {
@@ -53,22 +71,28 @@ namespace Gu.Wpf.FlipView.Gestures
         protected IReadOnlyList<EventSubscriber> Subscribers { get; set; }
 
         /// <summary>
-        /// Dispose(true); //I am calling you from Dispose, it's safe
-        /// GC.SuppressFinalize(this); //Hey, GC: don't bother calling finalize later
+        /// Raise the gesture event to notify subscribers that a gesture was detected.
         /// </summary>
-        public void Dispose()
+        /// <param name="gestureEventArgs">The detected gesture</param>
+        protected internal void OnGestured(GestureEventArgs gestureEventArgs)
         {
-            this.Dispose(true);
-            GC.SuppressFinalize(this);
+            this.Gestured?.Invoke(this, gestureEventArgs);
         }
 
         /// <summary>
-        /// Raise the gesture event to notify subscribers that a gesture was detected.
+        /// Notify a gesture for <paramref name="eventArgs"/>
         /// </summary>
-        /// <param name="gesture">The detected gesture</param>
-        protected internal virtual void OnGestured(Gesture gesture)
+        /// <param name="eventArgs">The event args for the command.</param>
+        protected void OnExecuted(ExecutedRoutedEventArgs eventArgs)
         {
-            this.Gestured?.Invoke(this, new GestureEventArgs(this, gesture));
+            if (this.Gestured != null &&
+                this.Interpreter != null)
+            {
+                if (this.Interpreter.TryGetGesture(eventArgs, out GestureEventArgs gesture))
+                {
+                    this.OnGestured(gesture);
+                }
+            }
         }
 
         /// <summary>
@@ -114,7 +138,15 @@ namespace Gu.Wpf.FlipView.Gestures
                 }
 
                 this.IsGesturing = false;
-                this.OnGestured(new Gesture(this.points));
+                if (this.points.Count > 1 &&
+                    this.Gestured != null &&
+                    this.Interpreter != null)
+                {
+                    if (this.Interpreter.TryGetGesture(this.points, out GestureEventArgs gesture))
+                    {
+                        this.OnGestured(gesture);
+                    }
+                }
             }
 
             this.points.Clear();
@@ -127,31 +159,5 @@ namespace Gu.Wpf.FlipView.Gestures
         /// <param name="point">The created point</param>
         /// <returns>True if a point could be created.</returns>
         protected abstract bool TryGetPoint(TArgs args, out GesturePoint point);
-
-        /// <summary>
-        /// Protected implementation of Dispose pattern.
-        /// </summary>
-        /// <param name="disposing">true: safe to free managed resources</param>
-        protected virtual void Dispose(bool disposing)
-        {
-            if (this.disposed)
-            {
-                return;
-            }
-
-            this.disposed = true;
-
-            if (disposing)
-            {
-                var element = this.InputElement;
-                if (element != null)
-                {
-                    foreach (var pattern in this.Subscribers)
-                    {
-                        pattern.RemoveHandler(element);
-                    }
-                }
-            }
-        }
     }
 }

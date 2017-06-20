@@ -6,9 +6,13 @@
 
     using Gu.Wpf.FlipView.Gestures;
 
+    /// <summary>
+    /// A panel that interprets user input like mouse and touch and detects gestures.
+    /// </summary>
     [DefaultEvent("Gestured")]
     public class GesturePanel : ContentControl
     {
+#pragma warning disable SA1600 // Elements must be documented
         public static readonly RoutedEvent GesturedEvent = EventManager.RegisterRoutedEvent("Gestured", RoutingStrategy.Bubble, typeof(GesturedEventhandler), typeof(GesturePanel));
 
         public static readonly DependencyProperty GestureTrackerProperty = DependencyProperty.Register(
@@ -18,17 +22,24 @@
             new PropertyMetadata(
                 null,
                 OnGestureTrackerChanged));
+#pragma warning restore SA1600 // Elements must be documented
 
         static GesturePanel()
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(GesturePanel), new FrameworkPropertyMetadata(typeof(GesturePanel)));
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="GesturePanel"/> class.
+        /// </summary>
         public GesturePanel()
         {
             this.GestureTracker = new TouchGestureTracker();
         }
 
+        /// <summary>
+        /// Notifies when a gesture was detected.
+        /// </summary>
         public event GesturedEventhandler Gestured
         {
             add => this.AddHandler(GesturedEvent, value);
@@ -61,23 +72,7 @@
 
         protected virtual void OnGesture(object sender, GestureEventArgs e)
         {
-            if (this.GestureTracker?.Interpreter == null)
-            {
-                return;
-            }
-
-            var gesture = GestureType.Unknown;
-            if (this.GestureTracker.Interpreter.IsSwipeRight(e))
-            {
-                gesture = GestureType.SwipeRight;
-            }
-
-            if (this.GestureTracker.Interpreter.IsSwipeLeft(e))
-            {
-                gesture = GestureType.SwipeLeft;
-            }
-
-            this.RaiseEvent(new GesturedEventArgs(gesture, e));
+            this.RaiseEvent(new GesturedEventArgs(e.Type, e));
         }
 
         private static void OnGestureTrackerChanged(DependencyObject o, DependencyPropertyChangedEventArgs e)

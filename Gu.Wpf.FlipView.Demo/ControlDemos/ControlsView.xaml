@@ -35,6 +35,10 @@
         <TabItem Header="GesturePanelView (mouse)">
             <controlDemos:MouseGesturePanelView />
         </TabItem>
+       
+        <TabItem Header="GesturePanelView (mouse and touch)">
+            <controlDemos:CompositeGesturePanelView />
+        </TabItem>
         
         <!--  Providing a sample of how to style it  -->
         <TabItem Header="FlipView Styles">

@@ -56,7 +56,7 @@
             typeof(TransitionControl),
             new PropertyMetadata(
                 EmptyStoryboard.Instance,
-                OnOldTransitionChanged,
+                null,
                (_, v) => OnAnimationCoerce(v)));
 
         public static readonly DependencyProperty OutAnimationProperty = DependencyProperty.Register(
@@ -65,7 +65,7 @@
             typeof(TransitionControl),
             new PropertyMetadata(
                 EmptyStoryboard.Instance,
-                null,
+                OnOutAnimationChanged,
                 (_, v) => OnAnimationCoerce(v)));
 
         private static readonly DependencyPropertyKey OldContentPropertyKey = DependencyProperty.RegisterReadOnly(
@@ -213,7 +213,7 @@
             this.OldContent = null;
         }
 
-        private static void OnOldTransitionChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        private static void OnOutAnimationChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             ((TransitionControl)d).OnOldTransitionChanged(e.NewValue as Storyboard);
         }
