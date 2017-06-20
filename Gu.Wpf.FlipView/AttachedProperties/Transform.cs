@@ -1,7 +1,11 @@
-﻿namespace Gu.Wpf.FlipView.AttachedProperties
+﻿#pragma warning disable SA1600 // Elements must be documented
+namespace Gu.Wpf.FlipView.AttachedProperties
 {
     using System.Windows;
 
+    /// <summary>
+    /// Attached properties for animating position during transitions.
+    /// </summary>
     public static class Transform
     {
         public static readonly DependencyProperty RelativeOffsetXProperty = DependencyProperty.RegisterAttached(

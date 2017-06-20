@@ -15,7 +15,6 @@
     {
 #pragma warning disable SA1202 // Elements must be ordered by access
 #pragma warning disable SA1600 // Elements must be documented
-
         public static readonly DependencyProperty IncreaseInAnimationProperty = DependencyProperty.Register(
             "IncreaseInAnimation",
             typeof(Storyboard),

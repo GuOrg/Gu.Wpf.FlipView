@@ -4,8 +4,16 @@
     using System.Linq;
     using System.Windows.Media.Animation;
 
+    /// <summary>
+    /// Extension methods for <see cref="Timeline"/>
+    /// </summary>
     internal static class TimeLineExt
     {
+        /// <summary>
+        /// Get the total time of the animation.
+        /// </summary>
+        /// <param name="timeline">The source <see cref="Timeline"/></param>
+        /// <returns>The total time the animation will run after it is started.</returns>
         internal static TimeSpan GetTimeToFinished(this Timeline timeline)
         {
             if (timeline.Duration.HasTimeSpan)

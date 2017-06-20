@@ -16,6 +16,7 @@
     [StyleTypedProperty(Property = nameof(TransitionControl.OldContentStyle), StyleTargetType = typeof(ContentPresenter))]
     public class TransitionControl : ContentControl
     {
+#pragma warning disable SA1600 // Elements must be documented
         public const string PartOldContent = "PART_OldContent";
         public const string PartNewContent = "PART_NewContent";
 
@@ -74,11 +75,10 @@
             new PropertyMetadata(default(object)));
 
         public static readonly DependencyProperty OldContentProperty = OldContentPropertyKey.DependencyProperty;
+#pragma warning restore SA1600 // Elements must be documented
 
         private readonly DispatcherTimer timer;
         private readonly RoutedEventArgs contentChangedEventArgs;
-        private readonly RoutedEventArgs oldContentChangedEventArgs;
-        private readonly RoutedEventArgs newContentChangedEventArgs;
 
         private ContentPresenter oldContentPresenter;
         private ContentPresenter newContentPresenter;
@@ -88,6 +88,9 @@
             DefaultStyleKeyProperty.OverrideMetadata(typeof(TransitionControl), new FrameworkPropertyMetadata(typeof(TransitionControl)));
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="TransitionControl"/> class.
+        /// </summary>
         public TransitionControl()
         {
             this.timer = new DispatcherTimer(
@@ -97,26 +100,15 @@
                 this.Dispatcher);
             this.timer.Stop();
             this.contentChangedEventArgs = new RoutedEventArgs(ContentChangedEvent, this);
-            this.oldContentChangedEventArgs = new RoutedEventArgs(OldContentChangedEvent, this);
-            this.newContentChangedEventArgs = new RoutedEventArgs(NewContentChangedEvent, this);
         }
 
+        /// <summary>
+        /// Notifies when content changes.
+        /// </summary>
         public event RoutedEventHandler ContentChanged
         {
             add => this.AddHandler(ContentChangedEvent, value);
             remove => this.RemoveHandler(ContentChangedEvent, value);
-        }
-
-        public event RoutedEventHandler OldContentChanged
-        {
-            add => this.AddHandler(OldContentChangedEvent, value);
-            remove => this.RemoveHandler(OldContentChangedEvent, value);
-        }
-
-        public event RoutedEventHandler NewContentChanged
-        {
-            add => this.AddHandler(NewContentChangedEvent, value);
-            remove => this.RemoveHandler(NewContentChangedEvent, value);
         }
 
         /// <summary>
@@ -179,13 +171,11 @@
             if (!ReferenceEquals(this.OldContent, oldContent))
             {
                 this.OldContent = oldContent;
-                this.RaiseEvent(this.oldContentChangedEventArgs);
                 this.oldContentPresenter?.RaiseEvent(new RoutedEventArgs(ContentChangedEvent, this.oldContentPresenter));
             }
 
             if (this.IsLoaded)
             {
-                this.RaiseEvent(this.newContentChangedEventArgs);
                 this.newContentPresenter?.RaiseEvent(new RoutedEventArgs(ContentChangedEvent, this.newContentPresenter));
                 this.RaiseEvent(this.contentChangedEventArgs);
                 if (ReferenceEquals(this.OutAnimation, EmptyStoryboard.Instance) ||
