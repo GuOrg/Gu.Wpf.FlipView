@@ -6,7 +6,7 @@ namespace Gu.Wpf.FlipView.Gestures
     /// <summary>
     /// Listens to events in <see cref="InputElement"/> and detects gestures.
     /// </summary>
-    public interface IGestureTracker : IDisposable
+    public interface IGestureTracker
     {
         /// <summary>
         /// Notifies when a gesture is detected.
@@ -17,10 +17,5 @@ namespace Gu.Wpf.FlipView.Gestures
         /// Gets or sets the element for which events are subscribed to to detect gestures.
         /// </summary>
         UIElement InputElement { get; set; }
-
-        /// <summary>
-        /// Gets or sets the <see cref="IGestureInterpreter"/> that interprets the events and checks if they are gestures.
-        /// </summary>
-        IGestureInterpreter Interpreter { get; set; }
     }
 }

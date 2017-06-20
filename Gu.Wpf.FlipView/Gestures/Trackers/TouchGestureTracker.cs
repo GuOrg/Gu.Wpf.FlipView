@@ -53,13 +53,13 @@ namespace Gu.Wpf.FlipView.Gestures
         private void OnBrowseForward(object sender, ExecutedRoutedEventArgs e)
         {
             this.IsGesturing = false;
-            this.OnGestured(new Gesture(e));
+            this.OnExecuted(e);
         }
 
         private void OnBrowseBack(object sender, ExecutedRoutedEventArgs e)
         {
             this.IsGesturing = false;
-            this.OnGestured(new Gesture(e));
+            this.OnExecuted(e);
         }
     }
 }

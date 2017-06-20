@@ -32,7 +32,6 @@ namespace Gu.Wpf.FlipView.Gestures
         protected override bool TryGetPoint(MouseEventArgs args, out GesturePoint point)
         {
             var inputElement = this.InputElement;
-
             if (inputElement == null)
             {
                 point = default(GesturePoint);

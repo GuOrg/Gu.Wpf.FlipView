@@ -1,6 +1,7 @@
 ﻿namespace Gu.Wpf.FlipView.Gestures
 {
     using System;
+    using System.Collections.Generic;
     using System.Windows;
     using System.Windows.Input;
 
@@ -58,65 +59,46 @@
         }
 
         /// <inheritdoc />
-        public virtual bool IsSwipeRight(GestureEventArgs args)
+        public bool TryGetGesture(IReadOnlyList<GesturePoint> points, out GestureEventArgs gestureEventArgs)
         {
-            var interpreter = args.Interpreter;
-            if (interpreter == null)
+            gestureEventArgs = null;
+            if (points == null || points.Count < 2)
             {
                 return false;
             }
 
-            var gesture = args.Gesture;
-            if (IsCommand(gesture, NavigationCommands.BrowseBack))
+            var first = points[0];
+            var last = points[points.Count - 1];
+            var duration = last.Time - first.Time;
+            var delta = last.Point - first.Point;
+            var velocity = delta.Length / duration;
+            if (velocity >= this.MinSwipeVelocity &&
+                Math.Abs(delta.X) >= this.MinSwipeLength &&
+                IsHorizontalEnough(delta, this.MaxDeviationFromHorizontal))
             {
-                return true;
+                gestureEventArgs = delta.X < 0
+                    ? new InputGestureEventArgs(GestureType.SwipeLeft, velocity, delta)
+                    : new InputGestureEventArgs(GestureType.SwipeRight, velocity, delta);
             }
 
-            return interpreter.IsSwipeRight(gesture);
+            return gestureEventArgs != null;
         }
 
         /// <inheritdoc />
-        public virtual bool IsSwipeRight(Gesture gesture)
+        public bool TryGetGesture(ExecutedRoutedEventArgs eventArgs, out GestureEventArgs gestureEventArgs)
         {
-            if (IsLongEnough(gesture, this.MinSwipeLength) &&
-                IsFastEnough(gesture, this.MinSwipeVelocity) &&
-                IsHorizontalEnough(gesture, this.MaxDeviationFromHorizontal))
+            gestureEventArgs = null;
+            if (eventArgs.Command == NavigationCommands.BrowseForward)
             {
-                return gesture.Delta.X > 0;
+                gestureEventArgs = new CommandGestureEventArgs(GestureType.SwipeLeft, eventArgs);
             }
 
-            return false;
-        }
-
-        /// <inheritdoc />
-        public virtual bool IsSwipeLeft(GestureEventArgs args)
-        {
-            var interpreter = args.Interpreter;
-            if (interpreter == null)
+            if (eventArgs.Command == NavigationCommands.BrowseBack)
             {
-                return false;
+                gestureEventArgs = new CommandGestureEventArgs(GestureType.SwipeRight, eventArgs);
             }
 
-            var gesture = args.Gesture;
-            if (IsCommand(gesture, NavigationCommands.BrowseForward))
-            {
-                return true;
-            }
-
-            return interpreter.IsSwipeLeft(gesture);
-        }
-
-        /// <inheritdoc />
-        public virtual bool IsSwipeLeft(Gesture gesture)
-        {
-            if (IsLongEnough(gesture, this.MinSwipeLength) &&
-                IsFastEnough(gesture, this.MinSwipeVelocity) &&
-                IsHorizontalEnough(gesture, this.MaxDeviationFromHorizontal))
-            {
-                return gesture.Delta.X < 0;
-            }
-
-            return false;
+            return gestureEventArgs != null;
         }
 
         /// <inheritdoc />
@@ -125,30 +107,9 @@
             return new GestureInterpreter();
         }
 
-        private static bool IsCommand(Gesture gesture, RoutedCommand command)
+        private static bool IsHorizontalEnough(Vector delta, double threshold)
         {
-            return gesture.CommandArgs != null && gesture.CommandArgs.Command == command;
-        }
-
-        private static bool IsLongEnough(Gesture gesture, double minSwipeLength)
-        {
-            var delta = gesture.Delta;
-            if (Math.Abs(delta.X) < minSwipeLength)
-            {
-                return false;
-            }
-
-            return true;
-        }
-
-        private static bool IsFastEnough(Gesture gesture, double minSwipeVelocity)
-        {
-            return gesture.Velocity >= minSwipeVelocity;
-        }
-
-        private static bool IsHorizontalEnough(Gesture gesture, double threshold)
-        {
-            var a = Math.Atan2(Math.Abs(gesture.Delta.Y), Math.Abs(gesture.Delta.X)) * 180 / Math.PI;
+            var a = Math.Atan2(Math.Abs(delta.Y), Math.Abs(delta.X)) * 180 / Math.PI;
             return a < threshold;
         }
     }

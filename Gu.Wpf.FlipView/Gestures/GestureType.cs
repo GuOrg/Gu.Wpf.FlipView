@@ -18,6 +18,6 @@
         /// <summary>
         /// The stream of events was a swipe to the right.
         /// </summary>
-        SwipeRight,
+        SwipeRight
     }
 }

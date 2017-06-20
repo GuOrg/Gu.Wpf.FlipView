@@ -61,10 +61,13 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Gestures\GesturedEventhandler.cs" />
-    <Compile Include="Gestures\GesturedEventArgs.cs" />
+    <Compile Include="Gestures\EventArgs\CommandGestureEventArgs.cs" />
+    <Compile Include="Gestures\EventArgs\GesturedEventhandler.cs" />
+    <Compile Include="Gestures\EventArgs\GesturedEventArgs.cs" />
     <Compile Include="GesturePanel.cs" />
     <Compile Include="Gestures\GestureType.cs" />
+    <Compile Include="Gestures\EventArgs\InputGestureEventArgs.cs" />
+    <Compile Include="Internals\EmptyEnumerator.cs" />
     <Compile Include="Internals\TimeLineExt.cs" />
     <Compile Include="TransitionControl.cs" />
     <Compile Include="AttachedProperties\Transform.cs" />
@@ -77,17 +80,16 @@
       <SubType>Designer</SubType>
     </Page>
     <Compile Include="ArrowPlacement.cs" />
-    <Compile Include="Gestures\CompositeGestureTracker.cs" />
-    <Compile Include="Gestures\EventSubscriber.cs" />
-    <Compile Include="Gestures\Gesture.cs" />
-    <Compile Include="Gestures\GestureEventArgs.cs" />
-    <Compile Include="Gestures\GestureTrackerBase.cs" />
+    <Compile Include="Gestures\Trackers\CompositeGestureTracker.cs" />
+    <Compile Include="Gestures\Trackers\EventSubscriber.cs" />
+    <Compile Include="Gestures\EventArgs\GestureEventArgs.cs" />
+    <Compile Include="Gestures\Trackers\GestureTrackerBase.cs" />
     <Compile Include="Gestures\GestureInterpreter.cs" />
     <Compile Include="Gestures\IGestureInterpreter.cs" />
-    <Compile Include="Gestures\IGestureTracker.cs" />
-    <Compile Include="Gestures\MouseGestureTracker.cs" />
+    <Compile Include="Gestures\Trackers\IGestureTracker.cs" />
+    <Compile Include="Gestures\Trackers\MouseGestureTracker.cs" />
     <Compile Include="Gestures\GesturePoint.cs" />
-    <Compile Include="Gestures\TouchGestureTracker.cs" />
+    <Compile Include="Gestures\Trackers\TouchGestureTracker.cs" />
     <Compile Include="IndexPlacement.cs" />
     <Compile Include="FlipView.cs">
       <SubType>Code</SubType>

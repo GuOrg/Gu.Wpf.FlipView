@@ -3,6 +3,7 @@ namespace Gu.Wpf.FlipView.Gestures
     using System;
     using System.Collections.Generic;
     using System.Windows;
+    using System.Windows.Input;
 
     public abstract class GestureTrackerBase<TArgs> : Freezable, IGestureTracker
     {
@@ -65,10 +66,26 @@ namespace Gu.Wpf.FlipView.Gestures
         /// <summary>
         /// Raise the gesture event to notify subscribers that a gesture was detected.
         /// </summary>
-        /// <param name="gesture">The detected gesture</param>
-        protected internal virtual void OnGestured(Gesture gesture)
+        /// <param name="gestureEventArgs">The detected gesture</param>
+        protected internal void OnGestured(GestureEventArgs gestureEventArgs)
         {
-            this.Gestured?.Invoke(this, new GestureEventArgs(this, gesture));
+            this.Gestured?.Invoke(this, gestureEventArgs);
+        }
+
+        /// <summary>
+        /// Notify a gesture for <paramref name="eventArgs"/>
+        /// </summary>
+        /// <param name="eventArgs">The event args for the command.</param>
+        protected void OnExecuted(ExecutedRoutedEventArgs eventArgs)
+        {
+            if (this.Gestured != null &&
+                this.Interpreter != null)
+            {
+                if (this.Interpreter.TryGetGesture(eventArgs, out GestureEventArgs gesture))
+                {
+                    this.OnGestured(gesture);
+                }
+            }
         }
 
         /// <summary>
@@ -114,7 +131,15 @@ namespace Gu.Wpf.FlipView.Gestures
                 }
 
                 this.IsGesturing = false;
-                this.OnGestured(new Gesture(this.points));
+                if (this.points.Count > 1 &&
+                    this.Gestured != null &&
+                    this.Interpreter != null)
+                {
+                    if (this.Interpreter.TryGetGesture(this.points, out GestureEventArgs gesture))
+                    {
+                        this.OnGestured(gesture);
+                    }
+                }
             }
 
             this.points.Clear();
