@@ -1,7 +1,6 @@
 namespace Gu.Wpf.FlipView.Gestures
 {
     using System;
-    using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Linq;
     using System.Windows;
@@ -82,25 +81,6 @@ namespace Gu.Wpf.FlipView.Gestures
         private void OnGestured(object sender, GestureEventArgs e)
         {
             this.OnGestured(e);
-        }
-
-        private void TrackersChanged(IReadOnlyList<IGestureTracker> old, IReadOnlyList<IGestureTracker> @new)
-        {
-            if (old != null)
-            {
-                foreach (var tracker in old)
-                {
-                    if (tracker != null)
-                    {
-
-                    }
-                }
-            }
-
-            if (@new != null)
-            {
-
-            }
         }
     }
 }

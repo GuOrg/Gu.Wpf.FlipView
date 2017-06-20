@@ -7,7 +7,7 @@
 
     public class EventBox : UserControl
     {
-        public static RoutedUICommand ClearCommand = new RoutedUICommand("Clear", "Clear", typeof(EventBox));
+        public static readonly RoutedUICommand ClearCommand = new RoutedUICommand("Clear", "Clear", typeof(EventBox));
 
         public static readonly DependencyProperty SwipeAreaProperty = DependencyProperty.Register(
             "SwipeArea",
@@ -22,7 +22,7 @@
             DefaultStyleKeyProperty.OverrideMetadata(typeof(EventBox), new FrameworkPropertyMetadata(typeof(EventBox)));
         }
 
-        public EventBox()
+        protected EventBox()
         {
             this.CommandBindings.Add(new CommandBinding(ClearCommand, this.ClearExecuted));
         }

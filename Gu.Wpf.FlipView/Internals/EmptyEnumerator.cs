@@ -5,11 +5,14 @@
 
     internal class EmptyEnumerator : IEnumerator
     {
-        public static readonly IEnumerator Instance = new EmptyEnumerator();
+        internal static readonly IEnumerator Instance = new EmptyEnumerator();
 
         private EmptyEnumerator()
         {
         }
+
+        /// <inheritdoc />
+        public object Current => throw new InvalidOperationException();
 
         /// <inheritdoc />
         public void Reset()
@@ -18,7 +21,5 @@
 
         /// <inheritdoc />
         public bool MoveNext() => false;
-
-        public object Current => throw new InvalidOperationException();
     }
 }

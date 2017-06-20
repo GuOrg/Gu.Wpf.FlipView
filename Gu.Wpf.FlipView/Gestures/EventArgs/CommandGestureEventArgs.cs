@@ -13,7 +13,7 @@
         /// <param name="type">The interpreted gesture</param>
         /// <param name="commandArgs">The command event args that triggered the gesture.</param>
         public CommandGestureEventArgs(GestureType type, ExecutedRoutedEventArgs commandArgs)
-            : base( type)
+            : base(type)
         {
             this.CommandArgs = commandArgs;
         }

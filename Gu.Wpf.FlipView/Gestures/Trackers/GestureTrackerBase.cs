@@ -5,11 +5,15 @@ namespace Gu.Wpf.FlipView.Gestures
     using System.Windows;
     using System.Windows.Input;
 
+    /// <summary>
+    /// A base class for <see cref="IGestureTracker"/>
+    /// </summary>
+    /// <typeparam name="TArgs">The type of the event args.</typeparam>
     public abstract class GestureTrackerBase<TArgs> : Freezable, IGestureTracker
     {
-        public static readonly DependencyPropertyKey IsGesturingPropertyKey = DependencyProperty.RegisterReadOnly(
+        private static readonly DependencyPropertyKey IsGesturingPropertyKey = DependencyProperty.RegisterReadOnly(
             "IsGesturing",
-            typeof(bool), 
+            typeof(bool),
             typeof(GestureTrackerBase<TArgs>),
             new PropertyMetadata(default(bool)));
 
@@ -18,16 +22,23 @@ namespace Gu.Wpf.FlipView.Gestures
         private readonly List<GesturePoint> points = new List<GesturePoint>();
 
         private UIElement inputElement;
-        private bool disposed = false;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="GestureTrackerBase{TArgs}"/> class.
+        /// </summary>
+        /// <param name="subscribers">Descriptor for how to subscribe and unsubscribe</param>
         protected GestureTrackerBase(params EventSubscriber[] subscribers)
         {
             this.Subscribers = subscribers;
             this.Interpreter = new GestureInterpreter();
         }
 
+        /// <inheritdoc />
         public event EventHandler<GestureEventArgs> Gestured;
 
+        /// <summary>
+        /// Gets a value indicating if a potential gesture is started.
+        /// </summary>
         public bool IsGesturing
         {
             get => (bool)this.GetValue(IsGesturingProperty);

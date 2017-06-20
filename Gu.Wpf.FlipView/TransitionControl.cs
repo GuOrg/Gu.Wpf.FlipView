@@ -17,6 +17,8 @@
     public class TransitionControl : ContentControl
     {
 #pragma warning disable SA1600 // Elements must be documented
+#pragma warning disable SA1202 // Elements must be ordered by access
+
         public const string PartOldContent = "PART_OldContent";
         public const string PartNewContent = "PART_NewContent";
 
@@ -75,6 +77,7 @@
             new PropertyMetadata(default(object)));
 
         public static readonly DependencyProperty OldContentProperty = OldContentPropertyKey.DependencyProperty;
+#pragma warning restore SA1202 // Elements must be ordered by access
 #pragma warning restore SA1600 // Elements must be documented
 
         private readonly DispatcherTimer timer;

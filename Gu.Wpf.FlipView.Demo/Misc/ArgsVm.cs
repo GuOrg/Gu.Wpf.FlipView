@@ -9,20 +9,20 @@
 
     public class ArgsVm
     {
+        private static readonly Type[] Types =
+        {
+            typeof(Vector),
+            typeof(Point),
+            typeof(ManipulationDelta),
+            typeof(ManipulationVelocities),
+            typeof(InputDevice),
+            typeof(InertiaExpansionBehavior),
+            typeof(InertiaTranslationBehavior),
+            typeof(InertiaRotationBehavior)
+        };
+
         private readonly object args;
         private readonly PropertyInfo info;
-
-        private static readonly Type[] Types =
-            {
-                typeof(Vector),
-                typeof(Point),
-                typeof(ManipulationDelta),
-                typeof(ManipulationVelocities),
-                typeof(InputDevice),
-                typeof(InertiaExpansionBehavior),
-                typeof(InertiaTranslationBehavior),
-                typeof(InertiaRotationBehavior)
-            };
 
         private ArgsVm[] children;
 

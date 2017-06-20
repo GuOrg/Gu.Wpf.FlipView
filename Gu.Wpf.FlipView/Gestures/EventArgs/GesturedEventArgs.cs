@@ -2,6 +2,9 @@ namespace Gu.Wpf.FlipView.Gestures
 {
     using System.Windows;
 
+    /// <summary>
+    /// A gesture triggered by user input.
+    /// </summary>
     public class GesturedEventArgs : RoutedEventArgs
     {
         public GesturedEventArgs(GestureType gesture, GestureEventArgs gestureEventArgs)
