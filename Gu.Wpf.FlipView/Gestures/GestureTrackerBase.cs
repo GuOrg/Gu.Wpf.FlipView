@@ -8,15 +8,15 @@ namespace Gu.Wpf.FlipView.Gestures
     {
         protected readonly List<GesturePoint> Points = new List<GesturePoint>();
         protected bool IsGesturing;
-        protected EventPattern[] Patterns;
+        protected EventSubscriber[] Subscribers;
 
         private readonly WeakReference<UIElement> inputElement = new WeakReference<UIElement>(null);
 
         private bool disposed = false;
 
-        protected GestureTrackerBase(params EventPattern[] patterns)
+        protected GestureTrackerBase(params EventSubscriber[] subscribers)
         {
-            this.Patterns = patterns;
+            this.Subscribers = subscribers;
             this.Interpreter = new GestureInterpreter();
         }
 
@@ -37,17 +37,17 @@ namespace Gu.Wpf.FlipView.Gestures
                 var old = this.InputElement;
                 if (old != null)
                 {
-                    foreach (var pattern in this.Patterns)
+                    foreach (var pattern in this.Subscribers)
                     {
-                        pattern.Remove(old);
+                        pattern.RemoveHandler(old);
                     }
                 }
 
                 if (value != null)
                 {
-                    foreach (var pattern in this.Patterns)
+                    foreach (var pattern in this.Subscribers)
                     {
-                        pattern.Add(value);
+                        pattern.AddHandler(value);
                     }
                 }
 
@@ -112,9 +112,9 @@ namespace Gu.Wpf.FlipView.Gestures
                 var element = this.InputElement;
                 if (element != null)
                 {
-                    foreach (var pattern in this.Patterns)
+                    foreach (var pattern in this.Subscribers)
                     {
-                        pattern.Remove(element);
+                        pattern.RemoveHandler(element);
                     }
                 }
             }

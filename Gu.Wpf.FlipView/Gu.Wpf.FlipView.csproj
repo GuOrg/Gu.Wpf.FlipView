@@ -78,7 +78,7 @@
     </Page>
     <Compile Include="ArrowPlacement.cs" />
     <Compile Include="Gestures\CompositeGestureTracker.cs" />
-    <Compile Include="Gestures\EventPattern.cs" />
+    <Compile Include="Gestures\EventSubscriber.cs" />
     <Compile Include="Gestures\Gesture.cs" />
     <Compile Include="Gestures\GestureEventArgs.cs" />
     <Compile Include="Gestures\GestureTrackerBase.cs" />

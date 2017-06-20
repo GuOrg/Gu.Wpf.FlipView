@@ -13,12 +13,12 @@ namespace Gu.Wpf.FlipView.Gestures
         /// </summary>
         public MouseGestureTracker()
         {
-            this.Patterns = new[]
+            this.Subscribers = new[]
                             {
-                                EventPattern.Create(UIElement.PreviewMouseLeftButtonDownEvent, new MouseButtonEventHandler(this.OnStart)),
-                                EventPattern.Create(UIElement.PreviewMouseLeftButtonUpEvent, new MouseButtonEventHandler(this.OnEnd)),
-                                EventPattern.Create(UIElement.PreviewMouseMoveEvent, new MouseEventHandler(this.OnMove)),
-                                EventPattern.Create(UIElement.MouseLeaveEvent, new MouseEventHandler(this.OnMove)),
+                                EventSubscriber.Create(UIElement.PreviewMouseLeftButtonDownEvent, new MouseButtonEventHandler(this.OnStart)),
+                                EventSubscriber.Create(UIElement.PreviewMouseMoveEvent, new MouseEventHandler(this.OnMove)),
+                                EventSubscriber.Create(UIElement.PreviewMouseLeftButtonUpEvent, new MouseButtonEventHandler(this.OnEnd)),
+                                EventSubscriber.Create(UIElement.MouseLeaveEvent, new MouseEventHandler(this.OnEnd)),
                             };
         }
 
