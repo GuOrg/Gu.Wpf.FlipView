@@ -37,6 +37,12 @@
                          .AsSlider();
         }
 
+        public static Grid FindListBox(this AutomationElement parent, string name)
+        {
+            return parent.FindByNameOrId(name, ControlType.List)
+                         .AsGrid();
+        }
+
         public static AutomationElement FindByNameOrId(this AutomationElement parent, string name, ControlType controlType)
         {
             return parent.FindFirstDescendant(

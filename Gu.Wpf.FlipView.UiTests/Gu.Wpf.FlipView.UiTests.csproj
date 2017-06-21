@@ -44,11 +44,12 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="FlipViewTests.cs" />
+    <Compile Include="FlipViewWindowTests.cs" />
     <Compile Include="Helpers\AutomationElementExt.cs" />
     <Compile Include="MainWindowTests.cs" />
     <Compile Include="Helpers\Info.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TransitionControlWindowTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Gu.Wpf.FlipView.UiTests.ruleset" />

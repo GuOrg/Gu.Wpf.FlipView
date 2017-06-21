@@ -1,0 +1,61 @@
+﻿<Window xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:converters="clr-namespace:Gu.Wpf.FlipView.Demo.Converters"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:flipView="http://gu.se/FlipView"
+        xmlns:local="clr-namespace:Gu.Wpf.FlipView.Demo.ControlDemos"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        Title="TransitionControlWindow"
+        Width="300"
+        Height="300"
+        mc:Ignorable="d">
+    <Window.Resources>
+        <DataTemplate DataType="{x:Type local:TransitionItem}">
+            <Border HorizontalAlignment="Stretch"
+                    VerticalAlignment="Stretch"
+                    Background="{Binding Brush}">
+                <TextBlock HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           FontSize="72"
+                           Text="{Binding Text}" />
+            </Border>
+        </DataTemplate>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <flipView:TransitionControl Content="{Binding SelectedItem, ElementName=ListBox}" />
+
+        <ListBox x:Name="ListBox"
+                 Grid.Row="1"
+                 HorizontalContentAlignment="Stretch"
+                 VerticalContentAlignment="Stretch"
+                 ItemsSource="{Binding Items, RelativeSource={RelativeSource AncestorType={x:Type local:TransitionControlView}}}">
+            <ListBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <UniformGrid Columns="{Binding Items.Count, RelativeSource={RelativeSource AncestorType={x:Type local:TransitionControlView}}}" Rows="1" />
+                </ItemsPanelTemplate>
+            </ListBox.ItemsPanel>
+            <local:TransitionItem Brush="Red" Text="1" />
+            <local:TransitionItem Brush="Blue" Text="2" />
+            <local:TransitionItem Brush="Yellow" Text="3" />
+        </ListBox>
+        <Grid Grid.Row="2" Grid.Column="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Grid.Column="0" Text="SelectedIndex: " />
+            <Slider x:Name="SelectedIndex"
+                    Grid.Column="1"
+                    Maximum="{Binding ElementName=FlipView, Path=Items.Count, Converter={x:Static converters:SubtractOneConverter.Default}}"
+                    Minimum="0"
+                    Value="{Binding ElementName=FlipView, Path=SelectedIndex}" />
+        </Grid>
+    </Grid>
+</Window>

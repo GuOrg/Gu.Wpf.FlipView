@@ -4,7 +4,7 @@ namespace Gu.Wpf.FlipView.UiTests
     using FlaUI.UIA3;
     using NUnit.Framework;
 
-    public class FlipViewTests
+    public class FlipViewWindowTests
     {
         [Test]
         public void BrowseBackAndForward()

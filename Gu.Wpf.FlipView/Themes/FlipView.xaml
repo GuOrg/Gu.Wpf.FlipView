@@ -114,6 +114,7 @@
 
         <Setter Property="Focusable" Value="False" />
         <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+        <Setter Property="ClipToBounds" Value="True" />
         <Setter Property="IncreaseInAnimation">
             <Setter.Value>
                 <Storyboard>
@@ -303,8 +304,7 @@
                             <flipView:GesturePanel x:Name="GesturePanel"
                                                    Grid.Row="1"
                                                    Grid.Column="1"
-                                                   Background="Transparent"
-                                                   ClipToBounds="True">
+                                                   Background="Transparent">
                                 <flipView:TransitionControl x:Name="TransitionControl"
                                                             Content="{TemplateBinding SelectedItem}"
                                                             ContentStringFormat="{TemplateBinding ItemStringFormat}"
