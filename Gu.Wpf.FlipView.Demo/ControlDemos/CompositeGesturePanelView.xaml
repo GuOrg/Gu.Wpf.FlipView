@@ -23,12 +23,12 @@
                     <flipView:CompositeGestureTracker>
                         <flipView:MouseGestureTracker>
                             <flipView:MouseGestureTracker.Interpreter>
-                                <flipView:GestureInterpreter MinSwipeLength="15" MinSwipeVelocity="1" />
+                                <flipView:DefaultGestureInterpreter MinSwipeLength="15" MinSwipeVelocity="1" />
                             </flipView:MouseGestureTracker.Interpreter>
                         </flipView:MouseGestureTracker>
                         <flipView:TouchGestureTracker>
                             <flipView:TouchGestureTracker.Interpreter>
-                                <flipView:GestureInterpreter MinSwipeLength="15" MinSwipeVelocity="1" />
+                                <flipView:DefaultGestureInterpreter MinSwipeLength="15" MinSwipeVelocity="1" />
                             </flipView:TouchGestureTracker.Interpreter>
                         </flipView:TouchGestureTracker>
                     </flipView:CompositeGestureTracker>

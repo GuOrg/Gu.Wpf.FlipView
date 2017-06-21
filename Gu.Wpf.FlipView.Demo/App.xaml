@@ -10,10 +10,14 @@
         </HierarchicalDataTemplate>
 
         <DataTemplate DataType="{x:Type flipView:GesturedEventArgs}">
-            <StackPanel Orientation="Horizontal">
-                <TextBlock Text="{Binding Gesture}" />
-                <TextBlock Text="{Binding GestureEventArgs}" />
-            </StackPanel>
+            <TextBlock>
+                <TextBlock.Text>
+                    <MultiBinding StringFormat="{}{0} {1}">
+                        <Binding Path="Gesture"></Binding>
+                        <Binding Path="GestureEventArgs"></Binding>
+                    </MultiBinding>
+                </TextBlock.Text>
+            </TextBlock>
         </DataTemplate>
     </Application.Resources>
 </Application>

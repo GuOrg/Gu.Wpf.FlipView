@@ -8,18 +8,18 @@ namespace Gu.Wpf.FlipView.Gestures
     /// </summary>
     public class MouseGestureTracker : GestureTrackerBase<MouseEventArgs>
     {
+        private readonly SubscribeInfos subscribers;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="MouseGestureTracker"/> class.
         /// </summary>
         public MouseGestureTracker()
         {
-            this.Subscribers = new[]
-                            {
-                                SubscribeInfo.Create(UIElement.PreviewMouseLeftButtonDownEvent, new MouseButtonEventHandler(this.OnStart)),
-                                SubscribeInfo.Create(UIElement.PreviewMouseMoveEvent, new MouseEventHandler(this.OnMove)),
-                                SubscribeInfo.Create(UIElement.PreviewMouseLeftButtonUpEvent, new MouseButtonEventHandler(this.OnEnd)),
-                                SubscribeInfo.Create(UIElement.MouseLeaveEvent, new MouseEventHandler(this.OnEnd)),
-                            };
+            this.subscribers = new SubscribeInfos(
+                SubscribeInfo.Create(UIElement.PreviewMouseLeftButtonDownEvent, new MouseButtonEventHandler(this.OnStart)),
+                SubscribeInfo.Create(UIElement.PreviewMouseMoveEvent, new MouseEventHandler(this.OnMove)),
+                SubscribeInfo.Create(UIElement.PreviewMouseLeftButtonUpEvent, new MouseButtonEventHandler(this.OnEnd)),
+                SubscribeInfo.Create(UIElement.MouseLeaveEvent, new MouseEventHandler(this.OnEnd)));
         }
 
         /// <inheritdoc />
@@ -40,6 +40,13 @@ namespace Gu.Wpf.FlipView.Gestures
 
             point = new GesturePoint(args.GetPosition(inputElement), args.Timestamp);
             return true;
+        }
+
+        /// <inheritdoc />
+        protected override void OnInputElementChanged(UIElement oldElement, UIElement newElement)
+        {
+            this.subscribers.RemoveHandlers(oldElement);
+            this.subscribers.AddHandlers(newElement);
         }
     }
 }

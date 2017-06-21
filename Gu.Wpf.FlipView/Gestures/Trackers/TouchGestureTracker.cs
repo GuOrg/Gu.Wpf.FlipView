@@ -9,20 +9,20 @@ namespace Gu.Wpf.FlipView.Gestures
     /// </summary>
     public class TouchGestureTracker : GestureTrackerBase<TouchEventArgs>
     {
+        private readonly SubscribeInfos subscribers;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="TouchGestureTracker"/> class.
         /// </summary>
         public TouchGestureTracker()
         {
-            this.Subscribers = new[]
-                                {
+            this.subscribers = new SubscribeInfos(
                                     SubscribeInfo.Create(UIElement.PreviewTouchDownEvent, new EventHandler<TouchEventArgs>(this.OnStart)),
                                     SubscribeInfo.Create(UIElement.PreviewTouchMoveEvent, new EventHandler<TouchEventArgs>(this.OnMove)),
                                     SubscribeInfo.Create(UIElement.PreviewTouchUpEvent, new EventHandler<TouchEventArgs>(this.OnEnd)),
                                     SubscribeInfo.Create(UIElement.TouchLeaveEvent, new EventHandler<TouchEventArgs>(this.OnEnd)),
                                     SubscribeInfo.Create(NavigationCommands.BrowseForward, this.OnBrowseForward),
-                                    SubscribeInfo.Create(NavigationCommands.BrowseBack, this.OnBrowseBack),
-                                };
+                                    SubscribeInfo.Create(NavigationCommands.BrowseBack, this.OnBrowseBack));
         }
 
         /// <inheritdoc />
@@ -44,6 +44,13 @@ namespace Gu.Wpf.FlipView.Gestures
 
             point = new GesturePoint(args.GetTouchPoint(inputElement).Position, args.Timestamp);
             return true;
+        }
+
+        /// <inheritdoc />
+        protected override void OnInputElementChanged(UIElement oldElement, UIElement newElement)
+        {
+            this.subscribers.RemoveHandlers(oldElement);
+            this.subscribers.AddHandlers(newElement);
         }
 
         private void OnBrowseForward(object sender, ExecutedRoutedEventArgs e)

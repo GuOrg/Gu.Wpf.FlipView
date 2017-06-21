@@ -1,3 +1,4 @@
+// ReSharper disable StaticMemberInGenericType
 namespace Gu.Wpf.FlipView.Gestures
 {
     using System;
@@ -42,11 +43,10 @@ namespace Gu.Wpf.FlipView.Gestures
         /// <summary>
         /// Initializes a new instance of the <see cref="GestureTrackerBase{TArgs}"/> class.
         /// </summary>
-        /// <param name="subscribers">Descriptor for how to subscribe and unsubscribe</param>
-        protected GestureTrackerBase(params SubscribeInfo[] subscribers)
+        /// <param name="interpreter">The interpreter to use. If null <see cref="DefaultGestureInterpreter"/> is used.</param>
+        protected GestureTrackerBase(IGestureInterpreter interpreter = null)
         {
-            this.Subscribers = subscribers;
-            this.Interpreter = new GestureInterpreter();
+            this.Interpreter = interpreter ?? new DefaultGestureInterpreter();
         }
 
         /// <inheritdoc />
@@ -78,8 +78,6 @@ namespace Gu.Wpf.FlipView.Gestures
             get => (UIElement)this.GetValue(InputElementProperty);
             set => this.SetValue(InputElementProperty, value);
         }
-
-        protected IReadOnlyList<SubscribeInfo> Subscribers { get; set; }
 
         /// <summary>
         /// Raise the gesture event to notify subscribers that a gesture was detected.
@@ -171,24 +169,23 @@ namespace Gu.Wpf.FlipView.Gestures
         /// <returns>True if a point could be created.</returns>
         protected abstract bool TryGetPoint(TArgs args, out GesturePoint point);
 
+        /// <summary>
+        /// Called when input element changes.
+        /// Unsubscribe for the old element and subscribe to the new.
+        /// </summary>
+        /// <param name="oldElement">The previously tracked element.</param>
+        /// <param name="newElement">The to be tracked element.</param>
+        protected abstract void OnInputElementChanged(UIElement oldElement, UIElement newElement);
+
         private static void OnInputElementChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            var tracker = (GestureTrackerBase<TArgs>)d;
-            if (e.OldValue is UIElement oldElement)
+            if (ReferenceEquals(e.OldValue, e.NewValue))
             {
-                foreach (var subscriber in tracker.Subscribers)
-                {
-                    subscriber.RemoveHandler(oldElement);
-                }
+                return;
             }
 
-            if (e.NewValue is UIElement newElement)
-            {
-                foreach (var subscriber in tracker.Subscribers)
-                {
-                    subscriber.AddHandler(newElement);
-                }
-            }
+            var tracker = (GestureTrackerBase<TArgs>)d;
+            tracker.OnInputElementChanged((UIElement)e.OldValue, (UIElement)e.NewValue);
         }
     }
 }

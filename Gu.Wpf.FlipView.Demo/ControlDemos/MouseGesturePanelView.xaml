@@ -21,7 +21,7 @@
                 <flipView:GesturePanel.GestureTracker>
                     <flipView:MouseGestureTracker>
                         <flipView:MouseGestureTracker.Interpreter>
-                            <flipView:GestureInterpreter MinSwipeLength="15" MinSwipeVelocity="1" />
+                            <flipView:DefaultGestureInterpreter MinSwipeLength="15" MinSwipeVelocity="1" />
                         </flipView:MouseGestureTracker.Interpreter>
                     </flipView:MouseGestureTracker>
                 </flipView:GesturePanel.GestureTracker>

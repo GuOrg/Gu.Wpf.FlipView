@@ -8,25 +8,25 @@
     /// <summary>
     /// The default interpreter of gestures.
     /// </summary>
-    public class GestureInterpreter : Freezable, IGestureInterpreter
+    public class DefaultGestureInterpreter : Freezable, IGestureInterpreter
     {
 #pragma warning disable SA1600 // Elements must be documented
         public static readonly DependencyProperty MinSwipeVelocityProperty = DependencyProperty.Register(
             "MinSwipeVelocity",
             typeof(double),
-            typeof(GestureInterpreter),
+            typeof(DefaultGestureInterpreter),
             new PropertyMetadata(1.0));
 
         public static readonly DependencyProperty MinSwipeLengthProperty = DependencyProperty.Register(
             "MinSwipeLength",
             typeof(double),
-            typeof(GestureInterpreter),
+            typeof(DefaultGestureInterpreter),
             new PropertyMetadata(50.0));
 
         public static readonly DependencyProperty MaxDeviationFromHorizontalProperty = DependencyProperty.Register(
             "MaxDeviationFromHorizontal",
             typeof(double),
-            typeof(GestureInterpreter),
+            typeof(DefaultGestureInterpreter),
             new PropertyMetadata(30.0));
 #pragma warning restore SA1600 // Elements must be documented
 
@@ -104,7 +104,7 @@
         /// <inheritdoc />
         protected override Freezable CreateInstanceCore()
         {
-            return new GestureInterpreter();
+            return new DefaultGestureInterpreter();
         }
 
         private static bool IsHorizontalEnough(Vector delta, double threshold)
