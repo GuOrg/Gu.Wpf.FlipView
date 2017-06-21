@@ -103,7 +103,7 @@ The default animation is fade new content in & old content out.
 When a transition starts the ContentChangedEvent is raised for `PART_OldContent` and `PART_NewContent` if they are found in the template.
 
 ## ContentChangedEvent
-Notifies when content changes.
+Notifies when content changes. When a transition starts the ContentChangedEvent is raised for `PART_OldContent` and `PART_NewContent` if they are found in the template.
 
 ## OldContent
 This property holds the old content until the transition animation finishes.
@@ -125,3 +125,41 @@ Sample
 <flipView:TransitionControl Content="{Binding SelectedItem, ElementName=ListBox}" 
                             ContentTemplate="{StaticResource SomeDataTemplate}" />
 ```
+
+# GesturePanel
+A contentcontrol that detects gestures such as swipes. Used in the `ContentTemplate` for `FlipView`
+
+## Gestured
+A routed event that notifies when a gesture was detected. 
+
+## GestureTracker
+Plug in a gesture tracker. 
+The default value is `new TouchGestureTracker()`
+
+Included in the library is
+- TouchGestureTracker
+- MouseGestureTracker
+
+The MouseGestureTracker can be useful for testing things if no touch device is available.
+
+Sample:
+```xaml
+<flipView:GesturePanel Background="Lavender">
+    <!-- content goes here -->
+</flipView:GesturePanel>
+```
+
+Sample with custom tracker:
+```xaml
+<flipView:GesturePanel.GestureTracker>
+    <flipView:MouseGestureTracker>
+        <flipView:MouseGestureTracker.Interpreter>
+            <flipView:DefaultGestureInterpreter MinSwipeLength="15" 
+                                                MinSwipeVelocity="1" 
+                                                MaxDeviationFromHorizontal="30" />
+        </flipView:MouseGestureTracker.Interpreter>
+    </flipView:MouseGestureTracker>
+     <!-- content goes here -->
+</flipView:GesturePanel.GestureTracker>
+```
+

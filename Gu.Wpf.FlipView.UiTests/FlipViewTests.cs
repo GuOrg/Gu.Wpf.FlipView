@@ -1,6 +1,5 @@
 namespace Gu.Wpf.FlipView.UiTests
 {
-    using System.Threading;
     using FlaUI.Core;
     using FlaUI.UIA3;
     using NUnit.Framework;
