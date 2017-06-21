@@ -16,8 +16,8 @@ using System.Windows.Markup;
 [assembly: ComVisible(false)]
 [assembly: ThemeInfo(ResourceDictionaryLocation.None, ResourceDictionaryLocation.SourceAssembly)]
 
-[assembly: AssemblyVersion("1.1.0.0")]
-[assembly: AssemblyFileVersion("1.1.0.0")]
+[assembly: AssemblyVersion("2.0.0.0")]
+[assembly: AssemblyFileVersion("2.0.0.0")]
 [assembly: InternalsVisibleTo("Gu.Wpf.FlipView.Tests", AllInternalsVisible = true)]
 [assembly: NeutralResourcesLanguageAttribute("en")]
 [assembly: XmlnsDefinition("https://github.com/JohanLarsson/Gu.Wpf.FlipView", "Gu.Wpf.FlipView")]
