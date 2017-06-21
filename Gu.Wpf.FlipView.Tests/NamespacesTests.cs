@@ -7,7 +7,7 @@
 
     public class NamespacesTests
     {
-        private const string Uri = @"http://gu.se/FlipView";
+        private const string Uri = @"https://github.com/JohanLarsson/Gu.Wpf.FlipView";
 
         [Test]
         public void XmlnsDefinitions()
