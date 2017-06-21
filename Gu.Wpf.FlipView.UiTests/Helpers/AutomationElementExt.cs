@@ -5,8 +5,14 @@
     using FlaUI.Core.Conditions;
     using FlaUI.Core.Definitions;
 
-    public static class WindowExt
+    public static class AutomationElementExt
     {
+        public static bool WaitUntilResponsive(this AutomationElement automationElement)
+        {
+            FlaUI.Core.Input.Helpers.WaitUntilInputIsProcessed();
+            return FlaUI.Core.Input.Helpers.WaitUntilResponsive(automationElement);
+        }
+
         public static Button FindButton(this AutomationElement parent, string name)
         {
             return parent.FindByNameOrId(name, ControlType.Button)

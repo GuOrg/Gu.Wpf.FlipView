@@ -1,5 +1,6 @@
 namespace Gu.Wpf.FlipView.UiTests
 {
+    using System.Threading;
     using FlaUI.Core;
     using FlaUI.UIA3;
     using NUnit.Framework;
@@ -14,7 +15,6 @@ namespace Gu.Wpf.FlipView.UiTests
                 using (var automation = new UIA3Automation())
                 {
                     var window = app.GetMainWindow(automation);
-                    app.WaitWhileBusy();
                     var flipView = window.FindFirstDescendant(x => x.ByAutomationId("FlipView"));
                     var browseBack = flipView.FindButton("BrowseBackButton");
                     var browseForward = flipView.FindButton("BrowseForwardButton");
@@ -24,26 +24,31 @@ namespace Gu.Wpf.FlipView.UiTests
                     Assert.AreEqual(1, selectedIndex.Value);
 
                     browseBack.Click();
+                    window.WaitUntilResponsive();
                     Assert.AreEqual(false, browseBack.Properties.IsEnabled.Value);
                     Assert.AreEqual(true, browseForward.Properties.IsEnabled.Value);
                     Assert.AreEqual(0, selectedIndex.Value);
 
                     browseForward.Click();
+                    window.WaitUntilResponsive();
                     Assert.AreEqual(true, browseBack.Properties.IsEnabled.Value);
                     Assert.AreEqual(true, browseForward.Properties.IsEnabled.Value);
                     Assert.AreEqual(1, selectedIndex.Value);
 
                     browseForward.Click();
+                    window.WaitUntilResponsive();
                     Assert.AreEqual(true, browseBack.Properties.IsEnabled.Value);
                     Assert.AreEqual(true, browseForward.Properties.IsEnabled.Value);
                     Assert.AreEqual(2, selectedIndex.Value);
 
                     browseForward.Click();
+                    window.WaitUntilResponsive();
                     Assert.AreEqual(true, browseBack.Properties.IsEnabled.Value);
                     Assert.AreEqual(false, browseForward.Properties.IsEnabled.Value);
                     Assert.AreEqual(3, selectedIndex.Value);
 
                     browseBack.Click();
+                    window.WaitUntilResponsive();
                     Assert.AreEqual(true, browseBack.Properties.IsEnabled.Value);
                     Assert.AreEqual(true, browseForward.Properties.IsEnabled.Value);
                     Assert.AreEqual(2, selectedIndex.Value);
@@ -60,7 +65,6 @@ namespace Gu.Wpf.FlipView.UiTests
                 using (var automation = new UIA3Automation())
                 {
                     var window = app.GetMainWindow(automation);
-                    app.WaitWhileBusy();
                     var flipView = window.FindFirstDescendant(x => x.ByAutomationId("FlipView"));
                     var browseBack = flipView.FindButton("BrowseBackButton");
                     var browseForward = flipView.FindButton("BrowseForwardButton");
@@ -70,11 +74,13 @@ namespace Gu.Wpf.FlipView.UiTests
                     Assert.AreEqual(1, selectedIndex.Value);
 
                     selectedIndex.Value = 0;
+                    window.WaitUntilResponsive();
                     Assert.AreEqual(false, browseBack.Properties.IsEnabled.Value);
                     Assert.AreEqual(true, browseForward.Properties.IsEnabled.Value);
                     Assert.AreEqual(0, selectedIndex.Value);
 
                     selectedIndex.Value = 3;
+                    window.WaitUntilResponsive();
                     Assert.AreEqual(true, browseBack.Properties.IsEnabled.Value);
                     Assert.AreEqual(false, browseForward.Properties.IsEnabled.Value);
                     Assert.AreEqual(3, selectedIndex.Value);
