@@ -25,6 +25,8 @@ A flipview for WPF, handles touch &amp; mouse swipe.
 A selector that transitions when selecteditem changes.
 Has bindings to `NavigationCommands.BrowseBack` and `NavigationCommands.BrowseForward`
 
+![animation](https://user-images.githubusercontent.com/1640096/27380318-f546c126-567e-11e7-8cb6-91463b74641f.gif)
+
 ## IncreaseInAnimation
 The animation to use for animating in new content when selected index increased.
 
