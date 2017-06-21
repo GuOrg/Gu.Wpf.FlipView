@@ -215,10 +215,8 @@
                                      Background="Transparent"
                                      BorderThickness="0"
                                      ItemContainerStyle="{TemplateBinding IndexItemStyle}"
-                                     ItemsSource="{Binding Items,
-                                                           RelativeSource={RelativeSource AncestorType=flipView:FlipView}}"
-                                     SelectedItem="{Binding SelectedItem,
-                                                            RelativeSource={RelativeSource AncestorType=flipView:FlipView}}">
+                                     ItemsSource="{Binding Items, RelativeSource={RelativeSource AncestorType=flipView:FlipView}}"
+                                     SelectedItem="{Binding SelectedItem, RelativeSource={RelativeSource AncestorType=flipView:FlipView}}">
                                 <ListBox.Template>
                                     <ControlTemplate TargetType="{x:Type ListBox}">
                                         <ItemsPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
@@ -254,7 +252,7 @@
 
                             <!--  ReSharper disable once Xaml.MissingGridIndex Set in style  -->
                             <Border x:Name="LeftArrow" Grid.Row="1">
-                                <RepeatButton x:Name="LeftArrowButton"
+                                <RepeatButton x:Name="BrowseBackButton"
                                               HorizontalAlignment="Left"
                                               Command="BrowseBack"
                                               Style="{TemplateBinding ArrowButtonStyle}">
@@ -279,7 +277,7 @@
 
                             <!--  ReSharper disable once Xaml.MissingGridIndex Set in style  -->
                             <Border x:Name="RightArrow" Grid.Row="1">
-                                <RepeatButton x:Name="RightArrowButton"
+                                <RepeatButton x:Name="BrowseForwardButton"
                                               HorizontalAlignment="Right"
                                               Command="BrowseForward"
                                               Style="{TemplateBinding ArrowButtonStyle}">
@@ -302,11 +300,13 @@
                                 </Border.Style>
                             </Border>
 
-                            <flipView:GesturePanel Grid.Row="1"
+                            <flipView:GesturePanel x:Name="GesturePanel"
+                                                   Grid.Row="1"
                                                    Grid.Column="1"
                                                    Background="Transparent"
                                                    ClipToBounds="True">
-                                <flipView:TransitionControl Content="{TemplateBinding SelectedItem}"
+                                <flipView:TransitionControl x:Name="TransitionControl"
+                                                            Content="{TemplateBinding SelectedItem}"
                                                             ContentStringFormat="{TemplateBinding ItemStringFormat}"
                                                             ContentTemplate="{TemplateBinding ItemTemplate}"
                                                             ContentTemplateSelector="{TemplateBinding ItemTemplateSelector}"

@@ -44,6 +44,8 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FlipViewTests.cs" />
+    <Compile Include="Helpers\WindowExt.cs" />
     <Compile Include="MainWindowTests.cs" />
     <Compile Include="Helpers\Info.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

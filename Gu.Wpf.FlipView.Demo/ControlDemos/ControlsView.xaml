@@ -20,6 +20,11 @@
             <controlDemos:FlipViewDataTemplateView />
         </TabItem>
 
+        <!--  Providing a sample of how to style it  -->
+        <TabItem Header="FlipView Styles">
+            <controlDemos:StyledFlipViewDemo />
+        </TabItem>
+
         <TabItem Header="TransitionControl">
             <controlDemos:TransitionControlView />
         </TabItem>
@@ -38,11 +43,6 @@
 
         <TabItem Header="GesturePanelView (mouse and touch)">
             <controlDemos:CompositeGesturePanelView />
-        </TabItem>
-
-        <!--  Providing a sample of how to style it  -->
-        <TabItem Header="FlipView Styles">
-            <controlDemos:StyledFlipViewDemo />
         </TabItem>
     </TabControl>
 </UserControl>

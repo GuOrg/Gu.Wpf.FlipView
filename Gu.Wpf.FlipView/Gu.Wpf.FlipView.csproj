@@ -61,6 +61,7 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FlipViewAutomationPeer.cs" />
     <Compile Include="Gestures\EventArgs\CommandGestureEventArgs.cs" />
     <Compile Include="Gestures\EventArgs\GesturedEventhandler.cs" />
     <Compile Include="Gestures\EventArgs\GesturedEventArgs.cs" />
@@ -68,6 +69,7 @@
     <Compile Include="Gestures\GestureType.cs" />
     <Compile Include="Gestures\EventArgs\InputGestureEventArgs.cs" />
     <Compile Include="Gestures\Trackers\SubscribeInfos.cs" />
+    <Compile Include="Internals\DependencyObjExtensions.cs" />
     <Compile Include="Internals\TimeLineExt.cs" />
     <Compile Include="TransitionControl.cs" />
     <Compile Include="AttachedProperties\Transform.cs" />

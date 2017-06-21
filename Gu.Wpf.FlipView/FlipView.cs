@@ -242,6 +242,12 @@
             }
         }
 
+        /// <inheritdoc />
+        protected override System.Windows.Automation.Peers.AutomationPeer OnCreateAutomationPeer()
+        {
+            return new FlipViewAutomationPeer(this);
+        }
+
         private static object CoerceSelectedIndexProxy(DependencyObject d, object basevalue)
         {
             if (basevalue is int index)

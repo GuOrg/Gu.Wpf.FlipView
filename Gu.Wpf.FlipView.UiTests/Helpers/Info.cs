@@ -4,8 +4,6 @@
     using System.Diagnostics;
     using System.IO;
     using System.Reflection;
-    using Gu.Wpf.FlipView.Demo;
-    using NUnit.Framework;
 
     public static class Info
     {
@@ -13,15 +11,9 @@
         {
             get
             {
-                var assembly = typeof(MainWindow).Assembly;
-                var uri = new Uri(assembly.CodeBase, UriKind.Absolute);
-                var fileName = uri.AbsolutePath;
-                var workingDirectory = Path.GetDirectoryName(fileName);
-                Assert.NotNull(workingDirectory);
                 var processStartInfo = new ProcessStartInfo
                                        {
-                                           WorkingDirectory = workingDirectory,
-                                           FileName = fileName,
+                                           FileName = GetExeFileName(),
                                        };
                 return processStartInfo;
             }

@@ -5,6 +5,10 @@
              xmlns:misc="clr-namespace:Gu.Wpf.FlipView.Demo.Misc"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
+        <Style TargetType="{x:Type TextBlock}">
+            <Setter Property="VerticalAlignment" Value="Center" />
+        </Style>
+
         <HierarchicalDataTemplate DataType="{x:Type misc:ArgsVm}" ItemsSource="{Binding Children}">
             <TextBlock Text="{Binding Name}" />
         </HierarchicalDataTemplate>
@@ -13,8 +17,8 @@
             <TextBlock>
                 <TextBlock.Text>
                     <MultiBinding StringFormat="{}{0} {1}">
-                        <Binding Path="Gesture"></Binding>
-                        <Binding Path="GestureEventArgs"></Binding>
+                        <Binding Path="Gesture" />
+                        <Binding Path="GestureEventArgs" />
                     </MultiBinding>
                 </TextBlock.Text>
             </TextBlock>
