@@ -97,3 +97,31 @@ Sample bound itemssource:
 </flipView:FlipView>
 ```
 
+# TransitionControl
+A contentcontrol that animates content changes. Used in the `ControlTemplate` for `FlipView`.
+The default animation is fade new content in & old content out.
+When a transition starts the ContentChangedEvent is raised for `PART_OldContent` and `PART_NewContent` if they are found in the template.
+
+## ContentChangedEvent
+Notifies when content changes.
+
+## OldContent
+This property holds the old content until the transition animation finishes.
+
+## OldContentStyle 
+The style for the old content. TargetType="ContentPresenter"
+
+## OutAnimation
+The storyboard used for animating out old content.
+
+## NewContentStyle 
+The style for the new and current content. TargetType="ContentPresenter"
+
+## InAnimation
+The storyboard used for animating in new content.
+
+Sample
+```xaml
+<flipView:TransitionControl Content="{Binding SelectedItem, ElementName=ListBox}" 
+                            ContentTemplate="{StaticResource SomeDataTemplate}" />
+```

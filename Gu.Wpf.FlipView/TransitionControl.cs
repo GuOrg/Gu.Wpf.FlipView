@@ -28,23 +28,20 @@
             typeof(RoutedEventHandler),
             typeof(TransitionControl));
 
-        public static readonly RoutedEvent OldContentChangedEvent = EventManager.RegisterRoutedEvent(
-            "OldContentChanged",
-            RoutingStrategy.Bubble,
-            typeof(RoutedEventHandler),
-            typeof(TransitionControl));
-
-        public static readonly RoutedEvent NewContentChangedEvent = EventManager.RegisterRoutedEvent(
-            "NewContentChanged",
-            RoutingStrategy.Bubble,
-            typeof(RoutedEventHandler),
-            typeof(TransitionControl));
-
         public static readonly DependencyProperty OldContentStyleProperty = DependencyProperty.Register(
             "OldContentStyle",
             typeof(Style),
             typeof(TransitionControl),
             new PropertyMetadata(default(Style)));
+
+        public static readonly DependencyProperty OutAnimationProperty = DependencyProperty.Register(
+            "OutAnimation",
+            typeof(Storyboard),
+            typeof(TransitionControl),
+            new PropertyMetadata(
+                EmptyStoryboard.Instance,
+                OnOutAnimationChanged,
+                (_, v) => OnAnimationCoerce(v)));
 
         public static readonly DependencyProperty NewContentStyleProperty = DependencyProperty.Register(
             "NewContentStyle",
@@ -60,15 +57,6 @@
                 EmptyStoryboard.Instance,
                 null,
                (_, v) => OnAnimationCoerce(v)));
-
-        public static readonly DependencyProperty OutAnimationProperty = DependencyProperty.Register(
-            "OutAnimation",
-            typeof(Storyboard),
-            typeof(TransitionControl),
-            new PropertyMetadata(
-                EmptyStoryboard.Instance,
-                OnOutAnimationChanged,
-                (_, v) => OnAnimationCoerce(v)));
 
         private static readonly DependencyPropertyKey OldContentPropertyKey = DependencyProperty.RegisterReadOnly(
             "OldContent",
@@ -134,12 +122,12 @@
         }
 
         /// <summary>
-        /// Gets or sets the storyboard that controls how old content animates out of view
+        /// Gets or sets the storyboard that controls how new content animates into view
         /// </summary>
-        public Storyboard InAnimation
+        public Storyboard OutAnimation
         {
-            get => (Storyboard)this.GetValue(InAnimationProperty);
-            set => this.SetValue(InAnimationProperty, value);
+            get => (Storyboard)this.GetValue(OutAnimationProperty);
+            set => this.SetValue(OutAnimationProperty, value);
         }
 
         /// <summary>
@@ -152,12 +140,12 @@
         }
 
         /// <summary>
-        /// Gets or sets the storyboard that controls how new content animates into view
+        /// Gets or sets the storyboard that controls how old content animates out of view
         /// </summary>
-        public Storyboard OutAnimation
+        public Storyboard InAnimation
         {
-            get => (Storyboard)this.GetValue(OutAnimationProperty);
-            set => this.SetValue(OutAnimationProperty, value);
+            get => (Storyboard)this.GetValue(InAnimationProperty);
+            set => this.SetValue(InAnimationProperty, value);
         }
 
         /// <inheritdoc />
@@ -190,6 +178,8 @@
                 }
                 else
                 {
+                    // We can't subscribe to .Completed for the storyboard as it might be frozen.
+                    // Hacking it like this instead.
                     this.timer.Start();
                 }
             }
@@ -201,8 +191,9 @@
         /// <param name="newAnimation">The storyboard for animating a value out of the view.</param>
         protected virtual void OnOldTransitionChanged(Storyboard newAnimation)
         {
+            // We can't subscribe to .Completed for the storyboard as it might be frozen.
+            // Hacking it like this instead.
             this.timer.Interval = newAnimation?.GetTimeToFinished() ?? TimeSpan.Zero;
-
             base.OnContentChanged(this.OldContent, null);
             this.OldContent = null;
         }
