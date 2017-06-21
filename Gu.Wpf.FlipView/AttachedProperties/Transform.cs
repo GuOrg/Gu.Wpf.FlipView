@@ -48,64 +48,104 @@ namespace Gu.Wpf.FlipView.AttachedProperties
             typeof(Transform),
             new PropertyMetadata(1.0));
 
-        public static void SetRelativeOffsetX(FrameworkElement element, double value)
-        {
-            element.SetValue(RelativeOffsetXProperty, value);
-        }
-
+        /// <summary>
+        /// Get the offset relative to the size of the element in the x direction.
+        /// 1 means the position is ActualWidth
+        /// </summary>
         public static double GetRelativeOffsetX(FrameworkElement element)
         {
             return (double)element.GetValue(RelativeOffsetXProperty);
         }
 
-        public static void SetOffsetX(DependencyObject element, double value)
+        /// <summary>
+        /// Set the offset relative to the size of the element in the x direction.
+        /// 1 means the position is ActualWidth
+        /// </summary>
+        public static void SetRelativeOffsetX(FrameworkElement element, double value)
         {
-            element.SetValue(OffsetXProperty, value);
+            element.SetValue(RelativeOffsetXProperty, value);
         }
 
+        /// <summary>
+        /// Get the absolute offset in the x direction.
+        /// </summary>
         public static double GetOffsetX(DependencyObject element)
         {
             return (double)element.GetValue(OffsetXProperty);
         }
 
-        public static void SetScaleX(DependencyObject element, double value)
+        /// <summary>
+        /// Set the absolute offset in the x direction.
+        /// </summary>
+        public static void SetOffsetX(DependencyObject element, double value)
         {
-            element.SetValue(ScaleXProperty, value);
+            element.SetValue(OffsetXProperty, value);
         }
 
+        /// <summary>
+        /// Get the scale in the x direction.
+        /// </summary>
         public static double GetScaleX(DependencyObject element)
         {
             return (double)element.GetValue(ScaleXProperty);
         }
 
-        public static void SetRelativeOffsetY(DependencyObject element, double value)
+        /// <summary>
+        /// Set the scale in the x direction.
+        /// </summary>
+        public static void SetScaleX(DependencyObject element, double value)
         {
-            element.SetValue(RelativeOffsetYProperty, value);
+            element.SetValue(ScaleXProperty, value);
         }
 
+        /// <summary>
+        /// Get the offset relative to the size of the element in the y direction.
+        /// 1 means the position is ActualHeight
+        /// </summary>
         public static double GetRelativeOffsetY(DependencyObject element)
         {
             return (double)element.GetValue(RelativeOffsetYProperty);
         }
 
-        public static void SetOffsetY(DependencyObject element, double value)
+        /// <summary>
+        /// Set the offset relative to the size of the element in the y direction.
+        /// 1 means the position is ActualHeight
+        /// </summary>
+        public static void SetRelativeOffsetY(DependencyObject element, double value)
         {
-            element.SetValue(OffsetYProperty, value);
+            element.SetValue(RelativeOffsetYProperty, value);
         }
 
+        /// <summary>
+        /// Get the absolute offset in the y direction.
+        /// </summary>
         public static double GetOffsetY(DependencyObject element)
         {
             return (double)element.GetValue(OffsetYProperty);
         }
 
-        public static void SetScaleY(DependencyObject element, double value)
+        /// <summary>
+        /// Set the absolute offset in the y direction.
+        /// </summary>
+        public static void SetOffsetY(DependencyObject element, double value)
         {
-            element.SetValue(ScaleYProperty, value);
+            element.SetValue(OffsetYProperty, value);
         }
 
+        /// <summary>
+        /// Get the scale in the y direction.
+        /// </summary>
         public static double GetScaleY(DependencyObject element)
         {
             return (double)element.GetValue(ScaleYProperty);
+        }
+
+        /// <summary>
+        /// Set the scale in the y direction.
+        /// </summary>
+        public static void SetScaleY(DependencyObject element, double value)
+        {
+            element.SetValue(ScaleYProperty, value);
         }
 
         private static void OnRelativeOffsetXChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
