@@ -1,0 +1,10 @@
+﻿type project
+tags xaml wpf flipview
+projectUrl https://github.com/JohanLarsson/Gu.Wpf.FlipView
+licenseUrl http://opensource.org/licenses/MIT
+
+excludeddependencies
+  JetBrains.Annotations
+  StyleCop.Analyzers
+  WpfAnalyzers
+  Gu.Analyzers
