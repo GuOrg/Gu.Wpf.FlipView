@@ -20,6 +20,16 @@ A flipview for WPF, handles touch &amp; mouse swipe.
   - [ArrowPlacement](#arrowplacement)
   - [ArrowButtonStyle](#arrowbuttonstyle)
   - [Samples](#samples)
+- [TransitionControl](#transitioncontrol)
+  - [ContentChangedEvent](#contentchangedevent)
+  - [OldContent](#oldcontent)
+  - [OldContentStyle](#oldcontentstyle)
+  - [OutAnimation](#outanimation)
+  - [NewContentStyle](#newcontentstyle)
+  - [InAnimation](#inanimation)
+- [GesturePanel](#gesturepanel)
+  - [Gestured](#gestured)
+  - [GestureTracker](#gesturetracker)
 
 # FlipView
 A selector that transitions when selecteditem changes.
