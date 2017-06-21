@@ -1,11 +1,10 @@
 ﻿namespace Gu.Wpf.FlipView
 {
-    using Gu.Wpf.FlipView.Internals;
     using System.Collections.Generic;
     using System.Linq;
     using System.Windows;
     using System.Windows.Automation.Peers;
-    using System.Windows.Media;
+    using Gu.Wpf.FlipView.Internals;
 
     /// <summary>
     /// An <see cref="AutomationPeer"/> for <see cref="FlipView"/>
