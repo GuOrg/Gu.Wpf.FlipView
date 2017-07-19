@@ -23,13 +23,15 @@ namespace Gu.Wpf.FlipView.UiTests
                     Assert.AreEqual(0, selectedIndex.Value);
                     Assert.AreEqual(false, browseBack.Properties.IsEnabled.Value);
                     Assert.AreEqual(true, browseForward.Properties.IsEnabled.Value);
-                    browseForward.Click();
 
+                    browseForward.Click();
+                    window.WaitUntilResponsive();
                     Assert.AreEqual(true, browseBack.Properties.IsEnabled.Value);
                     Assert.AreEqual(true, browseForward.Properties.IsEnabled.Value);
                     Assert.AreEqual(1, selectedIndex.Value);
 
                     browseBack.Click();
+                    window.WaitUntilResponsive();
                     Assert.AreEqual(false, browseBack.Properties.IsEnabled.Value);
                     Assert.AreEqual(true, browseForward.Properties.IsEnabled.Value);
                     Assert.AreEqual(0, selectedIndex.Value);

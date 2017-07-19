@@ -24,8 +24,9 @@ namespace Gu.Wpf.FlipView.UiTests
                     Assert.AreEqual("SelectedIndex: 0 SelectedItem: Johan Larsson", status.Text);
                     Assert.AreEqual(false, browseBack.Properties.IsEnabled.Value);
                     Assert.AreEqual(true, browseForward.Properties.IsEnabled.Value);
-                    browseForward.Click();
 
+                    browseForward.Click();
+                    window.WaitUntilResponsive();
                     Assert.AreEqual(true, browseBack.Properties.IsEnabled.Value);
                     Assert.AreEqual(true, browseForward.Properties.IsEnabled.Value);
                     Assert.AreEqual("SelectedIndex: 1 SelectedItem: Erik Svensson", status.Text);
