@@ -14,6 +14,9 @@ namespace Gu.Wpf.FlipView.UiTests
                 using (var automation = new UIA3Automation())
                 {
                     var window = app.GetMainWindow(automation);
+                    app.WaitWhileBusy();
+                    window.WaitUntilResponsive();
+
                     var flipView = window.FindFirstDescendant(x => x.ByAutomationId("FlipView"));
                     var browseBack = flipView.FindButton("BrowseBackButton");
                     var browseForward = flipView.FindButton("BrowseForwardButton");
