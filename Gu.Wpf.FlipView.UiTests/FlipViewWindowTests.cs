@@ -18,6 +18,11 @@ namespace Gu.Wpf.FlipView.UiTests
                     var browseBack = flipView.FindButton("BrowseBackButton");
                     var browseForward = flipView.FindButton("BrowseForwardButton");
                     var selectedIndex = window.FindSlider("SelectedIndex");
+                    Assert.AreEqual(0, selectedIndex.Value);
+                    Assert.AreEqual(false, browseBack.Properties.IsEnabled.Value);
+                    Assert.AreEqual(true, browseForward.Properties.IsEnabled.Value);
+                    browseForward.Click();
+
                     Assert.AreEqual(true, browseBack.Properties.IsEnabled.Value);
                     Assert.AreEqual(true, browseForward.Properties.IsEnabled.Value);
                     Assert.AreEqual(1, selectedIndex.Value);

@@ -44,6 +44,7 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FlipViewBoundWindowTests.cs" />
     <Compile Include="FlipViewWindowTests.cs" />
     <Compile Include="Helpers\AutomationElementExt.cs" />
     <Compile Include="MainWindowTests.cs" />

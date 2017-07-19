@@ -18,9 +18,7 @@
             <ColumnDefinition Width="4*" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
-        <flipView:FlipView x:Name="FlipView"
-                           Grid.Column="1"
-                           SelectedIndex="1">
+        <flipView:FlipView x:Name="FlipView" Grid.Column="1">
             <flipView:FlipView.Resources>
                 <Style TargetType="TextBlock">
                     <Setter Property="FontSize" Value="70" />
