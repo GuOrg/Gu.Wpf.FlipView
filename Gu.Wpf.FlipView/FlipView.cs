@@ -1,5 +1,6 @@
 ﻿namespace Gu.Wpf.FlipView
 {
+    using System.Collections.Specialized;
     using System.Windows;
     using System.Windows.Controls.Primitives;
     using System.Windows.Input;
@@ -9,8 +10,8 @@
     /// <summary>
     /// A <see cref="Selector"/> for navigating the content.
     /// </summary>
-    [StyleTypedProperty(Property =nameof(FlipView.IndexItemStyle), StyleTargetType = typeof(System.Windows.Controls.ListBoxItem))]
-    [StyleTypedProperty(Property =nameof(FlipView.ArrowButtonStyle), StyleTargetType = typeof(System.Windows.Controls.Primitives.RepeatButton))]
+    [StyleTypedProperty(Property = nameof(FlipView.IndexItemStyle), StyleTargetType = typeof(System.Windows.Controls.ListBoxItem))]
+    [StyleTypedProperty(Property = nameof(FlipView.ArrowButtonStyle), StyleTargetType = typeof(System.Windows.Controls.Primitives.RepeatButton))]
     public class FlipView : Selector
     {
 #pragma warning disable SA1202 // Elements must be ordered by access
@@ -98,11 +99,13 @@
             DefaultStyleKeyProperty.OverrideMetadata(typeof(FlipView), new FrameworkPropertyMetadata(typeof(FlipView)));
             IsTabStopProperty.OverrideMetadata(typeof(FlipView), new FrameworkPropertyMetadata(false));
             var metadata = (FrameworkPropertyMetadata)SelectedIndexProperty.GetMetadata(typeof(Selector));
-            SelectedIndexProperty.OverrideMetadata(typeof(FlipView), new FrameworkPropertyMetadata(
-                metadata.DefaultValue,
-                FrameworkPropertyMetadataOptions.BindsTwoWayByDefault | FrameworkPropertyMetadataOptions.Journal,
-                metadata.PropertyChangedCallback,
-                (d, basevalue) => CoerceSelectedIndexProxy(d, metadata.CoerceValueCallback.Invoke(d, basevalue))));
+            SelectedIndexProperty.OverrideMetadata(
+                typeof(FlipView),
+                new FrameworkPropertyMetadata(
+                    -1,
+                    FrameworkPropertyMetadataOptions.BindsTwoWayByDefault | FrameworkPropertyMetadataOptions.Journal,
+                    metadata.PropertyChangedCallback,
+                    (d, basevalue) => CoerceSelectedIndexProxy(d, metadata.CoerceValueCallback.Invoke(d, basevalue))));
             KeyboardNavigation.DirectionalNavigationProperty.OverrideMetadata(typeof(FlipView), new FrameworkPropertyMetadata(KeyboardNavigationMode.Contained));
             KeyboardNavigation.TabNavigationProperty.OverrideMetadata(typeof(FlipView), new FrameworkPropertyMetadata(KeyboardNavigationMode.Once));
             CommandManager.RegisterClassCommandBinding(typeof(FlipView), new CommandBinding(NavigationCommands.BrowseBack, OnPreviousExecuted, OnPreviousCanExecute));
@@ -239,6 +242,16 @@
             {
                 this.CurrentInAnimation = this.DecreaseInAnimation;
                 this.CurrentOutAnimation = this.DecreaseOutAnimation;
+            }
+        }
+
+        protected override void OnItemsChanged(NotifyCollectionChangedEventArgs e)
+        {
+            base.OnItemsChanged(e);
+            if (this.Items.Count > 0 &&
+                this.SelectedIndex == -1)
+            {
+                this.SetCurrentValue(SelectedIndexProperty, 0);
             }
         }
 

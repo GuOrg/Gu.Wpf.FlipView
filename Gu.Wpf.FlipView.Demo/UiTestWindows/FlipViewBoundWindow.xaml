@@ -41,7 +41,7 @@
             <Button Command="{Binding ResetCommand}" Content="Reset" />
         </UniformGrid>
 
-        <TextBlock Grid.Row="2">
+        <TextBlock x:Name="Status" Grid.Row="2">
             <TextBlock.Text>
                 <MultiBinding StringFormat="SelectedIndex: {0} SelectedItem: {1}">
                     <Binding ElementName="FlipView" Path="SelectedIndex" />
