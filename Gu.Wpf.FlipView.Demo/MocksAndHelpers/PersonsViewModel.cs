@@ -12,9 +12,9 @@ namespace Gu.Wpf.FlipView.Demo
         private static readonly IReadOnlyList<Person> StaticPersons = new[]
             {
                 new Person { FirstName = "Johan", LastName = "Larsson" },
-                new Person{ FirstName = "Erik", LastName = "Svensson" },
-                new Person{ FirstName = "Reed", LastName = "Forkmann" },
-                new Person{ FirstName = "Cat", LastName = "Incremented" }
+                new Person { FirstName = "Erik", LastName = "Svensson" },
+                new Person { FirstName = "Reed", LastName = "Forkmann" },
+                new Person { FirstName = "Cat", LastName = "Incremented" }
             };
 
         private ObservableCollection<Person> people;
