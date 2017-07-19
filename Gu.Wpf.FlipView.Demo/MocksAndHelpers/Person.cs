@@ -1,4 +1,4 @@
-﻿namespace Gu.Wpf.FlipView.Demo.ControlDemos
+﻿namespace Gu.Wpf.FlipView.Demo
 {
     using System.ComponentModel;
     using System.Runtime.CompilerServices;
@@ -12,10 +12,7 @@
 
         public string FirstName
         {
-            get
-            {
-                return this.firstName;
-            }
+            get => this.firstName;
 
             set
             {
@@ -31,10 +28,7 @@
 
         public string LastName
         {
-            get
-            {
-                return this.lastName;
-            }
+            get => this.lastName;
 
             set
             {
@@ -46,6 +40,11 @@
                 this.lastName = value;
                 this.OnPropertyChanged();
             }
+        }
+
+        public override string ToString()
+        {
+            return $"{this.firstName} {this.lastName}";
         }
 
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
