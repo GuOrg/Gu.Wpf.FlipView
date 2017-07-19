@@ -1,4 +1,4 @@
-﻿namespace Gu.Wpf.FlipView.Demo.MocksAndHelpers
+﻿namespace Gu.Wpf.FlipView.Demo
 {
     using System.Text;
     using System.Windows.Input;

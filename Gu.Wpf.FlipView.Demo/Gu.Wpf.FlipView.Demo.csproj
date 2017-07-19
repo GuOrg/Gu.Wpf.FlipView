@@ -71,16 +71,14 @@
     <Compile Include="ControlDemos\FlipViewDataTemplateView.xaml.cs">
       <DependentUpon>FlipViewDataTemplateView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ControlDemos\FlipViewDataTemplateViewModel.cs">
-      <DependentUpon>FlipViewDataTemplateView.xaml</DependentUpon>
-    </Compile>
+    <Compile Include="MocksAndHelpers\PersonsViewModel.cs" />
     <Compile Include="ControlDemos\FlipViewDemo.xaml.cs">
       <DependentUpon>FlipViewDemo.xaml</DependentUpon>
     </Compile>
     <Compile Include="ControlDemos\MouseGesturePanelView.xaml.cs">
       <DependentUpon>MouseGesturePanelView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ControlDemos\Person.cs" />
+    <Compile Include="MocksAndHelpers\Person.cs" />
     <Compile Include="ControlDemos\StyledFlipViewDemo.xaml.cs">
       <DependentUpon>StyledFlipViewDemo.xaml</DependentUpon>
     </Compile>
@@ -198,6 +196,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="UiTestWindows\FlipViewBoundWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="UiTestWindows\TransitionControlWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -209,6 +211,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MocksAndHelpers\ManipulationStringer.cs" />
+    <Compile Include="MocksAndHelpers\RelayCommand.cs" />
     <Compile Include="Properties\AssemblyInfo.generated.cs">
       <SubType>Code</SubType>
     </Compile>

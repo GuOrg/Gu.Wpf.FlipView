@@ -5,11 +5,12 @@
              xmlns:flipView="https://github.com/JohanLarsson/Gu.Wpf.FlipView"
              xmlns:local="clr-namespace:Gu.Wpf.FlipView.Demo.ControlDemos"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:demo="clr-namespace:Gu.Wpf.FlipView.Demo"
              d:DesignHeight="300"
              d:DesignWidth="300"
              mc:Ignorable="d">
     <UserControl.DataContext>
-        <local:FlipViewDataTemplateViewModel />
+        <demo:PersonsViewModel />
     </UserControl.DataContext>
     <Grid>
         <Grid.RowDefinitions>
@@ -26,7 +27,7 @@
                            ItemsSource="{Binding People}"
                            SelectedIndex="1">
             <flipView:FlipView.ItemTemplate>
-                <DataTemplate DataType="{x:Type local:Person}">
+                <DataTemplate DataType="{x:Type demo:Person}">
                     <Border Background="#f1eef6">
                         <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center">
                             <TextBlock.Text>
