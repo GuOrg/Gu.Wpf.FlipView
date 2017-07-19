@@ -13,13 +13,14 @@ namespace Gu.Wpf.FlipView.UiTests
             {
                 using (var automation = new UIA3Automation())
                 {
+                    app.WaitWhileBusy();
                     var window = app.GetMainWindow(automation);
                     var flipView = window.FindFirstDescendant(x => x.ByAutomationId("FlipView"));
                     var browseBack = flipView.FindButton("BrowseBackButton");
                     var browseForward = flipView.FindButton("BrowseForwardButton");
                     var dummyButton = window.FindButton("DummyButton");
-                    dummyButton.Click();
                     var status = window.FindTextBlock("Status");
+                    dummyButton.Click();
                     Assert.AreEqual("SelectedIndex: 0 SelectedItem: Johan Larsson", status.Text);
                     Assert.AreEqual(false, browseBack.Properties.IsEnabled.Value);
                     Assert.AreEqual(true, browseForward.Properties.IsEnabled.Value);
