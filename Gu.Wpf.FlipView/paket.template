@@ -3,6 +3,9 @@ tags xaml wpf flipview
 projectUrl https://github.com/JohanLarsson/Gu.Wpf.FlipView
 licenseUrl http://opensource.org/licenses/MIT
 
+releasenotes
+* BUGFIX: Set SelectedIndex to 0 when items c hanges if it is -1.
+
 excludeddependencies
   JetBrains.Annotations
   StyleCop.Analyzers
