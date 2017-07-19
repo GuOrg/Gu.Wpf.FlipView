@@ -19,6 +19,12 @@
                          .AsButton();
         }
 
+        public static Label FindTextBlock(this AutomationElement parent, string name)
+        {
+            return parent.FindByNameOrId(name, ControlType.Text)
+                         .AsLabel();
+        }
+
         public static TextBox FindTextBox(this AutomationElement parent, string name)
         {
             return parent.FindByNameOrId(name, ControlType.Text)
