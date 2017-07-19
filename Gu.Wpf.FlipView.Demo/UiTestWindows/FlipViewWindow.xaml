@@ -5,7 +5,7 @@
         xmlns:flipView="https://github.com/JohanLarsson/Gu.Wpf.FlipView"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         Title="FlipViewWindow"
-        Width="300"
+        Width="400"
         Height="300"
         mc:Ignorable="d">
     <Grid>
@@ -53,6 +53,7 @@
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
             <TextBlock Grid.Row="0"
                        Grid.Column="0"
@@ -60,7 +61,8 @@
             <CheckBox x:Name="ShowArrows"
                       Grid.Row="0"
                       Grid.Column="1"
-                      IsChecked="{Binding ElementName=FlipView, Path=ShowArrows}" />
+                      IsChecked="{Binding ElementName=FlipView,
+                                          Path=ShowArrows}" />
 
             <TextBlock Grid.Row="1"
                        Grid.Column="0"
@@ -68,7 +70,8 @@
             <CheckBox x:Name="ShowIndex"
                       Grid.Row="1"
                       Grid.Column="1"
-                      IsChecked="{Binding ElementName=FlipView, Path=ShowIndex}" />
+                      IsChecked="{Binding ElementName=FlipView,
+                                          Path=ShowIndex}" />
 
             <TextBlock Grid.Row="2"
                        Grid.Column="0"
@@ -77,7 +80,8 @@
                       Grid.Row="2"
                       Grid.Column="1"
                       HorizontalAlignment="Left"
-                      SelectedItem="{Binding ElementName=FlipView, Path=ArrowPlacement}">
+                      SelectedItem="{Binding ElementName=FlipView,
+                                             Path=ArrowPlacement}">
                 <flipView:ArrowPlacement>Inside</flipView:ArrowPlacement>
                 <flipView:ArrowPlacement>Outside</flipView:ArrowPlacement>
             </ComboBox>
@@ -89,7 +93,8 @@
                       Grid.Row="3"
                       Grid.Column="1"
                       HorizontalAlignment="Left"
-                      SelectedItem="{Binding ElementName=FlipView, Path=IndexPlacement}">
+                      SelectedItem="{Binding ElementName=FlipView,
+                                             Path=IndexPlacement}">
                 <flipView:IndexPlacement>Above</flipView:IndexPlacement>
                 <flipView:IndexPlacement>Below</flipView:IndexPlacement>
             </ComboBox>
@@ -100,9 +105,16 @@
             <Slider x:Name="SelectedIndex"
                     Grid.Row="4"
                     Grid.Column="1"
-                    Maximum="{Binding ElementName=FlipView, Path=Items.Count, Converter={x:Static converters:SubtractOneConverter.Default}}"
+                    Maximum="{Binding ElementName=FlipView,
+                                      Path=Items.Count,
+                                      Converter={x:Static converters:SubtractOneConverter.Default}}"
                     Minimum="0"
-                    Value="{Binding ElementName=FlipView, Path=SelectedIndex}" />
+                    Value="{Binding ElementName=FlipView,
+                                    Path=SelectedIndex}" />
+
+            <Button Grid.Row="5"
+                    Grid.Column="1"
+                    Content="DummyButton" />
         </Grid>
     </Grid>
 </Window>

@@ -39,6 +39,7 @@
             <Button Command="{Binding SetToEmptyCommand}" Content="Set empty" />
             <Button Command="{Binding SetToNullCommand}" Content="Set null" />
             <Button Command="{Binding ResetCommand}" Content="Reset" />
+            <Button Content="DummyButton" />
         </UniformGrid>
 
         <TextBlock x:Name="Status" Grid.Row="2">
