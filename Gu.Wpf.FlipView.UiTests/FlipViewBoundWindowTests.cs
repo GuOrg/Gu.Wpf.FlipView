@@ -17,37 +17,37 @@ namespace Gu.Wpf.FlipView.UiTests
                 var browseForward = flipView.FindButton("BrowseForwardButton");
                 var dummyButton = window.FindButton("DummyButton");
                 var status = window.FindTextBlock("Status");
-                dummyButton.Click(TimeSpan.FromMilliseconds(100));
+                dummyButton.Click();
                 Assert.AreEqual("SelectedIndex: 0 SelectedItem: Johan Larsson", status.Text);
                 Assert.AreEqual(false, browseBack.Properties.IsEnabled.Value);
                 Assert.AreEqual(true, browseForward.Properties.IsEnabled.Value);
 
-                browseForward.Click(TimeSpan.FromMilliseconds(100));
+                browseForward.Click();
                 Assert.AreEqual(true, browseBack.Properties.IsEnabled.Value);
                 Assert.AreEqual(true, browseForward.Properties.IsEnabled.Value);
                 Assert.AreEqual("SelectedIndex: 1 SelectedItem: Erik Svensson", status.Text);
 
-                browseBack.Click(TimeSpan.FromMilliseconds(100));
+                browseBack.Click();
                 Assert.AreEqual(false, browseBack.Properties.IsEnabled.Value);
                 Assert.AreEqual(true, browseForward.Properties.IsEnabled.Value);
                 Assert.AreEqual("SelectedIndex: 0 SelectedItem: Johan Larsson", status.Text);
 
-                browseForward.Click(TimeSpan.FromMilliseconds(100));
+                browseForward.Click();
                 Assert.AreEqual(true, browseBack.Properties.IsEnabled.Value);
                 Assert.AreEqual(true, browseForward.Properties.IsEnabled.Value);
                 Assert.AreEqual("SelectedIndex: 1 SelectedItem: Erik Svensson", status.Text);
 
-                browseForward.Click(TimeSpan.FromMilliseconds(100));
+                browseForward.Click();
                 Assert.AreEqual(true, browseBack.Properties.IsEnabled.Value);
                 Assert.AreEqual(true, browseForward.Properties.IsEnabled.Value);
                 Assert.AreEqual("SelectedIndex: 2 SelectedItem: Reed Forkmann", status.Text);
 
-                browseForward.Click(TimeSpan.FromMilliseconds(100));
+                browseForward.Click();
                 Assert.AreEqual(true, browseBack.Properties.IsEnabled.Value);
                 Assert.AreEqual(false, browseForward.Properties.IsEnabled.Value);
                 Assert.AreEqual("SelectedIndex: 3 SelectedItem: Cat Incremented", status.Text);
 
-                browseBack.Click(TimeSpan.FromMilliseconds(100));
+                browseBack.Click();
                 Assert.AreEqual(true, browseBack.Properties.IsEnabled.Value);
                 Assert.AreEqual(true, browseForward.Properties.IsEnabled.Value);
                 Assert.AreEqual("SelectedIndex: 2 SelectedItem: Reed Forkmann", status.Text);
