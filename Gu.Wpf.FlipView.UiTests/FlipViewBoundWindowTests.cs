@@ -18,36 +18,43 @@ namespace Gu.Wpf.FlipView.UiTests
                 var dummyButton = window.FindButton("DummyButton");
                 var status = window.FindTextBlock("Status");
                 dummyButton.Click();
+                window.WaitUntilResponsive();
                 Assert.AreEqual("SelectedIndex: 0 SelectedItem: Johan Larsson", status.Text);
                 Assert.AreEqual(false, browseBack.Properties.IsEnabled.Value);
                 Assert.AreEqual(true, browseForward.Properties.IsEnabled.Value);
 
                 browseForward.Click();
+                window.WaitUntilResponsive();
                 Assert.AreEqual(true, browseBack.Properties.IsEnabled.Value);
                 Assert.AreEqual(true, browseForward.Properties.IsEnabled.Value);
                 Assert.AreEqual("SelectedIndex: 1 SelectedItem: Erik Svensson", status.Text);
 
                 browseBack.Click();
+                window.WaitUntilResponsive();
                 Assert.AreEqual(false, browseBack.Properties.IsEnabled.Value);
                 Assert.AreEqual(true, browseForward.Properties.IsEnabled.Value);
                 Assert.AreEqual("SelectedIndex: 0 SelectedItem: Johan Larsson", status.Text);
 
                 browseForward.Click();
+                window.WaitUntilResponsive();
                 Assert.AreEqual(true, browseBack.Properties.IsEnabled.Value);
                 Assert.AreEqual(true, browseForward.Properties.IsEnabled.Value);
                 Assert.AreEqual("SelectedIndex: 1 SelectedItem: Erik Svensson", status.Text);
 
                 browseForward.Click();
+                window.WaitUntilResponsive();
                 Assert.AreEqual(true, browseBack.Properties.IsEnabled.Value);
                 Assert.AreEqual(true, browseForward.Properties.IsEnabled.Value);
                 Assert.AreEqual("SelectedIndex: 2 SelectedItem: Reed Forkmann", status.Text);
 
                 browseForward.Click();
+                window.WaitUntilResponsive();
                 Assert.AreEqual(true, browseBack.Properties.IsEnabled.Value);
                 Assert.AreEqual(false, browseForward.Properties.IsEnabled.Value);
                 Assert.AreEqual("SelectedIndex: 3 SelectedItem: Cat Incremented", status.Text);
 
                 browseBack.Click();
+                window.WaitUntilResponsive();
                 Assert.AreEqual(true, browseBack.Properties.IsEnabled.Value);
                 Assert.AreEqual(true, browseForward.Properties.IsEnabled.Value);
                 Assert.AreEqual("SelectedIndex: 2 SelectedItem: Reed Forkmann", status.Text);
