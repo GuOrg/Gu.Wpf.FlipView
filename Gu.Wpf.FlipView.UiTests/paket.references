@@ -1,6 +1,6 @@
 group Test
   NUnit
-  FlaUI.UIA3
+  Gu.Wpf.UiAutomation
 
 group Analyzers
   JetBrains.Annotations
