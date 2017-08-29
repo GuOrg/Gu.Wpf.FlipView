@@ -10,7 +10,6 @@ namespace Gu.Wpf.FlipView.UiTests
         {
             using (var app = Application.Launch(Info.CreateStartInfo("FlipViewBoundWindow")))
             {
-                app.WaitWhileBusy();
                 var window = app.MainWindow();
                 var flipView = window.FindFirstDescendant(x => x.ByAutomationId("FlipView"));
                 var browseBack = flipView.FindButton("BrowseBackButton");
