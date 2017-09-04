@@ -11,12 +11,16 @@
             // Just a smoke test so that everything builds.
             using (var app = Application.Launch(Info.ProcessStartInfo))
             {
-                var window = app.MainWindow();
-                var tab = window.FindFirstDescendant(x => x.ByControlType(ControlType.Tab));
-                foreach (var element in tab.FindAllChildren(x => x.ByControlType(ControlType.TabItem)))
+                var window = app.MainWindow;
+                var tab = window.FindTabControl();
+                foreach (var tabItem in tab.Items)
                 {
-                    var tabItem = element.AsTabItem();
                     tabItem.Click();
+                    var nested = tab.FindTabControl();
+                    foreach (var nestedItem in nested.Items)
+                    {
+                        nestedItem.Click();
+                    }
                 }
             }
         }

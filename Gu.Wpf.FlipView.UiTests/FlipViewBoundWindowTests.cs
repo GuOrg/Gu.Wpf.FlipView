@@ -1,6 +1,5 @@
 namespace Gu.Wpf.FlipView.UiTests
 {
-    using System;
     using Gu.Wpf.UiAutomation;
     using NUnit.Framework;
 
@@ -11,7 +10,7 @@ namespace Gu.Wpf.FlipView.UiTests
         {
             using (var app = Application.Launch(Info.CreateStartInfo("FlipViewBoundWindow")))
             {
-                var window = app.MainWindow();
+                var window = app.MainWindow;
                 var flipView = window.FindFirstDescendant(x => x.ByAutomationId("FlipView"));
                 var browseBack = flipView.FindButton("BrowseBackButton");
                 var browseForward = flipView.FindButton("BrowseForwardButton");
@@ -66,7 +65,7 @@ namespace Gu.Wpf.FlipView.UiTests
         {
             using (var app = Application.Launch(Info.CreateStartInfo("FlipViewBoundWindow")))
             {
-                var window = app.MainWindow();
+                var window = app.MainWindow;
                 var flipView = window.FindFirstDescendant(x => x.ByAutomationId("FlipView"));
                 var browseBack = flipView.FindButton("BrowseBackButton");
                 var browseForward = flipView.FindButton("BrowseForwardButton");
@@ -92,7 +91,7 @@ namespace Gu.Wpf.FlipView.UiTests
         {
             using (var app = Application.Launch(Info.CreateStartInfo("FlipViewBoundWindow")))
             {
-                var window = app.MainWindow();
+                var window = app.MainWindow;
                 var flipView = window.FindFirstDescendant(x => x.ByAutomationId("FlipView"));
                 var browseBack = flipView.FindButton("BrowseBackButton");
                 var browseForward = flipView.FindButton("BrowseForwardButton");
@@ -118,7 +117,7 @@ namespace Gu.Wpf.FlipView.UiTests
         {
             using (var app = Application.Launch(Info.CreateStartInfo("FlipViewBoundWindow")))
             {
-                var window = app.MainWindow();
+                var window = app.MainWindow;
                 var flipView = window.FindFirstDescendant(x => x.ByAutomationId("FlipView"));
                 var browseBack = flipView.FindButton("BrowseBackButton");
                 var browseForward = flipView.FindButton("BrowseForwardButton");
