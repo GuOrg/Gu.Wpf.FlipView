@@ -11,18 +11,21 @@
     public class DefaultGestureInterpreter : Freezable, IGestureInterpreter
     {
 #pragma warning disable SA1600 // Elements must be documented
+        /// <summary>Identifies the <see cref="MinSwipeVelocity"/> dependency property.</summary>
         public static readonly DependencyProperty MinSwipeVelocityProperty = DependencyProperty.Register(
             nameof(MinSwipeVelocity),
             typeof(double),
             typeof(DefaultGestureInterpreter),
             new PropertyMetadata(1.0));
 
+        /// <summary>Identifies the <see cref="MinSwipeLength"/> dependency property.</summary>
         public static readonly DependencyProperty MinSwipeLengthProperty = DependencyProperty.Register(
             nameof(MinSwipeLength),
             typeof(double),
             typeof(DefaultGestureInterpreter),
             new PropertyMetadata(50.0));
 
+        /// <summary>Identifies the <see cref="MaxDeviationFromHorizontal"/> dependency property.</summary>
         public static readonly DependencyProperty MaxDeviationFromHorizontalProperty = DependencyProperty.Register(
             nameof(MaxDeviationFromHorizontal),
             typeof(double),

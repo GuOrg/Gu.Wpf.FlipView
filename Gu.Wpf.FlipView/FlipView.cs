@@ -16,24 +16,28 @@
     {
 #pragma warning disable SA1202 // Elements must be ordered by access
 #pragma warning disable SA1600 // Elements must be documented
+        /// <summary>Identifies the <see cref="IncreaseInAnimation"/> dependency property.</summary>
         public static readonly DependencyProperty IncreaseInAnimationProperty = DependencyProperty.Register(
             nameof(IncreaseInAnimation),
             typeof(Storyboard),
             typeof(FlipView),
             new PropertyMetadata(default(Storyboard)));
 
+        /// <summary>Identifies the <see cref="IncreaseOutAnimation"/> dependency property.</summary>
         public static readonly DependencyProperty IncreaseOutAnimationProperty = DependencyProperty.Register(
             nameof(IncreaseOutAnimation),
             typeof(Storyboard),
             typeof(FlipView),
             new PropertyMetadata(default(Storyboard)));
 
+        /// <summary>Identifies the <see cref="DecreaseInAnimation"/> dependency property.</summary>
         public static readonly DependencyProperty DecreaseInAnimationProperty = DependencyProperty.Register(
             nameof(DecreaseInAnimation),
             typeof(Storyboard),
             typeof(FlipView),
             new PropertyMetadata(default(Storyboard)));
 
+        /// <summary>Identifies the <see cref="DecreaseOutAnimation"/> dependency property.</summary>
         public static readonly DependencyProperty DecreaseOutAnimationProperty = DependencyProperty.Register(
             nameof(DecreaseOutAnimation),
             typeof(Storyboard),
@@ -46,6 +50,7 @@
             typeof(FlipView),
             new PropertyMetadata(default(Storyboard)));
 
+        /// <summary>Identifies the <see cref="CurrentInAnimation"/> dependency property.</summary>
         public static readonly DependencyProperty CurrentInAnimationProperty = CurrentInAnimationPropertyKey.DependencyProperty;
 
         private static readonly DependencyPropertyKey CurrentOutAnimationPropertyKey = DependencyProperty.RegisterReadOnly(
@@ -54,38 +59,45 @@
             typeof(FlipView),
             new PropertyMetadata(default(Storyboard)));
 
+        /// <summary>Identifies the <see cref="CurrentOutAnimation"/> dependency property.</summary>
         public static readonly DependencyProperty CurrentOutAnimationProperty = CurrentOutAnimationPropertyKey.DependencyProperty;
 
+        /// <summary>Identifies the <see cref="ShowIndex"/> dependency property.</summary>
         public static readonly DependencyProperty ShowIndexProperty = DependencyProperty.RegisterAttached(
             nameof(ShowIndex),
             typeof(bool),
             typeof(FlipView),
             new FrameworkPropertyMetadata(true, FrameworkPropertyMetadataOptions.AffectsMeasure | FrameworkPropertyMetadataOptions.AffectsArrange));
 
+        /// <summary>Identifies the <see cref="IndexPlacement"/> dependency property.</summary>
         public static readonly DependencyProperty IndexPlacementProperty = DependencyProperty.Register(
             nameof(IndexPlacement),
             typeof(IndexPlacement),
             typeof(FlipView),
             new FrameworkPropertyMetadata(IndexPlacement.Above, FrameworkPropertyMetadataOptions.AffectsMeasure | FrameworkPropertyMetadataOptions.AffectsArrange));
 
+        /// <summary>Identifies the <see cref="IndexItemStyle"/> dependency property.</summary>
         public static readonly DependencyProperty IndexItemStyleProperty = DependencyProperty.Register(
             nameof(IndexItemStyle),
             typeof(Style),
             typeof(FlipView),
             new FrameworkPropertyMetadata(default(Style), FrameworkPropertyMetadataOptions.AffectsMeasure | FrameworkPropertyMetadataOptions.AffectsArrange));
 
+        /// <summary>Identifies the <see cref="ShowArrows"/> dependency property.</summary>
         public static readonly DependencyProperty ShowArrowsProperty = DependencyProperty.RegisterAttached(
             nameof(ShowArrows),
             typeof(bool),
             typeof(FlipView),
             new FrameworkPropertyMetadata(true, FrameworkPropertyMetadataOptions.AffectsArrange | FrameworkPropertyMetadataOptions.AffectsMeasure));
 
+        /// <summary>Identifies the <see cref="ArrowPlacement"/> dependency property.</summary>
         public static readonly DependencyProperty ArrowPlacementProperty = DependencyProperty.Register(
             nameof(ArrowPlacement),
             typeof(ArrowPlacement),
             typeof(FlipView),
             new FrameworkPropertyMetadata(default(ArrowPlacement), FrameworkPropertyMetadataOptions.AffectsArrange | FrameworkPropertyMetadataOptions.AffectsMeasure));
 
+        /// <summary>Identifies the <see cref="ArrowButtonStyle"/> dependency property.</summary>
         public static readonly DependencyProperty ArrowButtonStyleProperty = DependencyProperty.Register(
             nameof(ArrowButtonStyle),
             typeof(Style),

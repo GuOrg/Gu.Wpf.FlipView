@@ -22,18 +22,21 @@
         public const string PartOldContent = "PART_OldContent";
         public const string PartNewContent = "PART_NewContent";
 
+        /// <summary>Identifies the <see cref="ContentChanged"/> routed event.</summary>
         public static readonly RoutedEvent ContentChangedEvent = EventManager.RegisterRoutedEvent(
-            "ContentChanged",
+            nameof(ContentChanged),
             RoutingStrategy.Bubble,
             typeof(RoutedEventHandler),
             typeof(TransitionControl));
 
+        /// <summary>Identifies the <see cref="OldContentStyle"/> dependency property.</summary>
         public static readonly DependencyProperty OldContentStyleProperty = DependencyProperty.Register(
             nameof(OldContentStyle),
             typeof(Style),
             typeof(TransitionControl),
             new PropertyMetadata(default(Style)));
 
+        /// <summary>Identifies the <see cref="OutAnimation"/> dependency property.</summary>
         public static readonly DependencyProperty OutAnimationProperty = DependencyProperty.Register(
             nameof(OutAnimation),
             typeof(Storyboard),
@@ -43,12 +46,14 @@
                 OnOutAnimationChanged,
                 (_, v) => OnAnimationCoerce(v)));
 
+        /// <summary>Identifies the <see cref="NewContentStyle"/> dependency property.</summary>
         public static readonly DependencyProperty NewContentStyleProperty = DependencyProperty.Register(
             nameof(NewContentStyle),
             typeof(Style),
             typeof(TransitionControl),
             new PropertyMetadata(default(Style)));
 
+        /// <summary>Identifies the <see cref="InAnimation"/> dependency property.</summary>
         public static readonly DependencyProperty InAnimationProperty = DependencyProperty.Register(
             nameof(InAnimation),
             typeof(Storyboard),
@@ -64,6 +69,7 @@
             typeof(TransitionControl),
             new PropertyMetadata(default(object)));
 
+        /// <summary>Identifies the <see cref="OldContent"/> dependency property.</summary>
         public static readonly DependencyProperty OldContentProperty = OldContentPropertyKey.DependencyProperty;
 #pragma warning restore SA1202 // Elements must be ordered by access
 #pragma warning restore SA1600 // Elements must be documented

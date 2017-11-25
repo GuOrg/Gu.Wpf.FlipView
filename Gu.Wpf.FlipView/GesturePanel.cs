@@ -13,8 +13,15 @@
     public class GesturePanel : ContentControl
     {
 #pragma warning disable SA1600 // Elements must be documented
-        public static readonly RoutedEvent GesturedEvent = EventManager.RegisterRoutedEvent("Gestured", RoutingStrategy.Bubble, typeof(GesturedEventHandler), typeof(GesturePanel));
 
+        /// <summary>Identifies the <see cref="GesturedEvent"/> routed event.</summary>
+        public static readonly RoutedEvent GesturedEvent = EventManager.RegisterRoutedEvent(
+            nameof(Gestured),
+            RoutingStrategy.Bubble,
+            typeof(GesturedEventHandler),
+            typeof(GesturePanel));
+
+        /// <summary>Identifies the <see cref="GestureTracker"/> dependency property.</summary>
         public static readonly DependencyProperty GestureTrackerProperty = DependencyProperty.Register(
             nameof(GestureTracker),
             typeof(IGestureTracker),

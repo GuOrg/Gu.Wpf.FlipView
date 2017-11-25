@@ -21,14 +21,17 @@ namespace Gu.Wpf.FlipView.Gestures
             typeof(GestureTrackerBase<TArgs>),
             new PropertyMetadata(default(bool)));
 
+        /// <summary>Identifies the <see cref="IsGesturing"/> dependency property.</summary>
         public static readonly DependencyProperty IsGesturingProperty = IsGesturingPropertyKey.DependencyProperty;
 
+        /// <summary>Identifies the <see cref="Interpreter"/> dependency property.</summary>
         public static readonly DependencyProperty InterpreterProperty = DependencyProperty.Register(
             nameof(Interpreter),
             typeof(IGestureInterpreter),
             typeof(GestureTrackerBase<TArgs>),
             new PropertyMetadata(default(IGestureInterpreter)));
 
+        /// <summary>Identifies the <see cref="InputElement"/> dependency property.</summary>
         public static readonly DependencyProperty InputElementProperty = DependencyProperty.Register(
             nameof(InputElement),
             typeof(UIElement),
