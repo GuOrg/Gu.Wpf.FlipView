@@ -19,7 +19,9 @@
             e.CanExecute = this.canBoost;
         }
 
+#pragma warning disable AvoidAsyncVoid // Avoid async void
         private async void Executed(object sender, ExecutedRoutedEventArgs e)
+#pragma warning restore AvoidAsyncVoid // Avoid async void
         {
             this.canBoost = false;
             await Task.Delay(500);

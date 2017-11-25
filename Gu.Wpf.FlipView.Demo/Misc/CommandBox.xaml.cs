@@ -10,6 +10,7 @@
         public CommandBox()
         {
             this.InitializeComponent();
+#pragma warning disable INPC013 // Use nameof.
             this.CommandBindings.Add(new CommandBinding(ApplicationCommands.Cut, (sender, args) => this.Args.Add("Cut")));
             this.CommandBindings.Add(new CommandBinding(ApplicationCommands.Copy, (sender, args) => this.Args.Add("Copy")));
             this.CommandBindings.Add(new CommandBinding(ApplicationCommands.Paste, (sender, args) => this.Args.Add("Paste")));
@@ -100,6 +101,7 @@
             this.CommandBindings.Add(new CommandBinding(ComponentCommands.MoveFocusBack, (sender, args) => this.Args.Add("MoveFocusBack")));
             this.CommandBindings.Add(new CommandBinding(ComponentCommands.MoveFocusPageUp, (sender, args) => this.Args.Add("MoveFocusPageUp")));
             this.CommandBindings.Add(new CommandBinding(ComponentCommands.MoveFocusPageDown, (sender, args) => this.Args.Add("MoveFocusPageDown")));
+#pragma warning restore INPC013 // Use nameof.
         }
     }
 }

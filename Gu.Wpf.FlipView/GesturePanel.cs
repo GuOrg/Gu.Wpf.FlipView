@@ -16,7 +16,7 @@
         public static readonly RoutedEvent GesturedEvent = EventManager.RegisterRoutedEvent("Gestured", RoutingStrategy.Bubble, typeof(GesturedEventHandler), typeof(GesturePanel));
 
         public static readonly DependencyProperty GestureTrackerProperty = DependencyProperty.Register(
-            "GestureTracker",
+            nameof(GestureTracker),
             typeof(IGestureTracker),
             typeof(GesturePanel),
             new PropertyMetadata(

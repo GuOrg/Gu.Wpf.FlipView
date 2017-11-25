@@ -12,19 +12,19 @@
     {
 #pragma warning disable SA1600 // Elements must be documented
         public static readonly DependencyProperty MinSwipeVelocityProperty = DependencyProperty.Register(
-            "MinSwipeVelocity",
+            nameof(MinSwipeVelocity),
             typeof(double),
             typeof(DefaultGestureInterpreter),
             new PropertyMetadata(1.0));
 
         public static readonly DependencyProperty MinSwipeLengthProperty = DependencyProperty.Register(
-            "MinSwipeLength",
+            nameof(MinSwipeLength),
             typeof(double),
             typeof(DefaultGestureInterpreter),
             new PropertyMetadata(50.0));
 
         public static readonly DependencyProperty MaxDeviationFromHorizontalProperty = DependencyProperty.Register(
-            "MaxDeviationFromHorizontal",
+            nameof(MaxDeviationFromHorizontal),
             typeof(double),
             typeof(DefaultGestureInterpreter),
             new PropertyMetadata(30.0));

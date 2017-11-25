@@ -10,7 +10,7 @@
         public static readonly RoutedUICommand ClearCommand = new RoutedUICommand("Clear", "Clear", typeof(EventBox));
 
         public static readonly DependencyProperty SwipeAreaProperty = DependencyProperty.Register(
-            "SwipeArea",
+            nameof(SwipeArea),
             typeof(FrameworkElement),
             typeof(global::Gu.Wpf.FlipView.Demo.Misc.EventBox),
             new PropertyMetadata(default(FrameworkElement)));

@@ -29,13 +29,13 @@
             typeof(TransitionControl));
 
         public static readonly DependencyProperty OldContentStyleProperty = DependencyProperty.Register(
-            "OldContentStyle",
+            nameof(OldContentStyle),
             typeof(Style),
             typeof(TransitionControl),
             new PropertyMetadata(default(Style)));
 
         public static readonly DependencyProperty OutAnimationProperty = DependencyProperty.Register(
-            "OutAnimation",
+            nameof(OutAnimation),
             typeof(Storyboard),
             typeof(TransitionControl),
             new PropertyMetadata(
@@ -44,13 +44,13 @@
                 (_, v) => OnAnimationCoerce(v)));
 
         public static readonly DependencyProperty NewContentStyleProperty = DependencyProperty.Register(
-            "NewContentStyle",
+            nameof(NewContentStyle),
             typeof(Style),
             typeof(TransitionControl),
             new PropertyMetadata(default(Style)));
 
         public static readonly DependencyProperty InAnimationProperty = DependencyProperty.Register(
-            "InAnimation",
+            nameof(InAnimation),
             typeof(Storyboard),
             typeof(TransitionControl),
             new PropertyMetadata(
@@ -59,7 +59,7 @@
                (_, v) => OnAnimationCoerce(v)));
 
         private static readonly DependencyPropertyKey OldContentPropertyKey = DependencyProperty.RegisterReadOnly(
-            "OldContent",
+            nameof(OldContent),
             typeof(object),
             typeof(TransitionControl),
             new PropertyMetadata(default(object)));

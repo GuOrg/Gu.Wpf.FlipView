@@ -71,6 +71,9 @@
   <Rules AnalyzerId="Microsoft.CodeAnalysis.CSharp" RuleNamespace="Microsoft.CodeAnalysis.CSharp">
     <Rule Id="CS1591" Action="None" />
   </Rules>
+  <Rules AnalyzerId="PropertyChangedAnalyzers.Analyzers" RuleNamespace="PropertyChangedAnalyzers.Analyzers">
+    <Rule Id="INPC001" Action="Hidden" />
+  </Rules>
   <Rules AnalyzerId="StyleCop.Analyzers" RuleNamespace="StyleCop.Analyzers">
     <Rule Id="SA1118" Action="None" />
     <Rule Id="SA1313" Action="None" />
@@ -79,6 +82,12 @@
     <Rule Id="SA1633" Action="None" />
   </Rules>
   <Rules AnalyzerId="WpfAnalyzers.Analyzers" RuleNamespace="WpfAnalyzers.Analyzers">
+    <Rule Id="WPF0052" Action="Warning" />
+    <Rule Id="WPF0060" Action="Warning" />
+    <Rule Id="WPF0061" Action="Warning" />
+    <Rule Id="WPF0070" Action="Warning" />
+    <Rule Id="WPF0071" Action="Warning" />
+    <Rule Id="WPF0080" Action="Warning" />
     <Rule Id="WPF1011" Action="None" />
   </Rules>
 </RuleSet>
