@@ -62,6 +62,7 @@
       <Name>Gu.Wpf.FlipView.Demo</Name>
     </ProjectReference>
   </ItemGroup>
+  <Import Project="..\.paket\paket.targets" />
   <ItemGroup>
     <Analyzer Include="..\packages\analyzers\AsyncUsageAnalyzers\analyzers\dotnet\AsyncUsageAnalyzers.dll">
       <Paket>True</Paket>
@@ -210,5 +211,4 @@
       </ItemGroup>
     </When>
   </Choose>
-  <Import Project="..\.paket\paket.targets" />
 </Project>
