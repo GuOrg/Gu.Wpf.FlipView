@@ -42,6 +42,8 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="UIAutomationClient" />
+    <Reference Include="UIAutomationTypes" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="FlipViewBoundWindowTests.cs" />
@@ -189,11 +191,6 @@
       <ItemGroup>
         <Reference Include="Gu.Wpf.UiAutomation">
           <HintPath>..\packages\test\Gu.Wpf.UiAutomation\lib\net45\Gu.Wpf.UiAutomation.dll</HintPath>
-          <Private>True</Private>
-          <Paket>True</Paket>
-        </Reference>
-        <Reference Include="Interop.UIAutomationClient">
-          <HintPath>..\packages\test\Gu.Wpf.UiAutomation\lib\net45\Interop.UIAutomationClient.dll</HintPath>
           <Private>True</Private>
           <Paket>True</Paket>
         </Reference>

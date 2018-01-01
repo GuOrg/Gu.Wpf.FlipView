@@ -11,7 +11,7 @@ namespace Gu.Wpf.FlipView.UiTests
             using (var app = Application.Launch(Info.CreateStartInfo("FlipViewBoundWindow")))
             {
                 var window = app.MainWindow;
-                var flipView = window.FindFirstDescendant(x => x.ByAutomationId("FlipView"));
+                var flipView = window.FindFirstDescendant(Condition.ByAutomationId("FlipView"));
                 var browseBack = flipView.FindButton("BrowseBackButton");
                 var browseForward = flipView.FindButton("BrowseForwardButton");
                 var dummyButton = window.FindButton("DummyButton");
@@ -19,43 +19,43 @@ namespace Gu.Wpf.FlipView.UiTests
                 dummyButton.Click();
                 window.WaitUntilResponsive();
                 Assert.AreEqual("SelectedIndex: 0 SelectedItem: Johan Larsson", status.Text);
-                Assert.AreEqual(false, browseBack.Properties.IsEnabled.Value);
-                Assert.AreEqual(true, browseForward.Properties.IsEnabled.Value);
+                Assert.AreEqual(false, browseBack.IsEnabled);
+                Assert.AreEqual(true, browseForward.IsEnabled);
 
                 browseForward.Click();
                 window.WaitUntilResponsive();
-                Assert.AreEqual(true, browseBack.Properties.IsEnabled.Value);
-                Assert.AreEqual(true, browseForward.Properties.IsEnabled.Value);
+                Assert.AreEqual(true, browseBack.IsEnabled);
+                Assert.AreEqual(true, browseForward.IsEnabled);
                 Assert.AreEqual("SelectedIndex: 1 SelectedItem: Erik Svensson", status.Text);
 
                 browseBack.Click();
                 window.WaitUntilResponsive();
-                Assert.AreEqual(false, browseBack.Properties.IsEnabled.Value);
-                Assert.AreEqual(true, browseForward.Properties.IsEnabled.Value);
+                Assert.AreEqual(false, browseBack.IsEnabled);
+                Assert.AreEqual(true, browseForward.IsEnabled);
                 Assert.AreEqual("SelectedIndex: 0 SelectedItem: Johan Larsson", status.Text);
 
                 browseForward.Click();
                 window.WaitUntilResponsive();
-                Assert.AreEqual(true, browseBack.Properties.IsEnabled.Value);
-                Assert.AreEqual(true, browseForward.Properties.IsEnabled.Value);
+                Assert.AreEqual(true, browseBack.IsEnabled);
+                Assert.AreEqual(true, browseForward.IsEnabled);
                 Assert.AreEqual("SelectedIndex: 1 SelectedItem: Erik Svensson", status.Text);
 
                 browseForward.Click();
                 window.WaitUntilResponsive();
-                Assert.AreEqual(true, browseBack.Properties.IsEnabled.Value);
-                Assert.AreEqual(true, browseForward.Properties.IsEnabled.Value);
+                Assert.AreEqual(true, browseBack.IsEnabled);
+                Assert.AreEqual(true, browseForward.IsEnabled);
                 Assert.AreEqual("SelectedIndex: 2 SelectedItem: Reed Forkmann", status.Text);
 
                 browseForward.Click();
                 window.WaitUntilResponsive();
-                Assert.AreEqual(true, browseBack.Properties.IsEnabled.Value);
-                Assert.AreEqual(false, browseForward.Properties.IsEnabled.Value);
+                Assert.AreEqual(true, browseBack.IsEnabled);
+                Assert.AreEqual(false, browseForward.IsEnabled);
                 Assert.AreEqual("SelectedIndex: 3 SelectedItem: Cat Incremented", status.Text);
 
                 browseBack.Click();
                 window.WaitUntilResponsive();
-                Assert.AreEqual(true, browseBack.Properties.IsEnabled.Value);
-                Assert.AreEqual(true, browseForward.Properties.IsEnabled.Value);
+                Assert.AreEqual(true, browseBack.IsEnabled);
+                Assert.AreEqual(true, browseForward.IsEnabled);
                 Assert.AreEqual("SelectedIndex: 2 SelectedItem: Reed Forkmann", status.Text);
             }
         }
@@ -66,7 +66,7 @@ namespace Gu.Wpf.FlipView.UiTests
             using (var app = Application.Launch(Info.CreateStartInfo("FlipViewBoundWindow")))
             {
                 var window = app.MainWindow;
-                var flipView = window.FindFirstDescendant(x => x.ByAutomationId("FlipView"));
+                var flipView = window.FindFirstDescendant(Condition.ByAutomationId("FlipView"));
                 var browseBack = flipView.FindButton("BrowseBackButton");
                 var browseForward = flipView.FindButton("BrowseForwardButton");
                 var status = window.FindTextBlock("Status");
@@ -76,13 +76,13 @@ namespace Gu.Wpf.FlipView.UiTests
 
                 clear.Click();
                 Assert.AreEqual("SelectedIndex: -1 SelectedItem: ", status.Text);
-                Assert.AreEqual(false, browseBack.Properties.IsEnabled.Value);
-                Assert.AreEqual(false, browseForward.Properties.IsEnabled.Value);
+                Assert.AreEqual(false, browseBack.IsEnabled);
+                Assert.AreEqual(false, browseForward.IsEnabled);
 
                 reset.Click();
                 Assert.AreEqual("SelectedIndex: 0 SelectedItem: Johan Larsson", status.Text);
-                Assert.AreEqual(false, browseBack.Properties.IsEnabled.Value);
-                Assert.AreEqual(true, browseForward.Properties.IsEnabled.Value);
+                Assert.AreEqual(false, browseBack.IsEnabled);
+                Assert.AreEqual(true, browseForward.IsEnabled);
             }
         }
 
@@ -92,7 +92,7 @@ namespace Gu.Wpf.FlipView.UiTests
             using (var app = Application.Launch(Info.CreateStartInfo("FlipViewBoundWindow")))
             {
                 var window = app.MainWindow;
-                var flipView = window.FindFirstDescendant(x => x.ByAutomationId("FlipView"));
+                var flipView = window.FindFirstDescendant(Condition.ByAutomationId("FlipView"));
                 var browseBack = flipView.FindButton("BrowseBackButton");
                 var browseForward = flipView.FindButton("BrowseForwardButton");
                 var status = window.FindTextBlock("Status");
@@ -102,13 +102,13 @@ namespace Gu.Wpf.FlipView.UiTests
 
                 setEmpty.Click();
                 Assert.AreEqual("SelectedIndex: -1 SelectedItem: ", status.Text);
-                Assert.AreEqual(false, browseBack.Properties.IsEnabled.Value);
-                Assert.AreEqual(false, browseForward.Properties.IsEnabled.Value);
+                Assert.AreEqual(false, browseBack.IsEnabled);
+                Assert.AreEqual(false, browseForward.IsEnabled);
 
                 reset.Click();
                 Assert.AreEqual("SelectedIndex: 0 SelectedItem: Johan Larsson", status.Text);
-                Assert.AreEqual(false, browseBack.Properties.IsEnabled.Value);
-                Assert.AreEqual(true, browseForward.Properties.IsEnabled.Value);
+                Assert.AreEqual(false, browseBack.IsEnabled);
+                Assert.AreEqual(true, browseForward.IsEnabled);
             }
         }
 
@@ -118,7 +118,7 @@ namespace Gu.Wpf.FlipView.UiTests
             using (var app = Application.Launch(Info.CreateStartInfo("FlipViewBoundWindow")))
             {
                 var window = app.MainWindow;
-                var flipView = window.FindFirstDescendant(x => x.ByAutomationId("FlipView"));
+                var flipView = window.FindFirstDescendant(Condition.ByAutomationId("FlipView"));
                 var browseBack = flipView.FindButton("BrowseBackButton");
                 var browseForward = flipView.FindButton("BrowseForwardButton");
                 var status = window.FindTextBlock("Status");
@@ -128,13 +128,13 @@ namespace Gu.Wpf.FlipView.UiTests
 
                 setEmpty.Click();
                 Assert.AreEqual("SelectedIndex: -1 SelectedItem: ", status.Text);
-                Assert.AreEqual(false, browseBack.Properties.IsEnabled.Value);
-                Assert.AreEqual(false, browseForward.Properties.IsEnabled.Value);
+                Assert.AreEqual(false, browseBack.IsEnabled);
+                Assert.AreEqual(false, browseForward.IsEnabled);
 
                 reset.Click();
                 Assert.AreEqual("SelectedIndex: 0 SelectedItem: Johan Larsson", status.Text);
-                Assert.AreEqual(false, browseBack.Properties.IsEnabled.Value);
-                Assert.AreEqual(true, browseForward.Properties.IsEnabled.Value);
+                Assert.AreEqual(false, browseBack.IsEnabled);
+                Assert.AreEqual(true, browseForward.IsEnabled);
             }
         }
     }
