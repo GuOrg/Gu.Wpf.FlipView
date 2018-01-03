@@ -1,4 +1,4 @@
-﻿namespace Gu.Wpf.FlipView.UiTests
+namespace Gu.Wpf.FlipView.UiTests
 {
     using Gu.Wpf.UiAutomation;
     using NUnit.Framework;
@@ -15,11 +15,11 @@
                 var tab = window.FindTabControl();
                 foreach (var tabItem in tab.Items)
                 {
-                    tabItem.Click();
+                    tabItem.Select();
                     var nested = tab.FindTabControl();
                     foreach (var nestedItem in nested.Items)
                     {
-                        nestedItem.Click();
+                        nestedItem.Select();
                     }
                 }
             }

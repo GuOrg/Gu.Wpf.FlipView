@@ -11,7 +11,7 @@ namespace Gu.Wpf.FlipView.UiTests
             using (var app = Application.Launch(Info.CreateStartInfo("FlipViewBoundWindow")))
             {
                 var window = app.MainWindow;
-                var flipView = window.FindFirstDescendant(Condition.ByAutomationId("FlipView"));
+                var flipView = window.FindFirstDescendant(Conditions.ByAutomationId("FlipView"));
                 var browseBack = flipView.FindButton("BrowseBackButton");
                 var browseForward = flipView.FindButton("BrowseForwardButton");
                 var dummyButton = window.FindButton("DummyButton");
@@ -47,7 +47,7 @@ namespace Gu.Wpf.FlipView.UiTests
                 Assert.AreEqual("SelectedIndex: 2 SelectedItem: Reed Forkmann", status.Text);
 
                 browseForward.Click();
-                window.WaitUntilResponsive();
+                Wait.UntilInputIsProcessed();
                 Assert.AreEqual(true, browseBack.IsEnabled);
                 Assert.AreEqual(false, browseForward.IsEnabled);
                 Assert.AreEqual("SelectedIndex: 3 SelectedItem: Cat Incremented", status.Text);
@@ -66,7 +66,7 @@ namespace Gu.Wpf.FlipView.UiTests
             using (var app = Application.Launch(Info.CreateStartInfo("FlipViewBoundWindow")))
             {
                 var window = app.MainWindow;
-                var flipView = window.FindFirstDescendant(Condition.ByAutomationId("FlipView"));
+                var flipView = window.FindFirstDescendant(Conditions.ByAutomationId("FlipView"));
                 var browseBack = flipView.FindButton("BrowseBackButton");
                 var browseForward = flipView.FindButton("BrowseForwardButton");
                 var status = window.FindTextBlock("Status");
@@ -92,7 +92,7 @@ namespace Gu.Wpf.FlipView.UiTests
             using (var app = Application.Launch(Info.CreateStartInfo("FlipViewBoundWindow")))
             {
                 var window = app.MainWindow;
-                var flipView = window.FindFirstDescendant(Condition.ByAutomationId("FlipView"));
+                var flipView = window.FindFirstDescendant(Conditions.ByAutomationId("FlipView"));
                 var browseBack = flipView.FindButton("BrowseBackButton");
                 var browseForward = flipView.FindButton("BrowseForwardButton");
                 var status = window.FindTextBlock("Status");
@@ -118,7 +118,7 @@ namespace Gu.Wpf.FlipView.UiTests
             using (var app = Application.Launch(Info.CreateStartInfo("FlipViewBoundWindow")))
             {
                 var window = app.MainWindow;
-                var flipView = window.FindFirstDescendant(Condition.ByAutomationId("FlipView"));
+                var flipView = window.FindFirstDescendant(Conditions.ByAutomationId("FlipView"));
                 var browseBack = flipView.FindButton("BrowseBackButton");
                 var browseForward = flipView.FindButton("BrowseForwardButton");
                 var status = window.FindTextBlock("Status");

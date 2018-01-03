@@ -11,7 +11,7 @@ namespace Gu.Wpf.FlipView.UiTests
             using (var app = Application.Launch(Info.CreateStartInfo("FlipViewWindow")))
             {
                 var window = app.MainWindow;
-                var flipView = window.FindFirstDescendant(Condition.ByAutomationId("FlipView"));
+                var flipView = window.FindFirstDescendant(Conditions.ByAutomationId("FlipView"));
                 var browseBack = flipView.FindButton("BrowseBackButton");
                 var browseForward = flipView.FindButton("BrowseForwardButton");
                 var dummyButton = window.FindButton("DummyButton");
@@ -59,7 +59,7 @@ namespace Gu.Wpf.FlipView.UiTests
             using (var app = Application.Launch(Info.CreateStartInfo("FlipViewWindow")))
             {
                 var window = app.MainWindow;
-                var flipView = window.FindFirstDescendant(Condition.ByAutomationId("FlipView"));
+                var flipView = window.FindFirstDescendant(Conditions.ByAutomationId("FlipView"));
                 var browseBack = flipView.FindButton("BrowseBackButton");
                 var browseForward = flipView.FindButton("BrowseForwardButton");
                 var dummyButton = window.FindButton("DummyButton");
