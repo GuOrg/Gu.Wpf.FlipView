@@ -1,4 +1,4 @@
-﻿namespace Gu.Wpf.FlipView
+namespace Gu.Wpf.FlipView
 {
     using System.Collections.Specialized;
     using System.Windows;
@@ -122,7 +122,7 @@
             KeyboardNavigation.TabNavigationProperty.OverrideMetadata(typeof(FlipView), new FrameworkPropertyMetadata(KeyboardNavigationMode.Once));
             CommandManager.RegisterClassCommandBinding(typeof(FlipView), new CommandBinding(NavigationCommands.BrowseBack, OnPreviousExecuted, OnPreviousCanExecute));
             CommandManager.RegisterClassCommandBinding(typeof(FlipView), new CommandBinding(NavigationCommands.BrowseForward, OnNextExecuted, OnNextCanExecute));
-            EventManager.RegisterClassHandler(typeof(FlipView), GesturePanel.GesturedEvent, new GesturedEventHandler(OnGesture));
+            EventManager.RegisterClassHandler(typeof(FlipView), GesturePanel.GesturedEvent, new GesturedEventHandler(OnGestured));
         }
 
         /// <summary>
@@ -319,7 +319,7 @@
             }
         }
 
-        private static void OnGesture(object sender, GesturedEventArgs e)
+        private static void OnGestured(object sender, GesturedEventArgs e)
         {
             if (sender is FlipView flipView)
             {
