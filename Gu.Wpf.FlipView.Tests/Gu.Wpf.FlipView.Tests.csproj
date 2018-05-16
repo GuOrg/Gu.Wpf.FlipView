@@ -54,7 +54,6 @@
   </Choose>
   <ItemGroup>
     <Compile Include="NamespacesTests.cs" />
-    <Compile Include="Misc and helpers\DispatcherUtil.cs" />
     <Compile Include="Misc and helpers\DummyItem.cs" />
     <Compile Include="Misc and helpers\DumpCommands.cs" />
     <Compile Include="Misc and helpers\FakeTouchDevice.cs" />

@@ -10,8 +10,8 @@ namespace Gu.Wpf.FlipView
     /// <summary>
     /// A <see cref="Selector"/> for navigating the content.
     /// </summary>
-    [StyleTypedProperty(Property = nameof(FlipView.IndexItemStyle), StyleTargetType = typeof(System.Windows.Controls.ListBoxItem))]
-    [StyleTypedProperty(Property = nameof(FlipView.ArrowButtonStyle), StyleTargetType = typeof(System.Windows.Controls.Primitives.RepeatButton))]
+    [StyleTypedProperty(Property = nameof(IndexItemStyle), StyleTargetType = typeof(System.Windows.Controls.ListBoxItem))]
+    [StyleTypedProperty(Property = nameof(ArrowButtonStyle), StyleTargetType = typeof(RepeatButton))]
     public class FlipView : Selector
     {
 #pragma warning disable SA1202 // Elements must be ordered by access

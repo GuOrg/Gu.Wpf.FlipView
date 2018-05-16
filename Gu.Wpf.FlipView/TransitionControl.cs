@@ -1,4 +1,4 @@
-﻿namespace Gu.Wpf.FlipView
+namespace Gu.Wpf.FlipView
 {
     using System;
     using System.Windows;
@@ -12,8 +12,8 @@
     /// </summary>
     [TemplatePart(Name = PartNewContent, Type = typeof(ContentPresenter))]
     [TemplatePart(Name = PartOldContent, Type = typeof(ContentPresenter))]
-    [StyleTypedProperty(Property = nameof(TransitionControl.NewContentStyle), StyleTargetType = typeof(ContentPresenter))]
-    [StyleTypedProperty(Property = nameof(TransitionControl.OldContentStyle), StyleTargetType = typeof(ContentPresenter))]
+    [StyleTypedProperty(Property = nameof(NewContentStyle), StyleTargetType = typeof(ContentPresenter))]
+    [StyleTypedProperty(Property = nameof(OldContentStyle), StyleTargetType = typeof(ContentPresenter))]
     public class TransitionControl : ContentControl
     {
 #pragma warning disable SA1600 // Elements must be documented
@@ -114,7 +114,7 @@
         /// </summary>
         public object OldContent
         {
-            get => (object)this.GetValue(OldContentProperty);
+            get => this.GetValue(OldContentProperty);
             private set => this.SetValue(OldContentPropertyKey, value);
         }
 
@@ -221,13 +221,12 @@
 
         private static object OnAnimationCoerce(object basevalue)
         {
-            var storyboard = basevalue as Storyboard;
-            if (storyboard == null)
+            if (basevalue is Storyboard storyboard)
             {
-                return EmptyStoryboard.Instance;
+                return storyboard;
             }
 
-            return storyboard;
+            return EmptyStoryboard.Instance;
         }
 
         private static class EmptyStoryboard

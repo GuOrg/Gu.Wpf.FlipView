@@ -1,4 +1,4 @@
-﻿namespace Gu.Wpf.FlipView.Internals
+namespace Gu.Wpf.FlipView.Internals
 {
     using System;
     using System.Linq;
@@ -22,8 +22,7 @@
                 return beginTime + timeline.Duration.TimeSpan;
             }
 
-            var storyboard = timeline as Storyboard;
-            if (storyboard != null)
+            if (timeline is Storyboard storyboard)
             {
                 if (storyboard.Children.Count == 0)
                 {

@@ -1,4 +1,4 @@
-﻿namespace Gu.Wpf.FlipView.Demo.Misc
+namespace Gu.Wpf.FlipView.Demo.Misc
 {
     using System.Collections.ObjectModel;
     using System.Windows;
@@ -12,10 +12,8 @@
         public static readonly DependencyProperty SwipeAreaProperty = DependencyProperty.Register(
             nameof(SwipeArea),
             typeof(FrameworkElement),
-            typeof(global::Gu.Wpf.FlipView.Demo.Misc.EventBox),
+            typeof(EventBox),
             new PropertyMetadata(default(FrameworkElement)));
-
-        private readonly ObservableCollection<object> args = new ObservableCollection<object>();
 
         static EventBox()
         {
@@ -29,34 +27,31 @@
 
         public FrameworkElement SwipeArea
         {
-            get { return (FrameworkElement)this.GetValue(SwipeAreaProperty); }
-            set { this.SetValue(SwipeAreaProperty, value); }
+            get => (FrameworkElement)this.GetValue(SwipeAreaProperty);
+            set => this.SetValue(SwipeAreaProperty, value);
         }
 
-        public ObservableCollection<object> Args
-        {
-            get { return this.args; }
-        }
+        public ObservableCollection<object> Args { get; } = new ObservableCollection<object>();
 
         protected virtual void OnStarted(object sender, InputEventArgs e)
         {
-            this.args.Clear();
-            this.args.Add(new ArgsVm(e));
+            this.Args.Clear();
+            this.Args.Add(new ArgsVm(e));
         }
 
         protected virtual void OnInput(object sender, InputEventArgs e)
         {
-            this.args.Add(new ArgsVm(e));
+            this.Args.Add(new ArgsVm(e));
         }
 
         protected virtual void OnEnded(object sender, InputEventArgs e)
         {
-            this.args.Add(new ArgsVm(e));
+            this.Args.Add(new ArgsVm(e));
         }
 
         protected virtual void ClearExecuted(object sender, ExecutedRoutedEventArgs executedRoutedEventArgs)
         {
-            this.args.Clear();
+            this.Args.Clear();
         }
     }
 }

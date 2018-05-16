@@ -1,9 +1,10 @@
-﻿namespace Gu.Wpf.FlipView.Demo.Converters
+namespace Gu.Wpf.FlipView.Demo.Converters
 {
     using System;
     using System.Globalization;
     using System.Windows.Data;
 
+    [ValueConversion(typeof(int), typeof(int))]
     public class SubtractOneConverter : IValueConverter
     {
         public static readonly SubtractOneConverter Default = new SubtractOneConverter();

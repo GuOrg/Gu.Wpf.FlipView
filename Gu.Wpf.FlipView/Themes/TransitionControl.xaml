@@ -1,15 +1,18 @@
-﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:attached="clr-namespace:Gu.Wpf.FlipView.AttachedProperties"
                     xmlns:flipView="clr-namespace:Gu.Wpf.FlipView">
     <Style TargetType="{x:Type flipView:TransitionControl}">
         <Style.Resources>
-            <Style x:Key="ContentPresenterStyle" TargetType="{x:Type ContentPresenter}">
+            <Style x:Key="ContentPresenterStyle"
+                   TargetType="{x:Type ContentPresenter}">
                 <Setter Property="RenderTransform">
                     <Setter.Value>
                         <TransformGroup>
-                            <TranslateTransform X="{Binding Path=(attached:Transform.OffsetX), RelativeSource={RelativeSource AncestorType={x:Type ContentPresenter}}}" Y="{Binding Path=(attached:Transform.OffsetY), RelativeSource={RelativeSource AncestorType={x:Type ContentPresenter}}}" />
-                            <ScaleTransform ScaleX="{Binding Path=(attached:Transform.ScaleX), RelativeSource={RelativeSource AncestorType={x:Type ContentPresenter}}}" ScaleY="{Binding Path=(attached:Transform.ScaleY), RelativeSource={RelativeSource AncestorType={x:Type ContentPresenter}}}" />
+                            <TranslateTransform X="{Binding Path=(attached:Transform.OffsetX), RelativeSource={RelativeSource TemplatedParent}}" 
+                                                Y="{Binding Path=(attached:Transform.OffsetY), RelativeSource={RelativeSource TemplatedParent}}" />
+                            <ScaleTransform ScaleX="{Binding Path=(attached:Transform.ScaleX), RelativeSource={RelativeSource TemplatedParent}}"
+                                            ScaleY="{Binding Path=(attached:Transform.ScaleY), RelativeSource={RelativeSource TemplatedParent}}" />
                         </TransformGroup>
                     </Setter.Value>
                 </Setter>

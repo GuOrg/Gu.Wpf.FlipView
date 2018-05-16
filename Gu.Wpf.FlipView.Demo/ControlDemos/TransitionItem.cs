@@ -1,4 +1,4 @@
-﻿namespace Gu.Wpf.FlipView.Demo.ControlDemos
+namespace Gu.Wpf.FlipView.Demo.ControlDemos
 {
     using System.ComponentModel;
     using System.Runtime.CompilerServices;
@@ -16,7 +16,7 @@
         public TransitionItem(SolidColorBrush brush, string text)
         {
             this.Brush = brush;
-            this.Text = text;
+            this.text = text;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

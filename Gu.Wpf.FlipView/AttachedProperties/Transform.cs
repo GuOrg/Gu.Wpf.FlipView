@@ -1,4 +1,4 @@
-﻿#pragma warning disable SA1600 // Elements must be documented
+#pragma warning disable SA1600 // Elements must be documented
 namespace Gu.Wpf.FlipView.AttachedProperties
 {
     using System.Windows;
@@ -150,26 +150,20 @@ namespace Gu.Wpf.FlipView.AttachedProperties
 
         private static void OnRelativeOffsetXChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            var fe = d as FrameworkElement;
-            if (fe == null)
+            if (d is FrameworkElement fe)
             {
-                return;
+                var value = (double)e.NewValue;
+                fe.SetCurrentValue(OffsetXProperty, value * fe.ActualWidth);
             }
-
-            var value = (double)e.NewValue;
-            fe.SetCurrentValue(OffsetXProperty, value * fe.ActualWidth);
         }
 
         private static void OnRelativeOffsetYChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            var fe = d as FrameworkElement;
-            if (fe == null)
+            if (d is FrameworkElement fe)
             {
-                return;
+                var value = (double)e.NewValue;
+                fe.SetCurrentValue(OffsetYProperty, value * fe.ActualHeight);
             }
-
-            var value = (double)e.NewValue;
-            fe.SetCurrentValue(OffsetYProperty, value * fe.ActualHeight);
         }
     }
 }

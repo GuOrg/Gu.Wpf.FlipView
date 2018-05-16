@@ -1,5 +1,5 @@
 {
-    "AttributesTolerance": 2,
+    "AttributesTolerance": 1,
     "KeepFirstAttributeOnSameLine": true,
     "MaxAttributeCharatersPerLine": 0,
     "MaxAttributesPerLine": 1,
@@ -37,5 +37,5 @@
     "ThicknessSeparator": 2,
     "ThicknessAttributes": "Margin, Padding, BorderThickness, ThumbnailClipMargin",
     "FormatOnSave": false,
-    "CommentPadding": 2,
+    "CommentPadding": 2
 }

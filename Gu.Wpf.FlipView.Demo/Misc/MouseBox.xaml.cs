@@ -1,4 +1,4 @@
-﻿namespace Gu.Wpf.FlipView.Demo.Misc
+namespace Gu.Wpf.FlipView.Demo.Misc
 {
     using System.Windows.Input;
     using Gu.Wpf.FlipView.Gestures;
