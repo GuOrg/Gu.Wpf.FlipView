@@ -113,7 +113,9 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Gu.Wpf.FlipView.ruleset" />
+    <None Include="Gu.Wpf.FlipView.ruleset">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="paket.references" />
     <None Include="paket.template" />
   </ItemGroup>
