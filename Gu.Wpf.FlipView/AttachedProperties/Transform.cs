@@ -20,18 +20,28 @@ namespace Gu.Wpf.FlipView.AttachedProperties
                 default(double),
                 OnRelativeOffsetXChanged));
 
+        /// <summary>
+        /// The absolute offset in the x direction.
+        /// </summary>
         public static readonly DependencyProperty OffsetXProperty = DependencyProperty.RegisterAttached(
             "OffsetX",
             typeof(double),
             typeof(Transform),
             new PropertyMetadata(default(double)));
 
+        /// <summary>
+        /// The scale in the x direction.
+        /// </summary>
         public static readonly DependencyProperty ScaleXProperty = DependencyProperty.RegisterAttached(
             "ScaleX",
             typeof(double),
             typeof(Transform),
             new PropertyMetadata(1.0));
 
+        /// <summary>
+        /// The offset relative to the size of the element in the y direction.
+        /// 1 means the position is ActualHeight
+        /// </summary>
         public static readonly DependencyProperty RelativeOffsetYProperty = DependencyProperty.RegisterAttached(
             "RelativeOffsetY",
             typeof(double),
@@ -40,109 +50,121 @@ namespace Gu.Wpf.FlipView.AttachedProperties
                 default(double),
                 OnRelativeOffsetYChanged));
 
+        /// <summary>
+        /// The absolute offset in the y direction.
+        /// </summary>
         public static readonly DependencyProperty OffsetYProperty = DependencyProperty.RegisterAttached(
             "OffsetY",
             typeof(double),
             typeof(Transform),
             new PropertyMetadata(default(double)));
 
+        /// <summary>
+        /// The scale in the y direction.
+        /// </summary>
         public static readonly DependencyProperty ScaleYProperty = DependencyProperty.RegisterAttached(
             "ScaleY",
             typeof(double),
             typeof(Transform),
             new PropertyMetadata(1.0));
 
+        /// <summary>Helper for getting <see cref="RelativeOffsetXProperty"/> from <paramref name="element"/>.</summary>
+        /// <param name="element"><see cref="FrameworkElement"/> to read <see cref="RelativeOffsetXProperty"/> from.</param>
+        /// <returns>RelativeOffsetX property value.</returns>
+        [AttachedPropertyBrowsableForType(typeof(FrameworkElement))]
         public static double GetRelativeOffsetX(FrameworkElement element)
         {
             return (double)element.GetValue(RelativeOffsetXProperty);
         }
 
-        /// <summary>
-        /// Set the offset relative to the size of the element in the x direction.
-        /// 1 means the position is ActualWidth
-        /// </summary>
+        /// <summary>Helper for setting <see cref="RelativeOffsetXProperty"/> on <paramref name="element"/>.</summary>
+        /// <param name="element"><see cref="FrameworkElement"/> to set <see cref="RelativeOffsetXProperty"/> on.</param>
+        /// <param name="value">RelativeOffsetX property value.</param>
         public static void SetRelativeOffsetX(FrameworkElement element, double value)
         {
             element.SetValue(RelativeOffsetXProperty, value);
         }
 
-        /// <summary>
-        /// Get the absolute offset in the x direction.
-        /// </summary>
+        /// <summary>Helper for getting <see cref="OffsetXProperty"/> from <paramref name="element"/>.</summary>
+        /// <param name="element"><see cref="DependencyObject"/> to read <see cref="OffsetXProperty"/> from.</param>
+        /// <returns>OffsetX property value.</returns>
+        [AttachedPropertyBrowsableForType(typeof(DependencyObject))]
         public static double GetOffsetX(DependencyObject element)
         {
             return (double)element.GetValue(OffsetXProperty);
         }
 
-        /// <summary>
-        /// Set the absolute offset in the x direction.
-        /// </summary>
+        /// <summary>Helper for setting <see cref="OffsetXProperty"/> on <paramref name="element"/>.</summary>
+        /// <param name="element"><see cref="DependencyObject"/> to set <see cref="OffsetXProperty"/> on.</param>
+        /// <param name="value">OffsetX property value.</param>
         public static void SetOffsetX(DependencyObject element, double value)
         {
             element.SetValue(OffsetXProperty, value);
         }
 
-        /// <summary>
-        /// Get the scale in the x direction.
-        /// </summary>
+        /// <summary>Helper for getting <see cref="ScaleXProperty"/> from <paramref name="element"/>.</summary>
+        /// <param name="element"><see cref="DependencyObject"/> to read <see cref="ScaleXProperty"/> from.</param>
+        /// <returns>ScaleX property value.</returns>
+        [AttachedPropertyBrowsableForType(typeof(DependencyObject))]
         public static double GetScaleX(DependencyObject element)
         {
             return (double)element.GetValue(ScaleXProperty);
         }
 
-        /// <summary>
-        /// Set the scale in the x direction.
-        /// </summary>
+        /// <summary>Helper for setting <see cref="ScaleXProperty"/> on <paramref name="element"/>.</summary>
+        /// <param name="element"><see cref="DependencyObject"/> to set <see cref="ScaleXProperty"/> on.</param>
+        /// <param name="value">ScaleX property value.</param>
         public static void SetScaleX(DependencyObject element, double value)
         {
             element.SetValue(ScaleXProperty, value);
         }
 
-        /// <summary>
-        /// Get the offset relative to the size of the element in the y direction.
-        /// 1 means the position is ActualHeight
-        /// </summary>
+        /// <summary>Helper for getting <see cref="RelativeOffsetYProperty"/> from <paramref name="element"/>.</summary>
+        /// <param name="element"><see cref="DependencyObject"/> to read <see cref="RelativeOffsetYProperty"/> from.</param>
+        /// <returns>RelativeOffsetY property value.</returns>
+        [AttachedPropertyBrowsableForType(typeof(DependencyObject))]
         public static double GetRelativeOffsetY(DependencyObject element)
         {
             return (double)element.GetValue(RelativeOffsetYProperty);
         }
 
-        /// <summary>
-        /// Set the offset relative to the size of the element in the y direction.
-        /// 1 means the position is ActualHeight
-        /// </summary>
+        /// <summary>Helper for setting <see cref="RelativeOffsetYProperty"/> on <paramref name="element"/>.</summary>
+        /// <param name="element"><see cref="DependencyObject"/> to set <see cref="RelativeOffsetYProperty"/> on.</param>
+        /// <param name="value">RelativeOffsetY property value.</param>
         public static void SetRelativeOffsetY(DependencyObject element, double value)
         {
             element.SetValue(RelativeOffsetYProperty, value);
         }
 
-        /// <summary>
-        /// Get the absolute offset in the y direction.
-        /// </summary>
+        /// <summary>Helper for getting <see cref="OffsetYProperty"/> from <paramref name="element"/>.</summary>
+        /// <param name="element"><see cref="DependencyObject"/> to read <see cref="OffsetYProperty"/> from.</param>
+        /// <returns>OffsetY property value.</returns>
+        [AttachedPropertyBrowsableForType(typeof(DependencyObject))]
         public static double GetOffsetY(DependencyObject element)
         {
             return (double)element.GetValue(OffsetYProperty);
         }
 
-        /// <summary>
-        /// Set the absolute offset in the y direction.
-        /// </summary>
+        /// <summary>Helper for setting <see cref="OffsetYProperty"/> on <paramref name="element"/>.</summary>
+        /// <param name="element"><see cref="DependencyObject"/> to set <see cref="OffsetYProperty"/> on.</param>
+        /// <param name="value">OffsetY property value.</param>
         public static void SetOffsetY(DependencyObject element, double value)
         {
             element.SetValue(OffsetYProperty, value);
         }
 
-        /// <summary>
-        /// Get the scale in the y direction.
-        /// </summary>
+        /// <summary>Helper for getting <see cref="ScaleYProperty"/> from <paramref name="element"/>.</summary>
+        /// <param name="element"><see cref="DependencyObject"/> to read <see cref="ScaleYProperty"/> from.</param>
+        /// <returns>ScaleY property value.</returns>
+        [AttachedPropertyBrowsableForType(typeof(DependencyObject))]
         public static double GetScaleY(DependencyObject element)
         {
             return (double)element.GetValue(ScaleYProperty);
         }
 
-        /// <summary>
-        /// Set the scale in the y direction.
-        /// </summary>
+        /// <summary>Helper for setting <see cref="ScaleYProperty"/> on <paramref name="element"/>.</summary>
+        /// <param name="element"><see cref="DependencyObject"/> to set <see cref="ScaleYProperty"/> on.</param>
+        /// <param name="value">ScaleY property value.</param>
         public static void SetScaleY(DependencyObject element, double value)
         {
             element.SetValue(ScaleYProperty, value);

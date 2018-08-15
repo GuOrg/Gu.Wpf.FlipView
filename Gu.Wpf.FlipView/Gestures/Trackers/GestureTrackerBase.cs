@@ -172,12 +172,9 @@ namespace Gu.Wpf.FlipView.Gestures
         /// <returns>True if a point could be created.</returns>
         protected abstract bool TryGetPoint(TArgs args, out GesturePoint point);
 
-        /// <summary>
-        /// Called when input element changes.
-        /// Unsubscribe for the old element and subscribe to the new.
-        /// </summary>
-        /// <param name="oldElement">The previously tracked element.</param>
-        /// <param name="newElement">The to be tracked element.</param>
+        /// <summary>This method is invoked when the <see cref="InputElementProperty"/> changes.</summary>
+        /// <param name="oldElement">The old value of <see cref="InputElementProperty"/>.</param>
+        /// <param name="newElement">The new value of <see cref="InputElementProperty"/>.</param>
         protected abstract void OnInputElementChanged(UIElement oldElement, UIElement newElement);
 
         private static void OnInputElementChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)

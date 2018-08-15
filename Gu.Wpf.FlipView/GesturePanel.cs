@@ -1,4 +1,4 @@
-﻿namespace Gu.Wpf.FlipView
+namespace Gu.Wpf.FlipView
 {
     using System.ComponentModel;
     using System.Windows;
@@ -62,12 +62,9 @@
             set => this.SetValue(GestureTrackerProperty, value);
         }
 
-        /// <summary>
-        /// Called when <see cref="GestureTracker"/> changes value.
-        /// Note that the tracker is not disposable so input element should be set to null for the old tracker.
-        /// </summary>
-        /// <param name="oldTracker">The old tracker.</param>
-        /// <param name="newTracker">The new tracker.</param>
+        /// <summary>This method is invoked when the <see cref="GestureTrackerProperty"/> changes.</summary>
+        /// <param name="oldTracker">The old value of <see cref="GestureTrackerProperty"/>.</param>
+        /// <param name="newTracker">The new value of <see cref="GestureTrackerProperty"/>.</param>
         protected virtual void OnGestureTrackerChanged(IGestureTracker oldTracker, IGestureTracker newTracker)
         {
             if (oldTracker != null)

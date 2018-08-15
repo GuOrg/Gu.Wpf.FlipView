@@ -117,7 +117,7 @@ namespace Gu.Wpf.FlipView
                     -1,
                     FrameworkPropertyMetadataOptions.BindsTwoWayByDefault | FrameworkPropertyMetadataOptions.Journal,
                     metadata.PropertyChangedCallback,
-                    (d, basevalue) => CoerceSelectedIndexProxy(d, metadata.CoerceValueCallback.Invoke(d, basevalue))));
+                    (d, basevalue) => CoerceSelectedIndex(d, metadata.CoerceValueCallback.Invoke(d, basevalue))));
             KeyboardNavigation.DirectionalNavigationProperty.OverrideMetadata(typeof(FlipView), new FrameworkPropertyMetadata(KeyboardNavigationMode.Contained));
             KeyboardNavigation.TabNavigationProperty.OverrideMetadata(typeof(FlipView), new FrameworkPropertyMetadata(KeyboardNavigationMode.Once));
             CommandManager.RegisterClassCommandBinding(typeof(FlipView), new CommandBinding(NavigationCommands.BrowseBack, OnPreviousExecuted, OnPreviousCanExecute));
@@ -274,7 +274,7 @@ namespace Gu.Wpf.FlipView
             return new FlipViewAutomationPeer(this);
         }
 
-        private static object CoerceSelectedIndexProxy(DependencyObject d, object basevalue)
+        private static object CoerceSelectedIndex(DependencyObject d, object basevalue)
         {
             if (basevalue is int index)
             {
