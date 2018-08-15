@@ -8,6 +8,10 @@ namespace Gu.Wpf.FlipView.AttachedProperties
     /// </summary>
     public static class Transform
     {
+        /// <summary>
+        /// The offset relative to the size of the element in the x direction.
+        /// 1 means the position is ActualWidth
+        /// </summary>
         public static readonly DependencyProperty RelativeOffsetXProperty = DependencyProperty.RegisterAttached(
             "RelativeOffsetX",
             typeof(double),
@@ -48,10 +52,6 @@ namespace Gu.Wpf.FlipView.AttachedProperties
             typeof(Transform),
             new PropertyMetadata(1.0));
 
-        /// <summary>
-        /// Get the offset relative to the size of the element in the x direction.
-        /// 1 means the position is ActualWidth
-        /// </summary>
         public static double GetRelativeOffsetX(FrameworkElement element)
         {
             return (double)element.GetValue(RelativeOffsetXProperty);

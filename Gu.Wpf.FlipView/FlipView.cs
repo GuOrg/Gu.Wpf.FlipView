@@ -325,12 +325,12 @@ namespace Gu.Wpf.FlipView
             {
                 if (e.Gesture == GestureType.SwipeLeft)
                 {
-                    flipView.TransitionTo(flipView.SelectedIndex + 1);
+                    _ = flipView.TransitionTo(flipView.SelectedIndex + 1);
                 }
 
                 if (e.Gesture == GestureType.SwipeRight)
                 {
-                    flipView.TransitionTo(flipView.SelectedIndex - 1);
+                    _ = flipView.TransitionTo(flipView.SelectedIndex - 1);
                 }
             }
         }
