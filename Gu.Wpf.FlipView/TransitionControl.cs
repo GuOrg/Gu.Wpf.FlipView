@@ -43,7 +43,7 @@ namespace Gu.Wpf.FlipView
             typeof(TransitionControl),
             new PropertyMetadata(
                 EmptyStoryboard.Instance,
-                OnOutAnimationChanged,
+                (d, e) => ((TransitionControl)d).OnOutAnimationChanged(e.NewValue as Storyboard),
                 (_, v) => OnAnimationCoerce(v)));
 
         /// <summary>Identifies the <see cref="NewContentStyle"/> dependency property.</summary>
@@ -191,11 +191,9 @@ namespace Gu.Wpf.FlipView
             }
         }
 
-        /// <summary>
-        /// Called when the animation for the old value changes.
-        /// </summary>
-        /// <param name="newAnimation">The storyboard for animating a value out of the view.</param>
-        protected virtual void OnOldTransitionChanged(Storyboard newAnimation)
+        /// <summary>This method is invoked when the <see cref="OutAnimationProperty"/> changes.</summary>
+        /// <param name="newAnimation">The new value of <see cref="OutAnimationProperty"/>.</param>
+        protected virtual void OnOutAnimationChanged(Storyboard newAnimation)
         {
             // We can't subscribe to .Completed for the storyboard as it might be frozen.
             // Hacking it like this instead.
@@ -212,11 +210,6 @@ namespace Gu.Wpf.FlipView
             base.OnContentChanged(this.OldContent, null);
             this.timer.Stop();
             this.OldContent = null;
-        }
-
-        private static void OnOutAnimationChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-        {
-            ((TransitionControl)d).OnOldTransitionChanged(e.NewValue as Storyboard);
         }
 
         private static object OnAnimationCoerce(object basevalue)
