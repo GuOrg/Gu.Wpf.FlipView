@@ -19,7 +19,7 @@ namespace Gu.Wpf.FlipView.UiTests
                     var nested = tab.FindTabControl();
                     foreach (var nestedItem in nested.Items)
                     {
-                        nestedItem.Select();
+                        _ = nestedItem.Select();
                     }
                 }
             }
