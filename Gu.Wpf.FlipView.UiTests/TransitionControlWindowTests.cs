@@ -9,7 +9,7 @@ namespace Gu.Wpf.FlipView.UiTests
         public void Transitions()
         {
             // Just testing that we don't crash here.
-            using (var app = Application.Launch(Info.CreateStartInfo("TransitionControlWindow")))
+            using (var app = Application.Launch("Gu.Wpf.FlipView.Demo.exe", "TransitionControlWindow"))
             {
                 var window = app.MainWindow;
                 var selectedIndex = window.FindSlider("SelectedIndex");

@@ -8,7 +8,7 @@ namespace Gu.Wpf.FlipView.UiTests
         [Test]
         public void BrowseBackAndForward()
         {
-            using (var app = Application.Launch(Info.CreateStartInfo("FlipViewBoundWindow")))
+            using (var app = Application.Launch("Gu.Wpf.FlipView.Demo.exe", "FlipViewBoundWindow"))
             {
                 var window = app.MainWindow;
                 var flipView = window.FindFirstDescendant(Conditions.ByAutomationId("FlipView"));
@@ -63,7 +63,7 @@ namespace Gu.Wpf.FlipView.UiTests
         [Test]
         public void WhenSourceIsCleared()
         {
-            using (var app = Application.Launch(Info.CreateStartInfo("FlipViewBoundWindow")))
+            using (var app = Application.Launch("Gu.Wpf.FlipView.Demo.exe", "FlipViewBoundWindow"))
             {
                 var window = app.MainWindow;
                 var flipView = window.FindFirstDescendant(Conditions.ByAutomationId("FlipView"));
@@ -89,7 +89,7 @@ namespace Gu.Wpf.FlipView.UiTests
         [Test]
         public void WhenSourceIsSetToEmpty()
         {
-            using (var app = Application.Launch(Info.CreateStartInfo("FlipViewBoundWindow")))
+            using (var app = Application.Launch("Gu.Wpf.FlipView.Demo.exe", "FlipViewBoundWindow"))
             {
                 var window = app.MainWindow;
                 var flipView = window.FindFirstDescendant(Conditions.ByAutomationId("FlipView"));
@@ -115,7 +115,7 @@ namespace Gu.Wpf.FlipView.UiTests
         [Test]
         public void WhenSourceIsSetToNull()
         {
-            using (var app = Application.Launch(Info.CreateStartInfo("FlipViewBoundWindow")))
+            using (var app = Application.Launch("Gu.Wpf.FlipView.Demo.exe", "FlipViewBoundWindow"))
             {
                 var window = app.MainWindow;
                 var flipView = window.FindFirstDescendant(Conditions.ByAutomationId("FlipView"));

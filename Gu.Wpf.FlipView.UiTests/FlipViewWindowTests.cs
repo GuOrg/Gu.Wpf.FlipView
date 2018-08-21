@@ -8,7 +8,7 @@ namespace Gu.Wpf.FlipView.UiTests
         [Test]
         public void BrowseBackAndForward()
         {
-            using (var app = Application.Launch(Info.CreateStartInfo("FlipViewWindow")))
+            using (var app = Application.Launch("Gu.Wpf.FlipView.Demo.exe", "FlipViewWindow"))
             {
                 var window = app.MainWindow;
                 var flipView = window.FindFirstDescendant(Conditions.ByAutomationId("FlipView"));
@@ -56,7 +56,7 @@ namespace Gu.Wpf.FlipView.UiTests
         [Test]
         public void ChangeSelectedIndex()
         {
-            using (var app = Application.Launch(Info.CreateStartInfo("FlipViewWindow")))
+            using (var app = Application.Launch("Gu.Wpf.FlipView.Demo.exe", "FlipViewWindow"))
             {
                 var window = app.MainWindow;
                 var flipView = window.FindFirstDescendant(Conditions.ByAutomationId("FlipView"));
