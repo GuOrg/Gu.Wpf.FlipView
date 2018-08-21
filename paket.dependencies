@@ -1,9 +1,8 @@
 source http://nuget.org/api/v2
-framework: net45
 
 group Test
   source http://www.nuget.org/api/v2/
-  framework: net45
+  storage: none
   nuget NUnit
   nuget Gu.Wpf.UiAutomation
 
