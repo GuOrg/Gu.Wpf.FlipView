@@ -36,11 +36,17 @@ namespace Gu.Wpf.FlipView
         /// <summary>Identifies the <see cref="OffsetX"/> dependency property.</summary>
         public static readonly DependencyProperty OffsetXProperty = Transform.OffsetXProperty.AddOwner(typeof(TransitionControl));
 
+        /// <summary>Identifies the <see cref="ScaleX"/> dependency property.</summary>
+        public static readonly DependencyProperty ScaleXProperty = Transform.ScaleXProperty.AddOwner(typeof(TransitionControl));
+
         /// <summary>Identifies the <see cref="RelativeOffsetY"/> dependency property.</summary>
         public static readonly DependencyProperty RelativeOffsetYProperty = Transform.RelativeOffsetYProperty.AddOwner(typeof(TransitionControl));
 
         /// <summary>Identifies the <see cref="OffsetY"/> dependency property.</summary>
         public static readonly DependencyProperty OffsetYProperty = Transform.OffsetYProperty.AddOwner(typeof(TransitionControl));
+
+        /// <summary>Identifies the <see cref="ScaleY"/> dependency property.</summary>
+        public static readonly DependencyProperty ScaleYProperty = Transform.ScaleYProperty.AddOwner(typeof(TransitionControl));
 
         /// <summary>Identifies the <see cref="OldContentStyle"/> dependency property.</summary>
         public static readonly DependencyProperty OldContentStyleProperty = DependencyProperty.Register(
@@ -169,9 +175,9 @@ namespace Gu.Wpf.FlipView
 
         /// <summary>
         /// Gets or sets the offset relative to the size of the element in the x direction.
-        /// 0 means OffsetX is zero.
-        /// 1 means OffsetX is ActualWidth
-        /// -1 means OffsetX is -ActualWidth
+        /// 0 means <see cref="OffsetX"/> is zero.
+        /// 1 means <see cref="OffsetX"/> is ActualWidth
+        /// -1 means <see cref="OffsetX"/> is -ActualWidth
         /// </summary>
         public double RelativeOffsetX
         {
@@ -180,10 +186,7 @@ namespace Gu.Wpf.FlipView
         }
 
         /// <summary>
-        /// Gets or sets the offset relative to the size of the element in the x direction.
-        /// 0 means OffsetX is zero.
-        /// 1 means OffsetX is ActualWidth
-        /// -1 means OffsetX is -ActualWidth
+        /// Gets or sets the offset used in the render transform.
         /// </summary>
         public double OffsetX
         {
@@ -192,10 +195,19 @@ namespace Gu.Wpf.FlipView
         }
 
         /// <summary>
+        /// Gets or sets the scale used in the render transform.
+        /// </summary>
+        public double ScaleX
+        {
+            get => (double)this.GetValue(ScaleXProperty);
+            set => this.SetValue(ScaleXProperty, value);
+        }
+
+        /// <summary>
         /// Gets or sets the offset relative to the size of the element in the x direction.
-        /// 0 means OffsetY is zero.
-        /// 1 means OffsetY is ActualWidth
-        /// -1 means OffsetY is -ActualWidth
+        /// 0 means <see cref="OffsetY"/> is zero.
+        /// 1 means <see cref="OffsetY"/> is ActualHeight
+        /// -1 means <see cref="OffsetY"/> is -ActualWidth
         /// </summary>
         public double RelativeOffsetY
         {
@@ -204,15 +216,21 @@ namespace Gu.Wpf.FlipView
         }
 
         /// <summary>
-        /// Gets or sets the offset relative to the size of the element in the x direction.
-        /// 0 means OffsetY is zero.
-        /// 1 means OffsetY is ActualWidth
-        /// -1 means OffsetY is -ActualWidth
+        /// Gets or sets the offset used in the render transform.
         /// </summary>
         public double OffsetY
         {
             get => (double)this.GetValue(OffsetYProperty);
             set => this.SetValue(OffsetYProperty, value);
+        }
+
+        /// <summary>
+        /// Gets or sets the scale used in the render transform.
+        /// </summary>
+        public double ScaleY
+        {
+            get => (double)this.GetValue(ScaleYProperty);
+            set => this.SetValue(ScaleYProperty, value);
         }
 
         /// <inheritdoc />

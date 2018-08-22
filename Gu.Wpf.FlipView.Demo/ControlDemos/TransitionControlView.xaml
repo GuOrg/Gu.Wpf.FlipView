@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:converters="clr-namespace:Gu.Wpf.FlipView.Demo.Converters"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:flipView="https://github.com/JohanLarsson/Gu.Wpf.FlipView"
+             xmlns:gu="https://github.com/JohanLarsson/Gu.Wpf.FlipView"
              xmlns:local="clr-namespace:Gu.Wpf.FlipView.Demo.ControlDemos"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              d:DesignHeight="300"
@@ -28,9 +28,11 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <flipView:TransitionControl Content="{Binding ElementName=ListBox, Path=SelectedItem}"
-                                    RelativeOffsetX="{Binding ElementName=RelativeX, Path=Value}"
-                                    RelativeOffsetY="{Binding ElementName=RelativeY, Path=Value}" />
+        <gu:TransitionControl Content="{Binding ElementName=ListBox, Path=SelectedItem}"
+                              RelativeOffsetX="{Binding ElementName=RelativeX, Path=Value}"
+                              RelativeOffsetY="{Binding ElementName=RelativeY, Path=Value}"
+                              ScaleX="{Binding ElementName=ScaleX, Path=Value}"
+                              ScaleY="{Binding ElementName=ScaleY, Path=Value}" />
 
         <ListBox x:Name="ListBox"
                  Grid.Row="1"
@@ -85,13 +87,33 @@
 
             <TextBlock Grid.Row="2"
                        Grid.Column="0"
-                       Text="RelativeY: " />
-            <Slider x:Name="RelativeY"
+                       Text="ScaleX: " />
+            <Slider x:Name="ScaleX"
                     Grid.Row="2"
                     Grid.Column="1"
                     Maximum="1"
                     Minimum="-1"
+                    Value="1" />
+
+            <TextBlock Grid.Row="3"
+                       Grid.Column="0"
+                       Text="RelativeY: " />
+            <Slider x:Name="RelativeY"
+                    Grid.Row="3"
+                    Grid.Column="1"
+                    Maximum="1"
+                    Minimum="-1"
                     Value="0" />
+
+            <TextBlock Grid.Row="4"
+                       Grid.Column="0"
+                       Text="ScaleY: " />
+            <Slider x:Name="ScaleY"
+                    Grid.Row="4"
+                    Grid.Column="1"
+                    Maximum="1"
+                    Minimum="-1"
+                    Value="1" />
         </Grid>
     </Grid>
 </UserControl>

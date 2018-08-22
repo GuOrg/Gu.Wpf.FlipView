@@ -28,9 +28,11 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <a:TransitionControl a:Transform.RelativeOffsetY="{Binding ElementName=RelativeY, Path=Value}"
-                             Content="{Binding ElementName=ListBox, Path=SelectedItem}"
-                             RelativeOffsetX="{Binding ElementName=RelativeX, Path=Value}" />
+        <a:TransitionControl Content="{Binding ElementName=ListBox, Path=SelectedItem}"
+                             RelativeOffsetX="{Binding ElementName=RelativeX, Path=Value}"
+                             RelativeOffsetY="{Binding ElementName=RelativeY, Path=Value}"
+                             ScaleX="{Binding ElementName=ScaleX, Path=Value}"
+                             ScaleY="{Binding ElementName=ScaleY, Path=Value}" />
 
         <ListBox x:Name="ListBox"
                  Grid.Row="1"
@@ -85,13 +87,33 @@
 
             <TextBlock Grid.Row="2"
                        Grid.Column="0"
-                       Text="RelativeY: " />
-            <Slider x:Name="RelativeY"
+                       Text="RelativeX: " />
+            <Slider x:Name="ScaleX"
                     Grid.Row="2"
                     Grid.Column="1"
                     Maximum="1"
                     Minimum="-1"
+                    Value="1" />
+
+            <TextBlock Grid.Row="3"
+                       Grid.Column="0"
+                       Text="RelativeY: " />
+            <Slider x:Name="RelativeY"
+                    Grid.Row="3"
+                    Grid.Column="1"
+                    Maximum="1"
+                    Minimum="-1"
                     Value="0" />
+
+            <TextBlock Grid.Row="4"
+                       Grid.Column="0"
+                       Text="RelativeY: " />
+            <Slider x:Name="ScaleY"
+                    Grid.Row="4"
+                    Grid.Column="1"
+                    Maximum="1"
+                    Minimum="-1"
+                    Value="1" />
         </Grid>
     </Grid>
 </Window>
