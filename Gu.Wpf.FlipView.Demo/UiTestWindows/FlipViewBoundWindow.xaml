@@ -1,4 +1,4 @@
-﻿<Window xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+<Window xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:demo="clr-namespace:Gu.Wpf.FlipView.Demo"
@@ -17,11 +17,13 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <flipView:FlipView x:Name="FlipView" ItemsSource="{Binding People}">
+        <flipView:FlipView x:Name="FlipView"
+                           ItemsSource="{Binding People}">
             <flipView:FlipView.ItemTemplate>
                 <DataTemplate DataType="{x:Type demo:Person}">
                     <Border Background="#f1eef6">
-                        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <TextBlock HorizontalAlignment="Center"
+                                   VerticalAlignment="Center">
                             <TextBlock.Text>
                                 <MultiBinding StringFormat="{}{0} {1}">
                                     <Binding Path="FirstName" />
@@ -34,19 +36,27 @@
             </flipView:FlipView.ItemTemplate>
         </flipView:FlipView>
 
-        <UniformGrid Grid.Row="1" Rows="1">
-            <Button Command="{Binding ClearCommand}" Content="Clear" />
-            <Button Command="{Binding SetToEmptyCommand}" Content="Set empty" />
-            <Button Command="{Binding SetToNullCommand}" Content="Set null" />
-            <Button Command="{Binding ResetCommand}" Content="Reset" />
+        <UniformGrid Grid.Row="1"
+                     Rows="1">
+            <Button Command="{Binding ClearCommand}"
+                    Content="Clear" />
+            <Button Command="{Binding SetToEmptyCommand}"
+                    Content="Set empty" />
+            <Button Command="{Binding SetToNullCommand}"
+                    Content="Set null" />
+            <Button Command="{Binding ResetCommand}"
+                    Content="Reset" />
             <Button Content="DummyButton" />
         </UniformGrid>
 
-        <TextBlock x:Name="Status" Grid.Row="2">
+        <TextBlock x:Name="Status"
+                   Grid.Row="2">
             <TextBlock.Text>
                 <MultiBinding StringFormat="SelectedIndex: {0} SelectedItem: {1}">
-                    <Binding ElementName="FlipView" Path="SelectedIndex" />
-                    <Binding ElementName="FlipView" Path="SelectedItem" />
+                    <Binding ElementName="FlipView"
+                             Path="SelectedIndex" />
+                    <Binding ElementName="FlipView"
+                             Path="SelectedItem" />
                 </MultiBinding>
             </TextBlock.Text>
         </TextBlock>
