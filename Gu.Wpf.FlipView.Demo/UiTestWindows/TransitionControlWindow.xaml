@@ -87,7 +87,7 @@
 
             <TextBlock Grid.Row="2"
                        Grid.Column="0"
-                       Text="RelativeX: " />
+                       Text="ScaleX: " />
             <Slider x:Name="ScaleX"
                     Grid.Row="2"
                     Grid.Column="1"
@@ -107,7 +107,7 @@
 
             <TextBlock Grid.Row="4"
                        Grid.Column="0"
-                       Text="RelativeY: " />
+                       Text="ScaleY: " />
             <Slider x:Name="ScaleY"
                     Grid.Row="4"
                     Grid.Column="1"
