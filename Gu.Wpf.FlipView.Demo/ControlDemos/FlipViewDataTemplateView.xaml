@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:demo="clr-namespace:Gu.Wpf.FlipView.Demo"
-             xmlns:flipView="https://github.com/GuOrg/Gu.Wpf.FlipView"
+             xmlns:gu="https://github.com/GuOrg/Gu.Wpf.FlipView"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              d:DesignHeight="300"
              d:DesignWidth="300"
@@ -21,11 +21,11 @@
             <ColumnDefinition Width="4*" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
-        <flipView:FlipView x:Name="FlipView"
+        <gu:FlipView x:Name="FlipView"
                            Grid.Column="1"
                            ItemsSource="{Binding People}"
                            SelectedIndex="1">
-            <flipView:FlipView.ItemTemplate>
+            <gu:FlipView.ItemTemplate>
                 <DataTemplate DataType="{x:Type demo:Person}">
                     <Border Background="#f1eef6">
                         <TextBlock HorizontalAlignment="Center"
@@ -39,8 +39,8 @@
                         </TextBlock>
                     </Border>
                 </DataTemplate>
-            </flipView:FlipView.ItemTemplate>
-        </flipView:FlipView>
+            </gu:FlipView.ItemTemplate>
+        </gu:FlipView>
         <Grid Grid.Row="1"
               Grid.Column="0"
               Grid.ColumnSpan="3"
@@ -53,14 +53,14 @@
                 <ComboBox Width="100"
                           HorizontalAlignment="Left"
                           SelectedItem="{Binding ElementName=FlipView, Path=ArrowPlacement}">
-                    <flipView:ArrowPlacement>Inside</flipView:ArrowPlacement>
-                    <flipView:ArrowPlacement>Outside</flipView:ArrowPlacement>
+                    <gu:ArrowPlacement>Inside</gu:ArrowPlacement>
+                    <gu:ArrowPlacement>Outside</gu:ArrowPlacement>
                 </ComboBox>
                 <ComboBox Width="100"
                           HorizontalAlignment="Left"
                           SelectedItem="{Binding ElementName=FlipView, Path=IndexPlacement}">
-                    <flipView:IndexPlacement>Above</flipView:IndexPlacement>
-                    <flipView:IndexPlacement>Below</flipView:IndexPlacement>
+                    <gu:IndexPlacement>Above</gu:IndexPlacement>
+                    <gu:IndexPlacement>Below</gu:IndexPlacement>
                 </ComboBox>
             </StackPanel>
         </Grid>

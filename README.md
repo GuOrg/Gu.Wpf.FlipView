@@ -79,19 +79,19 @@ A style with `TargetType="RepeatButton"` for how to render navigation buttons.
 Sample slideshow images:
 
 ```xaml
-<flipView:FlipView SelectedIndex="0">
+<gu:FlipView SelectedIndex="0">
     <Image Source="http://i.imgur.com/xT3ay.jpg" />
     <Image Source="http://i.stack.imgur.com/lDlr1.jpg" />
-</flipView:FlipView>
+</gu:FlipView>
 ```
 
 Sample bound itemssource:
 
 ```xaml
-<flipView:FlipView x:Name="FlipView"
+<gu:FlipView x:Name="FlipView"
                     ItemsSource="{Binding People}"
                     SelectedIndex="0">
-    <flipView:FlipView.ItemTemplate>
+    <gu:FlipView.ItemTemplate>
         <DataTemplate DataType="{x:Type local:Person}">
             <Border Background="#f1eef6">
                 <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center">
@@ -104,8 +104,8 @@ Sample bound itemssource:
                 </TextBlock>
             </Border>
         </DataTemplate>
-    </flipView:FlipView.ItemTemplate>
-</flipView:FlipView>
+    </gu:FlipView.ItemTemplate>
+</gu:FlipView>
 ```
 
 # TransitionControl
@@ -136,15 +136,15 @@ The storyboard used for animating in new content.
 ### Simple with default animation, fade in & out:
 
 ```xaml
-<flipView:TransitionControl Content="{Binding SelectedItem, ElementName=ListBox}" 
+<gu:TransitionControl Content="{Binding SelectedItem, ElementName=ListBox}" 
                             ContentTemplate="{StaticResource SomeDataTemplate}" />
 ```
 
 ### With custom animations
 
 ```xaml
-<flipView:TransitionControl Content="{Binding SelectedItem, ElementName=ListBox}">
-    <flipView:TransitionControl.InAnimation>
+<gu:TransitionControl Content="{Binding SelectedItem, ElementName=ListBox}">
+    <gu:TransitionControl.InAnimation>
         <Storyboard>
             <DoubleAnimation BeginTime="0:0:0"
                                 Storyboard.TargetProperty="Opacity"
@@ -152,14 +152,14 @@ The storyboard used for animating in new content.
                                 To="0"
                                 Duration="0:0:0.3" />
             <DoubleAnimation BeginTime="0:0:0"
-                                Storyboard.TargetProperty="(flipView:Transform.RelativeOffsetX)"
+                                Storyboard.TargetProperty="(gu:Transform.RelativeOffsetX)"
                                 From="0"
                                 To="1"
                                 Duration="0:0:0.3" />
         </Storyboard>
-    </flipView:TransitionControl.InAnimation>
+    </gu:TransitionControl.InAnimation>
 
-    <flipView:TransitionControl.OutAnimation>
+    <gu:TransitionControl.OutAnimation>
         <Storyboard>
             <DoubleAnimation BeginTime="0:0:0"
                                 Storyboard.TargetProperty="Opacity"
@@ -167,13 +167,13 @@ The storyboard used for animating in new content.
                                 To="1"
                                 Duration="0:0:0.3" />
             <DoubleAnimation BeginTime="0:0:0"
-                                Storyboard.TargetProperty="(flipView:Transform.RelativeOffsetX)"
+                                Storyboard.TargetProperty="(gu:Transform.RelativeOffsetX)"
                                 From="-1"
                                 To="0"
                                 Duration="0:0:0.3" />
         </Storyboard>
-    </flipView:TransitionControl.OutAnimation>
-</flipView:TransitionControl>
+    </gu:TransitionControl.OutAnimation>
+</gu:TransitionControl>
 ```
 
 # GesturePanel
@@ -194,23 +194,23 @@ The MouseGestureTracker can be useful for testing things if no touch device is a
 
 Sample:
 ```xaml
-<flipView:GesturePanel Background="Lavender">
+<gu:GesturePanel Background="Lavender">
     <!-- content goes here -->
-</flipView:GesturePanel>
+</gu:GesturePanel>
 ```
 
 Sample with custom tracker:
 ```xaml
-<flipView:GesturePanel.GestureTracker>
-    <flipView:MouseGestureTracker>
-        <flipView:MouseGestureTracker.Interpreter>
-            <flipView:DefaultGestureInterpreter MinSwipeLength="15" 
+<gu:GesturePanel.GestureTracker>
+    <gu:MouseGestureTracker>
+        <gu:MouseGestureTracker.Interpreter>
+            <gu:DefaultGestureInterpreter MinSwipeLength="15" 
                                                 MinSwipeVelocity="1" 
                                                 MaxDeviationFromHorizontal="30" />
-        </flipView:MouseGestureTracker.Interpreter>
-    </flipView:MouseGestureTracker>
+        </gu:MouseGestureTracker.Interpreter>
+    </gu:MouseGestureTracker>
      <!-- content goes here -->
-</flipView:GesturePanel.GestureTracker>
+</gu:GesturePanel.GestureTracker>
 ```
 
 # Transform

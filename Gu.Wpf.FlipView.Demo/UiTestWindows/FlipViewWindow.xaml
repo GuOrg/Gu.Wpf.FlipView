@@ -2,7 +2,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:converters="clr-namespace:Gu.Wpf.FlipView.Demo.Converters"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:flipView="https://github.com/GuOrg/Gu.Wpf.FlipView"
+        xmlns:gu="https://github.com/GuOrg/Gu.Wpf.FlipView"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         Title="FlipViewWindow"
         Width="400"
@@ -18,15 +18,15 @@
             <ColumnDefinition Width="4*" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
-        <flipView:FlipView x:Name="FlipView"
-                           Grid.Column="1">
-            <flipView:FlipView.Resources>
+        <gu:FlipView x:Name="FlipView"
+                     Grid.Column="1">
+            <gu:FlipView.Resources>
                 <Style TargetType="TextBlock">
                     <Setter Property="FontSize" Value="70" />
                     <Setter Property="HorizontalAlignment" Value="Center" />
                     <Setter Property="VerticalAlignment" Value="Center" />
                 </Style>
-            </flipView:FlipView.Resources>
+            </gu:FlipView.Resources>
             <Border Background="#f1eef6">
                 <TextBlock Text="1" />
             </Border>
@@ -39,7 +39,7 @@
             <Border Background="#0570b0">
                 <TextBlock>4</TextBlock>
             </Border>
-        </flipView:FlipView>
+        </gu:FlipView>
 
         <Grid Grid.Row="1"
               Grid.Column="0"
@@ -80,8 +80,8 @@
                       Grid.Column="1"
                       HorizontalAlignment="Left"
                       SelectedItem="{Binding ElementName=FlipView, Path=ArrowPlacement}">
-                <flipView:ArrowPlacement>Inside</flipView:ArrowPlacement>
-                <flipView:ArrowPlacement>Outside</flipView:ArrowPlacement>
+                <gu:ArrowPlacement>Inside</gu:ArrowPlacement>
+                <gu:ArrowPlacement>Outside</gu:ArrowPlacement>
             </ComboBox>
 
             <TextBlock Grid.Row="3"
@@ -92,8 +92,8 @@
                       Grid.Column="1"
                       HorizontalAlignment="Left"
                       SelectedItem="{Binding ElementName=FlipView, Path=IndexPlacement}">
-                <flipView:IndexPlacement>Above</flipView:IndexPlacement>
-                <flipView:IndexPlacement>Below</flipView:IndexPlacement>
+                <gu:IndexPlacement>Above</gu:IndexPlacement>
+                <gu:IndexPlacement>Below</gu:IndexPlacement>
             </ComboBox>
 
             <TextBlock Grid.Row="4"

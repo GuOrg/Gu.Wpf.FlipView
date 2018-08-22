@@ -1,7 +1,7 @@
 <ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:a="clr-namespace:Gu.Wpf.FlipView.AttachedProperties"
-                    xmlns:flipView="clr-namespace:Gu.Wpf.FlipView">
+                    xmlns:gu="clr-namespace:Gu.Wpf.FlipView">
 
     <Geometry x:Key="LeftArrowPath">F1 M 35.8724,37.6042L 39.0391,40.7708L 50.5182,51.8542L 40.2266,51.8542L 25.1849,37.6041L 40.2266,23.3542L 50.5182,23.3542L 39.0391,34.4375L 35.8724,37.6042 Z</Geometry>
     <Geometry x:Key="RightArrowPath">F1 M 39.8307,37.6042L 36.6641,34.4375L 25.1849,23.3542L 35.4766,23.3542L 50.5182,37.6042L 35.4766,51.8542L 25.1849,51.8542L 36.6641,40.7708L 39.8307,37.6042 Z</Geometry>
@@ -96,18 +96,18 @@
         <Setter Property="BorderThickness" Value="0" />
         <Setter Property="Background" Value="{x:Null}" />
         <Style.Triggers>
-            <DataTrigger Binding="{Binding ShowArrows, RelativeSource={RelativeSource AncestorType=flipView:FlipView}}"
+            <DataTrigger Binding="{Binding ShowArrows, RelativeSource={RelativeSource AncestorType=gu:FlipView}}"
                          Value="True">
                 <Setter Property="Visibility" Value="Visible" />
             </DataTrigger>
-            <DataTrigger Binding="{Binding ShowArrows, RelativeSource={RelativeSource AncestorType=flipView:FlipView}}"
+            <DataTrigger Binding="{Binding ShowArrows, RelativeSource={RelativeSource AncestorType=gu:FlipView}}"
                          Value="False">
                 <Setter Property="Visibility" Value="Collapsed" />
             </DataTrigger>
         </Style.Triggers>
     </Style>
 
-    <Style TargetType="{x:Type flipView:FlipView}">
+    <Style TargetType="{x:Type gu:FlipView}">
         <Setter Property="HorizontalContentAlignment" Value="Stretch" />
         <Setter Property="VerticalContentAlignment" Value="Stretch" />
 
@@ -199,7 +199,7 @@
 
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="{x:Type flipView:FlipView}">
+                <ControlTemplate TargetType="{x:Type gu:FlipView}">
                     <Border Background="{TemplateBinding Background}"
                             BorderBrush="{TemplateBinding BorderBrush}"
                             BorderThickness="{TemplateBinding BorderThickness}">
@@ -222,8 +222,8 @@
                                      Background="Transparent"
                                      BorderThickness="0"
                                      ItemContainerStyle="{TemplateBinding IndexItemStyle}"
-                                     ItemsSource="{Binding Items, RelativeSource={RelativeSource AncestorType=flipView:FlipView}}"
-                                     SelectedItem="{Binding SelectedItem, RelativeSource={RelativeSource AncestorType=flipView:FlipView}}">
+                                     ItemsSource="{Binding Items, RelativeSource={RelativeSource AncestorType=gu:FlipView}}"
+                                     SelectedItem="{Binding SelectedItem, RelativeSource={RelativeSource AncestorType=gu:FlipView}}">
                                 <ListBox.Template>
                                     <ControlTemplate TargetType="{x:Type ListBox}">
                                         <ItemsPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
@@ -321,20 +321,20 @@
                                 </Border.Style>
                             </Border>
 
-                            <flipView:GesturePanel x:Name="GesturePanel"
-                                                   Grid.Row="1"
-                                                   Grid.Column="1"
-                                                   Background="Transparent">
-                                <flipView:TransitionControl x:Name="TransitionControl"
-                                                            Content="{TemplateBinding SelectedItem}"
-                                                            ContentStringFormat="{TemplateBinding ItemStringFormat}"
-                                                            ContentTemplate="{TemplateBinding ItemTemplate}"
-                                                            ContentTemplateSelector="{TemplateBinding ItemTemplateSelector}"
-                                                            InAnimation="{TemplateBinding CurrentOutAnimation}"
-                                                            OutAnimation="{TemplateBinding CurrentInAnimation}"
-                                                            RelativeOffsetX="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(a:Transform.RelativeOffsetX)}"
-                                                            RelativeOffsetY="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(a:Transform.RelativeOffsetY)}" />
-                            </flipView:GesturePanel>
+                            <gu:GesturePanel x:Name="GesturePanel"
+                                             Grid.Row="1"
+                                             Grid.Column="1"
+                                             Background="Transparent">
+                                <gu:TransitionControl x:Name="TransitionControl"
+                                                      Content="{TemplateBinding SelectedItem}"
+                                                      ContentStringFormat="{TemplateBinding ItemStringFormat}"
+                                                      ContentTemplate="{TemplateBinding ItemTemplate}"
+                                                      ContentTemplateSelector="{TemplateBinding ItemTemplateSelector}"
+                                                      InAnimation="{TemplateBinding CurrentOutAnimation}"
+                                                      OutAnimation="{TemplateBinding CurrentInAnimation}"
+                                                      RelativeOffsetX="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(a:Transform.RelativeOffsetX)}"
+                                                      RelativeOffsetY="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(a:Transform.RelativeOffsetY)}" />
+                            </gu:GesturePanel>
                         </Grid>
                     </Border>
                 </ControlTemplate>

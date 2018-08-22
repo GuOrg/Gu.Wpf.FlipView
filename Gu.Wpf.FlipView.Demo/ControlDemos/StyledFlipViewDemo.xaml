@@ -2,7 +2,7 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:flipView="https://github.com/GuOrg/Gu.Wpf.FlipView"
+             xmlns:gu="https://github.com/GuOrg/Gu.Wpf.FlipView"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              d:DesignHeight="300"
              d:DesignWidth="300"
@@ -18,10 +18,10 @@
                 <ColumnDefinition Width="4*" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            <flipView:FlipView x:Name="StyledFlipView"
+            <gu:FlipView x:Name="StyledFlipView"
                                Grid.Column="1"
                                SelectedIndex="1">
-                <flipView:FlipView.ArrowButtonStyle>
+                <gu:FlipView.ArrowButtonStyle>
                     <Style TargetType="{x:Type RepeatButton}">
                         <Setter Property="FocusVisualStyle" Value="{x:Null}" />
                         <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}" />
@@ -63,8 +63,8 @@
                             </Setter.Value>
                         </Setter>
                     </Style>
-                </flipView:FlipView.ArrowButtonStyle>
-                <flipView:FlipView.IndexItemStyle>
+                </gu:FlipView.ArrowButtonStyle>
+                <gu:FlipView.IndexItemStyle>
                     <Style TargetType="{x:Type ListBoxItem}">
                         <Setter Property="FocusVisualStyle" Value="{x:Null}" />
                         <Setter Property="Template">
@@ -99,14 +99,14 @@
                             </Setter.Value>
                         </Setter>
                     </Style>
-                </flipView:FlipView.IndexItemStyle>
-                <flipView:FlipView.Resources>
+                </gu:FlipView.IndexItemStyle>
+                <gu:FlipView.Resources>
                     <Style TargetType="TextBlock">
                         <Setter Property="FontSize" Value="70" />
                         <Setter Property="HorizontalAlignment" Value="Center" />
                         <Setter Property="VerticalAlignment" Value="Center" />
                     </Style>
-                </flipView:FlipView.Resources>
+                </gu:FlipView.Resources>
                 <Border Background="#f1eef6">
                     <TextBlock Text="1" />
                 </Border>
@@ -119,7 +119,7 @@
                 <Border Background="#0570b0">
                     <TextBlock>4</TextBlock>
                 </Border>
-            </flipView:FlipView>
+            </gu:FlipView>
             <Grid Grid.Row="1"
                   Grid.Column="0"
                   Grid.ColumnSpan="3"
@@ -132,14 +132,14 @@
                     <ComboBox Width="100"
                               HorizontalAlignment="Left"
                               SelectedItem="{Binding ElementName=FlipView, Path=ArrowPlacement}">
-                        <flipView:ArrowPlacement>Inside</flipView:ArrowPlacement>
-                        <flipView:ArrowPlacement>Outside</flipView:ArrowPlacement>
+                        <gu:ArrowPlacement>Inside</gu:ArrowPlacement>
+                        <gu:ArrowPlacement>Outside</gu:ArrowPlacement>
                     </ComboBox>
                     <ComboBox Width="100"
                               HorizontalAlignment="Left"
                               SelectedItem="{Binding ElementName=FlipView, Path=IndexPlacement}">
-                        <flipView:IndexPlacement>Above</flipView:IndexPlacement>
-                        <flipView:IndexPlacement>Below</flipView:IndexPlacement>
+                        <gu:IndexPlacement>Above</gu:IndexPlacement>
+                        <gu:IndexPlacement>Below</gu:IndexPlacement>
                     </ComboBox>
                     <StackPanel Orientation="Horizontal">
                         <TextBlock VerticalAlignment="Center"

@@ -2,12 +2,12 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:flipView="https://github.com/GuOrg/Gu.Wpf.FlipView"
+             xmlns:gu="https://github.com/GuOrg/Gu.Wpf.FlipView"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              d:DesignHeight="600"
              d:DesignWidth="600"
              mc:Ignorable="d">
-    <Grid flipView:GesturePanel.Gestured="GesturePanel_OnGestured">
+    <Grid gu:GesturePanel.Gestured="GesturePanel_OnGestured">
         <Grid.ColumnDefinitions>
             <ColumnDefinition />
             <ColumnDefinition />
@@ -19,21 +19,21 @@
 
         <GroupBox Grid.Column="1"
                   Header="Gesture panel">
-            <flipView:GesturePanel Background="Lavender">
+            <gu:GesturePanel Background="Lavender">
                 <Canvas>
                     <Rectangle x:Name="Rectangle"
                                Canvas.Left="100"
                                Canvas.Top="100"
                                Width="100"
                                Height="100"
-                               flipView:Transform.RelativeOffsetX="{Binding Value, ElementName=PercentX}"
+                               gu:Transform.RelativeOffsetX="{Binding Value, ElementName=PercentX}"
                                Fill="Red">
                         <Rectangle.RenderTransform>
-                            <TranslateTransform X="{Binding (flipView:Transform.OffsetX), ElementName=Rectangle}" />
+                            <TranslateTransform X="{Binding (gu:Transform.OffsetX), ElementName=Rectangle}" />
                         </Rectangle.RenderTransform>
                     </Rectangle>
                 </Canvas>
-            </flipView:GesturePanel>
+            </gu:GesturePanel>
         </GroupBox>
     </Grid>
 </UserControl>
