@@ -31,11 +31,11 @@
             <Setter.Value>
                 <Storyboard>
                     <DoubleAnimation BeginTime="0:0:0"
-                                     FillBehavior="Stop"
+                                     FillBehavior="HoldEnd"
                                      Storyboard.TargetProperty="Opacity"
                                      From="0"
                                      To="1"
-                                     Duration="0:0:1" />
+                                     Duration="0:0:0.3" />
                 </Storyboard>
             </Setter.Value>
         </Setter>
@@ -44,11 +44,11 @@
             <Setter.Value>
                 <Storyboard>
                     <DoubleAnimation BeginTime="0:0:0"
-                                     FillBehavior="Stop"
+                                     FillBehavior="HoldEnd"
                                      Storyboard.TargetProperty="Opacity"
                                      From="1"
                                      To="0"
-                                     Duration="0:0:1" />
+                                     Duration="0:0:0.3" />
                 </Storyboard>
             </Setter.Value>
         </Setter>
