@@ -213,6 +213,7 @@
   <ItemGroup>
     <Compile Include="MocksAndHelpers\ManipulationStringer.cs" />
     <Compile Include="MocksAndHelpers\RelayCommand.cs" />
+    <Compile Include="ObservableTraceListener.cs" />
     <Compile Include="Properties\AssemblyInfo.generated.cs">
       <SubType>Code</SubType>
     </Compile>

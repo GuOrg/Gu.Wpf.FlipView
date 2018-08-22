@@ -1,6 +1,7 @@
-﻿namespace Gu.Wpf.FlipView.Demo
+namespace Gu.Wpf.FlipView.Demo
 {
     using System;
+    using System.Diagnostics;
     using System.Windows;
 
     public partial class App : Application
@@ -13,6 +14,9 @@
                 this.StartupUri = new Uri($"UiTestWindows/{window}.xaml", UriKind.Relative);
             }
 
+            PresentationTraceSources.Refresh();
+            PresentationTraceSources.DataBindingSource.Listeners.Add(ObservableTraceListener.Instance);
+            PresentationTraceSources.DataBindingSource.Switch.Level = SourceLevels.Warning | SourceLevels.Error;
             base.OnStartup(e);
         }
     }
