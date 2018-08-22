@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="Gu.Wpf.FlipView.Demo.ControlDemos.StyledFlipViewDemo"
+<UserControl x:Class="Gu.Wpf.FlipView.Demo.ControlDemos.StyledFlipViewDemo"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -18,7 +18,7 @@
                 <ColumnDefinition Width="4*" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            <gu:FlipView x:Name="StyledFlipView"
+            <gu:FlipView x:Name="FlipView"
                                Grid.Column="1"
                                SelectedIndex="1">
                 <gu:FlipView.ArrowButtonStyle>

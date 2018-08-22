@@ -22,9 +22,9 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
         <gu:FlipView x:Name="FlipView"
-                           Grid.Column="1"
-                           ItemsSource="{Binding People}"
-                           SelectedIndex="1">
+                     Grid.Column="1"
+                     ItemsSource="{Binding People}"
+                     SelectedIndex="1">
             <gu:FlipView.ItemTemplate>
                 <DataTemplate DataType="{x:Type demo:Person}">
                     <Border Background="#f1eef6">
