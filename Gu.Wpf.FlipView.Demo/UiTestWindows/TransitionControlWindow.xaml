@@ -28,9 +28,9 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <a:TransitionControl a:Transform.RelativeOffsetX="{Binding ElementName=RelativeX, Path=Value}"
-                             a:Transform.RelativeOffsetY="{Binding ElementName=RelativeY, Path=Value}"
-                             Content="{Binding ElementName=ListBox, Path=SelectedItem}" />
+        <a:TransitionControl a:Transform.RelativeOffsetY="{Binding ElementName=RelativeY, Path=Value}"
+                             Content="{Binding ElementName=ListBox, Path=SelectedItem}"
+                             RelativeOffsetX="{Binding ElementName=RelativeX, Path=Value}" />
 
         <ListBox x:Name="ListBox"
                  Grid.Row="1"

@@ -9,8 +9,10 @@ namespace Gu.Wpf.FlipView.AttachedProperties
     public static class Transform
     {
         /// <summary>
-        /// The offset relative to the size of the element in the x direction.
-        /// 1 means the position is ActualWidth
+        /// Gets or sets the offset relative to the size of the element in the x direction.
+        /// 0 means <see cref="OffsetXProperty"/> is zero.
+        /// 1 means <see cref="OffsetXProperty"/> is ActualWidth
+        /// -1 means <see cref="OffsetXProperty"/> is -ActualWidth
         /// </summary>
         public static readonly DependencyProperty RelativeOffsetXProperty = DependencyProperty.RegisterAttached(
             "RelativeOffsetX",
