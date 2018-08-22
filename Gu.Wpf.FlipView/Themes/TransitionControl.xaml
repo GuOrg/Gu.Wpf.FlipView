@@ -4,6 +4,11 @@
                     xmlns:gu="clr-namespace:Gu.Wpf.FlipView">
     <Style TargetType="{x:Type gu:TransitionControl}">
         <Style.Resources>
+            <Style x:Key="PlaceHolderStyleThatIsNeverUsedForAnything" TargetType="{x:Type ContentPresenter}">
+                <Setter Property="attached:Transform.RelativeOffsetX" Value="0" />
+                <Setter Property="attached:Transform.RelativeOffsetY" Value="0" />
+            </Style>
+
             <Style x:Key="TransitionControlDefaultContentPresenterStyle"
                    TargetType="{x:Type ContentPresenter}">
                 <Setter Property="RenderTransform">
