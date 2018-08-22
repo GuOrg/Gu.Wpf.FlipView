@@ -8,14 +8,19 @@ namespace Gu.Wpf.FlipView.UiTests
         [Test]
         public void Transitions()
         {
-            // Just testing that we don't crash here.
-            using (var app = Application.Launch("Gu.Wpf.FlipView.Demo.exe", "TransitionControlWindow"))
+            using (var listener = new WpfTraceListener())
             {
-                var window = app.MainWindow;
-                var selectedIndex = window.FindSlider("SelectedIndex");
-                selectedIndex.Value = 0;
-                selectedIndex.Value = 1;
-                selectedIndex.Value = 2;
+                // Just testing that we don't crash here.
+                using (var app = Application.Launch("Gu.Wpf.FlipView.Demo.exe", "TransitionControlWindow"))
+                {
+                    var window = app.MainWindow;
+                    var selectedIndex = window.FindSlider("SelectedIndex");
+                    selectedIndex.Value = 0;
+                    selectedIndex.Value = 1;
+                    selectedIndex.Value = 2;
+                }
+
+                CollectionAssert.IsEmpty(listener.Messages);
             }
         }
     }

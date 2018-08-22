@@ -8,15 +8,20 @@ namespace Gu.Wpf.FlipView.UiTests
         [Test]
         public void ClickAllTabs()
         {
-            // Just a smoke test so that we don't explode.
-            using (var app = Application.Launch("Gu.Wpf.FlipView.Demo.exe"))
+            using (var listener = new WpfTraceListener())
             {
-                var window = app.MainWindow;
-                var tab = window.FindTabControl();
-                foreach (var tabItem in tab.Items)
+                // Just a smoke test so that we don't explode.
+                using (var app = Application.Launch("Gu.Wpf.FlipView.Demo.exe"))
                 {
-                    _ = tabItem.Select();
+                    var window = app.MainWindow;
+                    var tab = window.FindTabControl();
+                    foreach (var tabItem in tab.Items)
+                    {
+                        _ = tabItem.Select();
+                    }
                 }
+
+                CollectionAssert.IsEmpty(listener.Messages);
             }
         }
     }

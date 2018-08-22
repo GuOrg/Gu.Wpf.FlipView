@@ -1,13 +1,13 @@
-namespace Gu.Wpf.FlipView.Demo
+namespace Gu.Wpf.FlipView.UiTests
 {
-    using System.Collections.ObjectModel;
+    using System.Collections.Generic;
     using System.Diagnostics;
 
-    public class ObservableTraceListener : System.Diagnostics.TraceListener
+    public class WpfTraceListener : TraceListener
     {
-        public static readonly ObservableTraceListener Instance = new ObservableTraceListener();
+        private readonly List<string> messages = new List<string>();
 
-        private ObservableTraceListener()
+        public WpfTraceListener()
         {
             PresentationTraceSources.Refresh();
             Register(PresentationTraceSources.AnimationSource);
@@ -29,7 +29,7 @@ namespace Gu.Wpf.FlipView.Demo
             }
         }
 
-        public ObservableCollection<string> Messages { get;  } = new ObservableCollection<string>();
+        public IReadOnlyList<string> Messages => this.messages;
 
         public override void Write(string message)
         {
@@ -37,12 +37,7 @@ namespace Gu.Wpf.FlipView.Demo
 
         public override void WriteLine(string message)
         {
-            this.Messages.Add(message);
-        }
-
-        public static void Initialize()
-        {
-            // NOP ctor runs
+            this.messages.Add(message);
         }
     }
 }
