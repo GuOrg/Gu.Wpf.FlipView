@@ -9,10 +9,10 @@
                 <Setter Property="RenderTransform">
                     <Setter.Value>
                         <TransformGroup>
-                            <TranslateTransform X="{Binding Path=(attached:Transform.OffsetX), RelativeSource={RelativeSource TemplatedParent}}"
-                                                Y="{Binding Path=(attached:Transform.OffsetY), RelativeSource={RelativeSource TemplatedParent}}" />
-                            <ScaleTransform ScaleX="{Binding Path=(attached:Transform.ScaleX), RelativeSource={RelativeSource TemplatedParent}}"
-                                            ScaleY="{Binding Path=(attached:Transform.ScaleY), RelativeSource={RelativeSource TemplatedParent}}" />
+                            <TranslateTransform X="{Binding Path=(attached:Transform.OffsetX), RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type flipView:TransitionControl}}}"
+                                                Y="{Binding Path=(attached:Transform.OffsetY), RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type flipView:TransitionControl}}}" />
+                            <ScaleTransform ScaleX="{Binding Path=(attached:Transform.ScaleX), RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type flipView:TransitionControl}}}"
+                                            ScaleY="{Binding Path=(attached:Transform.ScaleY), RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type flipView:TransitionControl}}}" />
                         </TransformGroup>
                     </Setter.Value>
                 </Setter>
