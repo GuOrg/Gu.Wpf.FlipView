@@ -31,6 +31,11 @@ namespace Gu.Wpf.FlipView.Demo
 
         public ObservableCollection<string> Messages { get;  } = new ObservableCollection<string>();
 
+        public static void Initialize()
+        {
+            // NOP ctor runs
+        }
+
         public override void Write(string message)
         {
         }
@@ -38,11 +43,6 @@ namespace Gu.Wpf.FlipView.Demo
         public override void WriteLine(string message)
         {
             this.Messages.Add(message);
-        }
-
-        public static void Initialize()
-        {
-            // NOP ctor runs
         }
     }
 }
