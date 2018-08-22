@@ -16,11 +16,6 @@ namespace Gu.Wpf.FlipView.UiTests
                 foreach (var tabItem in tab.Items)
                 {
                     _ = tabItem.Select();
-                    var nested = tab.FindTabControl();
-                    foreach (var nestedItem in nested.Items)
-                    {
-                        _ = nestedItem.Select();
-                    }
                 }
             }
         }

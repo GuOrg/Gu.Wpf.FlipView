@@ -1,4 +1,4 @@
-﻿<Window x:Class="Gu.Wpf.FlipView.Demo.MainWindow"
+<Window x:Class="Gu.Wpf.FlipView.Demo.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:controlDemos="clr-namespace:Gu.Wpf.FlipView.Demo.ControlDemos"
@@ -6,15 +6,42 @@
         Title="MainWindow"
         Width="525"
         Height="350">
-    <Grid>
-        <TabControl>
-            <TabItem Header="Controls">
-                <controlDemos:ControlsView />
-            </TabItem>
+    <TabControl SelectedIndex="1">
+        <TabItem Header="FlipView">
+            <controlDemos:FlipViewDemo />
+        </TabItem>
 
-            <TabItem Header="Debug">
-                <misc:DebugView />
-            </TabItem>
-        </TabControl>
-    </Grid>
+        <TabItem Header="FlipView images">
+            <controlDemos:ImagesFlipView />
+        </TabItem>
+
+        <TabItem Header="FlipView DataTemplate">
+            <controlDemos:FlipViewDataTemplateView />
+        </TabItem>
+
+        <!--  Providing a sample of how to style it  -->
+        <TabItem Header="FlipView Styles">
+            <controlDemos:StyledFlipViewDemo />
+        </TabItem>
+
+        <TabItem Header="TransitionControl">
+            <controlDemos:TransitionControlView />
+        </TabItem>
+
+        <TabItem Header="TransitionControl custom animations">
+            <controlDemos:TransitionControlStyledView />
+        </TabItem>
+
+        <TabItem Header="GesturePanelView (touch)">
+            <controlDemos:TouchGesturePanelView />
+        </TabItem>
+
+        <TabItem Header="GesturePanelView (mouse)">
+            <controlDemos:MouseGesturePanelView />
+        </TabItem>
+
+        <TabItem Header="GesturePanelView (mouse and touch)">
+            <controlDemos:CompositeGesturePanelView />
+        </TabItem>
+    </TabControl>
 </Window>

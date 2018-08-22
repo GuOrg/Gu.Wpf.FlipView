@@ -12,7 +12,8 @@
             <Setter Property="VerticalAlignment" Value="Center" />
         </Style>
 
-        <HierarchicalDataTemplate DataType="{x:Type misc:ArgsVm}" ItemsSource="{Binding Children}">
+        <HierarchicalDataTemplate DataType="{x:Type misc:ArgsVm}"
+                                  ItemsSource="{Binding Children}">
             <TextBlock Text="{Binding Name}" />
         </HierarchicalDataTemplate>
 

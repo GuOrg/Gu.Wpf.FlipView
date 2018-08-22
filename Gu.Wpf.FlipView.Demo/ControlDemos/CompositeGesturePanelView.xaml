@@ -13,22 +13,26 @@
             <ColumnDefinition />
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
-        <GroupBox Grid.Column="0" Header="Detected gestures">
+        <GroupBox Grid.Column="0"
+                  Header="Detected gestures">
             <ListBox x:Name="Gestures" />
         </GroupBox>
 
-        <GroupBox Grid.Column="1" Header="Gesture panel">
+        <GroupBox Grid.Column="1"
+                  Header="Gesture panel">
             <flipView:GesturePanel Background="Lavender">
                 <flipView:GesturePanel.GestureTracker>
                     <flipView:CompositeGestureTracker>
                         <flipView:MouseGestureTracker>
                             <flipView:MouseGestureTracker.Interpreter>
-                                <flipView:DefaultGestureInterpreter MinSwipeLength="15" MinSwipeVelocity="1" />
+                                <flipView:DefaultGestureInterpreter MinSwipeLength="15"
+                                                                    MinSwipeVelocity="1" />
                             </flipView:MouseGestureTracker.Interpreter>
                         </flipView:MouseGestureTracker>
                         <flipView:TouchGestureTracker>
                             <flipView:TouchGestureTracker.Interpreter>
-                                <flipView:DefaultGestureInterpreter MinSwipeLength="15" MinSwipeVelocity="1" />
+                                <flipView:DefaultGestureInterpreter MinSwipeLength="15"
+                                                                    MinSwipeVelocity="1" />
                             </flipView:TouchGestureTracker.Interpreter>
                         </flipView:TouchGestureTracker>
                     </flipView:CompositeGestureTracker>

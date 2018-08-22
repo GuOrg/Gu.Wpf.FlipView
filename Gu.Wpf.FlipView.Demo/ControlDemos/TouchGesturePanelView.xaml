@@ -12,11 +12,13 @@
             <ColumnDefinition />
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
-        <GroupBox Grid.Column="0" Header="Detected gestures">
+        <GroupBox Grid.Column="0"
+                  Header="Detected gestures">
             <ListBox x:Name="Gestures" />
         </GroupBox>
 
-        <GroupBox Grid.Column="1" Header="Gesture panel">
+        <GroupBox Grid.Column="1"
+                  Header="Gesture panel">
             <flipView:GesturePanel Background="Lavender">
                 <Canvas>
                     <Rectangle x:Name="Rectangle"

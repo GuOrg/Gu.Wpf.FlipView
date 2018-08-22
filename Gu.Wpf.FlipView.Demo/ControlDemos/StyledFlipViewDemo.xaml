@@ -125,8 +125,10 @@
                   Grid.ColumnSpan="3"
                   TextBlock.FontSize="12">
                 <StackPanel>
-                    <CheckBox Content="ShowArrows" IsChecked="{Binding ElementName=FlipView, Path=ShowArrows}" />
-                    <CheckBox Content="ShowIndex" IsChecked="{Binding ElementName=FlipView, Path=ShowIndex}" />
+                    <CheckBox Content="ShowArrows"
+                              IsChecked="{Binding ElementName=FlipView, Path=ShowArrows}" />
+                    <CheckBox Content="ShowIndex"
+                              IsChecked="{Binding ElementName=FlipView, Path=ShowIndex}" />
                     <ComboBox Width="100"
                               HorizontalAlignment="Left"
                               SelectedItem="{Binding ElementName=FlipView, Path=ArrowPlacement}">
@@ -140,7 +142,8 @@
                         <flipView:IndexPlacement>Below</flipView:IndexPlacement>
                     </ComboBox>
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock VerticalAlignment="Center" Text="Transitiontime:" />
+                        <TextBlock VerticalAlignment="Center"
+                                   Text="Transitiontime:" />
                         <TextBox Text="300" />
                     </StackPanel>
                 </StackPanel>

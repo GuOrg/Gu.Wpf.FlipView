@@ -17,7 +17,10 @@
                 ManipulationInertiaStarting="OnInput"
                 ManipulationStarted="OnInput"
                 ManipulationStarting="OnStarted">
-            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center">Swipe Here</TextBlock>
+            <TextBlock HorizontalAlignment="Center"
+                       VerticalAlignment="Center">
+                Swipe Here
+            </TextBlock>
         </Border>
     </misc:EventBox.SwipeArea>
 </misc:EventBox>

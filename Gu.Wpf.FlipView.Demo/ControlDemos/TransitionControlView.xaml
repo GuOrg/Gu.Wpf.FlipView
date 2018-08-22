@@ -9,7 +9,8 @@
              d:DesignWidth="300"
              mc:Ignorable="d">
     <UserControl.Resources>
-        <DataTemplate x:Key="SomeDataTemplate" DataType="{x:Type local:TransitionItem}">
+        <DataTemplate x:Key="SomeDataTemplate"
+                      DataType="{x:Type local:TransitionItem}">
             <Border HorizontalAlignment="Stretch"
                     VerticalAlignment="Stretch"
                     Background="{Binding Brush}">
@@ -26,7 +27,8 @@
             <RowDefinition />
         </Grid.RowDefinitions>
 
-        <flipView:TransitionControl Content="{Binding SelectedItem, ElementName=ListBox}" ContentTemplate="{StaticResource SomeDataTemplate}" />
+        <flipView:TransitionControl Content="{Binding SelectedItem, ElementName=ListBox}"
+                                    ContentTemplate="{StaticResource SomeDataTemplate}" />
 
         <ListBox x:Name="ListBox"
                  Grid.Row="1"
@@ -36,7 +38,8 @@
                  ItemsSource="{Binding Items, RelativeSource={RelativeSource AncestorType={x:Type local:TransitionControlView}}}">
             <ListBox.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <UniformGrid Columns="{Binding Items.Count, RelativeSource={RelativeSource AncestorType={x:Type local:TransitionControlView}}}" Rows="1" />
+                    <UniformGrid Columns="{Binding Items.Count, RelativeSource={RelativeSource AncestorType={x:Type local:TransitionControlView}}}"
+                                 Rows="1" />
                 </ItemsPanelTemplate>
             </ListBox.ItemsPanel>
         </ListBox>

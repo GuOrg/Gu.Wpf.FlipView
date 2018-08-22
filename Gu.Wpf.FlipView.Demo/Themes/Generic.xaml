@@ -24,7 +24,8 @@
                                     <RowDefinition />
                                     <RowDefinition Height="Auto" />
                                 </Grid.RowDefinitions>
-                                <TreeView x:Name="ArgsBox" ItemsSource="{Binding Args, RelativeSource={RelativeSource AncestorType=misc:EventBox}}" />
+                                <TreeView x:Name="ArgsBox"
+                                          ItemsSource="{Binding Args, RelativeSource={RelativeSource AncestorType=misc:EventBox}}" />
                                 <Button Grid.Row="1"
                                         Height="30"
                                         Command="misc:EventBox.ClearCommand" />

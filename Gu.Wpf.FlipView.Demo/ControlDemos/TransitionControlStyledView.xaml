@@ -65,7 +65,8 @@
                  ItemsSource="{Binding Items, RelativeSource={RelativeSource AncestorType={x:Type controlDemos:TransitionControlStyledView}}}">
             <ListBox.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <UniformGrid Columns="{Binding Items.Count, RelativeSource={RelativeSource AncestorType={x:Type controlDemos:TransitionControlStyledView}}}" Rows="1" />
+                    <UniformGrid Columns="{Binding Items.Count, RelativeSource={RelativeSource AncestorType={x:Type controlDemos:TransitionControlStyledView}}}"
+                                 Rows="1" />
                 </ItemsPanelTemplate>
             </ListBox.ItemsPanel>
         </ListBox>

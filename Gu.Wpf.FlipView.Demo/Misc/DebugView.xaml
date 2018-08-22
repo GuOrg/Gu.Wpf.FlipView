@@ -6,8 +6,7 @@
              xmlns:misc="clr-namespace:Gu.Wpf.FlipView.Demo.Misc"
              d:DesignHeight="300"
              d:DesignWidth="300"
-             mc:Ignorable="d"
-             >
+             mc:Ignorable="d">
     <TabControl>
         <TabItem Header="InkCanvas">
             <Grid>
@@ -18,8 +17,7 @@
                 <InkCanvas Background="Gainsboro"
                            EditingMode="InkAndGesture"
                            Gesture="InkCanvas_OnGesture"
-                           MoveEnabled="True"
-                           >
+                           MoveEnabled="True">
                     <InkCanvas.DefaultDrawingAttributes>
                         <DrawingAttributes Color="Transparent" />
 
@@ -31,8 +29,7 @@
                         HorizontalAlignment="Left"
                         VerticalAlignment="Top"
                         Click="ButtonBase_OnClick"
-                        IsManipulationEnabled="False"
-                        >
+                        IsManipulationEnabled="False">
                     Clicker
                 </Button>
 
@@ -43,8 +40,7 @@
                     </Grid.RowDefinitions>
                     <ListBox x:Name="ArgsBox" />
                     <Button Grid.Row="1"
-                            Click="OnClear"
-                            >
+                            Click="OnClear">
                         Clear
                     </Button>
                 </Grid>
