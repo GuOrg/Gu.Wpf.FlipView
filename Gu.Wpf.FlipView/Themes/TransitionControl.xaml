@@ -4,7 +4,7 @@
                     xmlns:gu="clr-namespace:Gu.Wpf.FlipView">
     <Style TargetType="{x:Type gu:TransitionControl}">
         <Style.Resources>
-            <Style x:Key="ContentPresenterStyle"
+            <Style x:Key="TransitionControlDefaultContentPresenterStyle"
                    TargetType="{x:Type ContentPresenter}">
                 <Setter Property="RenderTransform">
                     <Setter.Value>
@@ -16,6 +16,7 @@
                         </TransformGroup>
                     </Setter.Value>
                 </Setter>
+
                 <Style.Triggers>
                     <Trigger Property="Content" Value="{x:Null}">
                         <Setter Property="Visibility" Value="Collapsed" />
@@ -24,8 +25,8 @@
             </Style>
         </Style.Resources>
         <Setter Property="ClipToBounds" Value="True" />
-        <Setter Property="OldContentStyle" Value="{StaticResource ContentPresenterStyle}" />
-        <Setter Property="NewContentStyle" Value="{StaticResource ContentPresenterStyle}" />
+        <Setter Property="OldContentStyle" Value="{StaticResource TransitionControlDefaultContentPresenterStyle}" />
+        <Setter Property="NewContentStyle" Value="{StaticResource TransitionControlDefaultContentPresenterStyle}" />
 
         <Setter Property="OutAnimation">
             <Setter.Value>
