@@ -7,7 +7,7 @@ namespace Gu.Wpf.FlipView.Demo
     {
         protected override void OnStartup(StartupEventArgs e)
         {
-            ////ObservableTraceListener.Initialize();
+            ObservableTraceListener.Initialize();
             if (e.Args.Length == 1)
             {
                 var window = e.Args[0];

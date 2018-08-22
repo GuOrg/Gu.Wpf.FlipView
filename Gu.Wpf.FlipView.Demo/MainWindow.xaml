@@ -49,10 +49,26 @@
             <TabItem Header="GesturePanelView (mouse and touch)">
                 <controlDemos:CompositeGesturePanelView />
             </TabItem>
+            <TabItem Header="Log">
+                <ListBox ItemsSource="{Binding Source={x:Static local:ObservableTraceListener.Instance}, Path=Messages}">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBox BorderThickness="0"
+                                     IsReadOnly="True"
+                                     Text="{Binding Mode=OneWay}" />
+                        </DataTemplate>
+
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </TabItem>
         </TabControl>
         <StatusBar Grid.Row="1">
             <StatusBarItem>
-                <TextBlock Text="{Binding Source={x:Static local:ObservableTraceListener.Instance}, Path=Messages.Count, StringFormat='Messages: {0}'}" />
+                <TextBlock Text="{Binding Source={x:Static local:ObservableTraceListener.Instance}, Path=Messages.Count, StringFormat='Messages: {0}'}">
+                    <TextBlock.ToolTip>
+                        <ItemsControl ItemsSource="{Binding Source={x:Static local:ObservableTraceListener.Instance}, Path=Messages}" />
+                    </TextBlock.ToolTip>
+                </TextBlock>
             </StatusBarItem>
         </StatusBar>
     </Grid>
