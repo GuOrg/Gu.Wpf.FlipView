@@ -12,8 +12,5 @@
   <ItemGroup>
     <ProjectReference Include="..\Gu.Wpf.FlipView.Demo\Gu.Wpf.FlipView.Demo.csproj" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Helpers\" />
-  </ItemGroup>
   <Import Project="..\.paket\Paket.Restore.targets" />
 </Project>

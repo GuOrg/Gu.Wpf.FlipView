@@ -96,6 +96,6 @@
     <Rule Id="WPF0083" Action="Warning" />
     <Rule Id="WPF0090" Action="Warning" />
     <Rule Id="WPF0091" Action="Warning" />
-    <Rule Id="WPF1011" Action="None" />
+    <Rule Id="WPF1011" Action="Warning" />
   </Rules>
 </RuleSet>
