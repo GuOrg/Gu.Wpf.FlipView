@@ -1,4 +1,4 @@
-﻿<Application x:Class="Gu.Wpf.FlipView.Demo.App"
+<Application x:Class="Gu.Wpf.FlipView.Demo.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:flipView="https://github.com/JohanLarsson/Gu.Wpf.FlipView"
