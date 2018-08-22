@@ -1,6 +1,6 @@
 ﻿type project
 tags xaml wpf flipview
-projectUrl https://github.com/JohanLarsson/Gu.Wpf.FlipView
+projectUrl https://github.com/GuOrg/Gu.Wpf.FlipView
 licenseUrl http://opensource.org/licenses/MIT
 
 releasenotes

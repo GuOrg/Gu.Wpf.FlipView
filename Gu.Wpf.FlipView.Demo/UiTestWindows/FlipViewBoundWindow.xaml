@@ -2,7 +2,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:demo="clr-namespace:Gu.Wpf.FlipView.Demo"
-        xmlns:flipView="https://github.com/JohanLarsson/Gu.Wpf.FlipView"
+        xmlns:flipView="https://github.com/GuOrg/Gu.Wpf.FlipView"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         Title="FlipViewBoundWindow"
         Width="300"

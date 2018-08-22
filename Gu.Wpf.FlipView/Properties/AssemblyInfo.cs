@@ -1,4 +1,4 @@
-﻿using System.Reflection;
+using System.Reflection;
 using System.Resources;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
@@ -24,3 +24,8 @@ using System.Windows.Markup;
 [assembly: XmlnsDefinition("https://github.com/JohanLarsson/Gu.Wpf.FlipView", "Gu.Wpf.FlipView.AttachedProperties")]
 [assembly: XmlnsDefinition("https://github.com/JohanLarsson/Gu.Wpf.FlipView", "Gu.Wpf.FlipView.Gestures")]
 [assembly: XmlnsPrefix("https://github.com/JohanLarsson/Gu.Wpf.FlipView", "flipView")]
+
+[assembly: XmlnsDefinition("https://github.com/GuOrg/Gu.Wpf.FlipView", "Gu.Wpf.FlipView")]
+[assembly: XmlnsDefinition("https://github.com/GuOrg/Gu.Wpf.FlipView", "Gu.Wpf.FlipView.AttachedProperties")]
+[assembly: XmlnsDefinition("https://github.com/GuOrg/Gu.Wpf.FlipView", "Gu.Wpf.FlipView.Gestures")]
+[assembly: XmlnsPrefix("https://github.com/GuOrg/Gu.Wpf.FlipView", "gu")]

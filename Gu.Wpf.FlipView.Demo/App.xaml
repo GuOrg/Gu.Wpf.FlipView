@@ -1,7 +1,7 @@
 <Application x:Class="Gu.Wpf.FlipView.Demo.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:flipView="https://github.com/JohanLarsson/Gu.Wpf.FlipView"
+             xmlns:flipView="https://github.com/GuOrg/Gu.Wpf.FlipView"
              xmlns:misc="clr-namespace:Gu.Wpf.FlipView.Demo.Misc">
     <Application.StartupUri>MainWindow.xaml</Application.StartupUri>
     <!--<Application.StartupUri>UiTestWindows/TransitionControlWindow.xaml</Application.StartupUri>-->
