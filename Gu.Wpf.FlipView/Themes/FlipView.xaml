@@ -331,9 +331,7 @@
                                                       ContentTemplate="{TemplateBinding ItemTemplate}"
                                                       ContentTemplateSelector="{TemplateBinding ItemTemplateSelector}"
                                                       InAnimation="{TemplateBinding CurrentOutAnimation}"
-                                                      OutAnimation="{TemplateBinding CurrentInAnimation}"
-                                                      RelativeOffsetX="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(a:Transform.RelativeOffsetX)}"
-                                                      RelativeOffsetY="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(a:Transform.RelativeOffsetY)}" />
+                                                      OutAnimation="{TemplateBinding CurrentInAnimation}" />
                             </gu:GesturePanel>
                         </Grid>
                     </Border>

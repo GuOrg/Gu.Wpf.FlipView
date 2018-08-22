@@ -60,14 +60,6 @@
                             BorderBrush="{TemplateBinding BorderBrush}"
                             BorderThickness="{TemplateBinding BorderThickness}">
                         <Grid Margin="{TemplateBinding Padding}">
-                            <Grid.RenderTransform>
-                                <TransformGroup>
-                                    <TranslateTransform X="{Binding OffsetX, RelativeSource={RelativeSource TemplatedParent}}"
-                                                        Y="{Binding OffsetY, RelativeSource={RelativeSource TemplatedParent}}" />
-                                    <ScaleTransform ScaleX="{Binding ScaleX, RelativeSource={RelativeSource TemplatedParent}}"
-                                                    ScaleY="{Binding ScaleY, RelativeSource={RelativeSource TemplatedParent}}" />
-                                </TransformGroup>
-                            </Grid.RenderTransform>
                             <ContentPresenter x:Name="PART_OldContent"
                                               Content="{TemplateBinding OldContent}"
                                               ContentStringFormat="{TemplateBinding ContentStringFormat}"
