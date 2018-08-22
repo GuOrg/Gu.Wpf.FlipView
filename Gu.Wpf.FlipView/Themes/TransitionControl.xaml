@@ -9,7 +9,8 @@
                 <Setter Property="RenderTransform">
                     <Setter.Value>
                         <TransformGroup>
-                            <TranslateTransform X="{Binding Path=(attached:Transform.OffsetX), RelativeSource={RelativeSource TemplatedParent}}" Y="{Binding Path=(attached:Transform.OffsetY), RelativeSource={RelativeSource TemplatedParent}}" />
+                            <TranslateTransform X="{Binding Path=(attached:Transform.OffsetX), RelativeSource={RelativeSource TemplatedParent}}"
+                                                Y="{Binding Path=(attached:Transform.OffsetY), RelativeSource={RelativeSource TemplatedParent}}" />
                             <ScaleTransform ScaleX="{Binding Path=(attached:Transform.ScaleX), RelativeSource={RelativeSource TemplatedParent}}"
                                             ScaleY="{Binding Path=(attached:Transform.ScaleY), RelativeSource={RelativeSource TemplatedParent}}" />
                         </TransformGroup>
