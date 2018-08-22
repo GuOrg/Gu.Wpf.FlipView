@@ -26,13 +26,13 @@
                         <gu:MouseGestureTracker>
                             <gu:MouseGestureTracker.Interpreter>
                                 <gu:DefaultGestureInterpreter MinSwipeLength="15"
-                                                                    MinSwipeVelocity="1" />
+                                                              MinSwipeVelocity="1" />
                             </gu:MouseGestureTracker.Interpreter>
                         </gu:MouseGestureTracker>
                         <gu:TouchGestureTracker>
                             <gu:TouchGestureTracker.Interpreter>
                                 <gu:DefaultGestureInterpreter MinSwipeLength="15"
-                                                                    MinSwipeVelocity="1" />
+                                                              MinSwipeVelocity="1" />
                             </gu:TouchGestureTracker.Interpreter>
                         </gu:TouchGestureTracker>
                     </gu:CompositeGestureTracker>

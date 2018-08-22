@@ -19,8 +19,8 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <gu:FlipView x:Name="FlipView"
-                               Grid.Column="1"
-                               SelectedIndex="1">
+                         Grid.Column="1"
+                         SelectedIndex="1">
                 <gu:FlipView.ArrowButtonStyle>
                     <Style TargetType="{x:Type RepeatButton}">
                         <Setter Property="FocusVisualStyle" Value="{x:Null}" />
