@@ -8,6 +8,13 @@
         Width="800"
         Height="450"
         mc:Ignorable="d">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/Gu.Wpf.FlipView;component/Themes/GesturePanel.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
     <Grid gu:GesturePanel.Gestured="OnGesture">
         <Grid.ColumnDefinitions>
             <ColumnDefinition />
@@ -21,16 +28,7 @@
         <GroupBox Grid.Column="1"
                   Header="Gesture panel">
             <Border Background="Lavender">
-                <gu:GesturePanel>
-                    <gu:GesturePanel.GestureTracker>
-                        <gu:MouseGestureTracker>
-                            <gu:MouseGestureTracker.Interpreter>
-                                <gu:DefaultGestureInterpreter MaxDeviationFromHorizontal="30"
-                                                              MinSwipeLength="15"
-                                                              MinSwipeVelocity="1" />
-                            </gu:MouseGestureTracker.Interpreter>
-                        </gu:MouseGestureTracker>
-                    </gu:GesturePanel.GestureTracker>
+                <gu:GesturePanel GestureTracker="{StaticResource {x:Static gu:MouseGestureTracker.ResourceKey}}">
                     <Canvas Background="Transparent">
                         <Rectangle x:Name="Rectangle"
                                    Canvas.Left="50"
