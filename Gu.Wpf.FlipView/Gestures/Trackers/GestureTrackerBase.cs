@@ -98,7 +98,7 @@ namespace Gu.Wpf.FlipView.Gestures
             if (this.Gestured != null &&
                 this.Interpreter != null)
             {
-                if (this.Interpreter.TryGetGesture(eventArgs, out GestureEventArgs gesture))
+                if (this.Interpreter.TryGetGesture(eventArgs, out var gesture))
                 {
                     this.OnGestured(gesture);
                 }
@@ -113,7 +113,7 @@ namespace Gu.Wpf.FlipView.Gestures
         protected virtual void OnStart(object sender, TArgs e)
         {
             this.points.Clear();
-            if (this.TryGetPoint(e, out GesturePoint point))
+            if (this.TryGetPoint(e, out var point))
             {
                 this.points.Add(point);
                 this.IsGesturing = true;
