@@ -24,6 +24,7 @@
                                           ItemsSource="{Binding Args, RelativeSource={RelativeSource AncestorType=misc:EventBox}}" />
                                 <Button Grid.Row="1"
                                         Height="30"
+                                        Content="Clear"
                                         Command="misc:EventBox.ClearCommand" />
                             </Grid>
                         </Grid>

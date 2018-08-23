@@ -9,5 +9,17 @@
         Width="800"
         Height="450"
         mc:Ignorable="d">
-    <misc:DebugView />
+    <TabControl>
+        <TabItem Header="Mouse">
+            <misc:MouseBox />
+        </TabItem>
+
+        <TabItem Header="Touch">
+            <misc:TouchBox />
+        </TabItem>
+
+        <TabItem Header="Manipulations">
+            <misc:ManipulationBox />
+        </TabItem>
+    </TabControl>
 </Window>
