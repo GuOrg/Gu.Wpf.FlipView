@@ -34,15 +34,5 @@
 
     <Style TargetType="{x:Type gu:GesturePanel}">
         <Setter Property="GestureTracker" Value="{StaticResource {x:Static gestures:CompositeGestureTracker.MouseAndTouchResourceKey}}" />
-        <Setter Property="Background" Value="Transparent" />
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="{x:Type gu:GesturePanel}">
-                    <Border Background="{TemplateBinding Background}">
-                        <ContentPresenter />
-                    </Border>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
     </Style>
 </ResourceDictionary>

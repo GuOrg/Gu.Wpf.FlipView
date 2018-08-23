@@ -21,6 +21,7 @@
         <GroupBox Grid.Column="1"
                   Header="Gesture panel">
             <Border Background="Lavender">
+                <!--  ReSharper disable once Xaml.StaticResourceNotResolved  -->
                 <gu:GesturePanel GestureTracker="{StaticResource {x:Static gu:MouseGestureTracker.ResourceKey}}">
                     <Canvas Background="Transparent">
                         <Rectangle x:Name="Rectangle"

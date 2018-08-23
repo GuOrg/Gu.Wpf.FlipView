@@ -3,14 +3,14 @@ namespace Gu.Wpf.FlipView
     using System.ComponentModel;
     using System.Windows;
     using System.Windows.Controls;
-
+    using System.Windows.Media;
     using Gu.Wpf.FlipView.Gestures;
 
     /// <summary>
     /// A panel that interprets user input like mouse and touch and detects gestures.
     /// </summary>
     [DefaultEvent("Gestured")]
-    public class GesturePanel : ContentControl
+    public class GesturePanel : Decorator
     {
         /// <summary>Identifies the <see cref="GesturedEvent"/> routed event.</summary>
         public static readonly RoutedEvent GesturedEvent = EventManager.RegisterRoutedEvent(
@@ -27,6 +27,15 @@ namespace Gu.Wpf.FlipView
             new PropertyMetadata(
                 null,
                 OnGestureTrackerChanged));
+
+        /// <summary>
+        /// DependencyProperty for <see cref="Background" /> property.
+        /// </summary>
+        public static readonly DependencyProperty BackgroundProperty = Panel.BackgroundProperty.AddOwner(
+            typeof(GesturePanel),
+            new FrameworkPropertyMetadata(
+                Brushes.Transparent,
+                FrameworkPropertyMetadataOptions.AffectsRender | FrameworkPropertyMetadataOptions.SubPropertiesDoNotAffectRender));
 
         static GesturePanel()
         {
@@ -57,6 +66,26 @@ namespace Gu.Wpf.FlipView
         {
             get => (IGestureTracker)this.GetValue(GestureTrackerProperty);
             set => this.SetValue(GestureTrackerProperty, value);
+        }
+
+        /// <summary>
+        /// Gets or sets the the brush used to fill the area within the panel.
+        /// </summary>
+        public Brush Background
+        {
+            get => (Brush)this.GetValue(BackgroundProperty);
+            set => this.SetValue(BackgroundProperty, value);
+        }
+
+        /// <summary>
+        /// In addition to the child, Border renders a background + border.  The background is drawn inside the border.
+        /// </summary>
+        protected override void OnRender(DrawingContext dc)
+        {
+            if (this.Background is Brush background)
+            {
+                dc.DrawRectangle(background, null, new Rect(this.RenderSize));
+            }
         }
 
         /// <summary>This method is invoked when the <see cref="GestureTrackerProperty"/> changes.</summary>
