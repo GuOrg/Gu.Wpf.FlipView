@@ -8,7 +8,7 @@ namespace Gu.Wpf.FlipView.Demo
     {
         public static readonly ObservableTraceListener Instance = new ObservableTraceListener();
 
-        private readonly StringBuilder StringBuilder = new StringBuilder();
+        private readonly StringBuilder messageBuilder = new StringBuilder();
 
         private ObservableTraceListener()
         {
@@ -40,14 +40,14 @@ namespace Gu.Wpf.FlipView.Demo
 
         public override void Write(string message)
         {
-            this.StringBuilder.Append(message);
+            this.messageBuilder.Append(message);
         }
 
         public override void WriteLine(string message)
         {
-            this.StringBuilder.Append(message);
-            this.Messages.Add(this.StringBuilder.ToString());
-            this.StringBuilder.Clear();
+            this.messageBuilder.Append(message);
+            this.Messages.Add(this.messageBuilder.ToString());
+            this.messageBuilder.Clear();
         }
     }
 }
