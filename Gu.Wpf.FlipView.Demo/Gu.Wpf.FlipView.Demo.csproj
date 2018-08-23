@@ -120,6 +120,9 @@
     <Compile Include="UiTestWindows\DefaultGesturePanelWindow.xaml.cs">
       <DependentUpon>DefaultGesturePanelWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UiTestWindows\EventsWindow.xaml.cs">
+      <DependentUpon>EventsWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UiTestWindows\MouseAndTouchGesturePanelWindow.xaml.cs">
       <DependentUpon>MouseAndTouchGesturePanelWindow.xaml</DependentUpon>
     </Compile>
@@ -207,6 +210,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UiTestWindows\DefaultGesturePanelWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UiTestWindows\EventsWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
