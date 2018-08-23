@@ -117,6 +117,9 @@
       <DependentUpon>TransitionControlStyledView.xaml</DependentUpon>
     </Compile>
     <Compile Include="ControlDemos\TransitionItem.cs" />
+    <Compile Include="UiTestWindows\MouseGesturePanelWindow.xaml.cs">
+      <DependentUpon>MouseGesturePanelWindow.xaml</DependentUpon>
+    </Compile>
     <Page Include="ControlDemos\CompositeGesturePanelView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -200,6 +203,10 @@
     <Page Include="UiTestWindows\FlipViewBoundWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UiTestWindows\MouseGesturePanelWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UiTestWindows\TransitionControlWindow.xaml">
       <Generator>MSBuild:Compile</Generator>

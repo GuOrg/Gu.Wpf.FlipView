@@ -19,7 +19,7 @@
         </gestures:TouchGestureTracker.Interpreter>
     </gestures:TouchGestureTracker>
 
-    <gestures:CompositeGestureTracker x:Key="CompositeGestureTracker"
+    <gestures:CompositeGestureTracker x:Key="MouseAndTouchGestureTracker"
                                       x:Shared="False">
         <gestures:MouseGestureTracker>
             <gestures:MouseGestureTracker.Interpreter>
@@ -37,7 +37,7 @@
     </gestures:CompositeGestureTracker>
 
     <Style TargetType="{x:Type gu:GesturePanel}">
-        <Setter Property="GestureTracker" Value="{StaticResource CompositeGestureTracker}" />
+        <Setter Property="GestureTracker" Value="{StaticResource MouseAndTouchGestureTracker}" />
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="Template">
             <Setter.Value>
