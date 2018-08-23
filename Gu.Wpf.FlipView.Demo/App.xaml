@@ -7,6 +7,8 @@
     <!--<Application.StartupUri>UiTestWindows/TransitionControlWindow.xaml</Application.StartupUri>-->
     <!--<Application.StartupUri>UiTestWindows/FlipViewWindow.xaml</Application.StartupUri>-->
     <!--<Application.StartupUri>UiTestWindows/FlipViewBoundWindow.xaml</Application.StartupUri>-->
+    <!--<Application.StartupUri>UiTestWindows/MouseGesturePanelWindow.xaml</Application.StartupUri>-->
+    <!--<Application.StartupUri>UiTestWindows/DefaultGesturePanelWindow.xaml</Application.StartupUri>-->
     <Application.Resources>
         <Style TargetType="{x:Type TextBlock}">
             <Setter Property="VerticalAlignment" Value="Center" />

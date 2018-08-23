@@ -8,7 +8,7 @@
         Width="800"
         Height="450"
         mc:Ignorable="d">
-    <Grid gu:GesturePanel.Gestured="GesturePanel_OnGestured">
+    <Grid gu:GesturePanel.Gestured="OnGesture">
         <Grid.ColumnDefinitions>
             <ColumnDefinition />
             <ColumnDefinition />
@@ -41,7 +41,6 @@
                     </Canvas>
                 </gu:GesturePanel>
             </Border>
-
         </GroupBox>
     </Grid>
 </Window>
