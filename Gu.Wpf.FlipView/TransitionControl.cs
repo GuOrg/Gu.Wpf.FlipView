@@ -16,7 +16,6 @@ namespace Gu.Wpf.FlipView
     [StyleTypedProperty(Property = nameof(OldContentStyle), StyleTargetType = typeof(ContentPresenter))]
     public class TransitionControl : ContentControl
     {
-#pragma warning disable SA1600 // Elements must be documented
 #pragma warning disable SA1202 // Elements must be ordered by access
 
         public const string PartOldContent = "PART_OldContent";
@@ -72,7 +71,6 @@ namespace Gu.Wpf.FlipView
         /// <summary>Identifies the <see cref="OldContent"/> dependency property.</summary>
         public static readonly DependencyProperty OldContentProperty = OldContentPropertyKey.DependencyProperty;
 #pragma warning restore SA1202 // Elements must be ordered by access
-#pragma warning restore SA1600 // Elements must be documented
 
         private readonly DispatcherTimer timer;
         private readonly RoutedEventArgs contentChangedEventArgs;

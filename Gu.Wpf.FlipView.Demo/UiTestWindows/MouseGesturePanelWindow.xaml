@@ -19,27 +19,29 @@
         </GroupBox>
 
         <GroupBox Grid.Column="1"
-                  Background="Lavender"
                   Header="Gesture panel">
-            <gu:GesturePanel>
-                <gu:GesturePanel.GestureTracker>
-                    <gu:MouseGestureTracker>
-                        <gu:MouseGestureTracker.Interpreter>
-                            <gu:DefaultGestureInterpreter MaxDeviationFromHorizontal="30"
-                                                          MinSwipeLength="15"
-                                                          MinSwipeVelocity="1" />
-                        </gu:MouseGestureTracker.Interpreter>
-                    </gu:MouseGestureTracker>
-                </gu:GesturePanel.GestureTracker>
-                <Canvas Background="Transparent">
-                    <Rectangle x:Name="Rectangle"
-                               Canvas.Left="50"
-                               Canvas.Top="50"
-                               Width="100"
-                               Height="100"
-                               Fill="Red" />
-                </Canvas>
-            </gu:GesturePanel>
+            <Border Background="Lavender">
+                <gu:GesturePanel>
+                    <gu:GesturePanel.GestureTracker>
+                        <gu:MouseGestureTracker>
+                            <gu:MouseGestureTracker.Interpreter>
+                                <gu:DefaultGestureInterpreter MaxDeviationFromHorizontal="30"
+                                                              MinSwipeLength="15"
+                                                              MinSwipeVelocity="1" />
+                            </gu:MouseGestureTracker.Interpreter>
+                        </gu:MouseGestureTracker>
+                    </gu:GesturePanel.GestureTracker>
+                    <Canvas Background="Transparent">
+                        <Rectangle x:Name="Rectangle"
+                                   Canvas.Left="50"
+                                   Canvas.Top="50"
+                                   Width="100"
+                                   Height="100"
+                                   Fill="Red" />
+                    </Canvas>
+                </gu:GesturePanel>
+            </Border>
+
         </GroupBox>
     </Grid>
 </Window>

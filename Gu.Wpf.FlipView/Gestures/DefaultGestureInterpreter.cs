@@ -1,4 +1,4 @@
-﻿namespace Gu.Wpf.FlipView.Gestures
+namespace Gu.Wpf.FlipView.Gestures
 {
     using System;
     using System.Collections.Generic;
@@ -10,7 +10,6 @@
     /// </summary>
     public class DefaultGestureInterpreter : Freezable, IGestureInterpreter
     {
-#pragma warning disable SA1600 // Elements must be documented
         /// <summary>Identifies the <see cref="MinSwipeVelocity"/> dependency property.</summary>
         public static readonly DependencyProperty MinSwipeVelocityProperty = DependencyProperty.Register(
             nameof(MinSwipeVelocity),
@@ -31,7 +30,6 @@
             typeof(double),
             typeof(DefaultGestureInterpreter),
             new PropertyMetadata(30.0));
-#pragma warning restore SA1600 // Elements must be documented
 
         /// <summary>
         /// Gets or sets the minimum velocity for a gesture to be considered a swipe.

@@ -12,8 +12,6 @@ namespace Gu.Wpf.FlipView
     [DefaultEvent("Gestured")]
     public class GesturePanel : ContentControl
     {
-#pragma warning disable SA1600 // Elements must be documented
-
         /// <summary>Identifies the <see cref="GesturedEvent"/> routed event.</summary>
         public static readonly RoutedEvent GesturedEvent = EventManager.RegisterRoutedEvent(
             nameof(Gestured),
@@ -29,7 +27,6 @@ namespace Gu.Wpf.FlipView
             new PropertyMetadata(
                 null,
                 OnGestureTrackerChanged));
-#pragma warning restore SA1600 // Elements must be documented
 
         static GesturePanel()
         {

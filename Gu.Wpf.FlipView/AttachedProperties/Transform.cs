@@ -1,4 +1,3 @@
-#pragma warning disable SA1600 // Elements must be documented
 namespace Gu.Wpf.FlipView.AttachedProperties
 {
     using System.Windows;

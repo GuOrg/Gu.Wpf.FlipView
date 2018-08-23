@@ -15,7 +15,6 @@ namespace Gu.Wpf.FlipView
     public class FlipView : Selector
     {
 #pragma warning disable SA1202 // Elements must be ordered by access
-#pragma warning disable SA1600 // Elements must be documented
         /// <summary>Identifies the <see cref="IncreaseInAnimation"/> dependency property.</summary>
         public static readonly DependencyProperty IncreaseInAnimationProperty = DependencyProperty.Register(
             nameof(IncreaseInAnimation),
@@ -104,7 +103,6 @@ namespace Gu.Wpf.FlipView
             typeof(FlipView),
             new FrameworkPropertyMetadata(default(Style), FrameworkPropertyMetadataOptions.AffectsMeasure | FrameworkPropertyMetadataOptions.AffectsArrange));
 #pragma warning restore SA1202 // Elements must be ordered by access
-#pragma warning restore SA1600 // Elements must be documented
 
         static FlipView()
         {
