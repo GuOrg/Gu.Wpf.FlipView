@@ -214,7 +214,7 @@
     <Compile Include="MocksAndHelpers\ManipulationStringer.cs" />
     <Compile Include="MocksAndHelpers\RelayCommand.cs" />
     <Compile Include="ObservableTraceListener.cs" />
-    <Compile Include="Properties\AssemblyInfo.generated.cs">
+    <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
     <AppDesigner Include="Properties\" />
