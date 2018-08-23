@@ -9,10 +9,12 @@ namespace Gu.Wpf.FlipView.UiTests
 
     public class MouseGesturePanelWindowTests
     {
+        private const string WindowName = "MouseGesturePanelWindow";
+
         [Test]
         public void Swipes()
         {
-            using (var app = Application.Launch("Gu.Wpf.FlipView.Demo.exe", "MouseGesturePanelWindow"))
+            using (var app = Application.Launch("Gu.Wpf.FlipView.Demo.exe", WindowName))
             {
                 var window = app.MainWindow;
                 var gesturePanel = window.FindGroupBox("Gesture panel");
@@ -35,7 +37,7 @@ namespace Gu.Wpf.FlipView.UiTests
         [Test]
         public void NoSwipesWhenTooShort()
         {
-            using (var app = Application.Launch("Gu.Wpf.FlipView.Demo.exe", "MouseGesturePanelWindow"))
+            using (var app = Application.Launch("Gu.Wpf.FlipView.Demo.exe", WindowName))
             {
                 var window = app.MainWindow;
                 var gesturePanel = window.FindGroupBox("Gesture panel");
@@ -55,7 +57,7 @@ namespace Gu.Wpf.FlipView.UiTests
         [Test]
         public void NoSwipesWhenTooSlow()
         {
-            using (var app = Application.Launch("Gu.Wpf.FlipView.Demo.exe", "MouseGesturePanelWindow"))
+            using (var app = Application.Launch("Gu.Wpf.FlipView.Demo.exe", WindowName))
             {
                 var window = app.MainWindow;
                 var gesturePanel = window.FindGroupBox("Gesture panel");
