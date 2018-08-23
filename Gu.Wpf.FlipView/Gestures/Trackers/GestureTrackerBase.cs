@@ -12,7 +12,6 @@ namespace Gu.Wpf.FlipView.Gestures
     /// <typeparam name="TArgs">The type of the event args.</typeparam>
     public abstract class GestureTrackerBase<TArgs> : Freezable, IGestureTracker
     {
-#pragma warning disable SA1600 // Elements must be documented
 #pragma warning disable SA1202 // Elements must be ordered by access
 
         private static readonly DependencyPropertyKey IsGesturingPropertyKey = DependencyProperty.RegisterReadOnly(
@@ -38,7 +37,6 @@ namespace Gu.Wpf.FlipView.Gestures
             typeof(GestureTrackerBase<TArgs>),
             new PropertyMetadata(default(UIElement), OnInputElementChanged));
 
-#pragma warning restore SA1600 // Elements must be documented
 #pragma warning restore SA1202 // Elements must be ordered by access
 
         private readonly List<GesturePoint> points = new List<GesturePoint>();
@@ -129,7 +127,7 @@ namespace Gu.Wpf.FlipView.Gestures
         /// <param name="e">The event argument.</param>
         protected virtual void OnMove(object sender, TArgs e)
         {
-            if (this.TryGetPoint(e, out GesturePoint point))
+            if (this.TryGetPoint(e, out var point))
             {
                 this.points.Add(point);
             }
@@ -144,7 +142,7 @@ namespace Gu.Wpf.FlipView.Gestures
         {
             if (this.IsGesturing)
             {
-                if (this.TryGetPoint(e, out GesturePoint point))
+                if (this.TryGetPoint(e, out var point))
                 {
                     this.points.Add(point);
                 }
