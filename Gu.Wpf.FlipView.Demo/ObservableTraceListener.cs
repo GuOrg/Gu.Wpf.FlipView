@@ -2,14 +2,16 @@ namespace Gu.Wpf.FlipView.Demo
 {
     using System.Collections.ObjectModel;
     using System.Diagnostics;
+    using System.Text;
 
     public class ObservableTraceListener : System.Diagnostics.TraceListener
     {
         public static readonly ObservableTraceListener Instance = new ObservableTraceListener();
 
+        private readonly StringBuilder StringBuilder = new StringBuilder();
+
         private ObservableTraceListener()
         {
-            PresentationTraceSources.Refresh();
             Register(PresentationTraceSources.AnimationSource);
             Register(PresentationTraceSources.DataBindingSource);
             Register(PresentationTraceSources.DocumentsSource);
@@ -38,11 +40,14 @@ namespace Gu.Wpf.FlipView.Demo
 
         public override void Write(string message)
         {
+            this.StringBuilder.Append(message);
         }
 
         public override void WriteLine(string message)
         {
-            this.Messages.Add(message);
+            this.StringBuilder.Append(message);
+            this.Messages.Add(this.StringBuilder.ToString());
+            this.StringBuilder.Clear();
         }
     }
 }
