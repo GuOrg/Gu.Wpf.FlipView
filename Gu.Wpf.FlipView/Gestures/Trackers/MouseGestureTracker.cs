@@ -8,6 +8,11 @@ namespace Gu.Wpf.FlipView.Gestures
     /// </summary>
     public class MouseGestureTracker : GestureTrackerBase<MouseEventArgs>
     {
+        /// <summary>
+        /// The key for the default resource.
+        /// </summary>
+        public static readonly ComponentResourceKey ResourceKey = new ComponentResourceKey(typeof(MouseGestureTracker), typeof(MouseGestureTracker));
+
         private readonly SubscribeInfos subscribers;
 
         /// <summary>

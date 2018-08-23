@@ -3,7 +3,7 @@
                     xmlns:gestures="clr-namespace:Gu.Wpf.FlipView.Gestures"
                     xmlns:gu="clr-namespace:Gu.Wpf.FlipView">
 
-    <gestures:MouseGestureTracker x:Key="MouseGestureTracker"
+    <gestures:MouseGestureTracker x:Key="{x:Static gestures:MouseGestureTracker.ResourceKey}"
                                   x:Shared="False">
         <gestures:MouseGestureTracker.Interpreter>
             <gestures:DefaultGestureInterpreter MinSwipeLength="40"
@@ -11,7 +11,7 @@
         </gestures:MouseGestureTracker.Interpreter>
     </gestures:MouseGestureTracker>
 
-    <gestures:TouchGestureTracker x:Key="TouchGestureTracker"
+    <gestures:TouchGestureTracker x:Key="{x:Static gestures:TouchGestureTracker.ResourceKey}"
                                   x:Shared="False">
         <gestures:TouchGestureTracker.Interpreter>
             <gestures:DefaultGestureInterpreter MinSwipeLength="50"
@@ -19,7 +19,7 @@
         </gestures:TouchGestureTracker.Interpreter>
     </gestures:TouchGestureTracker>
 
-    <gestures:CompositeGestureTracker x:Key="MouseAndTouchGestureTracker"
+    <gestures:CompositeGestureTracker x:Key="{x:Static gestures:CompositeGestureTracker.MouseAndTouchResourceKey}"
                                       x:Shared="False">
         <gestures:MouseGestureTracker>
             <gestures:MouseGestureTracker.Interpreter>
@@ -37,7 +37,7 @@
     </gestures:CompositeGestureTracker>
 
     <Style TargetType="{x:Type gu:GesturePanel}">
-        <Setter Property="GestureTracker" Value="{StaticResource MouseAndTouchGestureTracker}" />
+        <Setter Property="GestureTracker" Value="{StaticResource {x:Static gestures:CompositeGestureTracker.MouseAndTouchResourceKey}}" />
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="Template">
             <Setter.Value>

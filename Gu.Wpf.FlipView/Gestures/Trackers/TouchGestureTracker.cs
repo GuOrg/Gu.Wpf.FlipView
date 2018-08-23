@@ -9,6 +9,11 @@ namespace Gu.Wpf.FlipView.Gestures
     /// </summary>
     public class TouchGestureTracker : GestureTrackerBase<TouchEventArgs>
     {
+        /// <summary>
+        /// The key for the default resource.
+        /// </summary>
+        public static readonly ComponentResourceKey ResourceKey = new ComponentResourceKey(typeof(TouchGestureTracker), typeof(TouchGestureTracker));
+
         private readonly SubscribeInfos subscribers;
 
         /// <summary>

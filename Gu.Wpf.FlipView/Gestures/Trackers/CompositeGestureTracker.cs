@@ -10,6 +10,11 @@ namespace Gu.Wpf.FlipView.Gestures
     /// </summary>
     public class CompositeGestureTracker : Collection<IGestureTracker>, IGestureTracker
     {
+        /// <summary>
+        /// The key for the default resource.
+        /// </summary>
+        public static readonly ComponentResourceKey MouseAndTouchResourceKey = new ComponentResourceKey(typeof(CompositeGestureTracker), typeof(CompositeGestureTracker));
+
         private UIElement inputElement;
 
         /// <inheritdoc />
