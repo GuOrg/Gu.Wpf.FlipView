@@ -120,6 +120,9 @@
     <Compile Include="UiTestWindows\DefaultGesturePanelWindow.xaml.cs">
       <DependentUpon>DefaultGesturePanelWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UiTestWindows\MouseAndTouchGesturePanelWindow.xaml.cs">
+      <DependentUpon>MouseAndTouchGesturePanelWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UiTestWindows\MouseGesturePanelWindow.xaml.cs">
       <DependentUpon>MouseGesturePanelWindow.xaml</DependentUpon>
     </Compile>
@@ -210,6 +213,10 @@
     <Page Include="UiTestWindows\FlipViewBoundWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UiTestWindows\MouseAndTouchGesturePanelWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UiTestWindows\MouseGesturePanelWindow.xaml">
       <SubType>Designer</SubType>
