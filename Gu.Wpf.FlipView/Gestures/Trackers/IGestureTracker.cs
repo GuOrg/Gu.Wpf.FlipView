@@ -1,12 +1,13 @@
 namespace Gu.Wpf.FlipView.Gestures
 {
     using System;
+    using System.ComponentModel;
     using System.Windows;
 
     /// <summary>
     /// Listens to events in <see cref="InputElement"/> and detects gestures.
     /// </summary>
-    public interface IGestureTracker
+    public interface IGestureTracker : INotifyPropertyChanged
     {
         /// <summary>
         /// Notifies when a gesture is detected.

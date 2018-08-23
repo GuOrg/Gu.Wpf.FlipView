@@ -8,13 +8,6 @@
         Width="800"
         Height="450"
         mc:Ignorable="d">
-    <Window.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="pack://application:,,,/Gu.Wpf.FlipView;component/Themes/GesturePanel.xaml" />
-            </ResourceDictionary.MergedDictionaries>
-        </ResourceDictionary>
-    </Window.Resources>
     <Grid gu:GesturePanel.Gestured="OnGesture">
         <Grid.ColumnDefinitions>
             <ColumnDefinition />

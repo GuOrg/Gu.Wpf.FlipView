@@ -85,7 +85,7 @@
     <Compile Include="Gestures\Trackers\CompositeGestureTracker.cs" />
     <Compile Include="Gestures\Trackers\SubscribeInfo.cs" />
     <Compile Include="Gestures\EventArgs\GestureEventArgs.cs" />
-    <Compile Include="Gestures\Trackers\GestureTrackerBase.cs" />
+    <Compile Include="Gestures\Trackers\AbstractGestureTracker.cs" />
     <Compile Include="Gestures\DefaultGestureInterpreter.cs" />
     <Compile Include="Gestures\IGestureInterpreter.cs" />
     <Compile Include="Gestures\Trackers\IGestureTracker.cs" />

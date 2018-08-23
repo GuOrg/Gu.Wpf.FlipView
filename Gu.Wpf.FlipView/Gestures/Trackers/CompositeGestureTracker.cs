@@ -2,7 +2,9 @@ namespace Gu.Wpf.FlipView.Gestures
 {
     using System;
     using System.Collections.ObjectModel;
+    using System.ComponentModel;
     using System.Linq;
+    using System.Runtime.CompilerServices;
     using System.Windows;
 
     /// <summary>
@@ -19,6 +21,9 @@ namespace Gu.Wpf.FlipView.Gestures
 
         /// <inheritdoc />
         public event EventHandler<GestureEventArgs> Gestured;
+
+        /// <inheritdoc />
+        public event PropertyChangedEventHandler PropertyChanged;
 
         /// <summary>
         /// Gets returns a new instance of <see cref="MouseGestureTracker"/> with default settings.
@@ -46,6 +51,8 @@ namespace Gu.Wpf.FlipView.Gestures
                 {
                     tracker.InputElement = value;
                 }
+
+                this.OnPropertyChanged();
             }
         }
 
@@ -90,6 +97,13 @@ namespace Gu.Wpf.FlipView.Gestures
             item.InputElement = this.inputElement;
             item.Gestured += this.OnGestured;
             base.SetItem(index, item);
+        }
+
+        /// <summary>Raises the <see cref="PropertyChanged"/> event.</summary>
+        /// <param name="propertyName">The name of the property to notify for. String.Empty or null signals to WPF that all properties have changed.</param>
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
         private void OnGestured(object sender, GestureEventArgs e)

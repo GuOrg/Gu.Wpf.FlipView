@@ -7,7 +7,7 @@ namespace Gu.Wpf.FlipView.Gestures
     /// <summary>
     /// A gesture tracker for mouse.
     /// </summary>
-    public class TouchGestureTracker : GestureTrackerBase<TouchEventArgs>
+    public class TouchGestureTracker : AbstractGestureTracker<TouchEventArgs>
     {
         /// <summary>
         /// The key for the default resource.
@@ -37,12 +37,6 @@ namespace Gu.Wpf.FlipView.Gestures
         {
             Interpreter = DefaultGestureInterpreter.Touch
         };
-
-        /// <inheritdoc />
-        protected override Freezable CreateInstanceCore()
-        {
-            return new TouchGestureTracker();
-        }
 
         /// <inheritdoc />
         protected override bool TryGetPoint(TouchEventArgs args, out GesturePoint point)

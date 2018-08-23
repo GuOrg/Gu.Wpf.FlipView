@@ -3,6 +3,8 @@ namespace Gu.Wpf.FlipView.Gestures
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.Runtime.CompilerServices;
     using System.Windows;
     using System.Windows.Input;
 
@@ -10,56 +12,44 @@ namespace Gu.Wpf.FlipView.Gestures
     /// A base class for <see cref="IGestureTracker"/>
     /// </summary>
     /// <typeparam name="TArgs">The type of the event args.</typeparam>
-    public abstract class GestureTrackerBase<TArgs> : Freezable, IGestureTracker
+    public abstract class AbstractGestureTracker<TArgs> : IGestureTracker
     {
-#pragma warning disable SA1202 // Elements must be ordered by access
-
-        private static readonly DependencyPropertyKey IsGesturingPropertyKey = DependencyProperty.RegisterReadOnly(
-            nameof(IsGesturing),
-            typeof(bool),
-            typeof(GestureTrackerBase<TArgs>),
-            new PropertyMetadata(default(bool)));
-
-        /// <summary>Identifies the <see cref="IsGesturing"/> dependency property.</summary>
-        public static readonly DependencyProperty IsGesturingProperty = IsGesturingPropertyKey.DependencyProperty;
-
-        /// <summary>Identifies the <see cref="Interpreter"/> dependency property.</summary>
-        public static readonly DependencyProperty InterpreterProperty = DependencyProperty.Register(
-            nameof(Interpreter),
-            typeof(IGestureInterpreter),
-            typeof(GestureTrackerBase<TArgs>),
-            new PropertyMetadata(default(IGestureInterpreter)));
-
-        /// <summary>Identifies the <see cref="InputElement"/> dependency property.</summary>
-        public static readonly DependencyProperty InputElementProperty = DependencyProperty.Register(
-            nameof(InputElement),
-            typeof(UIElement),
-            typeof(GestureTrackerBase<TArgs>),
-            new PropertyMetadata(default(UIElement), OnInputElementChanged));
-
-#pragma warning restore SA1202 // Elements must be ordered by access
-
         private readonly List<GesturePoint> points = new List<GesturePoint>();
+        private bool isGesturing;
+        private IGestureInterpreter interpreter;
+        private UIElement inputElement;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="GestureTrackerBase{TArgs}"/> class.
+        /// Initializes a new instance of the <see cref="AbstractGestureTracker{TArgs}"/> class.
         /// </summary>
         /// <param name="interpreter">The interpreter to use. If null <see cref="DefaultGestureInterpreter"/> is used.</param>
-        protected GestureTrackerBase(IGestureInterpreter interpreter = null)
+        protected AbstractGestureTracker(IGestureInterpreter interpreter = null)
         {
-            this.Interpreter = interpreter ?? new DefaultGestureInterpreter();
+            this.interpreter = interpreter ?? new DefaultGestureInterpreter();
         }
 
         /// <inheritdoc />
         public event EventHandler<GestureEventArgs> Gestured;
+
+        /// <inheritdoc />
+        public event PropertyChangedEventHandler PropertyChanged;
 
         /// <summary>
         /// Gets or sets a value indicating whether gets a value indicating if a potential gesture is started.
         /// </summary>
         public bool IsGesturing
         {
-            get => (bool)this.GetValue(IsGesturingProperty);
-            protected set => this.SetValue(IsGesturingPropertyKey, value);
+            get => this.isGesturing;
+            protected set
+            {
+                if (value == this.isGesturing)
+                {
+                    return;
+                }
+
+                this.isGesturing = value;
+                this.OnPropertyChanged();
+            }
         }
 
         /// <summary>
@@ -67,8 +57,17 @@ namespace Gu.Wpf.FlipView.Gestures
         /// </summary>
         public IGestureInterpreter Interpreter
         {
-            get => (IGestureInterpreter)this.GetValue(InterpreterProperty);
-            set => this.SetValue(InterpreterProperty, value);
+            get => this.interpreter;
+            set
+            {
+                if (ReferenceEquals(value, this.interpreter))
+                {
+                    return;
+                }
+
+                this.interpreter = value;
+                this.OnPropertyChanged();
+            }
         }
 
         /// <summary>
@@ -76,8 +75,19 @@ namespace Gu.Wpf.FlipView.Gestures
         /// </summary>
         public UIElement InputElement
         {
-            get => (UIElement)this.GetValue(InputElementProperty);
-            set => this.SetValue(InputElementProperty, value);
+            get => this.inputElement;
+            set
+            {
+                if (ReferenceEquals(value, this.inputElement))
+                {
+                    return;
+                }
+
+                var old = value;
+                this.inputElement = value;
+                this.OnPropertyChanged();
+                this.OnInputElementChanged(old, value);
+            }
         }
 
         /// <summary>
@@ -170,20 +180,16 @@ namespace Gu.Wpf.FlipView.Gestures
         /// <returns>True if a point could be created.</returns>
         protected abstract bool TryGetPoint(TArgs args, out GesturePoint point);
 
-        /// <summary>This method is invoked when the <see cref="InputElementProperty"/> changes.</summary>
-        /// <param name="oldElement">The old value of <see cref="InputElementProperty"/>.</param>
-        /// <param name="newElement">The new value of <see cref="InputElementProperty"/>.</param>
+        /// <summary>This method is invoked when the <see cref="InputElement"/> changes.</summary>
+        /// <param name="oldElement">The old value of <see cref="InputElement"/>.</param>
+        /// <param name="newElement">The new value of <see cref="InputElement"/>.</param>
         protected abstract void OnInputElementChanged(UIElement oldElement, UIElement newElement);
 
-        private static void OnInputElementChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        /// <summary>Raises the <see cref="PropertyChanged"/> event.</summary>
+        /// <param name="propertyName">The name of the property to notify for. String.Empty or null signals to WPF that all properties have changed.</param>
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
-            if (ReferenceEquals(e.OldValue, e.NewValue))
-            {
-                return;
-            }
-
-            var tracker = (GestureTrackerBase<TArgs>)d;
-            tracker.OnInputElementChanged((UIElement)e.OldValue, (UIElement)e.NewValue);
+            this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

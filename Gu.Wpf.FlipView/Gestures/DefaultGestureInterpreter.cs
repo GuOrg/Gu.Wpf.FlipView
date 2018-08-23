@@ -8,29 +8,8 @@ namespace Gu.Wpf.FlipView.Gestures
     /// <summary>
     /// The default interpreter of gestures.
     /// </summary>
-    public class DefaultGestureInterpreter : Freezable, IGestureInterpreter
+    public class DefaultGestureInterpreter : IGestureInterpreter
     {
-        /// <summary>Identifies the <see cref="MinSwipeVelocity"/> dependency property.</summary>
-        public static readonly DependencyProperty MinSwipeVelocityProperty = DependencyProperty.Register(
-            nameof(MinSwipeVelocity),
-            typeof(double),
-            typeof(DefaultGestureInterpreter),
-            new PropertyMetadata(1.0));
-
-        /// <summary>Identifies the <see cref="MinSwipeLength"/> dependency property.</summary>
-        public static readonly DependencyProperty MinSwipeLengthProperty = DependencyProperty.Register(
-            nameof(MinSwipeLength),
-            typeof(double),
-            typeof(DefaultGestureInterpreter),
-            new PropertyMetadata(50.0));
-
-        /// <summary>Identifies the <see cref="MaxDeviationFromHorizontal"/> dependency property.</summary>
-        public static readonly DependencyProperty MaxDeviationFromHorizontalProperty = DependencyProperty.Register(
-            nameof(MaxDeviationFromHorizontal),
-            typeof(double),
-            typeof(DefaultGestureInterpreter),
-            new PropertyMetadata(30.0));
-
         /// <summary>
         /// Gets a new instance with default settings for mouse swipes.
         /// </summary>
@@ -54,30 +33,18 @@ namespace Gu.Wpf.FlipView.Gestures
         /// <summary>
         /// Gets or sets the minimum velocity for a gesture to be considered a swipe.
         /// </summary>
-        public double MinSwipeVelocity
-        {
-            get => (double)this.GetValue(MinSwipeVelocityProperty);
-            set => this.SetValue(MinSwipeVelocityProperty, value);
-        }
+        public double MinSwipeVelocity { get; set; } = 1;
 
         /// <summary>
         /// Gets or sets the minimum length for a gesture to be considered a swipe.
         /// </summary>
-        public double MinSwipeLength
-        {
-            get => (double)this.GetValue(MinSwipeLengthProperty);
-            set => this.SetValue(MinSwipeLengthProperty, value);
-        }
+        public double MinSwipeLength { get; set; } = 50;
 
         /// <summary>
         /// Gets or sets the maximum angle from horizontal for a swipe to be a swipe left or right.
         /// In degrees.
         /// </summary>
-        public double MaxDeviationFromHorizontal
-        {
-            get => (double)this.GetValue(MaxDeviationFromHorizontalProperty);
-            set => this.SetValue(MaxDeviationFromHorizontalProperty, value);
-        }
+        public double MaxDeviationFromHorizontal { get; set; } = 30;
 
         /// <inheritdoc />
         public bool TryGetGesture(IReadOnlyList<GesturePoint> points, out GestureEventArgs gestureEventArgs)
@@ -120,12 +87,6 @@ namespace Gu.Wpf.FlipView.Gestures
             }
 
             return gestureEventArgs != null;
-        }
-
-        /// <inheritdoc />
-        protected override Freezable CreateInstanceCore()
-        {
-            return new DefaultGestureInterpreter();
         }
 
         private static bool IsHorizontalEnough(Vector delta, double threshold)

@@ -6,7 +6,7 @@ namespace Gu.Wpf.FlipView.Gestures
     /// <summary>
     /// A gesture tracker for mouse.
     /// </summary>
-    public class MouseGestureTracker : GestureTrackerBase<MouseEventArgs>
+    public class MouseGestureTracker : AbstractGestureTracker<MouseEventArgs>
     {
         /// <summary>
         /// The key for the default resource.
@@ -34,12 +34,6 @@ namespace Gu.Wpf.FlipView.Gestures
         {
             Interpreter = DefaultGestureInterpreter.Mouse
         };
-
-        /// <inheritdoc />
-        protected override Freezable CreateInstanceCore()
-        {
-            return new MouseGestureTracker();
-        }
 
         /// <inheritdoc/>
         protected override bool TryGetPoint(MouseEventArgs args, out GesturePoint point)
