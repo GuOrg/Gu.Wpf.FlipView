@@ -19,14 +19,15 @@
         </GroupBox>
 
         <GroupBox Grid.Column="1"
+                  Background="Lavender"
                   Header="Gesture panel">
-            <gu:GesturePanel Background="Lavender">
+            <gu:GesturePanel>
                 <gu:GesturePanel.GestureTracker>
                     <gu:MouseGestureTracker>
                         <gu:MouseGestureTracker.Interpreter>
                             <gu:DefaultGestureInterpreter MaxDeviationFromHorizontal="30"
                                                           MinSwipeLength="15"
-                                                          MinSwipeVelocity="0.1" />
+                                                          MinSwipeVelocity="1" />
                         </gu:MouseGestureTracker.Interpreter>
                     </gu:MouseGestureTracker>
                 </gu:GesturePanel.GestureTracker>
