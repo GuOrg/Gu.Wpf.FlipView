@@ -1,0 +1,38 @@
+<Window x:Class="Gu.Wpf.FlipView.Demo.UiTestWindows.DefaultGesturePanelWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:gu="https://github.com/GuOrg/Gu.Wpf.FlipView"
+        xmlns:local="clr-namespace:Gu.Wpf.FlipView.Demo.UiTestWindows"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        Title="DefaultGesturePanelWindow"
+        Width="800"
+        Height="450"
+        mc:Ignorable="d">
+    <Grid gu:GesturePanel.Gestured="OnGesture">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <GroupBox Grid.Column="0"
+                  Header="Detected gestures">
+            <ListBox x:Name="Gestures" />
+        </GroupBox>
+
+        <GroupBox Grid.Column="1"
+                  Header="Gesture panel">
+            <Border Background="Lavender">
+                <gu:GesturePanel>
+                    <Canvas Background="Transparent">
+                        <Rectangle x:Name="Rectangle"
+                                   Canvas.Left="50"
+                                   Canvas.Top="50"
+                                   Width="100"
+                                   Height="100"
+                                   Fill="Red" />
+                    </Canvas>
+                </gu:GesturePanel>
+            </Border>
+        </GroupBox>
+    </Grid>
+</Window>
