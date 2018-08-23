@@ -16,10 +16,13 @@ namespace Gu.Wpf.FlipView
     [StyleTypedProperty(Property = nameof(OldContentStyle), StyleTargetType = typeof(ContentPresenter))]
     public class TransitionControl : ContentControl
     {
-#pragma warning disable SA1202 // Elements must be ordered by access
-
+        /// <summary>The expected name of the old content presenter.</summary>
         public const string PartOldContent = "PART_OldContent";
+
+        /// <summary>The expected name of the old content presenter.</summary>
         public const string PartNewContent = "PART_NewContent";
+
+#pragma warning disable SA1202 // Elements must be ordered by access
 
         /// <summary>Identifies the <see cref="ContentChanged"/> routed event.</summary>
         public static readonly RoutedEvent ContentChangedEvent = EventManager.RegisterRoutedEvent(
