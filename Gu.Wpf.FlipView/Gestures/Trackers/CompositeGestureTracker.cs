@@ -20,6 +20,15 @@ namespace Gu.Wpf.FlipView.Gestures
         /// <inheritdoc />
         public event EventHandler<GestureEventArgs> Gestured;
 
+        /// <summary>
+        /// Gets returns a new instance of <see cref="MouseGestureTracker"/> with default settings.
+        /// </summary>
+        public static CompositeGestureTracker DefaultMouseAndTouch => new CompositeGestureTracker
+        {
+            MouseGestureTracker.Default,
+            TouchGestureTracker.Default,
+        };
+
         /// <inheritdoc />
         public UIElement InputElement
         {

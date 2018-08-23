@@ -6,16 +6,14 @@
     <gestures:MouseGestureTracker x:Key="{x:Static gestures:MouseGestureTracker.ResourceKey}"
                                   x:Shared="False">
         <gestures:MouseGestureTracker.Interpreter>
-            <gestures:DefaultGestureInterpreter MinSwipeLength="40"
-                                                MinSwipeVelocity="1" />
+            <gestures:DefaultGestureInterpreter MinSwipeLength="40" />
         </gestures:MouseGestureTracker.Interpreter>
     </gestures:MouseGestureTracker>
 
     <gestures:TouchGestureTracker x:Key="{x:Static gestures:TouchGestureTracker.ResourceKey}"
                                   x:Shared="False">
         <gestures:TouchGestureTracker.Interpreter>
-            <gestures:DefaultGestureInterpreter MinSwipeLength="50"
-                                                MinSwipeVelocity="1" />
+            <gestures:DefaultGestureInterpreter />
         </gestures:TouchGestureTracker.Interpreter>
     </gestures:TouchGestureTracker>
 
@@ -23,15 +21,13 @@
                                       x:Shared="False">
         <gestures:MouseGestureTracker>
             <gestures:MouseGestureTracker.Interpreter>
-                <gestures:DefaultGestureInterpreter MinSwipeLength="40"
-                                                    MinSwipeVelocity="1" />
+                <gestures:DefaultGestureInterpreter MinSwipeLength="40" />
             </gestures:MouseGestureTracker.Interpreter>
         </gestures:MouseGestureTracker>
 
         <gestures:TouchGestureTracker>
             <gestures:TouchGestureTracker.Interpreter>
-                <gestures:DefaultGestureInterpreter MinSwipeLength="50"
-                                                    MinSwipeVelocity="1" />
+                <gestures:DefaultGestureInterpreter />
             </gestures:TouchGestureTracker.Interpreter>
         </gestures:TouchGestureTracker>
     </gestures:CompositeGestureTracker>

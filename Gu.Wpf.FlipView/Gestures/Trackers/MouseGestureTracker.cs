@@ -27,6 +27,14 @@ namespace Gu.Wpf.FlipView.Gestures
                 SubscribeInfo.Create(UIElement.MouseLeaveEvent, new MouseEventHandler(this.OnEnd)));
         }
 
+        /// <summary>
+        /// Gets returns a new instance of <see cref="MouseGestureTracker"/> with default settings.
+        /// </summary>
+        public static MouseGestureTracker Default => new MouseGestureTracker
+        {
+            Interpreter = DefaultGestureInterpreter.Mouse
+        };
+
         /// <inheritdoc />
         protected override Freezable CreateInstanceCore()
         {

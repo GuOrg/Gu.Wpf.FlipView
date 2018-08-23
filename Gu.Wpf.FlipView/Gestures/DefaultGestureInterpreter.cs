@@ -32,6 +32,26 @@ namespace Gu.Wpf.FlipView.Gestures
             new PropertyMetadata(30.0));
 
         /// <summary>
+        /// Gets a new instance with default settings for mouse swipes.
+        /// </summary>
+        public static IGestureInterpreter Mouse => new DefaultGestureInterpreter
+        {
+            MaxDeviationFromHorizontal = 30,
+            MinSwipeLength = 40,
+            MinSwipeVelocity = 1
+        };
+
+        /// <summary>
+        /// Gets a new instance with default settings for touch swipes.
+        /// </summary>
+        public static IGestureInterpreter Touch => new DefaultGestureInterpreter
+        {
+            MaxDeviationFromHorizontal = 30,
+            MinSwipeLength = 50,
+            MinSwipeVelocity = 1
+        };
+
+        /// <summary>
         /// Gets or sets the minimum velocity for a gesture to be considered a swipe.
         /// </summary>
         public double MinSwipeVelocity

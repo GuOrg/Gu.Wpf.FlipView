@@ -30,6 +30,14 @@ namespace Gu.Wpf.FlipView.Gestures
                                     SubscribeInfo.Create(NavigationCommands.BrowseBack, this.OnBrowseBack));
         }
 
+        /// <summary>
+        /// Gets returns a new instance of <see cref="MouseGestureTracker"/> with default settings.
+        /// </summary>
+        public static MouseGestureTracker Default => new MouseGestureTracker
+        {
+            Interpreter = DefaultGestureInterpreter.Touch
+        };
+
         /// <inheritdoc />
         protected override Freezable CreateInstanceCore()
         {
