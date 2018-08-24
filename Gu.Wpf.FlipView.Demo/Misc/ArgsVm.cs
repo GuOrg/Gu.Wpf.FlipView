@@ -1,4 +1,4 @@
-﻿namespace Gu.Wpf.FlipView.Demo.Misc
+namespace Gu.Wpf.FlipView.Demo.Misc
 {
     using System;
     using System.Collections.Generic;
@@ -50,7 +50,7 @@
             {
                 if (this.children == null && this.args != null && this.info != null && !this.info.PropertyType.IsPrimitive)
                 {
-                    PropertyInfo[] propertyInfos = this.args.GetType()
+                    var propertyInfos = this.args.GetType()
                                                         .GetProperties();
                     this.children = propertyInfos
                                 .Where(x => x != null && x.CanRead)
@@ -66,30 +66,19 @@
 
         private string StringIt(object o)
         {
-            if (o == null)
+            switch (o)
             {
-                return "null";
+                case null:
+                    return "null";
+                case double d:
+                    return d.ToString("F1");
+                case Vector v:
+                    return $"({v.X:F1}, {v.Y:F1})";
+                case Point p:
+                    return $"({p.X:F1}, {p.Y:F1})";
+                default:
+                    return o.ToString();
             }
-
-            var d = o as double?;
-            if (d != null)
-            {
-                return d.Value.ToString("F1");
-            }
-
-            var v = o as Vector?;
-            if (v != null)
-            {
-                return $"({v.Value.X:F1}, {v.Value.Y:F1})";
-            }
-
-            var p = o as Point?;
-            if (p != null)
-            {
-                return $"({p.Value.X:F1}, {p.Value.Y:F1})";
-            }
-
-            return o.ToString();
         }
     }
 }
