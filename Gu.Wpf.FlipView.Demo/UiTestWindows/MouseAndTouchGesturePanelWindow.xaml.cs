@@ -14,5 +14,10 @@ namespace Gu.Wpf.FlipView.Demo.UiTestWindows
         {
             this.Gestures.Items.Add(e);
         }
+
+        private void OnClearClick(object sender, RoutedEventArgs e)
+        {
+            this.Gestures.Items.Clear();
+        }
     }
 }
