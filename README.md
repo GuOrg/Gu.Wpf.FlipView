@@ -2,6 +2,7 @@
 
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![NuGet](https://img.shields.io/nuget/v/Gu.Wpf.FlipView.svg)](https://www.nuget.org/packages/Gu.Wpf.FlipView/)
+[![Build Status](https://dev.azure.com/johan-larsson/Gu.Wpf.FlipView/_apis/build/status/Gu.Wpf.FlipView-CI?branchName=master)](https://dev.azure.com/johan-larsson/Gu.Wpf.FlipView/_build/latest?definitionId=6&branchName=master)
 [![Build status](https://ci.appveyor.com/api/projects/status/tp8vm8xlvtakfat9/branch/master?svg=true)](https://ci.appveyor.com/project/JohanLarsson/gu-wpf-flipview/branch/master)
 
 A flipview for WPF, handles touch &amp; mouse swipe.
