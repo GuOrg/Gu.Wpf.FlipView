@@ -28,9 +28,7 @@ namespace Gu.Wpf.FlipView
                 null,
                 OnGestureTrackerChanged));
 
-        /// <summary>
-        /// DependencyProperty for <see cref="Background" /> property.
-        /// </summary>
+        /// <summary>Identifies the <see cref="Background"/> dependency property.</summary>
         public static readonly DependencyProperty BackgroundProperty = Panel.BackgroundProperty.AddOwner(
             typeof(GesturePanel),
             new FrameworkPropertyMetadata(

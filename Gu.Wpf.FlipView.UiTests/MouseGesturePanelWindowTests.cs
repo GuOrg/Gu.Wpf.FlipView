@@ -20,14 +20,16 @@ namespace Gu.Wpf.FlipView.UiTests
                 var gesturePanel = window.FindGroupBox("Gesture panel");
                 var listBox = window.FindListBox("Gestures");
                 var swipes = new List<string>();
+                var cp = gesturePanel.Bounds.Center();
+
                 CollectionAssert.IsEmpty(listBox.Items);
 
-                Mouse.DragHorizontally(MouseButton.Left, gesturePanel.Bounds.Center(), 40);
+                Mouse.Drag(MouseButton.Left, cp, cp + new Vector(40, 0), TimeSpan.Zero);
                 window.WaitUntilResponsive();
                 swipes.Add("SwipeRight Delta: (40, 0) Velocity: ∞");
                 CollectionAssert.AreEqual(swipes, listBox.Items.Select(x => x.Text));
 
-                Mouse.DragHorizontally(MouseButton.Left, gesturePanel.Bounds.Center(), -40);
+                Mouse.Drag(MouseButton.Left, cp, cp + new Vector(-40, 0), TimeSpan.Zero);
                 window.WaitUntilResponsive();
                 swipes.Add("SwipeLeft Delta: (-40, 0) Velocity: ∞");
                 CollectionAssert.AreEqual(swipes, listBox.Items.Select(x => x.Text));
@@ -42,13 +44,15 @@ namespace Gu.Wpf.FlipView.UiTests
                 var window = app.MainWindow;
                 var gesturePanel = window.FindGroupBox("Gesture panel");
                 var listBox = window.FindListBox("Gestures");
+                var cp = gesturePanel.Bounds.Center();
+
                 CollectionAssert.IsEmpty(listBox.Items);
 
-                Mouse.DragHorizontally(MouseButton.Left, gesturePanel.Bounds.Center(), 39);
+                Mouse.Drag(MouseButton.Left, cp, cp + new Vector(39, 0), double.PositiveInfinity);
                 window.WaitUntilResponsive();
                 CollectionAssert.IsEmpty(listBox.Items);
 
-                Mouse.DragHorizontally(MouseButton.Left, gesturePanel.Bounds.Center(), -39);
+                Mouse.Drag(MouseButton.Left, cp, cp + new Vector(-39, 0), double.PositiveInfinity);
                 window.WaitUntilResponsive();
                 CollectionAssert.IsEmpty(listBox.Items);
             }
@@ -62,21 +66,15 @@ namespace Gu.Wpf.FlipView.UiTests
                 var window = app.MainWindow;
                 var gesturePanel = window.FindGroupBox("Gesture panel");
                 var listBox = window.FindListBox("Gestures");
+                var cp = gesturePanel.Bounds.Center();
+
                 CollectionAssert.IsEmpty(listBox.Items);
 
-                Mouse.Position = gesturePanel.Bounds.Center();
-                Mouse.Down(MouseButton.Left);
-                Wait.For(TimeSpan.FromMilliseconds(200));
-                Mouse.Position += new Vector(40, 0);
-                Mouse.Up(MouseButton.Left);
+                Mouse.Drag(MouseButton.Left, cp, cp + new Vector(39, 0), 200);
                 window.WaitUntilResponsive();
                 CollectionAssert.IsEmpty(listBox.Items);
 
-                Mouse.Position = gesturePanel.Bounds.Center();
-                Mouse.Down(MouseButton.Left);
-                Wait.For(TimeSpan.FromMilliseconds(200));
-                Mouse.Position += new Vector(-40, 0);
-                Mouse.Up(MouseButton.Left);
+                Mouse.Drag(MouseButton.Left, cp, cp + new Vector(-39, 0), 200);
                 window.WaitUntilResponsive();
                 CollectionAssert.IsEmpty(listBox.Items);
             }
