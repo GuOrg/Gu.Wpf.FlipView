@@ -3,7 +3,9 @@ source http://nuget.org/api/v2
 group Test
   source http://www.nuget.org/api/v2/
   storage: none
+  nuget Microsoft.NET.Test.Sdk
   nuget NUnit
+  nuget NUnit3TestAdapter
   nuget Gu.Wpf.UiAutomation
 
 group Analyzers

@@ -1,4 +1,6 @@
 group Test
+  Microsoft.NET.Test.Sdk
+  NUnit3TestAdapter
   NUnit
 
 group Analyzers
