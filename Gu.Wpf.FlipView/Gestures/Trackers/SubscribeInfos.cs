@@ -4,7 +4,7 @@ namespace Gu.Wpf.FlipView.Gestures
     using System.Windows;
 
     /// <summary>
-    /// A collection of <see cref="SubscribeInfo"/>
+    /// A collection of <see cref="SubscribeInfo"/>.
     /// </summary>
     public class SubscribeInfos
     {
@@ -29,9 +29,9 @@ namespace Gu.Wpf.FlipView.Gestures
         }
 
         /// <summary>
-        /// Add handlers for all events
+        /// Add handlers for all events.
         /// </summary>
-        /// <param name="element">The new element, can be null</param>
+        /// <param name="element">The new element, can be null.</param>
         public void AddHandlers(UIElement element)
         {
             if (element != null)
@@ -44,9 +44,9 @@ namespace Gu.Wpf.FlipView.Gestures
         }
 
         /// <summary>
-        /// Remove handlers for all events
+        /// Remove handlers for all events.
         /// </summary>
-        /// <param name="element">The old element, can be null</param>
+        /// <param name="element">The old element, can be null.</param>
         public void RemoveHandlers(UIElement element)
         {
             if (element != null)

@@ -6,12 +6,12 @@
     using System.Windows.Media.Media3D;
 
     /// <summary>
-    /// Extension methods for <see cref="DependencyObject"/>
+    /// Extension methods for <see cref="DependencyObject"/>.
     /// </summary>
     internal static class DependencyObjExtensions
     {
         /// <summary>
-        /// Get all visual children, depth first
+        /// Get all visual children, depth first.
         /// </summary>
         internal static IEnumerable<DependencyObject> VisualChildrenRecursive(this DependencyObject parent)
         {

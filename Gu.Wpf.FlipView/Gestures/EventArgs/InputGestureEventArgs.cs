@@ -10,9 +10,9 @@
         /// <summary>
         /// Initializes a new instance of the <see cref="InputGestureEventArgs"/> class.
         /// </summary>
-        /// <param name="type">The interpreted gesture</param>
+        /// <param name="type">The interpreted gesture.</param>
         /// <param name="velocity">The speed of the gesture.</param>
-        /// <param name="delta">The size of the gesture</param>
+        /// <param name="delta">The size of the gesture.</param>
         public InputGestureEventArgs(GestureType type, double velocity, Vector delta)
             : base(type)
         {

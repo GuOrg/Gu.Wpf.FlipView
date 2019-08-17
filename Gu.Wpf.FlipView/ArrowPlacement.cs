@@ -13,6 +13,6 @@
         /// <summary>
         /// Outside the image.
         /// </summary>
-        Outside
+        Outside,
     }
 }

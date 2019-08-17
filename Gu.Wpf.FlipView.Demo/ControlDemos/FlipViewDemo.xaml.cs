@@ -3,7 +3,7 @@
     using System.Windows.Controls;
 
     /// <summary>
-    /// Interaction logic for FlipViewDemo.xaml
+    /// Interaction logic for FlipViewDemo.xaml.
     /// </summary>
     public partial class FlipViewDemo : UserControl
     {

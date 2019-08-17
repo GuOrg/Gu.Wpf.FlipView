@@ -28,7 +28,9 @@ namespace Gu.Wpf.FlipView.Tests.Misc_and_helpers
 
         public override TouchPointCollection GetIntermediateTouchPoints(IInputElement relativeTo)
         {
+#pragma warning disable GU0090 // Don't throw NotImplementedException.
             throw new NotImplementedException();
+#pragma warning restore GU0090 // Don't throw NotImplementedException.
         }
     }
 }

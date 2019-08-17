@@ -4,7 +4,7 @@
     using Gu.Wpf.FlipView.Gestures;
 
     /// <summary>
-    /// Interaction logic for TouchBox.xaml
+    /// Interaction logic for TouchBox.xaml.
     /// </summary>
     public partial class TouchBox : EventBox
     {

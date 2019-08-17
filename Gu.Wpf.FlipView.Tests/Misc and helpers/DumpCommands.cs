@@ -1,4 +1,4 @@
-﻿namespace Gu.Wpf.FlipView.Tests.Misc_and_helpers
+namespace Gu.Wpf.FlipView.Tests.Misc_and_helpers
 {
     using System;
     using System.Linq;
@@ -19,7 +19,7 @@
                                 typeof(ApplicationCommands),
                                 typeof(NavigationCommands),
                                 typeof(MediaCommands),
-                                typeof(ComponentCommands)
+                                typeof(ComponentCommands),
                             };
             foreach (var type in types)
             {

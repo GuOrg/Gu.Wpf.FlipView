@@ -4,7 +4,7 @@
     using Gu.Wpf.FlipView.Gestures;
 
     /// <summary>
-    /// Interaction logic for CompositeGesturePanelView.xaml
+    /// Interaction logic for CompositeGesturePanelView.xaml.
     /// </summary>
     public partial class CompositeGesturePanelView : UserControl
     {

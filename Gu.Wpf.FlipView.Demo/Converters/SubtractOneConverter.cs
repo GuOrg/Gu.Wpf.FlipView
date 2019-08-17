@@ -21,7 +21,7 @@ namespace Gu.Wpf.FlipView.Demo.Converters
 
         object IValueConverter.ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            throw new NotImplementedException();
+            throw new NotSupportedException($"{nameof(SubtractOneConverter)} can only be used in OneWay bindings");
         }
     }
 }

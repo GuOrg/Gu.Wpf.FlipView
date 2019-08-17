@@ -124,7 +124,7 @@ namespace Gu.Wpf.FlipView
         }
 
         /// <summary>
-        /// Gets or sets how new content animates in when selected index increases
+        /// Gets or sets how new content animates in when selected index increases.
         /// </summary>
         public Storyboard IncreaseInAnimation
         {
@@ -133,7 +133,7 @@ namespace Gu.Wpf.FlipView
         }
 
         /// <summary>
-        /// Gets or sets how new content animates out when selected index increases
+        /// Gets or sets how new content animates out when selected index increases.
         /// </summary>
         public Storyboard IncreaseOutAnimation
         {
@@ -142,7 +142,7 @@ namespace Gu.Wpf.FlipView
         }
 
         /// <summary>
-        /// Gets or sets how new content animates in when selected index decreases
+        /// Gets or sets how new content animates in when selected index decreases.
         /// </summary>
         public Storyboard DecreaseInAnimation
         {
@@ -151,7 +151,7 @@ namespace Gu.Wpf.FlipView
         }
 
         /// <summary>
-        /// Gets or sets how new content animates in when selected index decreases
+        /// Gets or sets how new content animates in when selected index decreases.
         /// </summary>
         public Storyboard DecreaseOutAnimation
         {
@@ -160,7 +160,7 @@ namespace Gu.Wpf.FlipView
         }
 
         /// <summary>
-        /// Gets or sets how new content animates in
+        /// Gets or sets how new content animates in.
         /// </summary>
         public Storyboard CurrentInAnimation
         {
@@ -169,7 +169,7 @@ namespace Gu.Wpf.FlipView
         }
 
         /// <summary>
-        /// Gets or sets how new content animates out
+        /// Gets or sets how new content animates out.
         /// </summary>
         public Storyboard CurrentOutAnimation
         {
@@ -196,7 +196,7 @@ namespace Gu.Wpf.FlipView
         }
 
         /// <summary>
-        /// Gets or sets a style for the index items looks TargetType="ListBoxItem"
+        /// Gets or sets a style for the index items looks TargetType="ListBoxItem".
         /// </summary>
         public Style IndexItemStyle
         {
@@ -223,7 +223,7 @@ namespace Gu.Wpf.FlipView
         }
 
         /// <summary>
-        /// Gets or sets a style for the navigation buttons TargetType="RepeatButton"
+        /// Gets or sets a style for the navigation buttons TargetType="RepeatButton".
         /// </summary>
         public Style ArrowButtonStyle
         {
@@ -232,10 +232,10 @@ namespace Gu.Wpf.FlipView
         }
 
         /// <summary>
-        /// Called before3 selected index changes
+        /// Called before3 selected index changes.
         /// </summary>
-        /// <param name="previousIndex">The old index</param>
-        /// <param name="newIndex">The new index</param>
+        /// <param name="previousIndex">The old index.</param>
+        /// <param name="newIndex">The new index.</param>
         protected virtual void PreviewSelectedIndexChanged(int previousIndex, int newIndex)
         {
             if (previousIndex == -1 || (previousIndex == newIndex))

@@ -3,7 +3,7 @@
     using System.Windows.Input;
 
     /// <summary>
-    /// Interaction logic for CommandBox.xaml
+    /// Interaction logic for CommandBox.xaml.
     /// </summary>
     public partial class CommandBox : EventBox
     {

@@ -4,13 +4,12 @@ namespace Gu.Wpf.FlipView.Demo.Misc
     using Gu.Wpf.FlipView.Gestures;
 
     /// <summary>
-    /// Interaction logic for MouseBox.xaml
+    /// Interaction logic for MouseBox.xaml.
     /// </summary>
     public partial class MouseBox : EventBox
     {
+        private readonly MouseGestureTracker tracker;
         private bool gestureStarted;
-
-        private MouseGestureTracker tracker;
 
         public MouseBox()
         {

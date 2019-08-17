@@ -5,14 +5,14 @@ namespace Gu.Wpf.FlipView.Internals
     using System.Windows.Media.Animation;
 
     /// <summary>
-    /// Extension methods for <see cref="Timeline"/>
+    /// Extension methods for <see cref="Timeline"/>.
     /// </summary>
     internal static class TimeLineExt
     {
         /// <summary>
         /// Get the total time of the animation.
         /// </summary>
-        /// <param name="timeline">The source <see cref="Timeline"/></param>
+        /// <param name="timeline">The source <see cref="Timeline"/>.</param>
         /// <returns>The total time the animation will run after it is started.</returns>
         internal static TimeSpan GetTimeToFinished(this Timeline timeline)
         {
@@ -32,7 +32,7 @@ namespace Gu.Wpf.FlipView.Internals
                 return storyboard.Children.Max(x => GetTimeToFinished(x));
             }
 
-            throw new NotImplementedException($"GetTimeToFinished not implemented for: {timeline.GetType().FullName}");
+            throw new NotSupportedException($"GetTimeToFinished not implemented for: {timeline.GetType().FullName}");
         }
     }
 }

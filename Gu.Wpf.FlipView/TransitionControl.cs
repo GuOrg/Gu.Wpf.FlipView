@@ -63,7 +63,7 @@ namespace Gu.Wpf.FlipView
             new PropertyMetadata(
                 EmptyStoryboard.Instance,
                 null,
-               (_, v) => OnAnimationCoerce(v)));
+                (_, v) => OnAnimationCoerce(v)));
 
         private static readonly DependencyPropertyKey OldContentPropertyKey = DependencyProperty.RegisterReadOnly(
             nameof(OldContent),
@@ -129,7 +129,7 @@ namespace Gu.Wpf.FlipView
         }
 
         /// <summary>
-        /// Gets or sets the storyboard that controls how new content animates into view
+        /// Gets or sets the storyboard that controls how new content animates into view.
         /// </summary>
         public Storyboard OutAnimation
         {
@@ -147,7 +147,7 @@ namespace Gu.Wpf.FlipView
         }
 
         /// <summary>
-        /// Gets or sets the storyboard that controls how old content animates out of view
+        /// Gets or sets the storyboard that controls how old content animates out of view.
         /// </summary>
         public Storyboard InAnimation
         {

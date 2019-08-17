@@ -3,7 +3,7 @@
     using System.Windows.Input;
 
     /// <summary>
-    /// Interaction logic for ManipulationBox.xaml
+    /// Interaction logic for ManipulationBox.xaml.
     /// </summary>
     public partial class ManipulationBox : EventBox
     {

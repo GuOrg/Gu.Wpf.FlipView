@@ -9,7 +9,7 @@ namespace Gu.Wpf.FlipView.Gestures
     using System.Windows.Input;
 
     /// <summary>
-    /// A base class for <see cref="IGestureTracker"/>
+    /// A base class for <see cref="IGestureTracker"/>.
     /// </summary>
     /// <typeparam name="TArgs">The type of the event args.</typeparam>
     public abstract class AbstractGestureTracker<TArgs> : IGestureTracker
@@ -93,14 +93,14 @@ namespace Gu.Wpf.FlipView.Gestures
         /// <summary>
         /// Raise the gesture event to notify subscribers that a gesture was detected.
         /// </summary>
-        /// <param name="gestureEventArgs">The detected gesture</param>
+        /// <param name="gestureEventArgs">The detected gesture.</param>
         protected void OnGestured(GestureEventArgs gestureEventArgs)
         {
             this.Gestured?.Invoke(this, gestureEventArgs);
         }
 
         /// <summary>
-        /// Notify a gesture for <paramref name="eventArgs"/>
+        /// Notify a gesture for <paramref name="eventArgs"/>.
         /// </summary>
         /// <param name="eventArgs">The event args for the command.</param>
         protected void OnExecuted(ExecutedRoutedEventArgs eventArgs)
@@ -173,10 +173,10 @@ namespace Gu.Wpf.FlipView.Gestures
         }
 
         /// <summary>
-        /// Try creating a <see cref="GesturePoint"/> from <paramref name="args"/>
+        /// Try creating a <see cref="GesturePoint"/> from <paramref name="args"/>.
         /// </summary>
         /// <param name="args">The event argument.</param>
-        /// <param name="point">The created point</param>
+        /// <param name="point">The created point.</param>
         /// <returns>True if a point could be created.</returns>
         protected abstract bool TryGetPoint(TArgs args, out GesturePoint point);
 

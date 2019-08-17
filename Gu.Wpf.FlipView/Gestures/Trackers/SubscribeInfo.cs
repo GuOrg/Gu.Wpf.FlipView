@@ -12,8 +12,8 @@ namespace Gu.Wpf.FlipView.Gestures
         /// <summary>
         /// Initializes a new instance of the <see cref="SubscribeInfo"/> class.
         /// </summary>
-        /// <param name="addHandler">e => e.AddHandler(routedEvent, handler)</param>
-        /// <param name="removeHandler"> e => e.RemoveHandler(routedEvent, handler)</param>
+        /// <param name="addHandler">e => e.AddHandler(routedEvent, handler).</param>
+        /// <param name="removeHandler"> e => e.RemoveHandler(routedEvent, handler).</param>
         public SubscribeInfo(Action<UIElement> addHandler, Action<UIElement> removeHandler)
         {
             this.AddHandler = addHandler;
@@ -31,11 +31,11 @@ namespace Gu.Wpf.FlipView.Gestures
         public Action<UIElement> RemoveHandler { get; }
 
         /// <summary>
-        /// Create an <see cref="SubscribeInfo"/>
+        /// Create an <see cref="SubscribeInfo"/>.
         /// </summary>
         /// <param name="routedEvent">The event.</param>
-        /// <param name="handler">The event handler</param>
-        /// <returns>A new <see cref="SubscribeInfo"/></returns>
+        /// <param name="handler">The event handler.</param>
+        /// <returns>A new <see cref="SubscribeInfo"/>.</returns>
         public static SubscribeInfo Create(RoutedEvent routedEvent, Delegate handler)
         {
             return new SubscribeInfo(
@@ -44,11 +44,11 @@ namespace Gu.Wpf.FlipView.Gestures
         }
 
         /// <summary>
-        /// Create an <see cref="SubscribeInfo"/>
+        /// Create an <see cref="SubscribeInfo"/>.
         /// </summary>
         /// <param name="command">The command.</param>
-        /// <param name="onExecuted">The executed handler</param>
-        /// <returns>A new <see cref="SubscribeInfo"/></returns>
+        /// <param name="onExecuted">The executed handler.</param>
+        /// <returns>A new <see cref="SubscribeInfo"/>.</returns>
         public static SubscribeInfo Create(RoutedCommand command, ExecutedRoutedEventHandler onExecuted)
         {
             var binding = new CommandBinding(command, onExecuted);

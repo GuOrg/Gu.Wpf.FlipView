@@ -17,7 +17,7 @@ namespace Gu.Wpf.FlipView.Gestures
         {
             MaxDeviationFromHorizontal = 30,
             MinSwipeLength = 40,
-            MinSwipeVelocity = 1
+            MinSwipeVelocity = 1,
         };
 
         /// <summary>
@@ -27,7 +27,7 @@ namespace Gu.Wpf.FlipView.Gestures
         {
             MaxDeviationFromHorizontal = 30,
             MinSwipeLength = 50,
-            MinSwipeVelocity = 1
+            MinSwipeVelocity = 1,
         };
 
         /// <summary>

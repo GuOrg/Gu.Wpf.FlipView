@@ -15,7 +15,7 @@ namespace Gu.Wpf.FlipView.Demo.ControlDemos
 
         public TransitionItem(SolidColorBrush brush, string text)
         {
-            this.Brush = brush;
+            this.brush = brush;
             this.text = text;
         }
 

@@ -32,7 +32,7 @@ namespace Gu.Wpf.FlipView.Gestures
         /// </summary>
         public static MouseGestureTracker Default => new MouseGestureTracker
         {
-            Interpreter = DefaultGestureInterpreter.Mouse
+            Interpreter = DefaultGestureInterpreter.Mouse,
         };
 
         /// <inheritdoc/>
@@ -41,7 +41,7 @@ namespace Gu.Wpf.FlipView.Gestures
             var inputElement = this.InputElement;
             if (inputElement == null)
             {
-                point = default(GesturePoint);
+                point = default;
                 return false;
             }
 

@@ -18,7 +18,7 @@ namespace Gu.Wpf.FlipView.Demo.Misc
             typeof(InputDevice),
             typeof(InertiaExpansionBehavior),
             typeof(InertiaTranslationBehavior),
-            typeof(InertiaRotationBehavior)
+            typeof(InertiaRotationBehavior),
         };
 
         private readonly object args;

@@ -7,7 +7,7 @@
     using Gu.Wpf.FlipView.Internals;
 
     /// <summary>
-    /// An <see cref="AutomationPeer"/> for <see cref="FlipView"/>
+    /// An <see cref="AutomationPeer"/> for <see cref="FlipView"/>.
     /// </summary>
     public class FlipViewAutomationPeer : SelectorAutomationPeer
     {

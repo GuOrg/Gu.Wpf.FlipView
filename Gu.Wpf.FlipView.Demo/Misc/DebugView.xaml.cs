@@ -4,7 +4,7 @@
     using System.Windows.Controls;
 
     /// <summary>
-    /// Interaction logic for DebugView.xaml
+    /// Interaction logic for DebugView.xaml.
     /// </summary>
     public partial class DebugView : UserControl
     {

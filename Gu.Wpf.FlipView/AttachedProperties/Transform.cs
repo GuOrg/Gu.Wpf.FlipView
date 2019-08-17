@@ -11,7 +11,7 @@ namespace Gu.Wpf.FlipView.AttachedProperties
         /// Gets or sets the offset relative to the size of the element in the x direction.
         /// 0 means <see cref="OffsetXProperty"/> is zero.
         /// 1 means <see cref="OffsetXProperty"/> is ActualWidth
-        /// -1 means <see cref="OffsetXProperty"/> is -ActualWidth
+        /// -1 means <see cref="OffsetXProperty"/> is -ActualWidth.
         /// </summary>
         public static readonly DependencyProperty RelativeOffsetXProperty = DependencyProperty.RegisterAttached(
             "RelativeOffsetX",
@@ -43,7 +43,7 @@ namespace Gu.Wpf.FlipView.AttachedProperties
         /// Gets or sets the offset relative to the size of the element in the x direction.
         /// 0 means <see cref="OffsetYProperty"/> is zero.
         /// 1 means <see cref="OffsetYProperty"/> is ActualWidth
-        /// -1 means <see cref="OffsetYProperty"/> is -ActualWidth
+        /// -1 means <see cref="OffsetYProperty"/> is -ActualWidth.
         /// </summary>
         public static readonly DependencyProperty RelativeOffsetYProperty = DependencyProperty.RegisterAttached(
             "RelativeOffsetY",

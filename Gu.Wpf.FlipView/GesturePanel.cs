@@ -12,7 +12,7 @@ namespace Gu.Wpf.FlipView
     [DefaultEvent("Gestured")]
     public class GesturePanel : Decorator
     {
-        /// <summary>Identifies the <see cref="GesturedEvent"/> routed event.</summary>
+        /// <summary>Identifies the <see cref="Gestured"/> routed event.</summary>
         public static readonly RoutedEvent GesturedEvent = EventManager.RegisterRoutedEvent(
             nameof(Gestured),
             RoutingStrategy.Bubble,

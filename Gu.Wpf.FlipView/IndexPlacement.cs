@@ -13,6 +13,6 @@
         /// <summary>
         /// Below the image.
         /// </summary>
-        Below
+        Below,
     }
 }
