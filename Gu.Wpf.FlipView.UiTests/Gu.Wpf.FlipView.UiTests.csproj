@@ -1,19 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
-  <Import Project="..\packages\test\NUnit\build\NUnit.props" Condition="Exists('..\packages\test\NUnit\build\NUnit.props')" Label="Paket" />
-  <Import Project="..\packages\MSTest.TestAdapter.1.1.11\build\net45\MSTest.TestAdapter.props" Condition="Exists('..\packages\MSTest.TestAdapter.1.1.11\build\net45\MSTest.TestAdapter.props')" />
   <PropertyGroup>
-    <TargetFramework>net45</TargetFramework>
-    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
-    <GenerateBindingRedirectsOutputType>true</GenerateBindingRedirectsOutputType>
+    <TargetFramework>net472</TargetFramework>
     <CodeAnalysisRuleSet>Gu.Wpf.FlipView.UiTests.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
+
   <ItemGroup>
     <ProjectReference Include="..\Gu.Wpf.FlipView.Demo\Gu.Wpf.FlipView.Demo.csproj" />
   </ItemGroup>
+  
   <ItemGroup>
     <Reference Include="WindowsBase" />
   </ItemGroup>
-  <Import Project="..\.paket\Paket.Restore.targets" />
+
+  <ItemGroup>
+    <PackageReference Include="Gu.Analyzers" Version="1.6.7-dev" PrivateAssets="all" />
+    <PackageReference Include="Gu.Wpf.UiAutomation" Version="0.3.5" />
+    <PackageReference Include="IDisposableAnalyzers" Version="3.3.7" PrivateAssets="all" />
+    <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="3.0.0-beta3.final" PrivateAssets="all" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.6.1" />
+    <PackageReference Include="NUnit" Version="3.12.0" />
+    <PackageReference Include="NUnit3TestAdapter" Version="3.16.1" />
+    <PackageReference Include="PropertyChangedAnalyzers" Version="3.2.0" PrivateAssets="all" />
+    <PackageReference Include="ReflectionAnalyzers" Version="0.1.21-dev" PrivateAssets="all" />
+    <PackageReference Include="StyleCop.Analyzers" Version="1.2.0-beta.164" PrivateAssets="all" />
+    <PackageReference Include="WpfAnalyzers" Version="2.4.5" PrivateAssets="all" />
+  </ItemGroup>
 </Project>
