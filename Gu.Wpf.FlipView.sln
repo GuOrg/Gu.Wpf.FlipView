@@ -42,8 +42,8 @@ Global
 		{B6B0CDA6-CBE0-4D18-A213-C0F5D8100DD1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B6B0CDA6-CBE0-4D18-A213-C0F5D8100DD1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B6B0CDA6-CBE0-4D18-A213-C0F5D8100DD1}.Release|Any CPU.Build.0 = Release|Any CPU
-		{5ABE606A-93D4-47B0-A070-76863A9CE789}.CreateNugetPackage|Any CPU.ActiveCfg = CreateNugetPackage|Any CPU
-		{5ABE606A-93D4-47B0-A070-76863A9CE789}.CreateNugetPackage|Any CPU.Build.0 = CreateNugetPackage|Any CPU
+		{5ABE606A-93D4-47B0-A070-76863A9CE789}.CreateNugetPackage|Any CPU.ActiveCfg = Release|Any CPU
+		{5ABE606A-93D4-47B0-A070-76863A9CE789}.CreateNugetPackage|Any CPU.Build.0 = Release|Any CPU
 		{5ABE606A-93D4-47B0-A070-76863A9CE789}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{5ABE606A-93D4-47B0-A070-76863A9CE789}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5ABE606A-93D4-47B0-A070-76863A9CE789}.Release|Any CPU.ActiveCfg = Release|Any CPU
