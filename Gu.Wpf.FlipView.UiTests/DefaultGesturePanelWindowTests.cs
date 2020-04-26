@@ -3,7 +3,6 @@ namespace Gu.Wpf.FlipView.UiTests
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Windows;
     using Gu.Wpf.UiAutomation;
     using NUnit.Framework;
 
@@ -68,7 +67,7 @@ namespace Gu.Wpf.FlipView.UiTests
                 Mouse.Position = gesturePanel.Bounds.Center();
                 Mouse.Down(MouseButton.Left);
                 Wait.For(TimeSpan.FromMilliseconds(200));
-                Mouse.Position += new Vector(40, 0);
+                Mouse.Position += new System.Windows.Vector(40, 0);
                 Mouse.Up(MouseButton.Left);
                 window.WaitUntilResponsive();
                 CollectionAssert.IsEmpty(listBox.Items);
@@ -76,7 +75,7 @@ namespace Gu.Wpf.FlipView.UiTests
                 Mouse.Position = gesturePanel.Bounds.Center();
                 Mouse.Down(MouseButton.Left);
                 Wait.For(TimeSpan.FromMilliseconds(200));
-                Mouse.Position += new Vector(-40, 0);
+                Mouse.Position += new System.Windows.Vector(-40, 0);
                 Mouse.Up(MouseButton.Left);
                 window.WaitUntilResponsive();
                 CollectionAssert.IsEmpty(listBox.Items);

@@ -3,7 +3,6 @@ namespace Gu.Wpf.FlipView.UiTests
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Windows;
     using Gu.Wpf.UiAutomation;
     using NUnit.Framework;
 
@@ -43,12 +42,12 @@ namespace Gu.Wpf.FlipView.UiTests
 
                 CollectionAssert.IsEmpty(listBox.Items);
 
-                Mouse.Drag(MouseButton.Left, cp, cp + new Vector(40, 0), TimeSpan.Zero);
+                Mouse.Drag(MouseButton.Left, cp, cp + new System.Windows.Vector(40, 0), TimeSpan.Zero);
                 window.WaitUntilResponsive();
                 swipes.Add("SwipeRight Delta: (40, 0) Velocity: ∞");
                 CollectionAssert.AreEqual(swipes, listBox.Items.Select(x => x.Text));
 
-                Mouse.Drag(MouseButton.Left, cp, cp + new Vector(-40, 0), TimeSpan.Zero);
+                Mouse.Drag(MouseButton.Left, cp, cp + new System.Windows.Vector(-40, 0), TimeSpan.Zero);
                 window.WaitUntilResponsive();
                 swipes.Add("SwipeLeft Delta: (-40, 0) Velocity: ∞");
                 CollectionAssert.AreEqual(swipes, listBox.Items.Select(x => x.Text));
@@ -67,11 +66,11 @@ namespace Gu.Wpf.FlipView.UiTests
 
                 CollectionAssert.IsEmpty(listBox.Items);
 
-                Mouse.Drag(MouseButton.Left, cp, cp + new Vector(39, 0), double.PositiveInfinity);
+                Mouse.Drag(MouseButton.Left, cp, cp + new System.Windows.Vector(39, 0), double.PositiveInfinity);
                 window.WaitUntilResponsive();
                 CollectionAssert.IsEmpty(listBox.Items);
 
-                Mouse.Drag(MouseButton.Left, cp, cp + new Vector(-39, 0), double.PositiveInfinity);
+                Mouse.Drag(MouseButton.Left, cp, cp + new System.Windows.Vector(-39, 0), double.PositiveInfinity);
                 window.WaitUntilResponsive();
                 CollectionAssert.IsEmpty(listBox.Items);
             }
@@ -89,11 +88,11 @@ namespace Gu.Wpf.FlipView.UiTests
 
                 CollectionAssert.IsEmpty(listBox.Items);
 
-                Mouse.Drag(MouseButton.Left, cp, cp + new Vector(39, 0), 200);
+                Mouse.Drag(MouseButton.Left, cp, cp + new System.Windows.Vector(39, 0), 200);
                 window.WaitUntilResponsive();
                 CollectionAssert.IsEmpty(listBox.Items);
 
-                Mouse.Drag(MouseButton.Left, cp, cp + new Vector(-39, 0), 200);
+                Mouse.Drag(MouseButton.Left, cp, cp + new System.Windows.Vector(-39, 0), 200);
                 window.WaitUntilResponsive();
                 CollectionAssert.IsEmpty(listBox.Items);
             }
