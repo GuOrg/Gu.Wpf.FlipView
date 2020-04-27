@@ -121,8 +121,6 @@ Gu.Wpf.FlipView.TransitionControl.OldContentStyle.set -> void
 Gu.Wpf.FlipView.TransitionControl.OutAnimation.get -> System.Windows.Media.Animation.Storyboard
 Gu.Wpf.FlipView.TransitionControl.OutAnimation.set -> void
 Gu.Wpf.FlipView.TransitionControl.TransitionControl() -> void
-XamlGeneratedNamespace.GeneratedInternalTypeHelper
-XamlGeneratedNamespace.GeneratedInternalTypeHelper.GeneratedInternalTypeHelper() -> void
 abstract Gu.Wpf.FlipView.Gestures.AbstractGestureTracker<TArgs>.OnInputElementChanged(System.Windows.UIElement oldElement, System.Windows.UIElement newElement) -> void
 abstract Gu.Wpf.FlipView.Gestures.AbstractGestureTracker<TArgs>.TryGetPoint(TArgs args, out Gu.Wpf.FlipView.Gestures.GesturePoint point) -> bool
 const Gu.Wpf.FlipView.TransitionControl.PartNewContent = "PART_NewContent" -> string

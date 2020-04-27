@@ -178,7 +178,7 @@ namespace Gu.Wpf.FlipView
                 this.newContentPresenter?.RaiseEvent(new RoutedEventArgs(ContentChangedEvent, this.newContentPresenter));
                 this.RaiseEvent(this.contentChangedEventArgs);
                 if (ReferenceEquals(this.OutAnimation, EmptyStoryboard.Instance) ||
-                    this.timer == null ||
+                    this.timer is null ||
                     this.timer.Interval == TimeSpan.Zero)
                 {
                     this.OldContent = null;

@@ -50,7 +50,7 @@ namespace Gu.Wpf.FlipView.Gestures
         public bool TryGetGesture(IReadOnlyList<GesturePoint> points, out GestureEventArgs gestureEventArgs)
         {
             gestureEventArgs = null;
-            if (points == null || points.Count < 2)
+            if (points is null || points.Count < 2)
             {
                 return false;
             }
@@ -75,6 +75,11 @@ namespace Gu.Wpf.FlipView.Gestures
         /// <inheritdoc />
         public bool TryGetGesture(ExecutedRoutedEventArgs executed, out GestureEventArgs gestureEventArgs)
         {
+            if (executed is null)
+            {
+                throw new ArgumentNullException(nameof(executed));
+            }
+
             gestureEventArgs = null;
             if (executed.Command == NavigationCommands.BrowseForward)
             {

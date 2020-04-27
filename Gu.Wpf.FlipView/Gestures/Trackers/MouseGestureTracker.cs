@@ -38,8 +38,13 @@ namespace Gu.Wpf.FlipView.Gestures
         /// <inheritdoc/>
         protected override bool TryGetPoint(MouseEventArgs args, out GesturePoint point)
         {
+            if (args is null)
+            {
+                throw new System.ArgumentNullException(nameof(args));
+            }
+
             var inputElement = this.InputElement;
-            if (inputElement == null)
+            if (inputElement is null)
             {
                 point = default;
                 return false;

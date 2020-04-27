@@ -77,6 +77,11 @@ namespace Gu.Wpf.FlipView.Gestures
         /// <inheritdoc />
         protected override void InsertItem(int index, IGestureTracker item)
         {
+            if (item is null)
+            {
+                throw new ArgumentNullException(nameof(item));
+            }
+
             item.InputElement = this.inputElement;
             item.Gestured += this.OnGestured;
             base.InsertItem(index, item);
@@ -94,6 +99,11 @@ namespace Gu.Wpf.FlipView.Gestures
         /// <inheritdoc />
         protected override void SetItem(int index, IGestureTracker item)
         {
+            if (item is null)
+            {
+                throw new ArgumentNullException(nameof(item));
+            }
+
             item.InputElement = this.inputElement;
             item.Gestured += this.OnGestured;
             base.SetItem(index, item);

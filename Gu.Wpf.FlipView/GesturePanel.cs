@@ -80,6 +80,11 @@ namespace Gu.Wpf.FlipView
         /// </summary>
         protected override void OnRender(DrawingContext dc)
         {
+            if (dc is null)
+            {
+                throw new System.ArgumentNullException(nameof(dc));
+            }
+
             if (this.Background is Brush background)
             {
                 dc.DrawRectangle(background, null, new Rect(this.RenderSize));
@@ -109,6 +114,11 @@ namespace Gu.Wpf.FlipView
         /// </summary>
         protected virtual void OnGesture(object sender, GestureEventArgs e)
         {
+            if (e is null)
+            {
+                throw new System.ArgumentNullException(nameof(e));
+            }
+
             this.RaiseEvent(new GesturedEventArgs(e.Type, e));
         }
 

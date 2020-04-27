@@ -15,7 +15,7 @@
         /// </summary>
         internal static IEnumerable<DependencyObject> VisualChildrenRecursive(this DependencyObject parent)
         {
-            if (parent == null)
+            if (parent is null)
             {
                 yield break;
             }

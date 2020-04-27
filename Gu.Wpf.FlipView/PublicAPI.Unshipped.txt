@@ -1,1 +1,7 @@
-﻿
+﻿Gu.Wpf.FlipView.Gestures.GesturePoint.Equals(Gu.Wpf.FlipView.Gestures.GesturePoint other) -> bool
+XamlGeneratedNamespace.GeneratedInternalTypeHelper
+XamlGeneratedNamespace.GeneratedInternalTypeHelper.GeneratedInternalTypeHelper() -> void
+override Gu.Wpf.FlipView.Gestures.GesturePoint.Equals(object obj) -> bool
+override Gu.Wpf.FlipView.Gestures.GesturePoint.GetHashCode() -> int
+static Gu.Wpf.FlipView.Gestures.GesturePoint.operator !=(Gu.Wpf.FlipView.Gestures.GesturePoint left, Gu.Wpf.FlipView.Gestures.GesturePoint right) -> bool
+static Gu.Wpf.FlipView.Gestures.GesturePoint.operator ==(Gu.Wpf.FlipView.Gestures.GesturePoint left, Gu.Wpf.FlipView.Gestures.GesturePoint right) -> bool

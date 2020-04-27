@@ -77,6 +77,11 @@ namespace Gu.Wpf.FlipView.AttachedProperties
         [AttachedPropertyBrowsableForType(typeof(FrameworkElement))]
         public static double GetRelativeOffsetX(FrameworkElement element)
         {
+            if (element is null)
+            {
+                throw new System.ArgumentNullException(nameof(element));
+            }
+
             return (double)element.GetValue(RelativeOffsetXProperty);
         }
 
@@ -85,6 +90,11 @@ namespace Gu.Wpf.FlipView.AttachedProperties
         /// <param name="value">RelativeOffsetX property value.</param>
         public static void SetRelativeOffsetX(FrameworkElement element, double value)
         {
+            if (element is null)
+            {
+                throw new System.ArgumentNullException(nameof(element));
+            }
+
             element.SetValue(RelativeOffsetXProperty, value);
         }
 
@@ -94,6 +104,11 @@ namespace Gu.Wpf.FlipView.AttachedProperties
         [AttachedPropertyBrowsableForType(typeof(DependencyObject))]
         public static double GetOffsetX(DependencyObject element)
         {
+            if (element is null)
+            {
+                throw new System.ArgumentNullException(nameof(element));
+            }
+
             return (double)element.GetValue(OffsetXProperty);
         }
 
@@ -102,6 +117,11 @@ namespace Gu.Wpf.FlipView.AttachedProperties
         /// <param name="value">OffsetX property value.</param>
         public static void SetOffsetX(DependencyObject element, double value)
         {
+            if (element is null)
+            {
+                throw new System.ArgumentNullException(nameof(element));
+            }
+
             element.SetValue(OffsetXProperty, value);
         }
 
@@ -111,6 +131,11 @@ namespace Gu.Wpf.FlipView.AttachedProperties
         [AttachedPropertyBrowsableForType(typeof(DependencyObject))]
         public static double GetScaleX(DependencyObject element)
         {
+            if (element is null)
+            {
+                throw new System.ArgumentNullException(nameof(element));
+            }
+
             return (double)element.GetValue(ScaleXProperty);
         }
 
@@ -119,6 +144,11 @@ namespace Gu.Wpf.FlipView.AttachedProperties
         /// <param name="value">ScaleX property value.</param>
         public static void SetScaleX(DependencyObject element, double value)
         {
+            if (element is null)
+            {
+                throw new System.ArgumentNullException(nameof(element));
+            }
+
             element.SetValue(ScaleXProperty, value);
         }
 
@@ -128,6 +158,11 @@ namespace Gu.Wpf.FlipView.AttachedProperties
         [AttachedPropertyBrowsableForType(typeof(DependencyObject))]
         public static double GetRelativeOffsetY(DependencyObject element)
         {
+            if (element is null)
+            {
+                throw new System.ArgumentNullException(nameof(element));
+            }
+
             return (double)element.GetValue(RelativeOffsetYProperty);
         }
 
@@ -136,6 +171,11 @@ namespace Gu.Wpf.FlipView.AttachedProperties
         /// <param name="value">RelativeOffsetY property value.</param>
         public static void SetRelativeOffsetY(DependencyObject element, double value)
         {
+            if (element is null)
+            {
+                throw new System.ArgumentNullException(nameof(element));
+            }
+
             element.SetValue(RelativeOffsetYProperty, value);
         }
 
@@ -145,6 +185,11 @@ namespace Gu.Wpf.FlipView.AttachedProperties
         [AttachedPropertyBrowsableForType(typeof(DependencyObject))]
         public static double GetOffsetY(DependencyObject element)
         {
+            if (element is null)
+            {
+                throw new System.ArgumentNullException(nameof(element));
+            }
+
             return (double)element.GetValue(OffsetYProperty);
         }
 
@@ -153,6 +198,11 @@ namespace Gu.Wpf.FlipView.AttachedProperties
         /// <param name="value">OffsetY property value.</param>
         public static void SetOffsetY(DependencyObject element, double value)
         {
+            if (element is null)
+            {
+                throw new System.ArgumentNullException(nameof(element));
+            }
+
             element.SetValue(OffsetYProperty, value);
         }
 
@@ -162,6 +212,11 @@ namespace Gu.Wpf.FlipView.AttachedProperties
         [AttachedPropertyBrowsableForType(typeof(DependencyObject))]
         public static double GetScaleY(DependencyObject element)
         {
+            if (element is null)
+            {
+                throw new System.ArgumentNullException(nameof(element));
+            }
+
             return (double)element.GetValue(ScaleYProperty);
         }
 
@@ -170,6 +225,11 @@ namespace Gu.Wpf.FlipView.AttachedProperties
         /// <param name="value">ScaleY property value.</param>
         public static void SetScaleY(DependencyObject element, double value)
         {
+            if (element is null)
+            {
+                throw new System.ArgumentNullException(nameof(element));
+            }
+
             element.SetValue(ScaleYProperty, value);
         }
 

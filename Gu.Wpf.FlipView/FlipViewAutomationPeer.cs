@@ -1,4 +1,4 @@
-﻿namespace Gu.Wpf.FlipView
+namespace Gu.Wpf.FlipView
 {
     using System.Collections.Generic;
     using System.Linq;
@@ -14,7 +14,7 @@
         /// <summary>
         /// Initializes a new instance of the <see cref="FlipViewAutomationPeer"/> class.
         /// </summary>
-        /// <param name="owner">The <see cref="T:System.Windows.UIElement" /> that is associated with this <see cref="T:System.Windows.Automation.Peers.UIElementAutomationPeer" />.</param>
+        /// <param name="owner">The <see cref="FlipView" /> that is associated with this <see cref="FlipViewAutomationPeer" />.</param>
         public FlipViewAutomationPeer(FlipView owner)
             : base(owner)
         {
