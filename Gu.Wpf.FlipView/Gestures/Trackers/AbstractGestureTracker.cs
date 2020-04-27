@@ -17,22 +17,22 @@ namespace Gu.Wpf.FlipView.Gestures
         private readonly List<GesturePoint> points = new List<GesturePoint>();
         private bool isGesturing;
         private IGestureInterpreter interpreter;
-        private UIElement inputElement;
+        private UIElement? inputElement;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="AbstractGestureTracker{TArgs}"/> class.
         /// </summary>
         /// <param name="interpreter">The interpreter to use. If null <see cref="DefaultGestureInterpreter"/> is used.</param>
-        protected AbstractGestureTracker(IGestureInterpreter interpreter = null)
+        protected AbstractGestureTracker(IGestureInterpreter? interpreter = null)
         {
             this.interpreter = interpreter ?? new DefaultGestureInterpreter();
         }
 
         /// <inheritdoc />
-        public event EventHandler<GestureEventArgs> Gestured;
+        public event EventHandler<GestureEventArgs>? Gestured;
 
         /// <inheritdoc />
-        public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler? PropertyChanged;
 
         /// <summary>
         /// Gets or sets a value indicating whether gets a value indicating if a potential gesture is started.
@@ -73,7 +73,7 @@ namespace Gu.Wpf.FlipView.Gestures
         /// <summary>
         /// Gets or sets the input element being tracked. Setting it to null removes subscriptions.
         /// </summary>
-        public UIElement InputElement
+        public UIElement? InputElement
         {
             get => this.inputElement;
             set
@@ -183,11 +183,11 @@ namespace Gu.Wpf.FlipView.Gestures
         /// <summary>This method is invoked when the <see cref="InputElement"/> changes.</summary>
         /// <param name="oldElement">The old value of <see cref="InputElement"/>.</param>
         /// <param name="newElement">The new value of <see cref="InputElement"/>.</param>
-        protected abstract void OnInputElementChanged(UIElement oldElement, UIElement newElement);
+        protected abstract void OnInputElementChanged(UIElement? oldElement, UIElement? newElement);
 
         /// <summary>Raises the <see cref="PropertyChanged"/> event.</summary>
         /// <param name="propertyName">The name of the property to notify for. String.Empty or null signals to WPF that all properties have changed.</param>
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
         {
             this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }

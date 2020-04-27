@@ -1,5 +1,17 @@
-﻿Gu.Wpf.FlipView.Gestures.GesturePoint.Equals(Gu.Wpf.FlipView.Gestures.GesturePoint other) -> bool
-override Gu.Wpf.FlipView.Gestures.GesturePoint.Equals(object obj) -> bool
+﻿Gu.Wpf.FlipView.Gestures.AbstractGestureTracker<TArgs>.AbstractGestureTracker(Gu.Wpf.FlipView.Gestures.IGestureInterpreter? interpreter = null) -> void
+Gu.Wpf.FlipView.Gestures.AbstractGestureTracker<TArgs>.Gestured -> System.EventHandler<Gu.Wpf.FlipView.Gestures.GestureEventArgs!>?
+Gu.Wpf.FlipView.Gestures.AbstractGestureTracker<TArgs>.InputElement.get -> System.Windows.UIElement?
+Gu.Wpf.FlipView.Gestures.AbstractGestureTracker<TArgs>.PropertyChanged -> System.ComponentModel.PropertyChangedEventHandler?
+Gu.Wpf.FlipView.Gestures.GesturePoint.Equals(Gu.Wpf.FlipView.Gestures.GesturePoint other) -> bool
+Gu.Wpf.FlipView.Gestures.IGestureTracker.InputElement.get -> System.Windows.UIElement?
+Gu.Wpf.FlipView.Gestures.SubscribeInfos.AddHandlers(System.Windows.UIElement? element) -> void
+Gu.Wpf.FlipView.Gestures.SubscribeInfos.RemoveHandlers(System.Windows.UIElement? element) -> void
+abstract Gu.Wpf.FlipView.Gestures.AbstractGestureTracker<TArgs>.OnInputElementChanged(System.Windows.UIElement? oldElement, System.Windows.UIElement? newElement) -> void
+override Gu.Wpf.FlipView.FlipViewAutomationPeer.CreateItemAutomationPeer(object! item) -> System.Windows.Automation.Peers.ItemAutomationPeer?
+override Gu.Wpf.FlipView.Gestures.GesturePoint.Equals(object! obj) -> bool
 override Gu.Wpf.FlipView.Gestures.GesturePoint.GetHashCode() -> int
+override Gu.Wpf.FlipView.Gestures.MouseGestureTracker.OnInputElementChanged(System.Windows.UIElement? oldElement, System.Windows.UIElement? newElement) -> void
 static Gu.Wpf.FlipView.Gestures.GesturePoint.operator !=(Gu.Wpf.FlipView.Gestures.GesturePoint left, Gu.Wpf.FlipView.Gestures.GesturePoint right) -> bool
 static Gu.Wpf.FlipView.Gestures.GesturePoint.operator ==(Gu.Wpf.FlipView.Gestures.GesturePoint left, Gu.Wpf.FlipView.Gestures.GesturePoint right) -> bool
+virtual Gu.Wpf.FlipView.Gestures.AbstractGestureTracker<TArgs>.OnPropertyChanged(string? propertyName = null) -> void
+virtual Gu.Wpf.FlipView.Gestures.CompositeGestureTracker.OnPropertyChanged(string? propertyName = null) -> void

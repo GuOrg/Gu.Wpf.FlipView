@@ -113,7 +113,7 @@ namespace Gu.Wpf.FlipView.Gestures
 
         /// <summary>Raises the <see cref="PropertyChanged"/> event.</summary>
         /// <param name="propertyName">The name of the property to notify for. String.Empty or null signals to WPF that all properties have changed.</param>
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
         {
             this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }

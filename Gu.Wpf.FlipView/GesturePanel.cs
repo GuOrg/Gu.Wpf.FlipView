@@ -85,7 +85,7 @@ namespace Gu.Wpf.FlipView
                 throw new System.ArgumentNullException(nameof(dc));
             }
 
-            if (this.Background is Brush background)
+            if (this.Background is { } background)
             {
                 dc.DrawRectangle(background, null, new Rect(this.RenderSize));
             }

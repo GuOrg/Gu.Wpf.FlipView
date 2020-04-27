@@ -55,7 +55,7 @@ namespace Gu.Wpf.FlipView.Gestures
         }
 
         /// <inheritdoc />
-        protected override void OnInputElementChanged(UIElement oldElement, UIElement newElement)
+        protected override void OnInputElementChanged(UIElement? oldElement, UIElement? newElement)
         {
             this.subscribers.RemoveHandlers(oldElement);
             this.subscribers.AddHandlers(newElement);

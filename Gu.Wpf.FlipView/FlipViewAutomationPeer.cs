@@ -21,15 +21,19 @@ namespace Gu.Wpf.FlipView
         }
 
         /// <inheritdoc />
-        protected override ItemAutomationPeer CreateItemAutomationPeer(object item)
-        {
-            return null;
-        }
+        protected override ItemAutomationPeer? CreateItemAutomationPeer(object item) => null;
 
         /// <inheritdoc />
         protected override List<AutomationPeer> GetChildrenCore()
         {
-            AutomationPeer CreatePeerForElement(DependencyObject o)
+#pragma warning disable CS8619 // Nullability of reference types in value doesn't match target type.
+            return this.Owner.VisualChildrenRecursive()
+                       .Select(CreatePeerForElement)
+                       .Where(x => x != null)
+                       .ToList();
+#pragma warning restore CS8619 // Nullability of reference types in value doesn't match target type.
+
+            AutomationPeer? CreatePeerForElement(DependencyObject o)
             {
                 if (o is UIElement uiElement)
                 {
@@ -43,17 +47,9 @@ namespace Gu.Wpf.FlipView
 
                 return null;
             }
-
-            return this.Owner.VisualChildrenRecursive()
-                       .Select(CreatePeerForElement)
-                       .Where(x => x != null)
-                       .ToList();
         }
 
         /// <inheritdoc />
-        protected override string GetClassNameCore()
-        {
-            return "FlipView";
-        }
+        protected override string GetClassNameCore() => "FlipView";
     }
 }

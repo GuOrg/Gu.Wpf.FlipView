@@ -116,7 +116,7 @@ namespace Gu.Wpf.FlipView
                     -1,
                     FrameworkPropertyMetadataOptions.BindsTwoWayByDefault | FrameworkPropertyMetadataOptions.Journal,
                     metadata.PropertyChangedCallback,
-                    (d, basevalue) => CoerceSelectedIndex(d, metadata.CoerceValueCallback.Invoke(d, basevalue))));
+                    (d, baseValue) => CoerceSelectedIndex(d, metadata.CoerceValueCallback.Invoke(d, baseValue))));
             KeyboardNavigation.DirectionalNavigationProperty.OverrideMetadata(typeof(FlipView), new FrameworkPropertyMetadata(KeyboardNavigationMode.Contained));
             KeyboardNavigation.TabNavigationProperty.OverrideMetadata(typeof(FlipView), new FrameworkPropertyMetadata(KeyboardNavigationMode.Once));
             CommandManager.RegisterClassCommandBinding(typeof(FlipView), new CommandBinding(NavigationCommands.BrowseBack, OnPreviousExecuted, OnPreviousCanExecute));
@@ -127,54 +127,54 @@ namespace Gu.Wpf.FlipView
         /// <summary>
         /// Gets or sets how new content animates in when selected index increases.
         /// </summary>
-        public Storyboard IncreaseInAnimation
+        public Storyboard? IncreaseInAnimation
         {
-            get => (Storyboard)this.GetValue(IncreaseInAnimationProperty);
+            get => (Storyboard?)this.GetValue(IncreaseInAnimationProperty);
             set => this.SetValue(IncreaseInAnimationProperty, value);
         }
 
         /// <summary>
         /// Gets or sets how new content animates out when selected index increases.
         /// </summary>
-        public Storyboard IncreaseOutAnimation
+        public Storyboard? IncreaseOutAnimation
         {
-            get => (Storyboard)this.GetValue(IncreaseOutAnimationProperty);
+            get => (Storyboard?)this.GetValue(IncreaseOutAnimationProperty);
             set => this.SetValue(IncreaseOutAnimationProperty, value);
         }
 
         /// <summary>
         /// Gets or sets how new content animates in when selected index decreases.
         /// </summary>
-        public Storyboard DecreaseInAnimation
+        public Storyboard? DecreaseInAnimation
         {
-            get => (Storyboard)this.GetValue(DecreaseInAnimationProperty);
+            get => (Storyboard?)this.GetValue(DecreaseInAnimationProperty);
             set => this.SetValue(DecreaseInAnimationProperty, value);
         }
 
         /// <summary>
         /// Gets or sets how new content animates in when selected index decreases.
         /// </summary>
-        public Storyboard DecreaseOutAnimation
+        public Storyboard? DecreaseOutAnimation
         {
-            get => (Storyboard)this.GetValue(DecreaseOutAnimationProperty);
+            get => (Storyboard?)this.GetValue(DecreaseOutAnimationProperty);
             set => this.SetValue(DecreaseOutAnimationProperty, value);
         }
 
         /// <summary>
         /// Gets or sets how new content animates in.
         /// </summary>
-        public Storyboard CurrentInAnimation
+        public Storyboard? CurrentInAnimation
         {
-            get => (Storyboard)this.GetValue(CurrentInAnimationProperty);
+            get => (Storyboard?)this.GetValue(CurrentInAnimationProperty);
             protected set => this.SetValue(CurrentInAnimationPropertyKey, value);
         }
 
         /// <summary>
         /// Gets or sets how new content animates out.
         /// </summary>
-        public Storyboard CurrentOutAnimation
+        public Storyboard? CurrentOutAnimation
         {
-            get => (Storyboard)this.GetValue(CurrentOutAnimationProperty);
+            get => (Storyboard?)this.GetValue(CurrentOutAnimationProperty);
             protected set => this.SetValue(CurrentOutAnimationPropertyKey, value);
         }
 
@@ -199,9 +199,9 @@ namespace Gu.Wpf.FlipView
         /// <summary>
         /// Gets or sets a style for the index items looks TargetType="ListBoxItem".
         /// </summary>
-        public Style IndexItemStyle
+        public Style? IndexItemStyle
         {
-            get => (Style)this.GetValue(IndexItemStyleProperty);
+            get => (Style?)this.GetValue(IndexItemStyleProperty);
             set => this.SetValue(IndexItemStyleProperty, value);
         }
 

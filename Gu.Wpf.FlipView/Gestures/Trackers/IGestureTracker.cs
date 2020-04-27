@@ -17,6 +17,6 @@ namespace Gu.Wpf.FlipView.Gestures
         /// <summary>
         /// Gets or sets the element for which events are subscribed to to detect gestures.
         /// </summary>
-        UIElement InputElement { get; set; }
+        UIElement? InputElement { get; set; }
     }
 }
