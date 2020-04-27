@@ -16,7 +16,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".sln", ".sln", "{3C205845-3
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gu.Wpf.FlipView", "Gu.Wpf.FlipView\Gu.Wpf.FlipView.csproj", "{B6B0CDA6-CBE0-4D18-A213-C0F5D8100DD1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gu.Wpf.FlipView.Demo", "Gu.Wpf.FlipView.Demo\Gu.Wpf.FlipView.Demo.csproj", "{5ABE606A-93D4-47B0-A070-76863A9CE789}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gu.Wpf.FlipView.Demo", "Gu.Wpf.FlipView.Demo\Gu.Wpf.FlipView.Demo.csproj", "{5ABE606A-93D4-47B0-A070-76863A9CE789}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gu.Wpf.FlipView.Tests", "Gu.Wpf.FlipView.Tests\Gu.Wpf.FlipView.Tests.csproj", "{1F09BF2F-02C3-4B8B-9042-17C042F1C5F7}"
 EndProject

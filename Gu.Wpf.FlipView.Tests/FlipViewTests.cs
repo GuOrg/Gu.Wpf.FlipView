@@ -1,4 +1,4 @@
-﻿namespace Gu.Wpf.FlipView.Tests
+namespace Gu.Wpf.FlipView.Tests
 {
     using System.Threading;
     using System.Windows.Input;
@@ -9,45 +9,46 @@
     using NUnit.Framework;
 
     [Apartment(ApartmentState.STA)]
-    public class FlipViewTests
+    public static class FlipViewTests
     {
-        private FlipView flipView;
-
-        [SetUp]
-        public void SetUp()
-        {
-            this.flipView = new FlipView();
-            this.flipView.Items.Add(new DummyItem(0));
-            this.flipView.Items.Add(new DummyItem(1));
-            this.flipView.Items.Add(new DummyItem(2));
-        }
-
         [TestCase(0, false, true)]
         [TestCase(1, true, true)]
         [TestCase(2, true, false)]
-        public void CanExecutePreviousAndNext(int index, bool canPrevious, bool canNext)
+        public static void CanExecutePreviousAndNext(int index, bool canPrevious, bool canNext)
         {
-            this.flipView.SetCurrentValue(System.Windows.Controls.Primitives.Selector.SelectedIndexProperty, index);
-            Assert.AreEqual(canPrevious, NavigationCommands.BrowseBack.CanExecute(null, this.flipView));
-            Assert.AreEqual(canNext, NavigationCommands.BrowseForward.CanExecute(null, this.flipView));
+            var flipView = new FlipView();
+            flipView.Items.Add(new DummyItem(0));
+            flipView.Items.Add(new DummyItem(1));
+            flipView.Items.Add(new DummyItem(2));
+            flipView.SetCurrentValue(System.Windows.Controls.Primitives.Selector.SelectedIndexProperty, index);
+            Assert.AreEqual(canPrevious, NavigationCommands.BrowseBack.CanExecute(null, flipView));
+            Assert.AreEqual(canNext, NavigationCommands.BrowseForward.CanExecute(null, flipView));
         }
 
         [TestCase(0, 0)]
         [TestCase(1, 0)]
-        public void BrowseBack(int from, int expectedTo)
+        public static void BrowseBack(int from, int expectedTo)
         {
-            this.flipView.SetCurrentValue(System.Windows.Controls.Primitives.Selector.SelectedIndexProperty, from);
-            NavigationCommands.BrowseBack.Execute(null, this.flipView);
-            Assert.AreSame(this.flipView.Items[expectedTo], this.flipView.SelectedItem);
+            var flipView = new FlipView();
+            flipView.Items.Add(new DummyItem(0));
+            flipView.Items.Add(new DummyItem(1));
+            flipView.Items.Add(new DummyItem(2));
+            flipView.SetCurrentValue(System.Windows.Controls.Primitives.Selector.SelectedIndexProperty, from);
+            NavigationCommands.BrowseBack.Execute(null, flipView);
+            Assert.AreSame(flipView.Items[expectedTo], flipView.SelectedItem);
         }
 
         [TestCase(0, 1)]
         [TestCase(2, 2)]
-        public void BrowseForward(int from, int expectedTo)
+        public static void BrowseForward(int from, int expectedTo)
         {
-            this.flipView.SetCurrentValue(System.Windows.Controls.Primitives.Selector.SelectedIndexProperty, from);
-            NavigationCommands.BrowseForward.Execute(null, this.flipView);
-            Assert.AreSame(this.flipView.Items[expectedTo], this.flipView.SelectedItem);
+            var flipView = new FlipView();
+            flipView.Items.Add(new DummyItem(0));
+            flipView.Items.Add(new DummyItem(1));
+            flipView.Items.Add(new DummyItem(2));
+            flipView.SetCurrentValue(System.Windows.Controls.Primitives.Selector.SelectedIndexProperty, from);
+            NavigationCommands.BrowseForward.Execute(null, flipView);
+            Assert.AreSame(flipView.Items[expectedTo], flipView.SelectedItem);
         }
     }
 }

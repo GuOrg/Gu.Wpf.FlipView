@@ -14,12 +14,10 @@ namespace Gu.Wpf.FlipView.UiTests
         [SetUp]
         public void SetUp()
         {
-            using (var app = Application.AttachOrLaunch(ExeFileName, WindowName))
-            {
-                // restore state for the next test.
-                Wait.UntilInputIsProcessed();
-                app.MainWindow.FindButton("Clear").Click();
-            }
+            using var app = Application.AttachOrLaunch(ExeFileName, WindowName);
+            // restore state for the next test.
+            Wait.UntilInputIsProcessed();
+            app.MainWindow.FindButton("Clear").Click();
         }
 
         [OneTimeTearDown]
@@ -32,70 +30,64 @@ namespace Gu.Wpf.FlipView.UiTests
         [Test]
         public void Swipes()
         {
-            using (var app = Application.AttachOrLaunch(ExeFileName, WindowName))
-            {
-                var window = app.MainWindow;
-                var gesturePanel = window.FindGroupBox("Gesture panel");
-                var listBox = window.FindListBox("Gestures");
-                var swipes = new List<string>();
-                var cp = gesturePanel.Bounds.Center();
+            using var app = Application.AttachOrLaunch(ExeFileName, WindowName);
+            var window = app.MainWindow;
+            var gesturePanel = window.FindGroupBox("Gesture panel");
+            var listBox = window.FindListBox("Gestures");
+            var swipes = new List<string>();
+            var cp = gesturePanel.Bounds.Center();
 
-                CollectionAssert.IsEmpty(listBox.Items);
+            CollectionAssert.IsEmpty(listBox.Items);
 
-                Mouse.Drag(MouseButton.Left, cp, cp + new System.Windows.Vector(40, 0), TimeSpan.Zero);
-                window.WaitUntilResponsive();
-                swipes.Add("SwipeRight Delta: (40, 0) Velocity: ∞");
-                CollectionAssert.AreEqual(swipes, listBox.Items.Select(x => x.Text));
+            Mouse.Drag(MouseButton.Left, cp, cp + new System.Windows.Vector(40, 0), TimeSpan.Zero);
+            window.WaitUntilResponsive();
+            swipes.Add("SwipeRight Delta: (40, 0) Velocity: ∞");
+            CollectionAssert.AreEqual(swipes, listBox.Items.Select(x => x.Text));
 
-                Mouse.Drag(MouseButton.Left, cp, cp + new System.Windows.Vector(-40, 0), TimeSpan.Zero);
-                window.WaitUntilResponsive();
-                swipes.Add("SwipeLeft Delta: (-40, 0) Velocity: ∞");
-                CollectionAssert.AreEqual(swipes, listBox.Items.Select(x => x.Text));
-            }
+            Mouse.Drag(MouseButton.Left, cp, cp + new System.Windows.Vector(-40, 0), TimeSpan.Zero);
+            window.WaitUntilResponsive();
+            swipes.Add("SwipeLeft Delta: (-40, 0) Velocity: ∞");
+            CollectionAssert.AreEqual(swipes, listBox.Items.Select(x => x.Text));
         }
 
         [Test]
         public void NoSwipesWhenTooShort()
         {
-            using (var app = Application.AttachOrLaunch(ExeFileName, WindowName))
-            {
-                var window = app.MainWindow;
-                var gesturePanel = window.FindGroupBox("Gesture panel");
-                var listBox = window.FindListBox("Gestures");
-                var cp = gesturePanel.Bounds.Center();
+            using var app = Application.AttachOrLaunch(ExeFileName, WindowName);
+            var window = app.MainWindow;
+            var gesturePanel = window.FindGroupBox("Gesture panel");
+            var listBox = window.FindListBox("Gestures");
+            var cp = gesturePanel.Bounds.Center();
 
-                CollectionAssert.IsEmpty(listBox.Items);
+            CollectionAssert.IsEmpty(listBox.Items);
 
-                Mouse.Drag(MouseButton.Left, cp, cp + new System.Windows.Vector(39, 0), double.PositiveInfinity);
-                window.WaitUntilResponsive();
-                CollectionAssert.IsEmpty(listBox.Items);
+            Mouse.Drag(MouseButton.Left, cp, cp + new System.Windows.Vector(39, 0), double.PositiveInfinity);
+            window.WaitUntilResponsive();
+            CollectionAssert.IsEmpty(listBox.Items);
 
-                Mouse.Drag(MouseButton.Left, cp, cp + new System.Windows.Vector(-39, 0), double.PositiveInfinity);
-                window.WaitUntilResponsive();
-                CollectionAssert.IsEmpty(listBox.Items);
-            }
+            Mouse.Drag(MouseButton.Left, cp, cp + new System.Windows.Vector(-39, 0), double.PositiveInfinity);
+            window.WaitUntilResponsive();
+            CollectionAssert.IsEmpty(listBox.Items);
         }
 
         [Test]
         public void NoSwipesWhenTooSlow()
         {
-            using (var app = Application.AttachOrLaunch(ExeFileName, WindowName))
-            {
-                var window = app.MainWindow;
-                var gesturePanel = window.FindGroupBox("Gesture panel");
-                var listBox = window.FindListBox("Gestures");
-                var cp = gesturePanel.Bounds.Center();
+            using var app = Application.AttachOrLaunch(ExeFileName, WindowName);
+            var window = app.MainWindow;
+            var gesturePanel = window.FindGroupBox("Gesture panel");
+            var listBox = window.FindListBox("Gestures");
+            var cp = gesturePanel.Bounds.Center();
 
-                CollectionAssert.IsEmpty(listBox.Items);
+            CollectionAssert.IsEmpty(listBox.Items);
 
-                Mouse.Drag(MouseButton.Left, cp, cp + new System.Windows.Vector(39, 0), 200);
-                window.WaitUntilResponsive();
-                CollectionAssert.IsEmpty(listBox.Items);
+            Mouse.Drag(MouseButton.Left, cp, cp + new System.Windows.Vector(39, 0), 200);
+            window.WaitUntilResponsive();
+            CollectionAssert.IsEmpty(listBox.Items);
 
-                Mouse.Drag(MouseButton.Left, cp, cp + new System.Windows.Vector(-39, 0), 200);
-                window.WaitUntilResponsive();
-                CollectionAssert.IsEmpty(listBox.Items);
-            }
+            Mouse.Drag(MouseButton.Left, cp, cp + new System.Windows.Vector(-39, 0), 200);
+            window.WaitUntilResponsive();
+            CollectionAssert.IsEmpty(listBox.Items);
         }
     }
 }
