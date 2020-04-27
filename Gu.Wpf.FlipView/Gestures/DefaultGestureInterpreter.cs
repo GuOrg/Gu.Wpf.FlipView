@@ -2,6 +2,7 @@ namespace Gu.Wpf.FlipView.Gestures
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
     using System.Windows;
     using System.Windows.Input;
 
@@ -47,7 +48,7 @@ namespace Gu.Wpf.FlipView.Gestures
         public double MaxDeviationFromHorizontal { get; set; } = 30;
 
         /// <inheritdoc />
-        public bool TryGetGesture(IReadOnlyList<GesturePoint> points, out GestureEventArgs gestureEventArgs)
+        public bool TryGetGesture(IReadOnlyList<GesturePoint> points, [NotNullWhen(true)] out GestureEventArgs? gestureEventArgs)
         {
             gestureEventArgs = null;
             if (points is null || points.Count < 2)
@@ -73,7 +74,7 @@ namespace Gu.Wpf.FlipView.Gestures
         }
 
         /// <inheritdoc />
-        public bool TryGetGesture(ExecutedRoutedEventArgs executed, out GestureEventArgs gestureEventArgs)
+        public bool TryGetGesture(ExecutedRoutedEventArgs executed, [NotNullWhen(true)] out GestureEventArgs? gestureEventArgs)
         {
             if (executed is null)
             {
