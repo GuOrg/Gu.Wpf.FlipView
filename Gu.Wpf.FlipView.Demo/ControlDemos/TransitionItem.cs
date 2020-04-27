@@ -6,8 +6,8 @@ namespace Gu.Wpf.FlipView.Demo.ControlDemos
 
     public class TransitionItem : INotifyPropertyChanged
     {
-        private SolidColorBrush brush;
-        private string text;
+        private SolidColorBrush? brush;
+        private string? text;
 
         public TransitionItem()
         {
@@ -19,9 +19,9 @@ namespace Gu.Wpf.FlipView.Demo.ControlDemos
             this.text = text;
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler? PropertyChanged;
 
-        public SolidColorBrush Brush
+        public SolidColorBrush? Brush
         {
             get => this.brush;
 
@@ -37,7 +37,7 @@ namespace Gu.Wpf.FlipView.Demo.ControlDemos
             }
         }
 
-        public string Text
+        public string? Text
         {
             get => this.text;
 
@@ -53,7 +53,7 @@ namespace Gu.Wpf.FlipView.Demo.ControlDemos
             }
         }
 
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
         {
             this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }

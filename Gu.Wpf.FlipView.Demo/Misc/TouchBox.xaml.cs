@@ -1,11 +1,8 @@
-﻿namespace Gu.Wpf.FlipView.Demo.Misc
+namespace Gu.Wpf.FlipView.Demo.Misc
 {
     using System.Windows.Input;
     using Gu.Wpf.FlipView.Gestures;
 
-    /// <summary>
-    /// Interaction logic for TouchBox.xaml.
-    /// </summary>
     public partial class TouchBox : EventBox
     {
         private readonly TouchGestureTracker tracker;

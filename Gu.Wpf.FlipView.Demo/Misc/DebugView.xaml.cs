@@ -1,11 +1,8 @@
-﻿namespace Gu.Wpf.FlipView.Demo.Misc
+namespace Gu.Wpf.FlipView.Demo.Misc
 {
     using System.Windows;
     using System.Windows.Controls;
 
-    /// <summary>
-    /// Interaction logic for DebugView.xaml.
-    /// </summary>
     public partial class DebugView : UserControl
     {
         public DebugView()
@@ -16,7 +13,7 @@
         private void InkCanvas_OnGesture(object sender, InkCanvasGestureEventArgs e)
         {
             var recognitionResults = e.GetGestureRecognitionResults();
-            this.ArgsBox.Items.Insert(0, $"recieved gesture: {recognitionResults.Count}");
+            this.ArgsBox.Items.Insert(0, $"received gesture: {recognitionResults.Count}");
 
             foreach (var gestureRecognitionResult in recognitionResults)
             {

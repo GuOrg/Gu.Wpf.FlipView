@@ -1,16 +1,16 @@
-﻿namespace Gu.Wpf.FlipView.Demo
+namespace Gu.Wpf.FlipView.Demo
 {
     using System.ComponentModel;
     using System.Runtime.CompilerServices;
 
     public class Person : INotifyPropertyChanged
     {
-        private string firstName;
-        private string lastName;
+        private string? firstName;
+        private string? lastName;
 
-        public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler? PropertyChanged;
 
-        public string FirstName
+        public string? FirstName
         {
             get => this.firstName;
 
@@ -26,7 +26,7 @@
             }
         }
 
-        public string LastName
+        public string? LastName
         {
             get => this.lastName;
 
@@ -47,7 +47,7 @@
             return $"{this.firstName} {this.lastName}";
         }
 
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
         {
             this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }

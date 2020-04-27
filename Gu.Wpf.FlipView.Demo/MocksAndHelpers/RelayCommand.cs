@@ -1,4 +1,4 @@
-﻿namespace Gu.Wpf.FlipView.Demo
+namespace Gu.Wpf.FlipView.Demo
 {
     using System;
     using System.Windows.Input;
@@ -6,14 +6,14 @@
     public class RelayCommand : ICommand
     {
         private readonly Action<object> execute;
-        private readonly Predicate<object> canExecute;
+        private readonly Func<object, bool> canExecute;
 
         public RelayCommand(Action<object> execute)
             : this(execute, null)
         {
         }
 
-        public RelayCommand(Action<object> execute, Predicate<object> canExecute)
+        public RelayCommand(Action<object> execute, Func<object, bool>? canExecute)
         {
             this.execute = execute ?? throw new ArgumentNullException(nameof(execute));
             this.canExecute = canExecute ?? (o => true);

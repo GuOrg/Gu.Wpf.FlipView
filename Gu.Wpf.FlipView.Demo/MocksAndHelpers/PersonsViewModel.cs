@@ -17,7 +17,7 @@ namespace Gu.Wpf.FlipView.Demo
             new Person { FirstName = "Cat", LastName = "Incremented" },
         };
 
-        private ObservableCollection<Person> people;
+        private ObservableCollection<Person>? people;
 
         public PersonsViewModel()
         {
@@ -28,9 +28,9 @@ namespace Gu.Wpf.FlipView.Demo
             this.ResetCommand = new RelayCommand(_ => this.People = new ObservableCollection<Person>(StaticPersons));
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler? PropertyChanged;
 
-        public ObservableCollection<Person> People
+        public ObservableCollection<Person>? People
         {
             get => this.people;
 
@@ -54,7 +54,7 @@ namespace Gu.Wpf.FlipView.Demo
 
         public ICommand ResetCommand { get; }
 
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
         {
             this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }

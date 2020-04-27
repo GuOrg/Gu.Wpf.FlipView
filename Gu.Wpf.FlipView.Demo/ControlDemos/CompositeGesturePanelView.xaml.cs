@@ -1,11 +1,8 @@
-﻿namespace Gu.Wpf.FlipView.Demo.ControlDemos
+namespace Gu.Wpf.FlipView.Demo.ControlDemos
 {
     using System.Windows.Controls;
     using Gu.Wpf.FlipView.Gestures;
 
-    /// <summary>
-    /// Interaction logic for CompositeGesturePanelView.xaml.
-    /// </summary>
     public partial class CompositeGesturePanelView : UserControl
     {
         public CompositeGesturePanelView()

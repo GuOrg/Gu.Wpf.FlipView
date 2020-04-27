@@ -1,10 +1,7 @@
-﻿namespace Gu.Wpf.FlipView.Demo.Misc
+namespace Gu.Wpf.FlipView.Demo.Misc
 {
     using System.Windows.Input;
 
-    /// <summary>
-    /// Interaction logic for CommandBox.xaml.
-    /// </summary>
     public partial class CommandBox : EventBox
     {
         public CommandBox()

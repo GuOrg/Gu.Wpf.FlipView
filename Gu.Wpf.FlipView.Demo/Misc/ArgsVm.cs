@@ -22,15 +22,15 @@ namespace Gu.Wpf.FlipView.Demo.Misc
             typeof(InertiaRotationBehavior),
         };
 
-        private readonly object args;
-        private readonly PropertyInfo info;
+        private readonly object? args;
+        private readonly PropertyInfo? info;
 
-        private ArgsVm[] children;
+        private ArgsVm[]? children;
 
         public ArgsVm(object args)
         {
             this.args = args;
-            this.Name = this.StringIt(args);
+            this.Name = StringIt(args);
             this.children = args.GetType()
                             .GetProperties()
                             .Where(x => Types.Contains(x.PropertyType))
@@ -38,18 +38,23 @@ namespace Gu.Wpf.FlipView.Demo.Misc
                             .ToArray();
         }
 
-        private ArgsVm(object args, PropertyInfo info)
+        private ArgsVm(object? args, PropertyInfo info)
         {
             this.args = args;
             this.info = info;
-            this.Name = $"{info.Name}: {this.StringIt(args)}";
+            this.Name = $"{info.Name}: {StringIt(args)}";
         }
 
-        public IEnumerable<ArgsVm> Children
+        public string Name { get; }
+
+        public IEnumerable<ArgsVm>? Children
         {
             get
             {
-                if (this.children == null && this.args != null && this.info != null && !this.info.PropertyType.IsPrimitive)
+                if (this.children is null &&
+                    this.args != null &&
+                    this.info != null &&
+                    !this.info.PropertyType.IsPrimitive)
                 {
                     var propertyInfos = this.args.GetType()
                                                         .GetProperties();
@@ -63,9 +68,7 @@ namespace Gu.Wpf.FlipView.Demo.Misc
             }
         }
 
-        public string Name { get; }
-
-        private string StringIt(object o)
+        private static string StringIt(object? o)
         {
             switch (o)
             {
