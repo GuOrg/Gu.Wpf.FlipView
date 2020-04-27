@@ -1,3 +1,4 @@
+#pragma warning disable CA1724
 namespace Gu.Wpf.FlipView
 {
     using System.Collections.Specialized;
