@@ -78,8 +78,8 @@ namespace Gu.Wpf.FlipView
         private readonly DispatcherTimer timer;
         private readonly RoutedEventArgs contentChangedEventArgs;
 
-        private ContentPresenter oldContentPresenter;
-        private ContentPresenter newContentPresenter;
+        private ContentPresenter? oldContentPresenter;
+        private ContentPresenter? newContentPresenter;
 
         static TransitionControl()
         {
@@ -113,7 +113,7 @@ namespace Gu.Wpf.FlipView
         /// Gets the content being removed.
         /// This will be set to null when the animation finishes.
         /// </summary>
-        public object OldContent
+        public object? OldContent
         {
             get => this.GetValue(OldContentProperty);
             private set => this.SetValue(OldContentPropertyKey, value);
@@ -122,7 +122,7 @@ namespace Gu.Wpf.FlipView
         /// <summary>
         /// Gets or sets the style for the old content presenter.
         /// </summary>
-        public Style OldContentStyle
+        public Style? OldContentStyle
         {
             get => (Style)this.GetValue(OldContentStyleProperty);
             set => this.SetValue(OldContentStyleProperty, value);
@@ -131,7 +131,7 @@ namespace Gu.Wpf.FlipView
         /// <summary>
         /// Gets or sets the storyboard that controls how new content animates into view.
         /// </summary>
-        public Storyboard OutAnimation
+        public Storyboard? OutAnimation
         {
             get => (Storyboard)this.GetValue(OutAnimationProperty);
             set => this.SetValue(OutAnimationProperty, value);
@@ -140,7 +140,7 @@ namespace Gu.Wpf.FlipView
         /// <summary>
         /// Gets or sets the style for the new content presenter.
         /// </summary>
-        public Style NewContentStyle
+        public Style? NewContentStyle
         {
             get => (Style)this.GetValue(NewContentStyleProperty);
             set => this.SetValue(NewContentStyleProperty, value);
@@ -149,7 +149,7 @@ namespace Gu.Wpf.FlipView
         /// <summary>
         /// Gets or sets the storyboard that controls how old content animates out of view.
         /// </summary>
-        public Storyboard InAnimation
+        public Storyboard? InAnimation
         {
             get => (Storyboard)this.GetValue(InAnimationProperty);
             set => this.SetValue(InAnimationProperty, value);

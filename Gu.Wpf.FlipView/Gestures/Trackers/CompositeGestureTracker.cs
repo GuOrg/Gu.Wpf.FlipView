@@ -118,7 +118,7 @@ namespace Gu.Wpf.FlipView.Gestures
             this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        private void OnGestured(object sender, GestureEventArgs e)
+        private void OnGestured(object? sender, GestureEventArgs e)
         {
             this.OnGestured(e);
         }

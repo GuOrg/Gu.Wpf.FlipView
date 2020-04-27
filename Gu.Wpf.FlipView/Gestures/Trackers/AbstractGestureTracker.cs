@@ -120,7 +120,7 @@ namespace Gu.Wpf.FlipView.Gestures
         /// </summary>
         /// <param name="sender">The sender of the event.</param>
         /// <param name="e">The event argument.</param>
-        protected virtual void OnStart(object sender, TArgs e)
+        protected virtual void OnStart(object? sender, TArgs e)
         {
             this.points.Clear();
             if (this.TryGetPoint(e, out var point))
@@ -135,7 +135,7 @@ namespace Gu.Wpf.FlipView.Gestures
         /// </summary>
         /// <param name="sender">The sender of the event.</param>
         /// <param name="e">The event argument.</param>
-        protected virtual void OnMove(object sender, TArgs e)
+        protected virtual void OnMove(object? sender, TArgs e)
         {
             if (this.TryGetPoint(e, out var point))
             {
@@ -148,7 +148,7 @@ namespace Gu.Wpf.FlipView.Gestures
         /// </summary>
         /// <param name="sender">The sender of the event.</param>
         /// <param name="e">The event argument.</param>
-        protected virtual void OnEnd(object sender, TArgs e)
+        protected virtual void OnEnd(object? sender, TArgs e)
         {
             if (this.IsGesturing)
             {

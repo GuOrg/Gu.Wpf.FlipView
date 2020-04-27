@@ -47,7 +47,7 @@ namespace Gu.Wpf.FlipView.Gestures
         }
 
         /// <inheritdoc />
-        public override bool Equals(object obj)
+        public override bool Equals(object? obj)
         {
             return obj is GesturePoint other && this.Equals(other);
         }

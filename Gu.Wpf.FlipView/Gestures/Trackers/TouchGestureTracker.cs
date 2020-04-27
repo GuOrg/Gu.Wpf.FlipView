@@ -59,19 +59,19 @@ namespace Gu.Wpf.FlipView.Gestures
         }
 
         /// <inheritdoc />
-        protected override void OnInputElementChanged(UIElement oldElement, UIElement newElement)
+        protected override void OnInputElementChanged(UIElement? oldElement, UIElement? newElement)
         {
             this.subscribers.RemoveHandlers(oldElement);
             this.subscribers.AddHandlers(newElement);
         }
 
-        private void OnBrowseForward(object sender, ExecutedRoutedEventArgs e)
+        private void OnBrowseForward(object? sender, ExecutedRoutedEventArgs e)
         {
             this.IsGesturing = false;
             this.OnExecuted(e);
         }
 
-        private void OnBrowseBack(object sender, ExecutedRoutedEventArgs e)
+        private void OnBrowseBack(object? sender, ExecutedRoutedEventArgs e)
         {
             this.IsGesturing = false;
             this.OnExecuted(e);
