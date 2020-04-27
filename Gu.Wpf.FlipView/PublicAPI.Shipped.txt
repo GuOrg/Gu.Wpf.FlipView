@@ -1,27 +1,26 @@
-﻿#nullable enable
-Gu.Wpf.FlipView.ArrowPlacement
+﻿Gu.Wpf.FlipView.ArrowPlacement
 Gu.Wpf.FlipView.ArrowPlacement.Inside = 0 -> Gu.Wpf.FlipView.ArrowPlacement
 Gu.Wpf.FlipView.ArrowPlacement.Outside = 1 -> Gu.Wpf.FlipView.ArrowPlacement
 Gu.Wpf.FlipView.AttachedProperties.Transform
 Gu.Wpf.FlipView.FlipView
-Gu.Wpf.FlipView.FlipView.ArrowButtonStyle.get -> System.Windows.Style!
+Gu.Wpf.FlipView.FlipView.ArrowButtonStyle.get -> System.Windows.Style
 Gu.Wpf.FlipView.FlipView.ArrowButtonStyle.set -> void
 Gu.Wpf.FlipView.FlipView.ArrowPlacement.get -> Gu.Wpf.FlipView.ArrowPlacement
 Gu.Wpf.FlipView.FlipView.ArrowPlacement.set -> void
-Gu.Wpf.FlipView.FlipView.CurrentInAnimation.get -> System.Windows.Media.Animation.Storyboard?
+Gu.Wpf.FlipView.FlipView.CurrentInAnimation.get -> System.Windows.Media.Animation.Storyboard
 Gu.Wpf.FlipView.FlipView.CurrentInAnimation.set -> void
-Gu.Wpf.FlipView.FlipView.CurrentOutAnimation.get -> System.Windows.Media.Animation.Storyboard?
+Gu.Wpf.FlipView.FlipView.CurrentOutAnimation.get -> System.Windows.Media.Animation.Storyboard
 Gu.Wpf.FlipView.FlipView.CurrentOutAnimation.set -> void
-Gu.Wpf.FlipView.FlipView.DecreaseInAnimation.get -> System.Windows.Media.Animation.Storyboard?
+Gu.Wpf.FlipView.FlipView.DecreaseInAnimation.get -> System.Windows.Media.Animation.Storyboard
 Gu.Wpf.FlipView.FlipView.DecreaseInAnimation.set -> void
-Gu.Wpf.FlipView.FlipView.DecreaseOutAnimation.get -> System.Windows.Media.Animation.Storyboard?
+Gu.Wpf.FlipView.FlipView.DecreaseOutAnimation.get -> System.Windows.Media.Animation.Storyboard
 Gu.Wpf.FlipView.FlipView.DecreaseOutAnimation.set -> void
 Gu.Wpf.FlipView.FlipView.FlipView() -> void
-Gu.Wpf.FlipView.FlipView.IncreaseInAnimation.get -> System.Windows.Media.Animation.Storyboard?
+Gu.Wpf.FlipView.FlipView.IncreaseInAnimation.get -> System.Windows.Media.Animation.Storyboard
 Gu.Wpf.FlipView.FlipView.IncreaseInAnimation.set -> void
-Gu.Wpf.FlipView.FlipView.IncreaseOutAnimation.get -> System.Windows.Media.Animation.Storyboard?
+Gu.Wpf.FlipView.FlipView.IncreaseOutAnimation.get -> System.Windows.Media.Animation.Storyboard
 Gu.Wpf.FlipView.FlipView.IncreaseOutAnimation.set -> void
-Gu.Wpf.FlipView.FlipView.IndexItemStyle.get -> System.Windows.Style?
+Gu.Wpf.FlipView.FlipView.IndexItemStyle.get -> System.Windows.Style
 Gu.Wpf.FlipView.FlipView.IndexItemStyle.set -> void
 Gu.Wpf.FlipView.FlipView.IndexPlacement.get -> Gu.Wpf.FlipView.IndexPlacement
 Gu.Wpf.FlipView.FlipView.IndexPlacement.set -> void
@@ -30,35 +29,35 @@ Gu.Wpf.FlipView.FlipView.ShowArrows.set -> void
 Gu.Wpf.FlipView.FlipView.ShowIndex.get -> bool
 Gu.Wpf.FlipView.FlipView.ShowIndex.set -> void
 Gu.Wpf.FlipView.FlipViewAutomationPeer
-Gu.Wpf.FlipView.FlipViewAutomationPeer.FlipViewAutomationPeer(Gu.Wpf.FlipView.FlipView! owner) -> void
+Gu.Wpf.FlipView.FlipViewAutomationPeer.FlipViewAutomationPeer(Gu.Wpf.FlipView.FlipView owner) -> void
 Gu.Wpf.FlipView.GesturePanel
-Gu.Wpf.FlipView.GesturePanel.Background.get -> System.Windows.Media.Brush!
+Gu.Wpf.FlipView.GesturePanel.Background.get -> System.Windows.Media.Brush
 Gu.Wpf.FlipView.GesturePanel.Background.set -> void
 Gu.Wpf.FlipView.GesturePanel.GesturePanel() -> void
-Gu.Wpf.FlipView.GesturePanel.GestureTracker.get -> Gu.Wpf.FlipView.Gestures.IGestureTracker!
+Gu.Wpf.FlipView.GesturePanel.GestureTracker.get -> Gu.Wpf.FlipView.Gestures.IGestureTracker
 Gu.Wpf.FlipView.GesturePanel.GestureTracker.set -> void
-Gu.Wpf.FlipView.GesturePanel.Gestured -> Gu.Wpf.FlipView.Gestures.GesturedEventHandler!
+Gu.Wpf.FlipView.GesturePanel.Gestured -> Gu.Wpf.FlipView.Gestures.GesturedEventHandler
 Gu.Wpf.FlipView.Gestures.AbstractGestureTracker<TArgs>
-Gu.Wpf.FlipView.Gestures.AbstractGestureTracker<TArgs>.AbstractGestureTracker(Gu.Wpf.FlipView.Gestures.IGestureInterpreter! interpreter = null) -> void
-Gu.Wpf.FlipView.Gestures.AbstractGestureTracker<TArgs>.Gestured -> System.EventHandler<Gu.Wpf.FlipView.Gestures.GestureEventArgs!>!
-Gu.Wpf.FlipView.Gestures.AbstractGestureTracker<TArgs>.InputElement.get -> System.Windows.UIElement!
+Gu.Wpf.FlipView.Gestures.AbstractGestureTracker<TArgs>.AbstractGestureTracker(Gu.Wpf.FlipView.Gestures.IGestureInterpreter interpreter = null) -> void
+Gu.Wpf.FlipView.Gestures.AbstractGestureTracker<TArgs>.Gestured -> System.EventHandler<Gu.Wpf.FlipView.Gestures.GestureEventArgs>
+Gu.Wpf.FlipView.Gestures.AbstractGestureTracker<TArgs>.InputElement.get -> System.Windows.UIElement
 Gu.Wpf.FlipView.Gestures.AbstractGestureTracker<TArgs>.InputElement.set -> void
-Gu.Wpf.FlipView.Gestures.AbstractGestureTracker<TArgs>.Interpreter.get -> Gu.Wpf.FlipView.Gestures.IGestureInterpreter!
+Gu.Wpf.FlipView.Gestures.AbstractGestureTracker<TArgs>.Interpreter.get -> Gu.Wpf.FlipView.Gestures.IGestureInterpreter
 Gu.Wpf.FlipView.Gestures.AbstractGestureTracker<TArgs>.Interpreter.set -> void
 Gu.Wpf.FlipView.Gestures.AbstractGestureTracker<TArgs>.IsGesturing.get -> bool
 Gu.Wpf.FlipView.Gestures.AbstractGestureTracker<TArgs>.IsGesturing.set -> void
-Gu.Wpf.FlipView.Gestures.AbstractGestureTracker<TArgs>.OnExecuted(System.Windows.Input.ExecutedRoutedEventArgs! eventArgs) -> void
-Gu.Wpf.FlipView.Gestures.AbstractGestureTracker<TArgs>.OnGestured(Gu.Wpf.FlipView.Gestures.GestureEventArgs! gestureEventArgs) -> void
-Gu.Wpf.FlipView.Gestures.AbstractGestureTracker<TArgs>.PropertyChanged -> System.ComponentModel.PropertyChangedEventHandler!
+Gu.Wpf.FlipView.Gestures.AbstractGestureTracker<TArgs>.OnExecuted(System.Windows.Input.ExecutedRoutedEventArgs eventArgs) -> void
+Gu.Wpf.FlipView.Gestures.AbstractGestureTracker<TArgs>.OnGestured(Gu.Wpf.FlipView.Gestures.GestureEventArgs gestureEventArgs) -> void
+Gu.Wpf.FlipView.Gestures.AbstractGestureTracker<TArgs>.PropertyChanged -> System.ComponentModel.PropertyChangedEventHandler
 Gu.Wpf.FlipView.Gestures.CommandGestureEventArgs
-Gu.Wpf.FlipView.Gestures.CommandGestureEventArgs.CommandArgs.get -> System.Windows.Input.ExecutedRoutedEventArgs!
-Gu.Wpf.FlipView.Gestures.CommandGestureEventArgs.CommandGestureEventArgs(Gu.Wpf.FlipView.Gestures.GestureType type, System.Windows.Input.ExecutedRoutedEventArgs! commandArgs) -> void
+Gu.Wpf.FlipView.Gestures.CommandGestureEventArgs.CommandArgs.get -> System.Windows.Input.ExecutedRoutedEventArgs
+Gu.Wpf.FlipView.Gestures.CommandGestureEventArgs.CommandGestureEventArgs(Gu.Wpf.FlipView.Gestures.GestureType type, System.Windows.Input.ExecutedRoutedEventArgs commandArgs) -> void
 Gu.Wpf.FlipView.Gestures.CompositeGestureTracker
 Gu.Wpf.FlipView.Gestures.CompositeGestureTracker.CompositeGestureTracker() -> void
-Gu.Wpf.FlipView.Gestures.CompositeGestureTracker.Gestured -> System.EventHandler<Gu.Wpf.FlipView.Gestures.GestureEventArgs!>!
-Gu.Wpf.FlipView.Gestures.CompositeGestureTracker.InputElement.get -> System.Windows.UIElement!
+Gu.Wpf.FlipView.Gestures.CompositeGestureTracker.Gestured -> System.EventHandler<Gu.Wpf.FlipView.Gestures.GestureEventArgs>
+Gu.Wpf.FlipView.Gestures.CompositeGestureTracker.InputElement.get -> System.Windows.UIElement
 Gu.Wpf.FlipView.Gestures.CompositeGestureTracker.InputElement.set -> void
-Gu.Wpf.FlipView.Gestures.CompositeGestureTracker.PropertyChanged -> System.ComponentModel.PropertyChangedEventHandler!
+Gu.Wpf.FlipView.Gestures.CompositeGestureTracker.PropertyChanged -> System.ComponentModel.PropertyChangedEventHandler
 Gu.Wpf.FlipView.Gestures.DefaultGestureInterpreter
 Gu.Wpf.FlipView.Gestures.DefaultGestureInterpreter.DefaultGestureInterpreter() -> void
 Gu.Wpf.FlipView.Gestures.DefaultGestureInterpreter.MaxDeviationFromHorizontal.get -> double
@@ -67,8 +66,8 @@ Gu.Wpf.FlipView.Gestures.DefaultGestureInterpreter.MinSwipeLength.get -> double
 Gu.Wpf.FlipView.Gestures.DefaultGestureInterpreter.MinSwipeLength.set -> void
 Gu.Wpf.FlipView.Gestures.DefaultGestureInterpreter.MinSwipeVelocity.get -> double
 Gu.Wpf.FlipView.Gestures.DefaultGestureInterpreter.MinSwipeVelocity.set -> void
-Gu.Wpf.FlipView.Gestures.DefaultGestureInterpreter.TryGetGesture(System.Collections.Generic.IReadOnlyList<Gu.Wpf.FlipView.Gestures.GesturePoint>! points, out Gu.Wpf.FlipView.Gestures.GestureEventArgs! gestureEventArgs) -> bool
-Gu.Wpf.FlipView.Gestures.DefaultGestureInterpreter.TryGetGesture(System.Windows.Input.ExecutedRoutedEventArgs! executed, out Gu.Wpf.FlipView.Gestures.GestureEventArgs! gestureEventArgs) -> bool
+Gu.Wpf.FlipView.Gestures.DefaultGestureInterpreter.TryGetGesture(System.Collections.Generic.IReadOnlyList<Gu.Wpf.FlipView.Gestures.GesturePoint> points, out Gu.Wpf.FlipView.Gestures.GestureEventArgs gestureEventArgs) -> bool
+Gu.Wpf.FlipView.Gestures.DefaultGestureInterpreter.TryGetGesture(System.Windows.Input.ExecutedRoutedEventArgs executed, out Gu.Wpf.FlipView.Gestures.GestureEventArgs gestureEventArgs) -> bool
 Gu.Wpf.FlipView.Gestures.GestureEventArgs
 Gu.Wpf.FlipView.Gestures.GestureEventArgs.GestureEventArgs(Gu.Wpf.FlipView.Gestures.GestureType type) -> void
 Gu.Wpf.FlipView.Gestures.GestureEventArgs.Type.get -> Gu.Wpf.FlipView.Gestures.GestureType
@@ -80,15 +79,15 @@ Gu.Wpf.FlipView.Gestures.GestureType.SwipeRight = 2 -> Gu.Wpf.FlipView.Gestures.
 Gu.Wpf.FlipView.Gestures.GestureType.Unknown = 0 -> Gu.Wpf.FlipView.Gestures.GestureType
 Gu.Wpf.FlipView.Gestures.GesturedEventArgs
 Gu.Wpf.FlipView.Gestures.GesturedEventArgs.Gesture.get -> Gu.Wpf.FlipView.Gestures.GestureType
-Gu.Wpf.FlipView.Gestures.GesturedEventArgs.GestureEventArgs.get -> Gu.Wpf.FlipView.Gestures.GestureEventArgs!
-Gu.Wpf.FlipView.Gestures.GesturedEventArgs.GesturedEventArgs(Gu.Wpf.FlipView.Gestures.GestureType gesture, Gu.Wpf.FlipView.Gestures.GestureEventArgs! gestureEventArgs) -> void
+Gu.Wpf.FlipView.Gestures.GesturedEventArgs.GestureEventArgs.get -> Gu.Wpf.FlipView.Gestures.GestureEventArgs
+Gu.Wpf.FlipView.Gestures.GesturedEventArgs.GesturedEventArgs(Gu.Wpf.FlipView.Gestures.GestureType gesture, Gu.Wpf.FlipView.Gestures.GestureEventArgs gestureEventArgs) -> void
 Gu.Wpf.FlipView.Gestures.GesturedEventHandler
 Gu.Wpf.FlipView.Gestures.IGestureInterpreter
-Gu.Wpf.FlipView.Gestures.IGestureInterpreter.TryGetGesture(System.Collections.Generic.IReadOnlyList<Gu.Wpf.FlipView.Gestures.GesturePoint>! points, out Gu.Wpf.FlipView.Gestures.GestureEventArgs! gestureEventArgs) -> bool
-Gu.Wpf.FlipView.Gestures.IGestureInterpreter.TryGetGesture(System.Windows.Input.ExecutedRoutedEventArgs! executed, out Gu.Wpf.FlipView.Gestures.GestureEventArgs! gestureEventArgs) -> bool
+Gu.Wpf.FlipView.Gestures.IGestureInterpreter.TryGetGesture(System.Collections.Generic.IReadOnlyList<Gu.Wpf.FlipView.Gestures.GesturePoint> points, out Gu.Wpf.FlipView.Gestures.GestureEventArgs gestureEventArgs) -> bool
+Gu.Wpf.FlipView.Gestures.IGestureInterpreter.TryGetGesture(System.Windows.Input.ExecutedRoutedEventArgs executed, out Gu.Wpf.FlipView.Gestures.GestureEventArgs gestureEventArgs) -> bool
 Gu.Wpf.FlipView.Gestures.IGestureTracker
-Gu.Wpf.FlipView.Gestures.IGestureTracker.Gestured -> System.EventHandler<Gu.Wpf.FlipView.Gestures.GestureEventArgs!>!
-Gu.Wpf.FlipView.Gestures.IGestureTracker.InputElement.get -> System.Windows.UIElement!
+Gu.Wpf.FlipView.Gestures.IGestureTracker.Gestured -> System.EventHandler<Gu.Wpf.FlipView.Gestures.GestureEventArgs>
+Gu.Wpf.FlipView.Gestures.IGestureTracker.InputElement.get -> System.Windows.UIElement
 Gu.Wpf.FlipView.Gestures.IGestureTracker.InputElement.set -> void
 Gu.Wpf.FlipView.Gestures.InputGestureEventArgs
 Gu.Wpf.FlipView.Gestures.InputGestureEventArgs.Delta.get -> System.Windows.Vector
@@ -97,112 +96,114 @@ Gu.Wpf.FlipView.Gestures.InputGestureEventArgs.Velocity.get -> double
 Gu.Wpf.FlipView.Gestures.MouseGestureTracker
 Gu.Wpf.FlipView.Gestures.MouseGestureTracker.MouseGestureTracker() -> void
 Gu.Wpf.FlipView.Gestures.SubscribeInfo
-Gu.Wpf.FlipView.Gestures.SubscribeInfo.AddHandler.get -> System.Action<System.Windows.UIElement!>!
-Gu.Wpf.FlipView.Gestures.SubscribeInfo.RemoveHandler.get -> System.Action<System.Windows.UIElement!>!
-Gu.Wpf.FlipView.Gestures.SubscribeInfo.SubscribeInfo(System.Action<System.Windows.UIElement!>! addHandler, System.Action<System.Windows.UIElement!>! removeHandler) -> void
+Gu.Wpf.FlipView.Gestures.SubscribeInfo.AddHandler.get -> System.Action<System.Windows.UIElement>
+Gu.Wpf.FlipView.Gestures.SubscribeInfo.RemoveHandler.get -> System.Action<System.Windows.UIElement>
+Gu.Wpf.FlipView.Gestures.SubscribeInfo.SubscribeInfo(System.Action<System.Windows.UIElement> addHandler, System.Action<System.Windows.UIElement> removeHandler) -> void
 Gu.Wpf.FlipView.Gestures.SubscribeInfos
-Gu.Wpf.FlipView.Gestures.SubscribeInfos.AddHandlers(System.Windows.UIElement! element) -> void
-Gu.Wpf.FlipView.Gestures.SubscribeInfos.RemoveHandlers(System.Windows.UIElement! element) -> void
-Gu.Wpf.FlipView.Gestures.SubscribeInfos.SubscribeInfos(System.Collections.Generic.IReadOnlyList<Gu.Wpf.FlipView.Gestures.SubscribeInfo!>! infos) -> void
-Gu.Wpf.FlipView.Gestures.SubscribeInfos.SubscribeInfos(params Gu.Wpf.FlipView.Gestures.SubscribeInfo![]! infos) -> void
+Gu.Wpf.FlipView.Gestures.SubscribeInfos.AddHandlers(System.Windows.UIElement element) -> void
+Gu.Wpf.FlipView.Gestures.SubscribeInfos.RemoveHandlers(System.Windows.UIElement element) -> void
+Gu.Wpf.FlipView.Gestures.SubscribeInfos.SubscribeInfos(System.Collections.Generic.IReadOnlyList<Gu.Wpf.FlipView.Gestures.SubscribeInfo> infos) -> void
+Gu.Wpf.FlipView.Gestures.SubscribeInfos.SubscribeInfos(params Gu.Wpf.FlipView.Gestures.SubscribeInfo[] infos) -> void
 Gu.Wpf.FlipView.Gestures.TouchGestureTracker
 Gu.Wpf.FlipView.Gestures.TouchGestureTracker.TouchGestureTracker() -> void
 Gu.Wpf.FlipView.IndexPlacement
 Gu.Wpf.FlipView.IndexPlacement.Above = 0 -> Gu.Wpf.FlipView.IndexPlacement
 Gu.Wpf.FlipView.IndexPlacement.Below = 1 -> Gu.Wpf.FlipView.IndexPlacement
 Gu.Wpf.FlipView.TransitionControl
-Gu.Wpf.FlipView.TransitionControl.ContentChanged -> System.Windows.RoutedEventHandler!
-Gu.Wpf.FlipView.TransitionControl.InAnimation.get -> System.Windows.Media.Animation.Storyboard!
+Gu.Wpf.FlipView.TransitionControl.ContentChanged -> System.Windows.RoutedEventHandler
+Gu.Wpf.FlipView.TransitionControl.InAnimation.get -> System.Windows.Media.Animation.Storyboard
 Gu.Wpf.FlipView.TransitionControl.InAnimation.set -> void
-Gu.Wpf.FlipView.TransitionControl.NewContentStyle.get -> System.Windows.Style!
+Gu.Wpf.FlipView.TransitionControl.NewContentStyle.get -> System.Windows.Style
 Gu.Wpf.FlipView.TransitionControl.NewContentStyle.set -> void
-Gu.Wpf.FlipView.TransitionControl.OldContent.get -> object!
-Gu.Wpf.FlipView.TransitionControl.OldContentStyle.get -> System.Windows.Style!
+Gu.Wpf.FlipView.TransitionControl.OldContent.get -> object
+Gu.Wpf.FlipView.TransitionControl.OldContentStyle.get -> System.Windows.Style
 Gu.Wpf.FlipView.TransitionControl.OldContentStyle.set -> void
-Gu.Wpf.FlipView.TransitionControl.OutAnimation.get -> System.Windows.Media.Animation.Storyboard!
+Gu.Wpf.FlipView.TransitionControl.OutAnimation.get -> System.Windows.Media.Animation.Storyboard
 Gu.Wpf.FlipView.TransitionControl.OutAnimation.set -> void
 Gu.Wpf.FlipView.TransitionControl.TransitionControl() -> void
-abstract Gu.Wpf.FlipView.Gestures.AbstractGestureTracker<TArgs>.OnInputElementChanged(System.Windows.UIElement! oldElement, System.Windows.UIElement! newElement) -> void
+XamlGeneratedNamespace.GeneratedInternalTypeHelper
+XamlGeneratedNamespace.GeneratedInternalTypeHelper.GeneratedInternalTypeHelper() -> void
+abstract Gu.Wpf.FlipView.Gestures.AbstractGestureTracker<TArgs>.OnInputElementChanged(System.Windows.UIElement oldElement, System.Windows.UIElement newElement) -> void
 abstract Gu.Wpf.FlipView.Gestures.AbstractGestureTracker<TArgs>.TryGetPoint(TArgs args, out Gu.Wpf.FlipView.Gestures.GesturePoint point) -> bool
-const Gu.Wpf.FlipView.TransitionControl.PartNewContent = "PART_NewContent" -> string!
-const Gu.Wpf.FlipView.TransitionControl.PartOldContent = "PART_OldContent" -> string!
-override Gu.Wpf.FlipView.FlipView.OnCreateAutomationPeer() -> System.Windows.Automation.Peers.AutomationPeer!
-override Gu.Wpf.FlipView.FlipView.OnItemsChanged(System.Collections.Specialized.NotifyCollectionChangedEventArgs! e) -> void
-override Gu.Wpf.FlipView.FlipViewAutomationPeer.CreateItemAutomationPeer(object! item) -> System.Windows.Automation.Peers.ItemAutomationPeer!
-override Gu.Wpf.FlipView.FlipViewAutomationPeer.GetChildrenCore() -> System.Collections.Generic.List<System.Windows.Automation.Peers.AutomationPeer!>!
-override Gu.Wpf.FlipView.FlipViewAutomationPeer.GetClassNameCore() -> string!
-override Gu.Wpf.FlipView.GesturePanel.OnRender(System.Windows.Media.DrawingContext! dc) -> void
-override Gu.Wpf.FlipView.Gestures.CommandGestureEventArgs.ToString() -> string!
+const Gu.Wpf.FlipView.TransitionControl.PartNewContent = "PART_NewContent" -> string
+const Gu.Wpf.FlipView.TransitionControl.PartOldContent = "PART_OldContent" -> string
+override Gu.Wpf.FlipView.FlipView.OnCreateAutomationPeer() -> System.Windows.Automation.Peers.AutomationPeer
+override Gu.Wpf.FlipView.FlipView.OnItemsChanged(System.Collections.Specialized.NotifyCollectionChangedEventArgs e) -> void
+override Gu.Wpf.FlipView.FlipViewAutomationPeer.CreateItemAutomationPeer(object item) -> System.Windows.Automation.Peers.ItemAutomationPeer
+override Gu.Wpf.FlipView.FlipViewAutomationPeer.GetChildrenCore() -> System.Collections.Generic.List<System.Windows.Automation.Peers.AutomationPeer>
+override Gu.Wpf.FlipView.FlipViewAutomationPeer.GetClassNameCore() -> string
+override Gu.Wpf.FlipView.GesturePanel.OnRender(System.Windows.Media.DrawingContext dc) -> void
+override Gu.Wpf.FlipView.Gestures.CommandGestureEventArgs.ToString() -> string
 override Gu.Wpf.FlipView.Gestures.CompositeGestureTracker.ClearItems() -> void
-override Gu.Wpf.FlipView.Gestures.CompositeGestureTracker.InsertItem(int index, Gu.Wpf.FlipView.Gestures.IGestureTracker! item) -> void
+override Gu.Wpf.FlipView.Gestures.CompositeGestureTracker.InsertItem(int index, Gu.Wpf.FlipView.Gestures.IGestureTracker item) -> void
 override Gu.Wpf.FlipView.Gestures.CompositeGestureTracker.RemoveItem(int index) -> void
-override Gu.Wpf.FlipView.Gestures.CompositeGestureTracker.SetItem(int index, Gu.Wpf.FlipView.Gestures.IGestureTracker! item) -> void
-override Gu.Wpf.FlipView.Gestures.InputGestureEventArgs.ToString() -> string!
-override Gu.Wpf.FlipView.Gestures.MouseGestureTracker.OnInputElementChanged(System.Windows.UIElement! oldElement, System.Windows.UIElement! newElement) -> void
-override Gu.Wpf.FlipView.Gestures.MouseGestureTracker.TryGetPoint(System.Windows.Input.MouseEventArgs! args, out Gu.Wpf.FlipView.Gestures.GesturePoint point) -> bool
-override Gu.Wpf.FlipView.Gestures.TouchGestureTracker.OnInputElementChanged(System.Windows.UIElement! oldElement, System.Windows.UIElement! newElement) -> void
-override Gu.Wpf.FlipView.Gestures.TouchGestureTracker.TryGetPoint(System.Windows.Input.TouchEventArgs! args, out Gu.Wpf.FlipView.Gestures.GesturePoint point) -> bool
+override Gu.Wpf.FlipView.Gestures.CompositeGestureTracker.SetItem(int index, Gu.Wpf.FlipView.Gestures.IGestureTracker item) -> void
+override Gu.Wpf.FlipView.Gestures.InputGestureEventArgs.ToString() -> string
+override Gu.Wpf.FlipView.Gestures.MouseGestureTracker.OnInputElementChanged(System.Windows.UIElement oldElement, System.Windows.UIElement newElement) -> void
+override Gu.Wpf.FlipView.Gestures.MouseGestureTracker.TryGetPoint(System.Windows.Input.MouseEventArgs args, out Gu.Wpf.FlipView.Gestures.GesturePoint point) -> bool
+override Gu.Wpf.FlipView.Gestures.TouchGestureTracker.OnInputElementChanged(System.Windows.UIElement oldElement, System.Windows.UIElement newElement) -> void
+override Gu.Wpf.FlipView.Gestures.TouchGestureTracker.TryGetPoint(System.Windows.Input.TouchEventArgs args, out Gu.Wpf.FlipView.Gestures.GesturePoint point) -> bool
 override Gu.Wpf.FlipView.TransitionControl.OnApplyTemplate() -> void
-override Gu.Wpf.FlipView.TransitionControl.OnContentChanged(object! oldContent, object! newContent) -> void
+override Gu.Wpf.FlipView.TransitionControl.OnContentChanged(object oldContent, object newContent) -> void
 readonly Gu.Wpf.FlipView.Gestures.GesturePoint.Point -> System.Windows.Point
 readonly Gu.Wpf.FlipView.Gestures.GesturePoint.Time -> int
-static Gu.Wpf.FlipView.AttachedProperties.Transform.GetOffsetX(System.Windows.DependencyObject! element) -> double
-static Gu.Wpf.FlipView.AttachedProperties.Transform.GetOffsetY(System.Windows.DependencyObject! element) -> double
-static Gu.Wpf.FlipView.AttachedProperties.Transform.GetRelativeOffsetX(System.Windows.FrameworkElement! element) -> double
-static Gu.Wpf.FlipView.AttachedProperties.Transform.GetRelativeOffsetY(System.Windows.DependencyObject! element) -> double
-static Gu.Wpf.FlipView.AttachedProperties.Transform.GetScaleX(System.Windows.DependencyObject! element) -> double
-static Gu.Wpf.FlipView.AttachedProperties.Transform.GetScaleY(System.Windows.DependencyObject! element) -> double
-static Gu.Wpf.FlipView.AttachedProperties.Transform.SetOffsetX(System.Windows.DependencyObject! element, double value) -> void
-static Gu.Wpf.FlipView.AttachedProperties.Transform.SetOffsetY(System.Windows.DependencyObject! element, double value) -> void
-static Gu.Wpf.FlipView.AttachedProperties.Transform.SetRelativeOffsetX(System.Windows.FrameworkElement! element, double value) -> void
-static Gu.Wpf.FlipView.AttachedProperties.Transform.SetRelativeOffsetY(System.Windows.DependencyObject! element, double value) -> void
-static Gu.Wpf.FlipView.AttachedProperties.Transform.SetScaleX(System.Windows.DependencyObject! element, double value) -> void
-static Gu.Wpf.FlipView.AttachedProperties.Transform.SetScaleY(System.Windows.DependencyObject! element, double value) -> void
-static Gu.Wpf.FlipView.Gestures.CompositeGestureTracker.DefaultMouseAndTouch.get -> Gu.Wpf.FlipView.Gestures.CompositeGestureTracker!
-static Gu.Wpf.FlipView.Gestures.DefaultGestureInterpreter.Mouse.get -> Gu.Wpf.FlipView.Gestures.IGestureInterpreter!
-static Gu.Wpf.FlipView.Gestures.DefaultGestureInterpreter.Touch.get -> Gu.Wpf.FlipView.Gestures.IGestureInterpreter!
-static Gu.Wpf.FlipView.Gestures.MouseGestureTracker.Default.get -> Gu.Wpf.FlipView.Gestures.MouseGestureTracker!
-static Gu.Wpf.FlipView.Gestures.SubscribeInfo.Create(System.Windows.Input.RoutedCommand! command, System.Windows.Input.ExecutedRoutedEventHandler! onExecuted) -> Gu.Wpf.FlipView.Gestures.SubscribeInfo!
-static Gu.Wpf.FlipView.Gestures.SubscribeInfo.Create(System.Windows.RoutedEvent! routedEvent, System.Delegate! handler) -> Gu.Wpf.FlipView.Gestures.SubscribeInfo!
-static Gu.Wpf.FlipView.Gestures.TouchGestureTracker.Default.get -> Gu.Wpf.FlipView.Gestures.MouseGestureTracker!
-static readonly Gu.Wpf.FlipView.AttachedProperties.Transform.OffsetXProperty -> System.Windows.DependencyProperty!
-static readonly Gu.Wpf.FlipView.AttachedProperties.Transform.OffsetYProperty -> System.Windows.DependencyProperty!
-static readonly Gu.Wpf.FlipView.AttachedProperties.Transform.RelativeOffsetXProperty -> System.Windows.DependencyProperty!
-static readonly Gu.Wpf.FlipView.AttachedProperties.Transform.RelativeOffsetYProperty -> System.Windows.DependencyProperty!
-static readonly Gu.Wpf.FlipView.AttachedProperties.Transform.ScaleXProperty -> System.Windows.DependencyProperty!
-static readonly Gu.Wpf.FlipView.AttachedProperties.Transform.ScaleYProperty -> System.Windows.DependencyProperty!
-static readonly Gu.Wpf.FlipView.FlipView.ArrowButtonStyleProperty -> System.Windows.DependencyProperty!
-static readonly Gu.Wpf.FlipView.FlipView.ArrowPlacementProperty -> System.Windows.DependencyProperty!
-static readonly Gu.Wpf.FlipView.FlipView.CurrentInAnimationProperty -> System.Windows.DependencyProperty!
-static readonly Gu.Wpf.FlipView.FlipView.CurrentOutAnimationProperty -> System.Windows.DependencyProperty!
-static readonly Gu.Wpf.FlipView.FlipView.DecreaseInAnimationProperty -> System.Windows.DependencyProperty!
-static readonly Gu.Wpf.FlipView.FlipView.DecreaseOutAnimationProperty -> System.Windows.DependencyProperty!
-static readonly Gu.Wpf.FlipView.FlipView.IncreaseInAnimationProperty -> System.Windows.DependencyProperty!
-static readonly Gu.Wpf.FlipView.FlipView.IncreaseOutAnimationProperty -> System.Windows.DependencyProperty!
-static readonly Gu.Wpf.FlipView.FlipView.IndexItemStyleProperty -> System.Windows.DependencyProperty!
-static readonly Gu.Wpf.FlipView.FlipView.IndexPlacementProperty -> System.Windows.DependencyProperty!
-static readonly Gu.Wpf.FlipView.FlipView.ShowArrowsProperty -> System.Windows.DependencyProperty!
-static readonly Gu.Wpf.FlipView.FlipView.ShowIndexProperty -> System.Windows.DependencyProperty!
-static readonly Gu.Wpf.FlipView.GesturePanel.BackgroundProperty -> System.Windows.DependencyProperty!
-static readonly Gu.Wpf.FlipView.GesturePanel.GestureTrackerProperty -> System.Windows.DependencyProperty!
-static readonly Gu.Wpf.FlipView.GesturePanel.GesturedEvent -> System.Windows.RoutedEvent!
-static readonly Gu.Wpf.FlipView.Gestures.CompositeGestureTracker.MouseAndTouchResourceKey -> System.Windows.ComponentResourceKey!
-static readonly Gu.Wpf.FlipView.Gestures.MouseGestureTracker.ResourceKey -> System.Windows.ComponentResourceKey!
-static readonly Gu.Wpf.FlipView.Gestures.TouchGestureTracker.ResourceKey -> System.Windows.ComponentResourceKey!
-static readonly Gu.Wpf.FlipView.TransitionControl.ContentChangedEvent -> System.Windows.RoutedEvent!
-static readonly Gu.Wpf.FlipView.TransitionControl.InAnimationProperty -> System.Windows.DependencyProperty!
-static readonly Gu.Wpf.FlipView.TransitionControl.NewContentStyleProperty -> System.Windows.DependencyProperty!
-static readonly Gu.Wpf.FlipView.TransitionControl.OldContentProperty -> System.Windows.DependencyProperty!
-static readonly Gu.Wpf.FlipView.TransitionControl.OldContentStyleProperty -> System.Windows.DependencyProperty!
-static readonly Gu.Wpf.FlipView.TransitionControl.OutAnimationProperty -> System.Windows.DependencyProperty!
+static Gu.Wpf.FlipView.AttachedProperties.Transform.GetOffsetX(System.Windows.DependencyObject element) -> double
+static Gu.Wpf.FlipView.AttachedProperties.Transform.GetOffsetY(System.Windows.DependencyObject element) -> double
+static Gu.Wpf.FlipView.AttachedProperties.Transform.GetRelativeOffsetX(System.Windows.FrameworkElement element) -> double
+static Gu.Wpf.FlipView.AttachedProperties.Transform.GetRelativeOffsetY(System.Windows.DependencyObject element) -> double
+static Gu.Wpf.FlipView.AttachedProperties.Transform.GetScaleX(System.Windows.DependencyObject element) -> double
+static Gu.Wpf.FlipView.AttachedProperties.Transform.GetScaleY(System.Windows.DependencyObject element) -> double
+static Gu.Wpf.FlipView.AttachedProperties.Transform.SetOffsetX(System.Windows.DependencyObject element, double value) -> void
+static Gu.Wpf.FlipView.AttachedProperties.Transform.SetOffsetY(System.Windows.DependencyObject element, double value) -> void
+static Gu.Wpf.FlipView.AttachedProperties.Transform.SetRelativeOffsetX(System.Windows.FrameworkElement element, double value) -> void
+static Gu.Wpf.FlipView.AttachedProperties.Transform.SetRelativeOffsetY(System.Windows.DependencyObject element, double value) -> void
+static Gu.Wpf.FlipView.AttachedProperties.Transform.SetScaleX(System.Windows.DependencyObject element, double value) -> void
+static Gu.Wpf.FlipView.AttachedProperties.Transform.SetScaleY(System.Windows.DependencyObject element, double value) -> void
+static Gu.Wpf.FlipView.Gestures.CompositeGestureTracker.DefaultMouseAndTouch.get -> Gu.Wpf.FlipView.Gestures.CompositeGestureTracker
+static Gu.Wpf.FlipView.Gestures.DefaultGestureInterpreter.Mouse.get -> Gu.Wpf.FlipView.Gestures.IGestureInterpreter
+static Gu.Wpf.FlipView.Gestures.DefaultGestureInterpreter.Touch.get -> Gu.Wpf.FlipView.Gestures.IGestureInterpreter
+static Gu.Wpf.FlipView.Gestures.MouseGestureTracker.Default.get -> Gu.Wpf.FlipView.Gestures.MouseGestureTracker
+static Gu.Wpf.FlipView.Gestures.SubscribeInfo.Create(System.Windows.Input.RoutedCommand command, System.Windows.Input.ExecutedRoutedEventHandler onExecuted) -> Gu.Wpf.FlipView.Gestures.SubscribeInfo
+static Gu.Wpf.FlipView.Gestures.SubscribeInfo.Create(System.Windows.RoutedEvent routedEvent, System.Delegate handler) -> Gu.Wpf.FlipView.Gestures.SubscribeInfo
+static Gu.Wpf.FlipView.Gestures.TouchGestureTracker.Default.get -> Gu.Wpf.FlipView.Gestures.MouseGestureTracker
+static readonly Gu.Wpf.FlipView.AttachedProperties.Transform.OffsetXProperty -> System.Windows.DependencyProperty
+static readonly Gu.Wpf.FlipView.AttachedProperties.Transform.OffsetYProperty -> System.Windows.DependencyProperty
+static readonly Gu.Wpf.FlipView.AttachedProperties.Transform.RelativeOffsetXProperty -> System.Windows.DependencyProperty
+static readonly Gu.Wpf.FlipView.AttachedProperties.Transform.RelativeOffsetYProperty -> System.Windows.DependencyProperty
+static readonly Gu.Wpf.FlipView.AttachedProperties.Transform.ScaleXProperty -> System.Windows.DependencyProperty
+static readonly Gu.Wpf.FlipView.AttachedProperties.Transform.ScaleYProperty -> System.Windows.DependencyProperty
+static readonly Gu.Wpf.FlipView.FlipView.ArrowButtonStyleProperty -> System.Windows.DependencyProperty
+static readonly Gu.Wpf.FlipView.FlipView.ArrowPlacementProperty -> System.Windows.DependencyProperty
+static readonly Gu.Wpf.FlipView.FlipView.CurrentInAnimationProperty -> System.Windows.DependencyProperty
+static readonly Gu.Wpf.FlipView.FlipView.CurrentOutAnimationProperty -> System.Windows.DependencyProperty
+static readonly Gu.Wpf.FlipView.FlipView.DecreaseInAnimationProperty -> System.Windows.DependencyProperty
+static readonly Gu.Wpf.FlipView.FlipView.DecreaseOutAnimationProperty -> System.Windows.DependencyProperty
+static readonly Gu.Wpf.FlipView.FlipView.IncreaseInAnimationProperty -> System.Windows.DependencyProperty
+static readonly Gu.Wpf.FlipView.FlipView.IncreaseOutAnimationProperty -> System.Windows.DependencyProperty
+static readonly Gu.Wpf.FlipView.FlipView.IndexItemStyleProperty -> System.Windows.DependencyProperty
+static readonly Gu.Wpf.FlipView.FlipView.IndexPlacementProperty -> System.Windows.DependencyProperty
+static readonly Gu.Wpf.FlipView.FlipView.ShowArrowsProperty -> System.Windows.DependencyProperty
+static readonly Gu.Wpf.FlipView.FlipView.ShowIndexProperty -> System.Windows.DependencyProperty
+static readonly Gu.Wpf.FlipView.GesturePanel.BackgroundProperty -> System.Windows.DependencyProperty
+static readonly Gu.Wpf.FlipView.GesturePanel.GestureTrackerProperty -> System.Windows.DependencyProperty
+static readonly Gu.Wpf.FlipView.GesturePanel.GesturedEvent -> System.Windows.RoutedEvent
+static readonly Gu.Wpf.FlipView.Gestures.CompositeGestureTracker.MouseAndTouchResourceKey -> System.Windows.ComponentResourceKey
+static readonly Gu.Wpf.FlipView.Gestures.MouseGestureTracker.ResourceKey -> System.Windows.ComponentResourceKey
+static readonly Gu.Wpf.FlipView.Gestures.TouchGestureTracker.ResourceKey -> System.Windows.ComponentResourceKey
+static readonly Gu.Wpf.FlipView.TransitionControl.ContentChangedEvent -> System.Windows.RoutedEvent
+static readonly Gu.Wpf.FlipView.TransitionControl.InAnimationProperty -> System.Windows.DependencyProperty
+static readonly Gu.Wpf.FlipView.TransitionControl.NewContentStyleProperty -> System.Windows.DependencyProperty
+static readonly Gu.Wpf.FlipView.TransitionControl.OldContentProperty -> System.Windows.DependencyProperty
+static readonly Gu.Wpf.FlipView.TransitionControl.OldContentStyleProperty -> System.Windows.DependencyProperty
+static readonly Gu.Wpf.FlipView.TransitionControl.OutAnimationProperty -> System.Windows.DependencyProperty
 virtual Gu.Wpf.FlipView.FlipView.PreviewSelectedIndexChanged(int previousIndex, int newIndex) -> void
-virtual Gu.Wpf.FlipView.GesturePanel.OnGesture(object! sender, Gu.Wpf.FlipView.Gestures.GestureEventArgs! e) -> void
-virtual Gu.Wpf.FlipView.GesturePanel.OnGestureTrackerChanged(Gu.Wpf.FlipView.Gestures.IGestureTracker! oldTracker, Gu.Wpf.FlipView.Gestures.IGestureTracker! newTracker) -> void
-virtual Gu.Wpf.FlipView.Gestures.AbstractGestureTracker<TArgs>.OnEnd(object! sender, TArgs e) -> void
-virtual Gu.Wpf.FlipView.Gestures.AbstractGestureTracker<TArgs>.OnMove(object! sender, TArgs e) -> void
-virtual Gu.Wpf.FlipView.Gestures.AbstractGestureTracker<TArgs>.OnPropertyChanged(string! propertyName = null) -> void
-virtual Gu.Wpf.FlipView.Gestures.AbstractGestureTracker<TArgs>.OnStart(object! sender, TArgs e) -> void
-virtual Gu.Wpf.FlipView.Gestures.CompositeGestureTracker.OnGestured(Gu.Wpf.FlipView.Gestures.GestureEventArgs! e) -> void
-virtual Gu.Wpf.FlipView.Gestures.CompositeGestureTracker.OnPropertyChanged(string! propertyName = null) -> void
+virtual Gu.Wpf.FlipView.GesturePanel.OnGesture(object sender, Gu.Wpf.FlipView.Gestures.GestureEventArgs e) -> void
+virtual Gu.Wpf.FlipView.GesturePanel.OnGestureTrackerChanged(Gu.Wpf.FlipView.Gestures.IGestureTracker oldTracker, Gu.Wpf.FlipView.Gestures.IGestureTracker newTracker) -> void
+virtual Gu.Wpf.FlipView.Gestures.AbstractGestureTracker<TArgs>.OnEnd(object sender, TArgs e) -> void
+virtual Gu.Wpf.FlipView.Gestures.AbstractGestureTracker<TArgs>.OnMove(object sender, TArgs e) -> void
+virtual Gu.Wpf.FlipView.Gestures.AbstractGestureTracker<TArgs>.OnPropertyChanged(string propertyName = null) -> void
+virtual Gu.Wpf.FlipView.Gestures.AbstractGestureTracker<TArgs>.OnStart(object sender, TArgs e) -> void
+virtual Gu.Wpf.FlipView.Gestures.CompositeGestureTracker.OnGestured(Gu.Wpf.FlipView.Gestures.GestureEventArgs e) -> void
+virtual Gu.Wpf.FlipView.Gestures.CompositeGestureTracker.OnPropertyChanged(string propertyName = null) -> void
 virtual Gu.Wpf.FlipView.TransitionControl.OnOldContentTransitionCompleted() -> void
-virtual Gu.Wpf.FlipView.TransitionControl.OnOutAnimationChanged(System.Windows.Media.Animation.Storyboard! newAnimation) -> void
+virtual Gu.Wpf.FlipView.TransitionControl.OnOutAnimationChanged(System.Windows.Media.Animation.Storyboard newAnimation) -> void
