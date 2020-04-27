@@ -194,7 +194,7 @@ namespace Gu.Wpf.FlipView
 
         /// <summary>This method is invoked when the <see cref="OutAnimationProperty"/> changes.</summary>
         /// <param name="newAnimation">The new value of <see cref="OutAnimationProperty"/>.</param>
-        protected virtual void OnOutAnimationChanged(Storyboard newAnimation)
+        protected virtual void OnOutAnimationChanged(Storyboard? newAnimation)
         {
             // We can't subscribe to .Completed for the storyboard as it might be frozen.
             // Hacking it like this instead.
@@ -213,9 +213,9 @@ namespace Gu.Wpf.FlipView
             this.OldContent = null;
         }
 
-        private static object OnAnimationCoerce(object basevalue)
+        private static object OnAnimationCoerce(object baseValue)
         {
-            if (basevalue is Storyboard storyboard)
+            if (baseValue is Storyboard storyboard)
             {
                 return storyboard;
             }

@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
   <PropertyGroup>
     <OutputType>library</OutputType>
-    <TargetFramework>net45</TargetFramework>
+    <TargetFrameworks>net45;netcoreapp3.1</TargetFrameworks>
     <UseWpf>true</UseWpf>
     <LangVersion>latest</LangVersion>
     <Nullable>enable</Nullable>
@@ -55,9 +55,5 @@
   <ItemGroup>
     <PackageDownload Include="Microsoft.NETCore.App.Ref" Version="[3.1.0]" />
     <PackageReference Include="TunnelVisionLabs.ReferenceAssemblyAnnotator" Version="1.0.0-alpha.154" PrivateAssets="all" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <EmbeddedFiles Remove="NullableAttributes.cs" />
   </ItemGroup>
 </Project>

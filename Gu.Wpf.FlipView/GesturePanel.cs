@@ -112,7 +112,7 @@ namespace Gu.Wpf.FlipView
         /// <summary>
         /// Called by the <see cref="GestureTracker"/> when it detects a gesture.
         /// </summary>
-        protected virtual void OnGesture(object sender, GestureEventArgs e)
+        protected virtual void OnGesture(object? sender, GestureEventArgs e)
         {
             if (e is null)
             {
