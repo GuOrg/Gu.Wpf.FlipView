@@ -1,4 +1,4 @@
-﻿namespace Gu.Wpf.FlipView.Demo.Misc
+namespace Gu.Wpf.FlipView.Demo.Misc
 {
     using System.Threading.Tasks;
     using System.Windows.Controls;
@@ -24,7 +24,7 @@
 #pragma warning restore AvoidAsyncVoid // Avoid async void
         {
             this.canBoost = false;
-            await Task.Delay(500);
+            await Task.Delay(500).ConfigureAwait(true);
             this.Boosts.Items.Add("boosted");
             this.canBoost = true;
         }

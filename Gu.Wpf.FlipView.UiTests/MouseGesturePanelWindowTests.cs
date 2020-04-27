@@ -15,7 +15,6 @@ namespace Gu.Wpf.FlipView.UiTests
         public void SetUp()
         {
             using var app = Application.AttachOrLaunch(ExeFileName, WindowName);
-            // restore state for the next test.
             Wait.UntilInputIsProcessed();
             app.MainWindow.FindButton("Clear").Click();
         }

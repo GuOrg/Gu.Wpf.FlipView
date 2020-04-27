@@ -1,4 +1,4 @@
-namespace Gu.Wpf.FlipView.Tests.Misc_and_helpers
+namespace Gu.Wpf.FlipView.Tests
 {
     /// <summary>
     /// Helper class for debugging tests, only purpose is ToString() :).

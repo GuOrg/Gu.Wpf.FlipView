@@ -1,10 +1,9 @@
-namespace Gu.Wpf.FlipView.Tests.Misc_and_helpers
+namespace Gu.Wpf.FlipView.Tests
 {
     using System;
     using System.Linq;
     using System.Reflection;
     using System.Windows.Input;
-
     using NUnit.Framework;
 
     public class DumpCommands

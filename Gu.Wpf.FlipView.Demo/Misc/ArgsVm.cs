@@ -2,6 +2,7 @@ namespace Gu.Wpf.FlipView.Demo.Misc
 {
     using System;
     using System.Collections.Generic;
+    using System.Globalization;
     using System.Linq;
     using System.Reflection;
     using System.Windows;
@@ -71,7 +72,7 @@ namespace Gu.Wpf.FlipView.Demo.Misc
                 case null:
                     return "null";
                 case double d:
-                    return d.ToString("F1");
+                    return d.ToString("F1", CultureInfo.InvariantCulture);
                 case Vector v:
                     return $"({v.X:F1}, {v.Y:F1})";
                 case Point p:

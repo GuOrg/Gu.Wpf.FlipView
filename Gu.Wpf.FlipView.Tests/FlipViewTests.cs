@@ -1,11 +1,9 @@
-namespace Gu.Wpf.FlipView.Tests
+﻿namespace Gu.Wpf.FlipView.Tests
 {
     using System.Threading;
     using System.Windows.Input;
 
     using Gu.Wpf.FlipView;
-    using Gu.Wpf.FlipView.Tests.Misc_and_helpers;
-
     using NUnit.Framework;
 
     [Apartment(ApartmentState.STA)]

@@ -16,7 +16,7 @@ namespace Gu.Wpf.FlipView.Demo.Converters
                 return i - 1;
             }
 
-            throw new ArgumentException();
+            throw new ArgumentException("Expected int", nameof(value));
         }
 
         object IValueConverter.ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
