@@ -25,13 +25,20 @@
 
   <PropertyGroup>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>2.0.1.0</Version>
+    <Version>2.0.2.0</Version>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <Authors>Johan Larsson</Authors>
     <Description>A flip view that works on Win7. Handles mouse &amp; touch.</Description>
     <NeutralLanguage>en</NeutralLanguage>
     <RepositoryUrl>https://github.com/GuOrg/Gu.Wpf.FlipView</RepositoryUrl>
-    <PackageReleaseNotes>BUGFIX: Set SelectedIndex to 0 when items c hanges if it is -1.</PackageReleaseNotes>
+    <PackageReleaseNotes>
+      2.0.2
+      Multitarget net45 and netcoreapp3.1
+      Nullable enable
+      Sign
+      2.0.1
+      BUGFIX: Set SelectedIndex to 0 when items c hanges if it is -1.
+    </PackageReleaseNotes>
     <PackageTags>xaml wpf flipview</PackageTags>
   </PropertyGroup>
 
