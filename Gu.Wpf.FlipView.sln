@@ -8,9 +8,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".sln", ".sln", "{3C205845-3
 		.editorconfig = .editorconfig
 		appveyor.yml = appveyor.yml
 		azure-pipelines.yml = azure-pipelines.yml
-		paket.dependencies = paket.dependencies
-		paket.lock = paket.lock
-		.paket\Readme.paket.md = .paket\Readme.paket.md
 		Settings.XamlStyler = Settings.XamlStyler
 	EndProjectSection
 EndProject

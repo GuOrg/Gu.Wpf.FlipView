@@ -3,13 +3,29 @@
     <OutputType>library</OutputType>
     <TargetFramework>net45</TargetFramework>
     <UseWpf>true</UseWpf>
-    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <CodeAnalysisRuleSet>Gu.Wpf.FlipView.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
 
+  <PropertyGroup>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Version>2.0.1.0</Version>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <Authors>Johan Larsson</Authors>
+    <Description>A flip view that works on Win7. Handles mouse &amp; touch.</Description>
+    <NeutralLanguage>en</NeutralLanguage>
+    <RepositoryUrl>https://github.com/GuOrg/Gu.Wpf.FlipView</RepositoryUrl>
+    <PackageReleaseNotes>BUGFIX: Set SelectedIndex to 0 when items c hanges if it is -1.</PackageReleaseNotes>
+    <PackageTags>xaml wpf flipview</PackageTags>
+  </PropertyGroup>
+
   <ItemGroup>
-    <AppDesigner Include="Properties\" />
+    <PackageReference Include="Gu.Analyzers" Version="1.6.7-dev" PrivateAssets="all" />
+    <PackageReference Include="IDisposableAnalyzers" Version="3.3.7" PrivateAssets="all" />
+    <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="2.9.8" PrivateAssets="all" />
+    <PackageReference Include="PropertyChangedAnalyzers" Version="3.2.0" PrivateAssets="all" />
+    <PackageReference Include="ReflectionAnalyzers" Version="0.1.21-dev" PrivateAssets="all" />
+    <PackageReference Include="StyleCop.Analyzers" Version="1.2.0-beta.113" PrivateAssets="all" />
+    <PackageReference Include="WpfAnalyzers" Version="2.4.5" PrivateAssets="all" />
   </ItemGroup>
-  <Import Project="..\.paket\paket.targets" />
 </Project>
