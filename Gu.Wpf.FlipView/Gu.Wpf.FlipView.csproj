@@ -13,6 +13,11 @@
   </PropertyGroup>
 
   <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>..\Gu.Wpf.FlipView.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+
+  <PropertyGroup>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Version>2.0.1.0</Version>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>

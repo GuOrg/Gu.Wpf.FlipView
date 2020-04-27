@@ -7,6 +7,11 @@
     <CodeAnalysisRuleSet>Gu.Wpf.FlipView.Tests.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
 
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>..\Gu.Wpf.FlipView.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+
   <ItemGroup>
     <ProjectReference Include="..\Gu.Wpf.FlipView\Gu.Wpf.FlipView.csproj" />
   </ItemGroup>
