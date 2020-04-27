@@ -7,11 +7,12 @@ variables:
 steps:
 
 - task: VSBuild@1
-  displayName: Build
+  displayName: build
   inputs:
     configuration: '$(buildConfiguration)'
     msbuildArgs: '/restore'
 
 - task: VSTest@2
+  displayName: test
   inputs:
     configuration: '$(buildConfiguration)'
