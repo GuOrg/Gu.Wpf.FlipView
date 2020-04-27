@@ -20,6 +20,10 @@
   </PropertyGroup>
 
   <PropertyGroup>
+    <GenerateNullableAttributes>false</GenerateNullableAttributes>
+  </PropertyGroup>
+
+  <PropertyGroup>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Version>2.0.1.0</Version>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
@@ -51,5 +55,9 @@
   <ItemGroup>
     <PackageDownload Include="Microsoft.NETCore.App.Ref" Version="[3.1.0]" />
     <PackageReference Include="TunnelVisionLabs.ReferenceAssemblyAnnotator" Version="1.0.0-alpha.154" PrivateAssets="all" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedFiles Remove="NullableAttributes.cs" />
   </ItemGroup>
 </Project>
