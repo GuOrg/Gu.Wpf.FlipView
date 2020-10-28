@@ -20,10 +20,6 @@
   </PropertyGroup>
 
   <PropertyGroup>
-    <GenerateNullableAttributes>false</GenerateNullableAttributes>
-  </PropertyGroup>
-
-  <PropertyGroup>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Version>2.0.2.0</Version>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
