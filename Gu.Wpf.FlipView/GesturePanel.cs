@@ -60,9 +60,9 @@ namespace Gu.Wpf.FlipView
         /// <summary>
         /// Gets or sets the <see cref="IGestureTracker"/> that interprets touch input.
         /// </summary>
-        public IGestureTracker GestureTracker
+        public IGestureTracker? GestureTracker
         {
-            get => (IGestureTracker)this.GetValue(GestureTrackerProperty);
+            get => (IGestureTracker?)this.GetValue(GestureTrackerProperty);
             set => this.SetValue(GestureTrackerProperty, value);
         }
 
@@ -94,7 +94,7 @@ namespace Gu.Wpf.FlipView
         /// <summary>This method is invoked when the <see cref="GestureTrackerProperty"/> changes.</summary>
         /// <param name="oldTracker">The old value of <see cref="GestureTrackerProperty"/>.</param>
         /// <param name="newTracker">The new value of <see cref="GestureTrackerProperty"/>.</param>
-        protected virtual void OnGestureTrackerChanged(IGestureTracker oldTracker, IGestureTracker newTracker)
+        protected virtual void OnGestureTrackerChanged(IGestureTracker? oldTracker, IGestureTracker? newTracker)
         {
             if (oldTracker != null)
             {
@@ -112,6 +112,8 @@ namespace Gu.Wpf.FlipView
         /// <summary>
         /// Called by the <see cref="GestureTracker"/> when it detects a gesture.
         /// </summary>
+        /// <param name="sender">The sender <see cref="object"/>.</param>
+        /// <param name="e">The <see cref="GestureEventArgs"/>.</param>
         protected virtual void OnGesture(object? sender, GestureEventArgs e)
         {
             if (e is null)
