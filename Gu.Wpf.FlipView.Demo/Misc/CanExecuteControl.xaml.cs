@@ -19,9 +19,9 @@ namespace Gu.Wpf.FlipView.Demo.Misc
             e.CanExecute = this.canBoost;
         }
 
-#pragma warning disable AvoidAsyncVoid // Avoid async void
+#pragma warning disable VSTHRD100 // Avoid async void methods
         private async void Executed(object sender, ExecutedRoutedEventArgs e)
-#pragma warning restore AvoidAsyncVoid // Avoid async void
+#pragma warning restore VSTHRD100 // Avoid async void methods
         {
             this.canBoost = false;
             await Task.Delay(500).ConfigureAwait(true);
