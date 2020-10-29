@@ -78,16 +78,17 @@ namespace Gu.Wpf.FlipView
         /// <summary>
         /// In addition to the child, Border renders a background + border.  The background is drawn inside the border.
         /// </summary>
-        protected override void OnRender(DrawingContext dc)
+        /// <param name="drawingContext">The <see cref="DrawingContext"/>.</param>
+        protected override void OnRender(DrawingContext drawingContext)
         {
-            if (dc is null)
+            if (drawingContext is null)
             {
-                throw new System.ArgumentNullException(nameof(dc));
+                throw new System.ArgumentNullException(nameof(drawingContext));
             }
 
             if (this.Background is { } background)
             {
-                dc.DrawRectangle(background, null, new Rect(this.RenderSize));
+                drawingContext.DrawRectangle(background, null, new Rect(this.RenderSize));
             }
         }
 

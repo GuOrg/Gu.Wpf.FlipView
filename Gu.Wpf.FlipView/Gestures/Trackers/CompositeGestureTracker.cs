@@ -61,6 +61,7 @@ namespace Gu.Wpf.FlipView.Gestures
         /// <summary>
         /// Notify that a gesture was detected to any subscribers.
         /// </summary>
+        /// <param name="e">The <see cref="GestureEventArgs"/>.</param>
         protected virtual void OnGestured(GestureEventArgs e)
         {
             this.Gestured?.Invoke(this, e);

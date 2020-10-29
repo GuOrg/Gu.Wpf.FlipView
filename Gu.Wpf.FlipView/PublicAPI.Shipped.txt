@@ -35,8 +35,6 @@ Gu.Wpf.FlipView.GesturePanel
 Gu.Wpf.FlipView.GesturePanel.Background.get -> System.Windows.Media.Brush!
 Gu.Wpf.FlipView.GesturePanel.Background.set -> void
 Gu.Wpf.FlipView.GesturePanel.GesturePanel() -> void
-Gu.Wpf.FlipView.GesturePanel.GestureTracker.get -> Gu.Wpf.FlipView.Gestures.IGestureTracker!
-Gu.Wpf.FlipView.GesturePanel.GestureTracker.set -> void
 Gu.Wpf.FlipView.GesturePanel.Gestured -> Gu.Wpf.FlipView.Gestures.GesturedEventHandler!
 Gu.Wpf.FlipView.Gestures.AbstractGestureTracker<TArgs>
 Gu.Wpf.FlipView.Gestures.AbstractGestureTracker<TArgs>.AbstractGestureTracker(Gu.Wpf.FlipView.Gestures.IGestureInterpreter? interpreter = null) -> void

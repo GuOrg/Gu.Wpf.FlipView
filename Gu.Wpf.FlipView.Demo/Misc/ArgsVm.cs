@@ -70,19 +70,14 @@ namespace Gu.Wpf.FlipView.Demo.Misc
 
         private static string StringIt(object? o)
         {
-            switch (o)
+            return o switch
             {
-                case null:
-                    return "null";
-                case double d:
-                    return d.ToString("F1", CultureInfo.InvariantCulture);
-                case Vector v:
-                    return $"({v.X:F1}, {v.Y:F1})";
-                case Point p:
-                    return $"({p.X:F1}, {p.Y:F1})";
-                default:
-                    return o.ToString();
-            }
+                null => "null",
+                double d => d.ToString("F1", CultureInfo.InvariantCulture),
+                Vector v => $"({v.X:F1}, {v.Y:F1})",
+                Point p => $"({p.X:F1}, {p.Y:F1})",
+                _ => o.ToString(),
+            };
         }
     }
 }

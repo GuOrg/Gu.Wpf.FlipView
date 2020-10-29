@@ -30,11 +30,19 @@ namespace Gu.Wpf.FlipView.Gestures
             this.Time = time;
         }
 
+        /// <summary>Check if <paramref name="left"/> is equal to <paramref name="right"/>.</summary>
+        /// <param name="left">The left <see cref="GesturePoint"/>.</param>
+        /// <param name="right">The right <see cref="GesturePoint"/>.</param>
+        /// <returns>True if <paramref name="left"/> is equal to <paramref name="right"/>.</returns>
         public static bool operator ==(GesturePoint left, GesturePoint right)
         {
             return left.Equals(right);
         }
 
+        /// <summary>Check if <paramref name="left"/> is not equal to <paramref name="right"/>.</summary>
+        /// <param name="left">The left <see cref="GesturePoint"/>.</param>
+        /// <param name="right">The right <see cref="GesturePoint"/>.</param>
+        /// <returns>True if <paramref name="left"/> is not equal to <paramref name="right"/>.</returns>
         public static bool operator !=(GesturePoint left, GesturePoint right)
         {
             return !left.Equals(right);

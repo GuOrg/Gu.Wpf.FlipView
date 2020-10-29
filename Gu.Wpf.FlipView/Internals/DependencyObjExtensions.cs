@@ -1,4 +1,4 @@
-﻿namespace Gu.Wpf.FlipView.Internals
+namespace Gu.Wpf.FlipView.Internals
 {
     using System.Collections.Generic;
     using System.Windows;
@@ -13,7 +13,9 @@
         /// <summary>
         /// Get all visual children, depth first.
         /// </summary>
-        internal static IEnumerable<DependencyObject> VisualChildrenRecursive(this DependencyObject parent)
+        /// <param name="parent">The <see cref="DependencyObject"/>.</param>
+        /// <returns>All recursive children.</returns>
+        internal static IEnumerable<DependencyObject> VisualChildrenRecursive(this DependencyObject? parent)
         {
             if (parent is null)
             {
