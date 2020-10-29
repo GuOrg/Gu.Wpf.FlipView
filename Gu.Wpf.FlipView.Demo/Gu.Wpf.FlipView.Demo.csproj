@@ -5,7 +5,6 @@
     <TargetFramework>net48</TargetFramework>
     <LangVersion>latest</LangVersion>
     <Nullable>enable</Nullable>
-    <CodeAnalysisRuleSet>Gu.Wpf.FlipView.Demo.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
 
   <ItemGroup>
