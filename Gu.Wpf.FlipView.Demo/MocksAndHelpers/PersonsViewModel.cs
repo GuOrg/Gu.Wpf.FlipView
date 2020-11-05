@@ -30,6 +30,14 @@ namespace Gu.Wpf.FlipView.Demo
 
         public event PropertyChangedEventHandler? PropertyChanged;
 
+        public ICommand ClearCommand { get; }
+
+        public ICommand SetToNullCommand { get; }
+
+        public ICommand SetToEmptyCommand { get; }
+
+        public ICommand ResetCommand { get; }
+
         public ObservableCollection<Person>? People
         {
             get => this.people;
@@ -45,14 +53,6 @@ namespace Gu.Wpf.FlipView.Demo
                 this.OnPropertyChanged();
             }
         }
-
-        public ICommand ClearCommand { get; }
-
-        public ICommand SetToNullCommand { get; }
-
-        public ICommand SetToEmptyCommand { get; }
-
-        public ICommand ResetCommand { get; }
 
         protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
         {

@@ -1,4 +1,1 @@
-﻿Gu.Wpf.FlipView.GesturePanel.GestureTracker.get -> Gu.Wpf.FlipView.Gestures.IGestureTracker?
-Gu.Wpf.FlipView.Gestures.GesturePoint.GesturePoint() -> void
-override Gu.Wpf.FlipView.GesturePanel.OnRender(System.Windows.Media.DrawingContext! drawingContext) -> void
-virtual Gu.Wpf.FlipView.GesturePanel.OnGestureTrackerChanged(Gu.Wpf.FlipView.Gestures.IGestureTracker? oldTracker, Gu.Wpf.FlipView.Gestures.IGestureTracker? newTracker) -> void
+﻿

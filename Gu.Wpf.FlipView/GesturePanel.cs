@@ -115,7 +115,9 @@ namespace Gu.Wpf.FlipView
         /// </summary>
         /// <param name="sender">The sender <see cref="object"/>.</param>
         /// <param name="e">The <see cref="GestureEventArgs"/>.</param>
+#pragma warning disable CA2109 // Review visible event handlers
         protected virtual void OnGesture(object? sender, GestureEventArgs e)
+#pragma warning restore CA2109 // Review visible event handlers
         {
             if (e is null)
             {
@@ -132,7 +134,7 @@ namespace Gu.Wpf.FlipView
                 return;
             }
 
-            ((GesturePanel)o).OnGestureTrackerChanged((IGestureTracker)e.OldValue, (IGestureTracker)e.NewValue);
+            ((GesturePanel)o).OnGestureTrackerChanged((IGestureTracker?)e.OldValue, (IGestureTracker?)e.NewValue);
         }
     }
 }

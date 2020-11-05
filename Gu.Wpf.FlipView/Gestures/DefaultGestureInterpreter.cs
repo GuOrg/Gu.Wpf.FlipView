@@ -9,7 +9,9 @@ namespace Gu.Wpf.FlipView.Gestures
     /// <summary>
     /// The default interpreter of gestures.
     /// </summary>
+#pragma warning disable INPC001 // The class has mutable properties and should implement INotifyPropertyChanged.
     public class DefaultGestureInterpreter : IGestureInterpreter
+#pragma warning restore INPC001 // The class has mutable properties and should implement INotifyPropertyChanged.
     {
         /// <summary>
         /// Gets a new instance with default settings for mouse swipes.

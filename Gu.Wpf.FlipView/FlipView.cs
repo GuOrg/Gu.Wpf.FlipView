@@ -226,9 +226,9 @@ namespace Gu.Wpf.FlipView
         /// <summary>
         /// Gets or sets a style for the navigation buttons TargetType="RepeatButton".
         /// </summary>
-        public Style ArrowButtonStyle
+        public Style? ArrowButtonStyle
         {
-            get => (Style)this.GetValue(ArrowButtonStyleProperty);
+            get => (Style?)this.GetValue(ArrowButtonStyleProperty);
             set => this.SetValue(ArrowButtonStyleProperty, value);
         }
 

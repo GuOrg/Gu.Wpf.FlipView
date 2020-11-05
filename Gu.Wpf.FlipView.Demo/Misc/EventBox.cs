@@ -26,9 +26,9 @@ namespace Gu.Wpf.FlipView.Demo.Misc
             this.CommandBindings.Add(new CommandBinding(ClearCommand, this.ClearExecuted));
         }
 
-        public FrameworkElement SwipeArea
+        public FrameworkElement? SwipeArea
         {
-            get => (FrameworkElement)this.GetValue(SwipeAreaProperty);
+            get => (FrameworkElement?)this.GetValue(SwipeAreaProperty);
             set => this.SetValue(SwipeAreaProperty, value);
         }
 

@@ -124,14 +124,14 @@ namespace Gu.Wpf.FlipView
         /// </summary>
         public Style? OldContentStyle
         {
-            get => (Style)this.GetValue(OldContentStyleProperty);
+            get => (Style?)this.GetValue(OldContentStyleProperty);
             set => this.SetValue(OldContentStyleProperty, value);
         }
 
         /// <summary>
         /// Gets or sets the storyboard that controls how new content animates into view.
         /// </summary>
-        public Storyboard? OutAnimation
+        public Storyboard OutAnimation
         {
             get => (Storyboard)this.GetValue(OutAnimationProperty);
             set => this.SetValue(OutAnimationProperty, value);
@@ -142,14 +142,14 @@ namespace Gu.Wpf.FlipView
         /// </summary>
         public Style? NewContentStyle
         {
-            get => (Style)this.GetValue(NewContentStyleProperty);
+            get => (Style?)this.GetValue(NewContentStyleProperty);
             set => this.SetValue(NewContentStyleProperty, value);
         }
 
         /// <summary>
         /// Gets or sets the storyboard that controls how old content animates out of view.
         /// </summary>
-        public Storyboard? InAnimation
+        public Storyboard InAnimation
         {
             get => (Storyboard)this.GetValue(InAnimationProperty);
             set => this.SetValue(InAnimationProperty, value);
