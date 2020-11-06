@@ -22,8 +22,6 @@ namespace Gu.Wpf.FlipView
         /// <summary>The expected name of the old content presenter.</summary>
         public const string PartNewContent = "PART_NewContent";
 
-#pragma warning disable SA1202 // Elements must be ordered by access
-
         /// <summary>Identifies the <see cref="ContentChanged"/> routed event.</summary>
         public static readonly RoutedEvent ContentChangedEvent = EventManager.RegisterRoutedEvent(
             nameof(ContentChanged),
@@ -73,7 +71,6 @@ namespace Gu.Wpf.FlipView
 
         /// <summary>Identifies the <see cref="OldContent"/> dependency property.</summary>
         public static readonly DependencyProperty OldContentProperty = OldContentPropertyKey.DependencyProperty;
-#pragma warning restore SA1202 // Elements must be ordered by access
 
         private readonly DispatcherTimer timer;
         private readonly RoutedEventArgs contentChangedEventArgs;

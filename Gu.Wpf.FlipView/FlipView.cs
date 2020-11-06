@@ -15,7 +15,6 @@ namespace Gu.Wpf.FlipView
     [StyleTypedProperty(Property = nameof(ArrowButtonStyle), StyleTargetType = typeof(RepeatButton))]
     public class FlipView : Selector
     {
-#pragma warning disable SA1202 // Elements must be ordered by access
         /// <summary>Identifies the <see cref="IncreaseInAnimation"/> dependency property.</summary>
         public static readonly DependencyProperty IncreaseInAnimationProperty = DependencyProperty.Register(
             nameof(IncreaseInAnimation),
@@ -103,7 +102,6 @@ namespace Gu.Wpf.FlipView
             typeof(Style),
             typeof(FlipView),
             new FrameworkPropertyMetadata(default(Style), FrameworkPropertyMetadataOptions.AffectsMeasure | FrameworkPropertyMetadataOptions.AffectsArrange));
-#pragma warning restore SA1202 // Elements must be ordered by access
 
         static FlipView()
         {
