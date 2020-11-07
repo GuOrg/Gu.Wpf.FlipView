@@ -271,15 +271,15 @@ namespace Gu.Wpf.FlipView
             return new FlipViewAutomationPeer(this);
         }
 
-        private static object CoerceSelectedIndex(DependencyObject d, object basevalue)
+        private static object? CoerceSelectedIndex(DependencyObject d, object? baseValue)
         {
-            if (basevalue is int index)
+            if (baseValue is int index)
             {
                 var flipView = (FlipView)d;
                 flipView.PreviewSelectedIndexChanged(flipView.SelectedIndex, index);
             }
 
-            return basevalue;
+            return baseValue;
         }
 
         private static void OnPreviousCanExecute(object sender, CanExecuteRoutedEventArgs e)
