@@ -33,19 +33,14 @@ namespace Gu.Wpf.FlipView
                        .ToList();
 #pragma warning restore CS8619 // Nullability of reference types in value doesn't match target type.
 
-            AutomationPeer? CreatePeerForElement(DependencyObject o)
+            static AutomationPeer? CreatePeerForElement(DependencyObject o)
             {
-                if (o is UIElement uiElement)
+                return o switch
                 {
-                    return UIElementAutomationPeer.CreatePeerForElement(uiElement);
-                }
-
-                if (o is UIElement3D uiElement3D)
-                {
-                    return UIElement3DAutomationPeer.CreatePeerForElement(uiElement3D);
-                }
-
-                return null;
+                    UIElement uiElement => UIElementAutomationPeer.CreatePeerForElement(uiElement),
+                    UIElement3D uiElement3D => UIElement3DAutomationPeer.CreatePeerForElement(uiElement3D),
+                    _ => null,
+                };
             }
         }
 

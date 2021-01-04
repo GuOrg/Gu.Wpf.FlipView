@@ -5,7 +5,7 @@ namespace Gu.Wpf.FlipView.Demo.Converters
     using System.Windows.Data;
 
     [ValueConversion(typeof(int), typeof(int))]
-    public class SubtractOneConverter : IValueConverter
+    public sealed class SubtractOneConverter : IValueConverter
     {
         public static readonly SubtractOneConverter Default = new SubtractOneConverter();
 

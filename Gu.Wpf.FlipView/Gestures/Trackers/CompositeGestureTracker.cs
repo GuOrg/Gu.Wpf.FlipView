@@ -10,9 +10,7 @@ namespace Gu.Wpf.FlipView.Gestures
     /// <summary>
     /// A tracker that tracks both mouse and touch.
     /// </summary>
-#pragma warning disable CA1710 // Identifiers should have correct suffix
     public class CompositeGestureTracker : Collection<IGestureTracker>, IGestureTracker
-#pragma warning restore CA1710 // Identifiers should have correct suffix
     {
         /// <summary>
         /// The key for the default resource.

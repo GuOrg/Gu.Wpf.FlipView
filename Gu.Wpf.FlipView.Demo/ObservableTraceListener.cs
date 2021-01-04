@@ -4,7 +4,7 @@ namespace Gu.Wpf.FlipView.Demo
     using System.Diagnostics;
     using System.Text;
 
-    public class ObservableTraceListener : System.Diagnostics.TraceListener
+    public sealed class ObservableTraceListener : System.Diagnostics.TraceListener
     {
         public static readonly ObservableTraceListener Instance = new ObservableTraceListener();
 
