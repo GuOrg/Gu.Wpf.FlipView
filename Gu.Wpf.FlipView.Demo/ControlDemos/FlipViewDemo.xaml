@@ -17,7 +17,7 @@
             <ColumnDefinition Width="4*" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
-        <gu:FlipView x:Name="FlipView"
+        <gu:FlipView x:Name="FlipView"                     
                      Grid.Column="1"
                      SelectedIndex="1">
             <gu:FlipView.Resources>
@@ -79,8 +79,12 @@
                       Grid.Column="1"
                       HorizontalAlignment="Left"
                       SelectedItem="{Binding ElementName=FlipView, Path=ArrowPlacement}">
+                <gu:ArrowPlacement>InsideTop</gu:ArrowPlacement>
                 <gu:ArrowPlacement>Inside</gu:ArrowPlacement>
+                <gu:ArrowPlacement>InsideBottom</gu:ArrowPlacement>
+                <gu:ArrowPlacement>OutsideTop</gu:ArrowPlacement>
                 <gu:ArrowPlacement>Outside</gu:ArrowPlacement>
+                <gu:ArrowPlacement>OutsideBottom</gu:ArrowPlacement>
             </ComboBox>
 
             <TextBlock Grid.Row="3"
