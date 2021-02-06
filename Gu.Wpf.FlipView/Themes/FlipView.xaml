@@ -218,7 +218,7 @@
                             <ListBox x:Name="Index"
                                      Grid.Column="0"
                                      Grid.ColumnSpan="3"
-                                     HorizontalAlignment="Center"
+                                     HorizontalAlignment="{Binding IndexAlignment, RelativeSource={RelativeSource AncestorType=gu:FlipView}}"
                                      Background="Transparent"
                                      BorderThickness="0"
                                      ItemContainerStyle="{TemplateBinding IndexItemStyle}"
@@ -231,7 +231,7 @@
                                 </ListBox.Template>
                                 <ListBox.ItemsPanel>
                                     <ItemsPanelTemplate>
-                                        <UniformGrid HorizontalAlignment="Center"
+                                        <UniformGrid HorizontalAlignment="{Binding IndexAlignment, RelativeSource={RelativeSource AncestorType=gu:FlipView}}"
                                                      IsItemsHost="True"
                                                      Rows="1" />
                                     </ItemsPanelTemplate>
