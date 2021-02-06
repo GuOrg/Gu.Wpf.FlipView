@@ -211,15 +211,15 @@
                             </Grid.RowDefinitions>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
                                 <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
                                 <ColumnDefinition Width="Auto" />
                             </Grid.ColumnDefinitions>
 
                             <ListBox x:Name="Index"
-                                     Grid.Column="0"
-                                     Grid.ColumnSpan="3"
-                                     HorizontalAlignment="{Binding IndexAlignment, RelativeSource={RelativeSource AncestorType=gu:FlipView}}"
-                                     Background="Transparent"
+                                     Grid.Column="2"
+                                     HorizontalAlignment="{Binding IndexAlignment, RelativeSource={RelativeSource AncestorType=gu:FlipView}}"                                     
                                      BorderThickness="0"
                                      ItemContainerStyle="{TemplateBinding IndexItemStyle}"
                                      ItemsSource="{Binding Items, RelativeSource={RelativeSource AncestorType=gu:FlipView}}"
@@ -330,32 +330,32 @@
                                         <Style.Triggers>
                                             <DataTrigger Binding="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ArrowPlacement}"
                                                          Value="InsideTop">
-                                                <Setter Property="Grid.Column" Value="1" />
+                                                <Setter Property="Grid.Column" Value="3" />
                                                 <Setter Property="Grid.Row" Value="0" />
                                             </DataTrigger>
                                             <DataTrigger Binding="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ArrowPlacement}"
                                                          Value="Inside">
-                                                <Setter Property="Grid.Column" Value="1" />
+                                                <Setter Property="Grid.Column" Value="3" />
                                                 <Setter Property="Grid.Row" Value="1" />
                                             </DataTrigger>
                                             <DataTrigger Binding="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ArrowPlacement}"
                                                          Value="InsideBottom">
-                                                <Setter Property="Grid.Column" Value="1" />
+                                                <Setter Property="Grid.Column" Value="3" />
                                                 <Setter Property="Grid.Row" Value="2" />
                                             </DataTrigger>
                                             <DataTrigger Binding="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ArrowPlacement}"
                                                          Value="OutsideTop">
-                                                <Setter Property="Grid.Column" Value="2" />
+                                                <Setter Property="Grid.Column" Value="4" />
                                                 <Setter Property="Grid.Row" Value="0" />
                                             </DataTrigger>
                                             <DataTrigger Binding="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ArrowPlacement}"
                                                          Value="Outside">
-                                                <Setter Property="Grid.Column" Value="2" />
+                                                <Setter Property="Grid.Column" Value="4" />
                                                 <Setter Property="Grid.Row" Value="1" />
                                             </DataTrigger>
                                             <DataTrigger Binding="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ArrowPlacement}"
                                                          Value="OutsideBottom">
-                                                <Setter Property="Grid.Column" Value="2" />
+                                                <Setter Property="Grid.Column" Value="4" />
                                                 <Setter Property="Grid.Row" Value="2" />
                                             </DataTrigger>
                                         </Style.Triggers>
@@ -366,6 +366,7 @@
                             <gu:GesturePanel x:Name="GesturePanel"
                                              Grid.Row="1"
                                              Grid.Column="1"
+                                             Grid.ColumnSpan="3"
                                              Background="Transparent">
                                 <gu:TransitionControl x:Name="TransitionControl"
                                                       Content="{TemplateBinding SelectedItem}"
