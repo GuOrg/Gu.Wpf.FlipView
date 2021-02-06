@@ -17,7 +17,7 @@
             <ColumnDefinition Width="4*" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
-        <gu:FlipView x:Name="FlipView"                     
+        <gu:FlipView x:Name="FlipView"
                      Grid.Column="1"
                      SelectedIndex="1">
             <gu:FlipView.Resources>
