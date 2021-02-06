@@ -75,6 +75,13 @@ namespace Gu.Wpf.FlipView
             typeof(FlipView),
             new FrameworkPropertyMetadata(IndexPlacement.Above, FrameworkPropertyMetadataOptions.AffectsMeasure | FrameworkPropertyMetadataOptions.AffectsArrange));
 
+        /// <summary>Identifies the <see cref="IndexAlignment"/> dependency property.</summary>
+        public static readonly DependencyProperty IndexAlignmentProperty = DependencyProperty.Register(
+            nameof(IndexAlignment),
+            typeof(HorizontalAlignment),
+            typeof(FlipView),
+            new FrameworkPropertyMetadata(HorizontalAlignment.Center, FrameworkPropertyMetadataOptions.AffectsMeasure | FrameworkPropertyMetadataOptions.AffectsArrange));
+
         /// <summary>Identifies the <see cref="IndexItemStyle"/> dependency property.</summary>
         public static readonly DependencyProperty IndexItemStyleProperty = DependencyProperty.Register(
             nameof(IndexItemStyle),
@@ -183,6 +190,15 @@ namespace Gu.Wpf.FlipView
         {
             get => (bool)this.GetValue(ShowIndexProperty);
             set => this.SetValue(ShowIndexProperty, value);
+        }
+
+        /// <summary>
+        /// Gets or sets a value specifying the horizontal alignment for the index.
+        /// </summary>
+        public HorizontalAlignment IndexAlignment
+        {
+            get => (HorizontalAlignment)this.GetValue(IndexAlignmentProperty);
+            set => this.SetValue(IndexAlignmentProperty, value);
         }
 
         /// <summary>

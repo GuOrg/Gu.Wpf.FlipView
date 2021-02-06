@@ -1,1 +1,2 @@
-﻿
+﻿Gu.Wpf.FlipView.FlipView.IndexAlignment.get -> System.Windows.HorizontalAlignment
+Gu.Wpf.FlipView.FlipView.IndexAlignment.set -> void

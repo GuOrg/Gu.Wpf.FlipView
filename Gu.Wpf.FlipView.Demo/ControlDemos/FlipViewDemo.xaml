@@ -54,6 +54,7 @@
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
             <TextBlock Grid.Row="0"
                        Grid.Column="0"
@@ -101,9 +102,23 @@
 
             <TextBlock Grid.Row="4"
                        Grid.Column="0"
+                       Text="IndexAlignment" />
+            <ComboBox x:Name="IndexAlignment"
+                      Grid.Row="4"
+                      Grid.Column="1"
+                      HorizontalAlignment="Left"
+                      SelectedItem="{Binding ElementName=FlipView, Path=IndexAlignment}">
+                <HorizontalAlignment>Left</HorizontalAlignment>
+                <HorizontalAlignment>Center</HorizontalAlignment>
+                <HorizontalAlignment>Right</HorizontalAlignment>
+                <HorizontalAlignment>Stretch</HorizontalAlignment>
+            </ComboBox>
+
+            <TextBlock Grid.Row="5"
+                       Grid.Column="0"
                        Text="SelectedIndex" />
             <Slider x:Name="SelectedIndex"
-                    Grid.Row="4"
+                    Grid.Row="5"
                     Grid.Column="1"
                     Maximum="{Binding ElementName=FlipView, Path=Items.Count}"
                     Minimum="0"
