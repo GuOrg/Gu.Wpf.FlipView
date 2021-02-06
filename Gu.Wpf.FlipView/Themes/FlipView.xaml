@@ -262,8 +262,7 @@
                             </ListBox>
 
                             <!--  ReSharper disable once Xaml.MissingGridIndex Set in style  -->
-                            <Border x:Name="LeftArrow"
-                                    Grid.Row="1">
+                            <Border x:Name="LeftArrow">
                                 <RepeatButton x:Name="BrowseBackButton"
                                               HorizontalAlignment="Left"
                                               Command="BrowseBack"
@@ -279,12 +278,34 @@
                                         <Setter Property="Grid.Column" Value="1" />
                                         <Style.Triggers>
                                             <DataTrigger Binding="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ArrowPlacement}"
+                                                         Value="InsideTop">
+                                                <Setter Property="Grid.Column" Value="1" />
+                                                <Setter Property="Grid.Row" Value="0" />
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ArrowPlacement}"
                                                          Value="Inside">
                                                 <Setter Property="Grid.Column" Value="1" />
+                                                <Setter Property="Grid.Row" Value="1" />
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ArrowPlacement}"
+                                                         Value="InsideBottom">
+                                                <Setter Property="Grid.Column" Value="1" />
+                                                <Setter Property="Grid.Row" Value="2" />
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ArrowPlacement}"
+                                                         Value="OutsideTop">
+                                                <Setter Property="Grid.Column" Value="0" />
+                                                <Setter Property="Grid.Row" Value="0" />
                                             </DataTrigger>
                                             <DataTrigger Binding="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ArrowPlacement}"
                                                          Value="Outside">
                                                 <Setter Property="Grid.Column" Value="0" />
+                                                <Setter Property="Grid.Row" Value="1" />
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ArrowPlacement}"
+                                                         Value="OutsideBottom">
+                                                <Setter Property="Grid.Column" Value="0" />
+                                                <Setter Property="Grid.Row" Value="2" />
                                             </DataTrigger>
                                         </Style.Triggers>
                                     </Style>
@@ -292,8 +313,7 @@
                             </Border>
 
                             <!--  ReSharper disable once Xaml.MissingGridIndex Set in style  -->
-                            <Border x:Name="RightArrow"
-                                    Grid.Row="1">
+                            <Border x:Name="RightArrow">
                                 <RepeatButton x:Name="BrowseForwardButton"
                                               HorizontalAlignment="Right"
                                               Command="BrowseForward"
@@ -309,12 +329,34 @@
                                         <Setter Property="Grid.Column" Value="1" />
                                         <Style.Triggers>
                                             <DataTrigger Binding="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ArrowPlacement}"
+                                                         Value="InsideTop">
+                                                <Setter Property="Grid.Column" Value="1" />
+                                                <Setter Property="Grid.Row" Value="0" />
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ArrowPlacement}"
                                                          Value="Inside">
                                                 <Setter Property="Grid.Column" Value="1" />
+                                                <Setter Property="Grid.Row" Value="1" />
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ArrowPlacement}"
+                                                         Value="InsideBottom">
+                                                <Setter Property="Grid.Column" Value="1" />
+                                                <Setter Property="Grid.Row" Value="2" />
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ArrowPlacement}"
+                                                         Value="OutsideTop">
+                                                <Setter Property="Grid.Column" Value="2" />
+                                                <Setter Property="Grid.Row" Value="0" />
                                             </DataTrigger>
                                             <DataTrigger Binding="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ArrowPlacement}"
                                                          Value="Outside">
                                                 <Setter Property="Grid.Column" Value="2" />
+                                                <Setter Property="Grid.Row" Value="1" />
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ArrowPlacement}"
+                                                         Value="OutsideBottom">
+                                                <Setter Property="Grid.Column" Value="2" />
+                                                <Setter Property="Grid.Row" Value="2" />
                                             </DataTrigger>
                                         </Style.Triggers>
                                     </Style>

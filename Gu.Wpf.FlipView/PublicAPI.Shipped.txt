@@ -5,7 +5,11 @@ const Gu.Wpf.FlipView.TransitionControl.PartNewContent = "PART_NewContent" -> st
 const Gu.Wpf.FlipView.TransitionControl.PartOldContent = "PART_OldContent" -> string!
 Gu.Wpf.FlipView.ArrowPlacement
 Gu.Wpf.FlipView.ArrowPlacement.Inside = 0 -> Gu.Wpf.FlipView.ArrowPlacement
-Gu.Wpf.FlipView.ArrowPlacement.Outside = 1 -> Gu.Wpf.FlipView.ArrowPlacement
+Gu.Wpf.FlipView.ArrowPlacement.InsideTop = 1 -> Gu.Wpf.FlipView.ArrowPlacement
+Gu.Wpf.FlipView.ArrowPlacement.InsideBottom = 2 -> Gu.Wpf.FlipView.ArrowPlacement
+Gu.Wpf.FlipView.ArrowPlacement.Outside = 3 -> Gu.Wpf.FlipView.ArrowPlacement
+Gu.Wpf.FlipView.ArrowPlacement.OutsideTop = 4 -> Gu.Wpf.FlipView.ArrowPlacement
+Gu.Wpf.FlipView.ArrowPlacement.OutsideBottom = 5 -> Gu.Wpf.FlipView.ArrowPlacement
 Gu.Wpf.FlipView.AttachedProperties.Transform
 Gu.Wpf.FlipView.FlipView
 Gu.Wpf.FlipView.FlipView.ArrowButtonStyle.get -> System.Windows.Style?
