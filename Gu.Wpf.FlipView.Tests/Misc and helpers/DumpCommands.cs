@@ -14,12 +14,13 @@ namespace Gu.Wpf.FlipView.Tests
         {
             // CommandBindings.Add(new CommandBinding(NavigationCommands.BrowseForward, (sender, args) => Args.Add("Forward")));
             var types = new[]
-                            {
-                                typeof(ApplicationCommands),
-                                typeof(NavigationCommands),
-                                typeof(MediaCommands),
-                                typeof(ComponentCommands),
-                            };
+            {
+                typeof(ApplicationCommands),
+                typeof(NavigationCommands),
+                typeof(MediaCommands),
+                typeof(ComponentCommands),
+            };
+
             foreach (var type in types)
             {
                 PropertyInfo[] propertyInfos = type.GetProperties().Where(x => x.PropertyType.IsSubclassOf(typeof(RoutedCommand))).ToArray();
