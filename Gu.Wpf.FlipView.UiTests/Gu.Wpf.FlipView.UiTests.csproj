@@ -4,6 +4,7 @@
     <TargetFramework>net6.0-windows</TargetFramework>
     <LangVersion>latest</LangVersion>
     <Nullable>enable</Nullable>
+    <UseWpf>true</UseWpf>
   </PropertyGroup>
 
   <PropertyGroup>
@@ -14,10 +15,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Gu.Wpf.FlipView.Demo\Gu.Wpf.FlipView.Demo.csproj" />
-  </ItemGroup>
-  
-  <ItemGroup>
-    <Reference Include="WindowsBase" />
   </ItemGroup>
 
   <ItemGroup>
