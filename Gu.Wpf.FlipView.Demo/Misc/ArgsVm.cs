@@ -45,7 +45,7 @@ namespace Gu.Wpf.FlipView.Demo.Misc
             this.Name = $"{info.Name}: {StringIt(args)}";
         }
 
-        public string Name { get; }
+        public string? Name { get; }
 
         public IEnumerable<ArgsVm>? Children
         {
@@ -68,7 +68,7 @@ namespace Gu.Wpf.FlipView.Demo.Misc
             }
         }
 
-        private static string StringIt(object? o)
+        private static string? StringIt(object? o)
         {
             return o switch
             {

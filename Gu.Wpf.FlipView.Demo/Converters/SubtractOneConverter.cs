@@ -7,7 +7,7 @@ namespace Gu.Wpf.FlipView.Demo.Converters
     [ValueConversion(typeof(int), typeof(int))]
     public sealed class SubtractOneConverter : IValueConverter
     {
-        public static readonly SubtractOneConverter Default = new SubtractOneConverter();
+        public static readonly SubtractOneConverter Default = new();
 
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {

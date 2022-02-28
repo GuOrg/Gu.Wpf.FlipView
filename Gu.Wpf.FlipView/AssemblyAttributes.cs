@@ -18,6 +18,7 @@ using System.Windows.Markup;
 [assembly: XmlnsPrefix("https://github.com/GuOrg/Gu.Wpf.FlipView", "gu")]
 
 #if NET45
+#pragma warning disable SA1402, SA1502, SA1600, SA1649, GU0073
 namespace System.Diagnostics.CodeAnalysis
 {
     [AttributeUsage(AttributeTargets.Field | AttributeTargets.Parameter | AttributeTargets.Property, Inherited = false)]
@@ -35,16 +36,15 @@ namespace System.Diagnostics.CodeAnalysis
     [AttributeUsage(AttributeTargets.Parameter, Inherited = false)]
     internal sealed class MaybeNullWhenAttribute : Attribute
     {
-        public MaybeNullWhenAttribute(bool returnValue) => ReturnValue = returnValue;
+        public MaybeNullWhenAttribute(bool returnValue) => this.ReturnValue = returnValue;
 
-        /// <summary>Gets the return value condition.</summary>
         public bool ReturnValue { get; }
     }
 
     [AttributeUsage(AttributeTargets.Parameter, Inherited = false)]
     internal sealed class NotNullWhenAttribute : Attribute
     {
-        public NotNullWhenAttribute(bool returnValue) => ReturnValue = returnValue;
+        public NotNullWhenAttribute(bool returnValue) => this.ReturnValue = returnValue;
 
         public bool ReturnValue { get; }
     }
@@ -52,7 +52,7 @@ namespace System.Diagnostics.CodeAnalysis
     [AttributeUsage(AttributeTargets.Parameter | AttributeTargets.Property | AttributeTargets.ReturnValue, AllowMultiple = true, Inherited = false)]
     internal sealed class NotNullIfNotNullAttribute : Attribute
     {
-        public NotNullIfNotNullAttribute(string parameterName) => ParameterName = parameterName;
+        public NotNullIfNotNullAttribute(string parameterName) => this.ParameterName = parameterName;
 
         public string ParameterName { get; }
     }
@@ -63,7 +63,7 @@ namespace System.Diagnostics.CodeAnalysis
     [AttributeUsage(AttributeTargets.Parameter, Inherited = false)]
     internal sealed class DoesNotReturnIfAttribute : Attribute
     {
-        public DoesNotReturnIfAttribute(bool parameterValue) => ParameterValue = parameterValue;
+        public DoesNotReturnIfAttribute(bool parameterValue) => this.ParameterValue = parameterValue;
 
         public bool ParameterValue { get; }
     }

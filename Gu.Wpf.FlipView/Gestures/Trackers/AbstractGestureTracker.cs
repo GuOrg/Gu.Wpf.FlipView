@@ -14,7 +14,7 @@ namespace Gu.Wpf.FlipView.Gestures
     /// <typeparam name="TArgs">The type of the event args.</typeparam>
     public abstract class AbstractGestureTracker<TArgs> : IGestureTracker
     {
-        private readonly List<GesturePoint> points = new List<GesturePoint>();
+        private readonly List<GesturePoint> points = new();
         private bool isGesturing;
         private IGestureInterpreter interpreter;
         private UIElement? inputElement;

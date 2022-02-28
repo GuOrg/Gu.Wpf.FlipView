@@ -6,11 +6,11 @@ namespace Gu.Wpf.FlipView.Tests
     using System.Windows.Input;
     using NUnit.Framework;
 
-    public class DumpCommands
+    public static class DumpCommands
     {
         [Test]
         [Explicit]
-        public void DumpBindings()
+        public static void DumpBindings()
         {
             // CommandBindings.Add(new CommandBinding(NavigationCommands.BrowseForward, (sender, args) => Args.Add("Forward")));
             var types = new[]
@@ -25,7 +25,7 @@ namespace Gu.Wpf.FlipView.Tests
                 PropertyInfo[] propertyInfos = type.GetProperties().Where(x => x.PropertyType.IsSubclassOf(typeof(RoutedCommand))).ToArray();
                 foreach (var propertyInfo in propertyInfos)
                 {
-                    Console.WriteLine(@"CommandBindings.Add(new CommandBinding({0}.{1}, (sender, args) => Args.Add(""{1}"")));", propertyInfo.DeclaringType.Name, propertyInfo.Name);
+                    Console.WriteLine(@"CommandBindings.Add(new CommandBinding({0}.{1}, (sender, args) => Args.Add(""{1}"")));", propertyInfo.DeclaringType!.Name, propertyInfo.Name);
                 }
             }
         }

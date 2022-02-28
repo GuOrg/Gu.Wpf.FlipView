@@ -15,7 +15,7 @@ namespace Gu.Wpf.FlipView.Gestures
         /// <summary>
         /// The key for the default resource.
         /// </summary>
-        public static readonly ComponentResourceKey MouseAndTouchResourceKey = new ComponentResourceKey(typeof(CompositeGestureTracker), typeof(CompositeGestureTracker));
+        public static readonly ComponentResourceKey MouseAndTouchResourceKey = new(typeof(CompositeGestureTracker), typeof(CompositeGestureTracker));
 
         private UIElement? inputElement;
 
@@ -28,7 +28,7 @@ namespace Gu.Wpf.FlipView.Gestures
         /// <summary>
         /// Gets returns a new instance of <see cref="MouseGestureTracker"/> with default settings.
         /// </summary>
-        public static CompositeGestureTracker DefaultMouseAndTouch => new CompositeGestureTracker
+        public static CompositeGestureTracker DefaultMouseAndTouch => new()
         {
             MouseGestureTracker.Default,
             TouchGestureTracker.Default,

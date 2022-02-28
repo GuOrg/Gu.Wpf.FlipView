@@ -12,7 +12,7 @@ namespace Gu.Wpf.FlipView.Gestures
         /// <summary>
         /// The key for the default resource.
         /// </summary>
-        public static readonly ComponentResourceKey ResourceKey = new ComponentResourceKey(typeof(TouchGestureTracker), typeof(TouchGestureTracker));
+        public static readonly ComponentResourceKey ResourceKey = new(typeof(TouchGestureTracker), typeof(TouchGestureTracker));
 
         private readonly SubscribeInfos subscribers;
 
@@ -33,7 +33,7 @@ namespace Gu.Wpf.FlipView.Gestures
         /// <summary>
         /// Gets returns a new instance of <see cref="MouseGestureTracker"/> with default settings.
         /// </summary>
-        public static MouseGestureTracker Default => new MouseGestureTracker
+        public static MouseGestureTracker Default => new()
         {
             Interpreter = DefaultGestureInterpreter.Touch,
         };

@@ -7,7 +7,7 @@ namespace Gu.Wpf.FlipView.Demo.Misc
 
     public class EventBox : UserControl
     {
-        public static readonly RoutedUICommand ClearCommand = new RoutedUICommand("Clear", nameof(ClearCommand), typeof(EventBox));
+        public static readonly RoutedUICommand ClearCommand = new("Clear", nameof(ClearCommand), typeof(EventBox));
 
         /// <summary>Identifies the <see cref="SwipeArea"/> dependency property.</summary>
         public static readonly DependencyProperty SwipeAreaProperty = DependencyProperty.Register(
@@ -32,7 +32,7 @@ namespace Gu.Wpf.FlipView.Demo.Misc
             set => this.SetValue(SwipeAreaProperty, value);
         }
 
-        public ObservableCollection<object> Args { get; } = new ObservableCollection<object>();
+        public ObservableCollection<object> Args { get; } = new();
 
         protected virtual void OnStarted(object sender, InputEventArgs e)
         {

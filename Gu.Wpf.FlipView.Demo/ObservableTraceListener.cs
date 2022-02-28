@@ -6,9 +6,9 @@ namespace Gu.Wpf.FlipView.Demo
 
     public sealed class ObservableTraceListener : System.Diagnostics.TraceListener
     {
-        public static readonly ObservableTraceListener Instance = new ObservableTraceListener();
+        public static readonly ObservableTraceListener Instance = new();
 
-        private readonly StringBuilder messageBuilder = new StringBuilder();
+        private readonly StringBuilder messageBuilder = new();
 
         private ObservableTraceListener()
         {
@@ -31,19 +31,19 @@ namespace Gu.Wpf.FlipView.Demo
             }
         }
 
-        public ObservableCollection<string> Messages { get;  } = new ObservableCollection<string>();
+        public ObservableCollection<string> Messages { get;  } = new();
 
         public static void Initialize()
         {
             // NOP ctor runs
         }
 
-        public override void Write(string message)
+        public override void Write(string? message)
         {
             this.messageBuilder.Append(message);
         }
 
-        public override void WriteLine(string message)
+        public override void WriteLine(string? message)
         {
             this.messageBuilder.Append(message);
             this.Messages.Add(this.messageBuilder.ToString());
