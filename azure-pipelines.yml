@@ -1,18 +1,16 @@
 pool:
   vmImage: 'windows-2022'
 
-variables:
-  buildConfiguration: 'Release'
-
 steps:
 
 - task: VSBuild@1
   displayName: build
   inputs:
-    configuration: '$(buildConfiguration)'
+    configuration: 'Release'
     msbuildArgs: '/restore'
 
 - task: VSTest@2
   displayName: test
   inputs:
-    configuration: '$(buildConfiguration)'
+    configuration: 'Release'
+    otherConsoleOptions: '/Framework:.NETCoreApp,Version=v6.0 /Platform:x64'
