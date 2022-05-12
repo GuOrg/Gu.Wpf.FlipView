@@ -1,4 +1,4 @@
-﻿namespace Gu.Wpf.FlipView.Gestures
+namespace Gu.Wpf.FlipView.Gestures
 {
     using System.Windows.Input;
 
