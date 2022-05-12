@@ -17,7 +17,7 @@ using System.Windows.Markup;
 [assembly: XmlnsDefinition("https://github.com/GuOrg/Gu.Wpf.FlipView", "Gu.Wpf.FlipView.Gestures")]
 [assembly: XmlnsPrefix("https://github.com/GuOrg/Gu.Wpf.FlipView", "gu")]
 
-#if NET45
+#if NET48
 #pragma warning disable SA1402, SA1502, SA1600, SA1649, GU0073
 namespace System.Diagnostics.CodeAnalysis
 {
